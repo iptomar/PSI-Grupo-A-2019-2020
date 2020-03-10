@@ -14,3 +14,15 @@ npm start
 
 link:
 https://localhost:3000/
+
+
+********************************* Para aceder à base de dados por cmd *********************************
+instalar o sqlite3 através do link 
+"https://www.sqlite.org/2020/sqlite-tools-win32-x86-3310100.zip" -pra windows
+"https://www.sqlite.org/2020/sqlite-tools-osx-x86-3310100.zip" - pro joao almeida
+dps de adicionar o sqlite3 ao path nas variaveis de sistema podemos aceder a bd, por executar o comando "sqlite3 mydb.db" dentro do ficheiro db; resultado experado no cmd "sqlite>"
+
+-Aqui podemos ver as tabelas por executar o comando ".tables"
+-Para ver a estrutura das tabelas correr o comando ".schema"
+-Podemos ainda executar comandos sql normais: select, update, insert, delete, create, drop, etc...
+

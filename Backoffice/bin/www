@@ -9,9 +9,8 @@ var debug = require('debug')('foo:server');
 const https = require('https');
 const fs = require('fs');
 
-
-var privateKey  = fs.readFileSync('key.pem', 'utf8');
-var certificate = fs.readFileSync('cert.pem', 'utf8');
+var privateKey  = fs.readFileSync('./key.pem', 'utf8');
+var certificate = fs.readFileSync('./cert.pem', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 /**
