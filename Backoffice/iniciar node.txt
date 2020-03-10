@@ -1,0 +1,16 @@
+********************************* Instalar *********************************
+fazer download do node
+https://nodejs.org/en/
+
+*ir para a pasta do projeto*
+correr no projeto o comando - "npm install"
+
+
+
+
+
+********************************* Para iniciar o servidor *********************************
+npm start
+
+link:
+https://localhost:3000/
