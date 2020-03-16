@@ -1,22 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
-//Knex initial config
-var dbConfig = {
-  client: "sqlite3",
-  connection: {
-    filename: "./db/mydb.db"
-  }
-};
-var knex = require("knex")(dbConfig);
+var knex = require('../utils/databaseConection');
 
 /* GET users listing. */
-router.get("/", function(req, res, next) {
+router.get("/", async function(req, res, next) {
   res.send(req.url);
 });
 
-router.get("/login/:user/:password", function(req, res, next) {
-  knex
+router.get("/login/:user/:password", async function(req, res, next) {
+  await knex
     .from("users")
     .select("*")
     .where({ username: req.params.user })
@@ -33,11 +26,14 @@ router.get("/login/:user/:password", function(req, res, next) {
         let error = { error: "User or password incorret" };
         res.send(error);
       }
-    });
+    }
+    )
+    .catch(err)
+    res.send(err.clientError.stack);;
 });
 
-router.get("/register/:user/:password", function(req, res, next) {
-  knex
+router.get("/register/:user/:password", async function(req, res, next) {
+  await knex
     .from("users")
     .select("*")
     .where({ username: req.params.user })
