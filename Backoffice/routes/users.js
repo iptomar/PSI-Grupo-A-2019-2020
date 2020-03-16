@@ -36,7 +36,7 @@ router.get("/login/:user/:password", function(req, res, next) {
     });
 });
 
-router.get("/register/:user/:password", function(req, res, next) {
+router.post("/register/:user/:password", function(req, res, next) {
   knex
     .from("users")
     .select("*")
