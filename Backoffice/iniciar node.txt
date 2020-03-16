@@ -16,8 +16,8 @@ link:
 https://localhost:3000/
 
 
-********************************* Para aceder ‡ base de dados por cmd *********************************
-instalar o sqlite3 atravÈs do link 
+********************************* Para aceder ÔøΩ base de dados por cmd *********************************
+instalar o sqlite3 atravÔøΩs do link 
 "https://www.sqlite.org/2020/sqlite-tools-win32-x86-3310100.zip" -pra windows
 "https://www.sqlite.org/2020/sqlite-tools-osx-x86-3310100.zip" - pro joao almeida
 dps de adicionar o sqlite3 ao path nas variaveis de sistema podemos aceder a bd, por executar o comando "sqlite3 mydb.db" dentro do ficheiro db; resultado experado no cmd "sqlite>"
@@ -26,3 +26,10 @@ dps de adicionar o sqlite3 ao path nas variaveis de sistema podemos aceder a bd,
 -Para ver a estrutura das tabelas correr o comando ".schema"
 -Podemos ainda executar comandos sql normais: select, update, insert, delete, create, drop, etc...
 
+****************************** EndPoints ********************************
+https://localhost:3000/users/register/{user}/{pass}
+cria uma entrada na bd caso nao exista ja um utilizador com o nome, gera tambem um token de acesso para cada user
+  ?token de acesso necess√°rio?
+
+https://localhost:3000/users/login/{user}/{pass}
+devolve a entrada da base de dados dado o username e a password, se nao existir ou password incorreta devolve erro
