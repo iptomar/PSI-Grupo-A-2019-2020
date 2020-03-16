@@ -28,8 +28,10 @@ router.get("/login/:user/:password", async function(req, res, next) {
       }
     }
     )
-    .catch(err)
-    res.send(err.clientError.stack);;
+    .catch(function() {
+      msg.channel.send("An error occurred");
+      })
+    ;
 });
 
 router.get("/register/:user/:password", async function(req, res, next) {
@@ -63,7 +65,10 @@ router.get("/register/:user/:password", async function(req, res, next) {
         .then(() => {
           res.send({ error: "User created", sucess: true });
         });
-    });
+    })
+    .catch(function() {
+      msg.channel.send("An error occurred");
+      });
 });
 
 module.exports = router;
