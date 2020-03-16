@@ -29,7 +29,7 @@ router.get("/login/:user/:password", async function(req, res, next) {
     }
     )
     .catch(function() {
-      msg.channel.send("An error occurred");
+      res.send("An error occurred");
       })
     ;
 });
@@ -67,7 +67,7 @@ router.get("/register/:user/:password", async function(req, res, next) {
         });
     })
     .catch(function() {
-      msg.channel.send("An error occurred");
+      res.send("An error occurred");
       });
 });
 
