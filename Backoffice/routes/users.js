@@ -9,6 +9,9 @@ router.get("/", async function(req, res, next) {
 });
 
 router.get("/login/:user/:password", async function(req, res, next) {
+  // Allow Cors
+  res.header("Access-Control-Allow-Origin", "*");
+
   let query;
   await knex
     .from("users")
@@ -20,20 +23,21 @@ router.get("/login/:user/:password", async function(req, res, next) {
     .catch(function() {
       res.send("An error occurred");
     });
-    if (!query.length == 0) {
-      query = query[0];
-    }
-    if (
-      req.params.password == query.password
-    ) {
-      res.send(query);
-    } else {
-      let error = { error: "User or password incorret" };
-      res.send(error);
-    }
+  if (!query.length == 0) {
+    query = query[0];
+  }
+  if (req.params.password == query.password) {
+    res.send(query);
+  } else {
+    let error = { error: "User or password incorret" };
+    res.send(error);
+  }
 });
 
 router.get("/register/:user/:password", async function(req, res, next) {
+  // Allow Cors
+  res.header("Access-Control-Allow-Origin", "*");
+  
   let query;
   await knex
     .from("users")
@@ -68,13 +72,13 @@ router.get("/register/:user/:password", async function(req, res, next) {
   });
 
   await knex("users")
-  .select("*")
-  .where({ username: req.params.user })
-  .then((select)=>{
-    console.log(select);
-    select = select[0];
-    res.send(select);
-  })
+    .select("*")
+    .where({ username: req.params.user })
+    .then(select => {
+      console.log(select);
+      select = select[0];
+      res.send(select);
+    });
 });
 
 module.exports = router;
