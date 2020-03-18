@@ -8,18 +8,18 @@ router.get("/", async function(req, res, next) {
   res.send(req.url);
 });
 
-router.get("/login/:user/:password", async function(req, res, next) {
+router.post("/login", async function(req, res, next) {
   await knex
     .from("users")
     .select("*")
-    .where({ username: req.params.user })
+    .where({ username: req.body.user })
     .then(result => {
       if (!result.length == 0) {
         result = result[0];
       }
       if (
-        req.params.user == result.username &&
-        req.params.password == result.password
+        req.body.user == result.username &&
+        req.body.password == result.password
       ) {
         res.send(result);
       } else {
@@ -34,11 +34,11 @@ router.get("/login/:user/:password", async function(req, res, next) {
     ;
 });
 
-router.get("/register/:user/:password", async function(req, res, next) {
+router.post("/register", async function(req, res, next) {
   await knex
     .from("users")
     .select("*")
-    .where({ username: req.params.user })
+    .where({ username: req.body.user })
     .then(result => {
       if (!result.length == 0) {
         let error = { error: "User already exists", sucess: false };
@@ -57,8 +57,8 @@ router.get("/register/:user/:password", async function(req, res, next) {
       }
       knex("users")
         .insert({
-          username: req.params.user,
-          password: req.params.password,
+          username: req.body.user,
+          password: req.body.password,
           token: randomstring,
           role: "user"
         })
