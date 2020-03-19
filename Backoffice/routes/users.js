@@ -8,8 +8,15 @@ router.get("/", async function(req, res, next) {
   res.send(req.url);
 });
 
-router.post("/login", async function(req, res, next) {
+router.post("/", async function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.send(req.url);
+});
+
+router.post("/login", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  console.log(req.body);
+
   await knex
     .from("users")
     .select("*")
@@ -26,12 +33,13 @@ router.post("/login", async function(req, res, next) {
       }
     })
     .catch(async function(err) {
-      res.send("An error occurred");
+      console.log(err);
+      res.send(err)
     });
 });
 
 router.post("/register", async function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "*");
   await knex("users")
     .select("*")
     .where({username: "admin"})

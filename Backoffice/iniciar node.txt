@@ -6,15 +6,16 @@ https://nodejs.org/en/
 correr no projeto o comando - "npm install"
 
 
-
-
-
 ********************************* Para iniciar o servidor *********************************
 npm start
 
 link:
 https://localhost:3000/
 
+********************************* Para resolver o problema do CORS *********************************
+Caso a dependência instalada do CORS deixe de funcionar ou deixe de ser necessária, o Bruno Rosário fez este pedaço de código que no início de cada endpoint resolve o problema que tinhamos
+var keyss = Object.keys(req.body);
+var info = JSON.parse(keyss);
 
 ********************************* Para aceder � base de dados por cmd *********************************
 instalar o sqlite3 atrav�s do link 
