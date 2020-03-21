@@ -4,7 +4,7 @@ exports.up = (knex, Promise) => {
 	table.string('id_inter').primary();
 	table.string('prop_id');
 	table.foreign('id_roteir').references('id').inTable('Roteiro');
-	table.foreign('id_roteir').references('id').inTable('prop');
+	table.foreign('prop_id').references('id').inTable('prop');
 
   })
 }
