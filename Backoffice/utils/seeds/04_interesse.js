@@ -1,9 +1,9 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('Roteiro').del()
+  return knex('Interesse').del()
   .then(function () {
     // Inserts seed entries
-    return knex('Roteiro').insert([
+    return knex('Interesse').insert([
       {
         id: '1',
         titulo: 'Palácio da Justiça',
