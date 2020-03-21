@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var updatedb=true;
+var updatedb=false;
 /**
  * Module dependencies.
  */
