@@ -3,7 +3,7 @@ exports.up = (knex, Promise) => {
     table.increments('id').primary()
     table.string('path')
     table.string('legenda')
-    table.string('name_user/place')
+    table.string('autorFonte')
     table.string('Interesse_id')
     table.foreign('Interesse_id').references('Interesse.id')
   })
