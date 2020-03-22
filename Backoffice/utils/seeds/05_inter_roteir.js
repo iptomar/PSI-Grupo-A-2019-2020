@@ -5,16 +5,16 @@ exports.seed = function(knex, Promise) {
     // Inserts seed entries
     return knex('Inter_Roteir').insert([
       {
-        id_inter: '1',
-        id_roteir: '1'
+        id_inter: 1,
+        id_roteir: 1
 	  },
       {
-        id_inter: '2',
-        id_roteir: '1'
+        id_inter: 2,
+        id_roteir: 1
 		},
       {
-        id_inter: '3',
-        id_roteir: '1'
+        id_inter: 3,
+        id_roteir: 1
 		}
     ]);
   });
