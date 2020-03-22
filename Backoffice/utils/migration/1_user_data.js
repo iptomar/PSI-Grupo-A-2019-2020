@@ -8,6 +8,7 @@ exports.up = (knex, Promise) => {
     table.string('password')
     table.integer('age')
     table.unique('email')
+    table.string('token')
   })
 }
 
