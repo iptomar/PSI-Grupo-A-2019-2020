@@ -10,7 +10,9 @@ exports.seed = function(knex, Promise) {
         password: 'a',
         first_name: "Jacinto",
         last_name: "Ribeiro" ,
-        age: 21
+        age: 21,
+        token: ""
+
       },
       {
         id: 2,
@@ -18,7 +20,8 @@ exports.seed = function(knex, Promise) {
         password: 'b',
         first_name: "Carolina",
         last_name: "Silva" ,
-        age: 34
+        age: 34,
+        token: ""
       },
       {
         id: 3,
@@ -26,7 +29,8 @@ exports.seed = function(knex, Promise) {
         password: 'c',
         first_name: "Hugo",
         last_name: "Oliveira" ,
-        age: 52
+        age: 52,
+        token: ""
       }
     ]);
   });
