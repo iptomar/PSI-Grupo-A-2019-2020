@@ -172,8 +172,9 @@ router.post("/register", async function(req, res, next) {
     });
 });
 
+// RECEBE {id: ""}
 router.post("/delete", async function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Origin", "*");
 
   let del = false;
 
