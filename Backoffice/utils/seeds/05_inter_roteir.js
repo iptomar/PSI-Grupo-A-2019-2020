@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
     return knex('Inter_Roteir').insert([
       {
         id_inter: 1,
-        id_roteir: 1
+        id_roteir: 2
 	  },
       {
         id_inter: 2,
@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
 		},
       {
         id_inter: 3,
-        id_roteir: 1
+        id_roteir: 3
 		}
     ]);
   });
