@@ -49,6 +49,42 @@ router.post("/login", async function(req, res, next) {
       res.send(err);
     });
 });
+// RECEBE tokenAdmin
+// DEVOLVE {sucess: true}
+router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
+  // o token é o do administrador?
+  await knex("users")
+    .select("*")
+    .where({ name: "admin" })
+    .then(result => {
+      console.log(result[0].token);
+      if (result[0].token != req.params.tokenAdmin) {
+        let error = {
+          error: "The token provided is not the admin's",
+          sucess: false
+        };
+        res.status(401).send(error);
+        return;
+      }
+    })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      console.log(err);
+      res.send(err);
+    });
+
+  await knex("users")
+    .select('id','name','surname','email','age')
+    .whereNot({ name: "admin" })
+    .then(response => {
+      res.send(response);
+    });
+});
 
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
@@ -72,7 +108,7 @@ router.post("/register", async function(req, res, next) {
     .where({ name: "admin" })
     .then(result => {
       result = result[0];
-      
+
       // O token enviado tem que ser o do admin
       if (req.body.tokenAdmin != result.token) {
         let error = {
@@ -88,7 +124,7 @@ router.post("/register", async function(req, res, next) {
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err
+        err.stack()
       );
 
       console.log(err);
@@ -97,7 +133,7 @@ router.post("/register", async function(req, res, next) {
     });
 
   let query;
-  
+
   // verifica se o utilizador já existe, se já devolve um erro
   await knex
     .from("users")
@@ -112,7 +148,7 @@ router.post("/register", async function(req, res, next) {
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err
+        err.stack()
       );
 
       console.log(err);
@@ -123,8 +159,7 @@ router.post("/register", async function(req, res, next) {
     return;
   }
   // criação da chave do utilizador
-  var chars =
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz*&-%/!?*+=()";
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 
   var randomstring = "";
 
@@ -147,7 +182,7 @@ router.post("/register", async function(req, res, next) {
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err
+        err.stack()
       );
 
       console.log(err);
@@ -165,7 +200,7 @@ router.post("/register", async function(req, res, next) {
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err
+        err.stack()
       );
 
       console.log(err);
