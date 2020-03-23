@@ -97,4 +97,37 @@ router.post("/register", async function(req, res, next) {
       res.send(select);
     });
 });
+
+router.post("/delete", async function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+
+  let del = false;
+
+  //Verifica se o user existe
+  await knex('users')
+    .where({id: req.body.id})
+    .then(result => {
+      if(!result.length == 0){
+        del = true;
+      } else {
+        let error = { error: "User doesn't exist"};
+        res.send(error);
+      }
+    })
+    .catch(async function(err){
+      console.log(err);
+      res.send(err);
+    });
+
+    //Elimina o utilizador, caso exista
+    if(del){
+      await knex('users')
+        .where({id:req.body.id})
+        .del();
+    }
+
+    let msg = {msg: "User successfully deleted"};
+    res.send(msg);
+});
+
 module.exports = router;
