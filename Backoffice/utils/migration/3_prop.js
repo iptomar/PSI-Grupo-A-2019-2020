@@ -1,10 +1,10 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable(' prop', (table) => {
-    table.increments('id').primary()
-    table.string('first_name')
-    table.string('work')
-    table.string('user_id')
-    table.foreign('user_id').references('users.id')
+    table.increments('id').primary();
+    table.string('first_name');
+    table.string('work');
+    table.string('user_id');
+    table.foreign('user_id').references('users.id');
   })
 }
 
