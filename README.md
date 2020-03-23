@@ -19,7 +19,7 @@ fetch("https://localhost:3000/users/login", requestOptions)
 ##Register:
 var myHeaders = new Headers();
 myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-var raw = JSON.stringify({email: "new@new.com", password:"new", name:"new", surname:"new", age:"10", tokenAdmin:"K(+?y/(Le0lMnpP+!vZ)GQToI=WesVRXapAc21AXqXx*M8S78KTgx7i-vn)dUu?0"});
+var raw = JSON.stringify({email: "new@new.com", password:"new", name:"new", surname:"new", age:"10", tokenAdmin:"VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57"});
 
 var requestOptions = {
   method: 'POST',
