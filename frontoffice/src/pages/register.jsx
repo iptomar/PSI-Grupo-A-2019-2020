@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+import './style/register.css';
 import HomePage from "./home";
 
 class RegisterBox extends React.Component {
@@ -10,8 +11,6 @@ class RegisterBox extends React.Component {
       password: "",
       redirect: false
     };
-
-
 
     this.handleUserNameChange = this.handleUserNameChange.bind(this);
     this.handleUserPasswordChange = this.handleUserPasswordChange.bind(this);

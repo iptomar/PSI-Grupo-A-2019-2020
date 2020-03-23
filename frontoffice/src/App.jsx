@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css';
+import {Provider} from 'mobx-react';
+import './pages/style/App.css';
 
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 
@@ -9,8 +10,9 @@ import RegisterBox from "./pages/register";
 import LoginBox from "./pages/login";
 import HomePage from "./pages/home";
 
-class App extends React.Component {
 
+
+class App extends React.Component {
   render() {
     return (
       <Router>

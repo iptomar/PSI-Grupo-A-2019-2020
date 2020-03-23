@@ -1,11 +1,11 @@
 import React from 'react';
-import './login.css';
+import './style/login.css';
 import { Redirect } from "react-router-dom";
 
 function AccountLoginFailed() {
   return <div>
-    <p>Nome de utilizador ou password errada</p>
-  </div>
+          <p>Nome de utilizador ou password errada</p>
+        </div>
 }
 
 class LoginBox extends React.Component {
