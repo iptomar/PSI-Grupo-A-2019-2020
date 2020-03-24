@@ -16,12 +16,13 @@ router.post("/", async function(req, res, next) {
 // RECEBE {email: "", password:""}
 // DEVOLVE a entrada da db do utilizador se os dados estiverem corretos
 router.post("/login", async function(req, res, next) {
-  // vai pesquisar se o utilizador existe. caso exista devolve-o
+  // vai validar o que recebe no body
   if (req.body.email == null || req.body.password == null) {
     let error = { sucess : false , mesage:  "Incorrect parameters" };
     res.send(errormesage);
     //res.status(400).send(error);
   }
+  // verifica se o utilizador existe, caso exista retorna a entrada da db
   await knex
     .from("users")
     .select("*")
@@ -60,7 +61,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // o token é o do administrador?
   await knex("users")
     .select("*")
-    .where({ name: "admin" })
+    .where({ email: "admin@admin.com" })
     .then(result => {
       console.log(result[0].token);
       if (result[0].token != req.params.tokenAdmin) {
@@ -86,6 +87,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
       //res.send(err);
     });
 
+  // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
     .select('id','name','surname','email','age')
     .whereNot({ name: "admin" })
@@ -99,6 +101,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
 router.post("/register", async function(req, res, next) {
+  // o body está preenchido? se não pede para preencher todos os campos
   if (
     req.body.email == null ||
     req.body.password == null ||
@@ -117,7 +120,7 @@ router.post("/register", async function(req, res, next) {
   // o token enviado é o do admin
   await knex("users")
     .select("*")
-    .where({ name: "admin" })
+    .where({ email: "admin@admin.com" })
     .then(result => {
       result = result[0];
 
@@ -153,7 +156,7 @@ router.post("/register", async function(req, res, next) {
   await knex
     .from("users")
     .select("*")
-    .where({ name: req.body.name })
+    .where({ email: req.body.email })
     .then(result => {
       query = result;
       console.log(result);
@@ -262,9 +265,13 @@ router.post("/update", async function(req, res, next) {
 
 }});
 
-// RECEBE {id: ""}
+//usage:
+//body.user = token
+//body.data = id do utilizador a eliminar(json)
 router.post("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
+
+  //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
 
   let del = false;
 
