@@ -23,7 +23,6 @@ class LoginBox extends React.Component {
   }
 
   async submitLogin() {
-    // tu chamas esta função aonde
     this.state.username = document.getElementById("username").value;
     this.state.password = document.getElementById("password").value;
 
