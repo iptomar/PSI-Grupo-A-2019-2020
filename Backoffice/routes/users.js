@@ -105,7 +105,7 @@ router.post("/register", async function(req, res, next) {
   // o token enviado é o do admin
   await knex("users")
     .select("*")
-    .where({ name: "admin" })
+    .where({ email: "admin@admin.com" })
     .then(result => {
       result = result[0];
 
@@ -138,7 +138,7 @@ router.post("/register", async function(req, res, next) {
   await knex
     .from("users")
     .select("*")
-    .where({ name: req.body.name })
+    .where({ email: req.body.email })
     .then(result => {
       query = result;
       console.log(result);
