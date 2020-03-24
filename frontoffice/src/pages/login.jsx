@@ -17,7 +17,7 @@ class LoginBox extends React.Component {
       AccountStatus: "not-logged-in",
       redirect: false
     };
-
+    
     this.handleUserNameChange = this.handleUserNameChange.bind(this);
     this.handleUserPasswordChange = this.handleUserPasswordChange.bind(this);
   }
@@ -43,9 +43,8 @@ class LoginBox extends React.Component {
     console.log(data);
 
     if (data.hasOwnProperty('token')) {
-      this.setState({ AccountStatus: "logged-in"});
-      this.setState({ redirect: true});
       sessionStorage.setItem("userData", JSON.stringify(data));
+      this.setState({ AccountStatus: "logged-in", redirect: true});
     }else{
       this.setState({ AccountStatus: "bad-login" });
       console.log("erro");
