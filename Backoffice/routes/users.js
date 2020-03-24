@@ -16,11 +16,12 @@ router.post("/", async function(req, res, next) {
 // RECEBE {email: "", password:""}
 // DEVOLVE a entrada da db do utilizador se os dados estiverem corretos
 router.post("/login", async function(req, res, next) {
-  // vai pesquisar se o utilizador existe. caso exista devolve-o
+  // vai validar o que recebe no body
   if (req.body.email == null || req.body.password == null) {
     let error = { error: "Incorrect parameters" };
     res.status(400).send(error);
   }
+  // verifica se o utilizador existe, caso exista retorna a entrada da db
   await knex
     .from("users")
     .select("*")
@@ -55,7 +56,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // o token é o do administrador?
   await knex("users")
     .select("*")
-    .where({ name: "admin" })
+    .where({ email: "admin@admin.com" })
     .then(result => {
       console.log(result[0].token);
       if (result[0].token != req.params.tokenAdmin) {
@@ -78,6 +79,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
       res.send(err);
     });
 
+  // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
     .select('id','name','surname','email','age')
     .whereNot({ name: "admin" })
@@ -89,6 +91,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
 router.post("/register", async function(req, res, next) {
+  // o body está preenchido? se não pede para preencher todos os campos
   if (
     req.body.email == null ||
     req.body.password == null ||
