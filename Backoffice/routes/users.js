@@ -18,8 +18,9 @@ router.post("/", async function(req, res, next) {
 router.post("/login", async function(req, res, next) {
   // vai pesquisar se o utilizador existe. caso exista devolve-o
   if (req.body.email == null || req.body.password == null) {
-    let error = { error: "Incorrect parameters" };
-    res.status(400).send(error);
+    let error = { sucess : false , mesage:  "Incorrect parameters" };
+    res.send(errormesage);
+    //res.status(400).send(error);
   }
   await knex
     .from("users")
@@ -30,10 +31,13 @@ router.post("/login", async function(req, res, next) {
         result = result[0];
       }
       if (req.body.password == result.password) {
-        res.send(result);
+        let errormesage = { sucess : true , mesage: result };
+        res.send(errormesage);
+        //res.send(result);
       } else {
-        let error = { error: "User or password incorret" };
-        res.status(401).send(error);
+        let errormesage = { sucess : false , mesage: "User or password incorret" };
+        res.send(errormesage);
+        //res.status(401).send(error);
       }
     })
     .catch(async function(err) {
@@ -41,12 +45,13 @@ router.post("/login", async function(req, res, next) {
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err
+        err.stack()
       );
 
       console.log(err);
-
-      res.send(err);
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      //res.send(err);
     });
 });
 // RECEBE tokenAdmin
@@ -59,11 +64,12 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
     .then(result => {
       console.log(result[0].token);
       if (result[0].token != req.params.tokenAdmin) {
-        let error = {
-          error: "The token provided is not the admin's",
-          sucess: false
+        let errormesage = {
+          sucess: false,
+          mesage: "The token provided is not the admin's",
         };
-        res.status(401).send(error);
+        res.send(errormesage);
+       // res.status(401).send(error);
         return;
       }
     })
@@ -75,14 +81,18 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
         err.stack()
       );
       console.log(err);
-      res.send(err);
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+      //res.send(err);
     });
 
   await knex("users")
     .select('id','name','surname','email','age')
     .whereNot({ name: "admin" })
     .then(response => {
-      res.send(response);
+      let errormesage = { sucess : true , mesage: response };
+      res.send(errormesage);
+      //res.send(response);
     });
 });
 
@@ -97,8 +107,10 @@ router.post("/register", async function(req, res, next) {
     req.body.age == null ||
     req.body.tokenAdmin == null
   ) {
-    let error = { error: "Incorrect parameters" };
-    res.status(400).send(error);
+    //let error = { error: "Incorrect parameters" };
+    let errormesage = { sucess : false , mesage: "Incorrect parameters" };
+    res.send(errormesage);
+    //res.status(400).send(error);
     return;
   }
 
@@ -111,11 +123,12 @@ router.post("/register", async function(req, res, next) {
 
       // O token enviado tem que ser o do admin
       if (req.body.tokenAdmin != result.token) {
-        let error = {
-          error: "The token provided is not the admin's",
-          sucess: false
+        let errormesage = {
+          sucess: false,
+          mesage: "The token provided is not the admin's"
         };
-        res.status(401).send(error);
+        res.send(errormesage);
+        //res.status(401).send(error);
         return;
       }
     })
@@ -127,9 +140,11 @@ router.post("/register", async function(req, res, next) {
         err.stack()
       );
 
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
       console.log(err);
 
-      res.send(err);
+      //res.send(err);
     });
 
   let query;
@@ -154,8 +169,9 @@ router.post("/register", async function(req, res, next) {
       console.log(err);
     });
   if (!query.length == 0) {
-    let error = { error: "User already exists", sucess: false };
-    res.status(401).send(error);
+    let errormesage = { sucess : false , mesage: "User already exists" };
+    res.send(errormesage);
+    //res.status(401).send(error);
     return;
   }
   // criação da chave do utilizador
@@ -184,7 +200,8 @@ router.post("/register", async function(req, res, next) {
         "a",
         err.stack()
       );
-
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
       console.log(err);
     });
 
@@ -192,8 +209,10 @@ router.post("/register", async function(req, res, next) {
     .select("*")
     .where({ name: req.body.name })
     .then(select => {
-      let response = { id: select[0].id, email: select[0].email };
-      res.send(response);
+      let errormesage = { sucess : true , mesage: { id: select[0].id, email: select[0].email } };
+      res.send(errormesage);
+      //let response = { id: select[0].id, email: select[0].email };
+      //res.send(response);
     })
     .catch(async function(err) {
       var d = new Date();
@@ -202,8 +221,10 @@ router.post("/register", async function(req, res, next) {
         "a",
         err.stack()
       );
-
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
       console.log(err);
+
     });
 });
 
@@ -254,13 +275,17 @@ router.post("/delete", async function(req, res, next) {
       if(!result.length == 0){
         del = true;
       } else {
-        let error = { error: "User doesn't exist"};
-        res.send(error);
+        /*let error = { error: "User doesn't exist"};
+        res.send(error);*/
+
+        let errormesage = { sucess : false , mesage: "User doesn't exist" };
+        res.send(errormesage);
       }
     })
     .catch(async function(err){
-      console.log(err);
-      res.send(err);
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+      let errormesage = { sucess : false , mesage: "token not used" };
+      res.send(errormesage);
     });
 
     //Elimina o utilizador, caso exista
@@ -270,8 +295,10 @@ router.post("/delete", async function(req, res, next) {
         .del();
     }
 
-    let msg = {msg: "User successfully deleted"};
-    res.send(msg);
+    //let msg = {msg: "User successfully deleted"};
+    let errormesage = { sucess : true , mesage: "User successfully deleted" };
+      res.send(errormesage);
+    //res.send(msg);
 });
 
 module.exports = router;
