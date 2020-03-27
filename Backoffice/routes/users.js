@@ -18,7 +18,7 @@ router.post("/", async function(req, res, next) {
 router.post("/login", async function(req, res, next) {
   // vai validar o que recebe no body
   if (req.body.email == null || req.body.password == null) {
-    let error = { sucess : false , mesage:  "Incorrect parameters" };
+    let errormesage = { sucess : false , mesage:  "Incorrect parameters" };
     res.send(errormesage);
     //res.status(400).send(error);
   }
