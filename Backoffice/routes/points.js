@@ -5,7 +5,7 @@ var knex = require("../utils/databaseConection");
 
 //Usage:
 //body.data = id do ponto a eliminar(json)
-router.post("/delete", async function(req, res, next){
+router.delete("/delete", async function(req, res, next){
     //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
     //um administrador ou o utilizador que o criou
 
