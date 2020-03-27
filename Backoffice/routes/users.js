@@ -268,7 +268,7 @@ router.post("/update", async function(req, res, next) {
 //usage:
 //body.user = token
 //body.data = id do utilizador a eliminar(json)
-router.post("/delete", async function(req, res, next) {
+router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
 
   //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
