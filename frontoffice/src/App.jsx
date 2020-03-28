@@ -9,7 +9,7 @@ import NotFoundPage from "./pages/404";
 import RegisterBox from "./pages/register";
 import LoginBox from "./pages/login";
 import HomePage from "./pages/home";
-
+import GetUsers from "./pages/getUsers";
 
 
 class App extends React.Component {
@@ -21,6 +21,7 @@ class App extends React.Component {
           <Route exact path="/login" component={LoginBox}></Route>
           <Route exact path="/register" component={RegisterBox}></Route>
           <Route exact path="/home" component={HomePage}></Route>
+          <Route exact path="/getUsers" component={GetUsers}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

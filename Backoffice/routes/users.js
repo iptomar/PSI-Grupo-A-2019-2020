@@ -244,8 +244,6 @@ router.post("/update", async function(req, res, next) {
     res.send(errormesage);
   }else{
   try{
-  var d = new Date();
-  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
       return await knex('users').where({ token: req.body.user }).update(req.body.data).then(async function( resp ){ 
         let errormesage = { sucess : true , mesage: "update sucessfull" };
