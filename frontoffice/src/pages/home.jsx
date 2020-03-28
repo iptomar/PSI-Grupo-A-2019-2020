@@ -17,7 +17,8 @@ class HomePage extends React.Component {
     componentDidMount(){
         if(sessionStorage.getItem("userData")){
             let data = JSON.parse(sessionStorage.getItem("userData"));
-            this.setState({role: data.email})
+            this.setState({role: data.email});
+            sessionStorage.setItem("token",data.token);            
         }else{
             this.setState({redirect: "login"});
         }

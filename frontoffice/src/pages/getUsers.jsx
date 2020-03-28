@@ -1,28 +1,65 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-class GetUsers extends Component{
-  state={
-    user: null,
-    redirect:false
-  }
-  
-  constructor(props){
+class GetUsers extends Component {
+  constructor(props) {
     super(props);
+    this.state = {
+      user: null,
+      redirect: false,
+      listOfUsers: []
+    }
+    this.teste = this.teste.bind(this);
   }
 
-  componentDidMount(){
+  async componentDidMount() {
     if (sessionStorage.getItem("userData")) {
       let data = JSON.parse(sessionStorage.getItem("userData"));
       this.setState({ user: data });
-    } else{
-      this.setState({redirect:true});
+      this.teste();
+    } else {
+      this.setState({ redirect: true });
     }
   }
 
-  render(){
-    let UI=[]
-    return <div>{UI}</div>
+  async teste(){
+    let response = await fetch(
+      "https://localhost:3000/users/getUsers/" + sessionStorage.getItem("token")
+    ); 
+
+    let dat = await response.json();
+
+    this.setState({listOfUsers:dat.mesage});
+    console.log(this.state.listOfUsers);
+  }
+
+  render() {
+
+    let UI = [];
+    
+    if(this.state.listOfUsers!==[]){
+      this.state.listOfUsers.forEach((element)=>{
+        // para aceder a uma variavel do state dentro de um componente a ser renderizado fazes dentro de {}
+        UI.push(
+          <div id={element.id}>
+            <p>{element.name}</p>
+            <p>{element.surname}</p> 
+            <p>{element.email}</p> 
+          </div>
+        );
+      })
+      console.log(UI);
+    }
+
+    return (
+
+      <div>Utilizadores
+          {UI}    
+      </div>
+
+      
+
+  );
   }
 
 }

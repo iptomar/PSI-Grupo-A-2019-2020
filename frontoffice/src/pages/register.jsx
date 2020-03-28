@@ -33,10 +33,15 @@ class RegisterBox extends React.Component {
     let age = document.getElementById("age").value;
     let password = document.getElementById("password").value;
     
+    if(isNaN(parseInt(age))){
+      alert("Insira uma idade válida");
+    }
+
     if(name==""||surname==""||email==""||age==""||password==""){
       alert("Preencha todos os campos por favor");
       return ;
     }
+    
     if(age<0 || age>150){
       alert("Preencha com uma idade válida");
       return ;
