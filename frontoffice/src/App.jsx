@@ -1,5 +1,4 @@
 import React from 'react';
-import {Provider} from 'mobx-react';
 import './pages/style/App.css';
 
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
@@ -10,7 +9,7 @@ import RegisterBox from "./pages/register";
 import LoginBox from "./pages/login";
 import HomePage from "./pages/home";
 import GetUsers from "./pages/getUsers";
-
+import EditUser from "./pages/editUser";
 
 class App extends React.Component {
   render() {
@@ -22,6 +21,7 @@ class App extends React.Component {
           <Route exact path="/register" component={RegisterBox}></Route>
           <Route exact path="/home" component={HomePage}></Route>
           <Route exact path="/getUsers" component={GetUsers}></Route>
+          <Route exact path="/editUser" component={EditUser}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

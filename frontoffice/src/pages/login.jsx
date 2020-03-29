@@ -12,8 +12,7 @@ class LoginBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      AccountStatus: "not-logged-in",
-      redirect: false
+      AccountStatus: "not-logged-in"
     };
   }
 
@@ -40,7 +39,7 @@ class LoginBox extends React.Component {
 
     if (data.hasOwnProperty('token')) {
       sessionStorage.setItem("userData", JSON.stringify(data));
-      this.setState({ AccountStatus: "logged-in", redirect: true});
+      this.setState({ AccountStatus: "logged-in"});
     }else{
       this.setState({ AccountStatus: "bad-login" });
       console.log("erro");
@@ -49,10 +48,6 @@ class LoginBox extends React.Component {
   }
 
   render() {
-
-    if (this.state.redirect) {
-      return (<Redirect to={"/home"} />);
-    }
 
     if (sessionStorage.getItem("userData")) {
       return (<Redirect to={"/home"} />);
