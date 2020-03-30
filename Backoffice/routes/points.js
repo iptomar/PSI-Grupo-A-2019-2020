@@ -78,4 +78,83 @@ router.delete("/delete", async function(req, res, next){
     res.send(errormesage);
 });
 
+//Usage:
+//body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
+router.delete("/insert", async function(req, res, next){
+
+    await knex("Interesse")
+    .insert(body.data)
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
+
+    let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
+    res.send(errormesage);
+});
+
+//Usage:
+//point to return data
+//body.data = id
+router.delete("/searchpoint", async function(req, res, next){
+
+    await knex('Interesse')
+    .select("*")
+    .where({ id: body.data })
+    .then(rows => {
+        let errormesage = { sucess : true , mesage: rows };
+        res.send(errormesage);
+        
+      })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
+
+    let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+    res.send(errormesage);
+});
+
+//Usage:
+//Return all points id
+//body.data = idRoteiro
+router.delete("/search", async function(req, res, next){
+
+    await knex('users')
+    .select("id_inter")
+    .where({ id_roteir: body.data })
+    .then(rows => {
+        let errormesage = { sucess : true , mesage: rows };
+        res.send(errormesage);
+        
+      })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
+
+    let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+    res.send(errormesage);
+});
 module.exports = router;
