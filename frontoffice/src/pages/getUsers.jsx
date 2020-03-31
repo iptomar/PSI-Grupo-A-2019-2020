@@ -22,6 +22,24 @@ class GetUsers extends Component {
     }
   }
 
+  async deleteUser(id){
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ "user": this.state.user.token, "id": id });
+
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw, mode: 'cors',
+      redirect: 'follow'
+    };
+
+    let response = await fetch("https://localhost:3000/users/delete", requestOptions);
+    let data = await response.json();
+    await this.teste();
+  }
+
   async teste(){
     let response = await fetch(
       "https://localhost:3000/users/getUsers/" + sessionStorage.getItem("token")
@@ -36,7 +54,6 @@ class GetUsers extends Component {
   render() {
 
     let UI = [];
-    
     if(this.state.listOfUsers!==[]){
       this.state.listOfUsers.forEach((element)=>{
         // para aceder a uma variavel do state dentro de um componente a ser renderizado fazes dentro de {}
@@ -45,6 +62,7 @@ class GetUsers extends Component {
             <p>{element.name}</p>
             <p>{element.surname}</p> 
             <p>{element.email}</p> 
+            <button onClick={()=> this.deleteUser(element.id)}>Deletar</button>
           </div>
         );
       })
@@ -53,8 +71,14 @@ class GetUsers extends Component {
 
     return (
 
-      <div>Utilizadores
-          {UI}    
+      <div>
+        <Link type="button" to="/home">
+          Voltar
+        </Link><br/>
+        
+        Utilizadores 
+        
+        {UI}    
       </div>
 
       
