@@ -80,7 +80,7 @@ router.delete("/delete", async function(req, res, next){
 
 //Usage:
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
-router.delete("/insert", async function(req, res, next){
+router.post("/insert", async function(req, res, next){
 
     await knex("Interesse")
     .insert(body.data)
@@ -103,7 +103,7 @@ router.delete("/insert", async function(req, res, next){
 //Usage:
 //point to return data
 //body.data = id
-router.delete("/searchpoint", async function(req, res, next){
+router.post("/searchpoint", async function(req, res, next){
 
     await knex('Interesse')
     .select("*")
@@ -132,7 +132,7 @@ router.delete("/searchpoint", async function(req, res, next){
 //Usage:
 //Return all points id
 //body.data = idRoteiro
-router.delete("/search", async function(req, res, next){
+router.post("/search", async function(req, res, next){
 
     await knex('users')
     .select("id_inter")
