@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./style/register.css";
 
-class RegisterBox extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
+      redirect: "",
       RegisterStatus: null,
       token: ""
     };
@@ -33,17 +33,11 @@ class RegisterBox extends React.Component {
     let age = document.getElementById("age").value;
     let password = document.getElementById("password").value;
     
-    if(isNaN(parseInt(age))){
+    if(isNaN(parseInt(age))&&(age<0 || age>150)){
       alert("Insira uma idade válida");
     }
-
-    if(name==""||surname==""||email==""||age==""||password==""){
+    if(name===""||surname===""||email===""||age===""||password===""){
       alert("Preencha todos os campos por favor");
-      return ;
-    }
-    
-    if(age<0 || age>150){
-      alert("Preencha com uma idade válida");
       return ;
     }
     if(!email.includes("@")){
@@ -78,7 +72,7 @@ class RegisterBox extends React.Component {
     let data = await response.json();
     console.log(data);
 
-    if (data.sucess==true) {
+    if (data.sucess===true) {
       this.setState({ RegisterStatus: true });
     } else {
       this.setState({ RegisterStatus: false });
@@ -87,14 +81,9 @@ class RegisterBox extends React.Component {
 
 
   render() {
-    if (this.state.redirect != "") {
-      this.setState({ redirect: "" });
-      return <Redirect to={"/" + this.state.redirect} />;
-    }
-
     return (
       <div className="inner-container">
-        <Link type="button" to="/home">
+        <Link type="button" to="/">
           Voltar
         </Link>
 
@@ -185,4 +174,4 @@ class RegisterBox extends React.Component {
   }
 }
 
-export default RegisterBox;
+export default Register;

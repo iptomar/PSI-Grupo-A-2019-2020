@@ -1,27 +1,29 @@
 import React from 'react';
-import './pages/style/App.css';
+import './App.css';
 
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-
-import MainPage from "./pages/index";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NotFoundPage from "./pages/404";
-import RegisterBox from "./pages/register";
-import LoginBox from "./pages/login";
-import HomePage from "./pages/home";
-import GetUsers from "./pages/getUsers";
-import EditUser from "./pages/editUser";
+import Register from "./pages/register";
+import Login from "./pages/login";
+import HomePage from "./pages/homepage";
+import Users from "./pages/users";
+import Profile from "./pages/profile";
+import Library from "./pages/library";
+import Create from "./pages/create";
+
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/login" component={LoginBox}></Route>
-          <Route exact path="/register" component={RegisterBox}></Route>
-          <Route exact path="/home" component={HomePage}></Route>
-          <Route exact path="/getUsers" component={GetUsers}></Route>
-          <Route exact path="/editUser" component={EditUser}></Route>
+          <Route exact path="/" component={HomePage}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/users/register" component={Register}></Route>
+          <Route exact path="/users" component={Users}></Route>
+          <Route exact path="/profile" component={Profile}></Route>
+          <Route exact path="/library" component={Library}></Route>
+          <Route exact path="/create" component={Create}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

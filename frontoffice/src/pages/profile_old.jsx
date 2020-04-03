@@ -1,15 +1,14 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import "./style/editUser.css";
+import React,{Component} from "react";
+import {Link} from "react-router-dom";
+import "./style/users.css";
 
-class EditUserBox extends React.Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       EditUser: null,
       token: ""
     };
-
   }
 
   componentDidMount() {
@@ -17,7 +16,7 @@ class EditUserBox extends React.Component {
       this.setState({ token: data.token });
   }
 
-  async submitRegister() {
+  async submitEdit() {
     let name = document.getElementById("name").value;
     let surname = document.getElementById("surname").value;
     let email = document.getElementById("email").value;
@@ -25,21 +24,21 @@ class EditUserBox extends React.Component {
     let password = document.getElementById("password").value;
     let update ={};
     
-    if(email!=""&&!email.includes("@")){
+    if(email!==""&&!email.includes("@")){
       alert("Insira um email válido");
       return ;
     }
 
-    if(isNaN(parseInt(age)) && age<0 || age>150){
+    if(isNaN(parseInt(age)) && (age<0 || age>150)){
       alert("Insira uma idade válida");
       return;
     }
 
-    name != "" ? update.name = name : console.log(); 
-    surname != "" ? update.surname = surname : console.log();
-    email != "" ? update.email = email : console.log(); 
-    age != "" ? update.age = age : console.log();
-    password != "" ? update.password = password : console.log();
+    name !== "" ? update.name = name : console.log(); 
+    surname !== "" ? update.surname = surname : console.log();
+    email !== "" ? update.email = email : console.log(); 
+    age !== "" ? update.age = age : console.log();
+    password !== "" ? update.password = password : console.log();
     
     
     
@@ -63,7 +62,7 @@ class EditUserBox extends React.Component {
     let data = await response.json();
       console.log(data);
 
-    if (data.sucess==true) {
+    if (data.sucess===true) {
         this.setState({ EditUser: true });
       } else {
         this.setState({ EditUser: false });
@@ -74,7 +73,7 @@ class EditUserBox extends React.Component {
   render() {
     return (
       <div className="inner-container">
-        <Link type="button" to="/home">
+        <Link type="button" to="/">
           Voltar
         </Link>
 
@@ -143,7 +142,7 @@ class EditUserBox extends React.Component {
 
           <button
             className="login-btn"
-            onClick={this.submitRegister.bind(this)}
+            onClick={this.submitEdit.bind(this)}
           >
             Guardar
           </button>
@@ -165,4 +164,4 @@ class EditUserBox extends React.Component {
   }
 }
 
-export default EditUserBox;
+export default Profile;

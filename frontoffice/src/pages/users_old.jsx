@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-class GetUsers extends Component {
+class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +72,7 @@ class GetUsers extends Component {
     return (
 
       <div>
-        <Link type="button" to="/home">
+        <Link type="button" to="/">
           Voltar
         </Link><br/>
         
@@ -88,4 +88,4 @@ class GetUsers extends Component {
 
 }
 
-export default GetUsers;
+export default Users;
