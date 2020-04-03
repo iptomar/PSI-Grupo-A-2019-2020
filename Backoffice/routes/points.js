@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
+const {file } = require('../helpers')
 
 //Usage:
 //body.id = id do ponto a actualizar
