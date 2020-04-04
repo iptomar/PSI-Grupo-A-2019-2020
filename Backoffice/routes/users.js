@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
+const {file } = require('../helpers')
 
 /* GET users listing. */
 router.get("/", async function(req, res, next) {
@@ -18,7 +19,7 @@ router.post("/", async function(req, res, next) {
 router.post("/login", async function(req, res, next) {
   // vai validar o que recebe no body
   if (req.body.email == null || req.body.password == null) {
-    let error = { sucess : false , mesage:  "Incorrect parameters" };
+    let errormesage = { sucess : false , mesage:  "Incorrect parameters" };
     res.send(errormesage);
     //res.status(400).send(error);
   }
@@ -244,6 +245,8 @@ router.post("/update", async function(req, res, next) {
     res.send(errormesage);
   }else{
   try{
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
       return await knex('users').where({ token: req.body.user }).update(req.body.data).then(async function( resp ){ 
         let errormesage = { sucess : true , mesage: "update sucessfull" };
@@ -266,7 +269,7 @@ router.post("/update", async function(req, res, next) {
 //usage:
 //body.user = token
 //body.data = id do utilizador a eliminar(json)
-router.post("/delete", async function(req, res, next) {
+router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
 
   //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
