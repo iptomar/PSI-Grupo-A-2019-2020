@@ -84,7 +84,7 @@ router.delete("/delete", async function(req, res, next){
 router.post("/insert", async function(req, res, next){
 
     await knex("Interesse")
-    .insert(res.body.data)
+    .insert(req.body.data)
     .catch(async function(err) {
       var d = new Date();
       await file(
@@ -108,7 +108,7 @@ router.post("/searchpoint", async function(req, res, next){
 
     await knex('Interesse')
     .select("*")
-    .where({ id: res.body.data })
+    .where({ id: req.body.data })
     .then(rows => {
         let errormesage = { sucess : true , mesage: rows };
         res.send(errormesage);
@@ -137,7 +137,7 @@ router.post("/search", async function(req, res, next){
 
     await knex('Inter_Roteir')
     .select("id_inter")
-    .where({ id_roteir: res.body.data })
+    .where({ id_roteir: req.body.data })
     .then(rows => {
         let errormesage = { sucess : true , mesage: rows };
         res.send(errormesage);
