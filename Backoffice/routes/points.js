@@ -135,7 +135,7 @@ router.post("/searchpoint", async function(req, res, next){
 //body.data = idRoteiro
 router.post("/search", async function(req, res, next){
 
-    await knex('users')
+    await knex('Inter_Roteir')
     .select("id_inter")
     .where({ id_roteir: body.data })
     .then(rows => {
