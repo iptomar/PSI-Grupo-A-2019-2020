@@ -7,7 +7,15 @@ exports.seed = function(knex, Promise) {
       {
         id_roteir: 1,
         id_inter: 1
-	  },
+    },
+    {
+      id_roteir: 1,
+      id_inter: 2
+  },
+  {
+    id_roteir: 1,
+    id_inter: 3
+},
       {
         id_roteir: 2,
         id_inter: 1
