@@ -1,0 +1,10 @@
+#UsersTable{
+    margin-top: 40px;
+    margin-left: 60px;
+    margin-right: 60px;
+    border:1px #000 solid;
+}
+
+td,th {
+    text-align: left;
+}

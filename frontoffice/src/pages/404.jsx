@@ -11,38 +11,17 @@ class NotFoundPage extends React.Component {
         this.state = {
             redirect: "",
         };
-        this.logout = this.logout.bind(this);
-        this.login = this.login.bind(this);
-        this.homepage = this.homepage.bind(this);
-        this.users = this.users.bind(this);
-        this.create = this.create.bind(this);
-        this.library = this.library.bind(this);
+        this.redirecter = this.redirecter.bind(this);
     }
 
-    logout(){
-        sessionStorage.setItem("userdata","");
-        sessionStorage.clear();
-        this.setState({redirect: "/", loggedIn : false, data: null});
-    }
-
-    login(){
-        this.setState({redirect: "/login"});
-    }
-
-    homepage(){
-        this.setState({redirect: "/"});
-    }
-
-    create(){
-        this.setState({redirect: "/create"});
-    }
-
-    library(){
-        this.setState({redirect: "/library"});
-    }
-
-    users(){
-      this.setState({redirect: "/users"});
+    redirecter(local){
+        if(local==="/logout"){
+            sessionStorage.setItem("userdata","");
+            sessionStorage.clear();
+            this.setState({redirect: "/", loggedIn : false, data: null});    
+        } 
+        else      
+        this.setState({redirect: local});
     }
 
     render() {
@@ -52,7 +31,7 @@ class NotFoundPage extends React.Component {
         else{
             return (
                 <div>
-                    <NavBar login={this.login}logout={this.logout}create={this.create}library={this.library}users={this.users}homepage={this.homepage}></NavBar>
+                    <NavBar redirecter={this.redirecter}></NavBar>
                     <div id="PageMainDiv">
                         <div id="PageCentralDiv">
                             <div id="Div404">

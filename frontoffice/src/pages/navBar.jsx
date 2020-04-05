@@ -6,7 +6,6 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect :"/",
             loggedIn : false,
         };
         this.logout = this.logout.bind(this);
@@ -38,11 +37,8 @@ class NavBar extends Component {
                     </div>
                     {this.state.loggedIn?
                         <div id="NavButtons">
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/create")}>
-                                <p className="NavButtonsText">Criar</p>
-                            </div>
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/library")}>
-                                <p className="NavButtonsText">Biblioteca</p>
+                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/routes")}>
+                                <p className="NavButtonsText">Roteiros</p>
                             </div>
                             <div className="CenterNavButton" onClick={()=>this.props.redirecter("/users")}>
                                 <p className="NavButtonsText">Utilizadores</p>

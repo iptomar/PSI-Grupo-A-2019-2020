@@ -54,6 +54,7 @@ body,
     flex-direction: column;
 }
 
+
 .box-controller {
     visibility: visible;
     display: -webkit-box;

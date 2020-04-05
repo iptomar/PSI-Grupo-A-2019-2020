@@ -14,13 +14,7 @@ class Profile extends Component {
             role: "",
             userdata:null,
         };
-        this.logout = this.logout.bind(this);
-        this.login = this.login.bind(this);
-        this.homepage = this.homepage.bind(this);
-        this.users = this.users.bind(this);
-        this.create = this.create.bind(this);
-        this.library = this.library.bind(this);
-        this.profile = this.profile.bind(this);
+        this.redirecter = this.redirecter.bind(this);
     }
 
     componentDidMount(){
@@ -35,35 +29,15 @@ class Profile extends Component {
         }
     }
 
-    logout(){
-        sessionStorage.setItem("userdata","");
-        sessionStorage.clear();
-        this.setState({redirect: "/", loggedIn : false, data: null});
+    redirecter(local){
+        if(local==="/logout"){
+            sessionStorage.setItem("userdata","");
+            sessionStorage.clear();
+            this.setState({redirect: "/", loggedIn : false, data: null});    
+        } 
+        else      
+        this.setState({redirect: local});
     }
-
-    login(){
-        this.setState({redirect: "/login"});
-    }
-
-    homepage(){
-        this.setState({redirect: "/"});
-    }
-
-    create(){
-        this.setState({redirect: "/create"});
-    }
-
-    library(){
-        this.setState({redirect: "/library"});
-    }
-
-    users(){
-      this.setState({redirect: "/users"});
-    }
-
-    profile(){
-        this.setState({redirect: "/profile"});
-      }
 
     render() {
         if (this.state.redirect!=="/profile") {
@@ -72,7 +46,7 @@ class Profile extends Component {
         
         return (
             <div>
-                <NavBar login={this.login}logout={this.logout}create={this.create}library={this.library}users={this.users}homepage={this.homepage}profile={this.profile}></NavBar>
+                <NavBar redirecter={this.redirecter}></NavBar>
                 <div id="PageMainDiv">
                     <div id="PageCentralDiv">
                     </div>

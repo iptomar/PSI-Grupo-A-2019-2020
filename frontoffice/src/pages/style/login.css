@@ -36,7 +36,7 @@
 }
 
 #BackImg{
-    width: 20px;
+    width: 22px;
 }
 
 #LoginInnerDiv{
@@ -52,12 +52,13 @@
     height: 500px;
 }
 #LoginLogoImg{
-    width: 200px;
+    width: 150px;
     box-shadow:  8px 8px 15px #000;
 }
 
 #LoginText{
     margin: 20px;
+    margin-top: 40px;
     font-family: Ozxgen, sans-serif;
     font-size: 40px;
     color: #E8E8E8;

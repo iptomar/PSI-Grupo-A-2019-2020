@@ -45,15 +45,19 @@ class HomePage extends Component {
         }        
         
         return (
-            <div>
+            <div id="body">
                 <NavBar redirecter={this.redirecter}></NavBar>
                 <div id="PageMainDiv">
+                    <div className="BackgroundDiv"></div>
+                    <div id="PageCenter">
                     <div id="PageCentralDiv">
                     </div>
                     <footer id="FooterDiv">
                         <p id="Footer1p">ToursTomar</p>
                         <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
                     </footer>
+                    </div>
+                    <div className="BackgroundDiv"></div>
                 </div>
                 
             </div>
