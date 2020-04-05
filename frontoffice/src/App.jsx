@@ -10,6 +10,7 @@ import Users from "./pages/users";
 import Profile from "./pages/profile_old";
 import Routes from "./pages/routes";
 import Create from "./pages/create";
+import InsertPoint from "./pages/createPoint";
 
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/users/register" component={Register}></Route>
           <Route exact path="/users" component={Users}></Route>
+          <Route exact path="/createPoint" component={InsertPoint}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/routes" component={Routes}></Route>
           <Route exact path="/routes/create" component={Create}></Route>
