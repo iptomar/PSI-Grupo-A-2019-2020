@@ -8,7 +8,7 @@ const {file } = require('../helpers')
 //Return all owners
 router.get("/list", async function(req, res, next){
 
-    await knex('prop')
+    await knex('Roteiro')
     .select()
     .then(rows => {
         let errormesage = { sucess : true , mesage: rows };
@@ -25,9 +25,6 @@ router.get("/list", async function(req, res, next){
       res.send(errormesage);
       console.log(err);
     });
-
-    let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-    res.send(errormesage);
 });
 
 //Usage:
