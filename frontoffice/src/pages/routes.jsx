@@ -14,7 +14,7 @@ class Routes extends Component {
       userdata: null,
       routes: [],
       routeId: null,
-      points: []
+      points: [],
     };
     this.redirecter = this.redirecter.bind(this);
     this.getPoints = this.getPoints.bind(this);
@@ -96,6 +96,28 @@ class Routes extends Component {
     } else this.setState({ redirect: local });
   }
 
+  async deletePoint(id){
+    var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
+        var raw = JSON.stringify({  "id": id });
+    
+    
+        var requestOptions = {
+          method: 'DELETE',
+          headers: myHeaders,
+          body: raw, mode: 'cors',
+          redirect: 'follow'
+        };
+    
+        let response = await fetch("https://localhost:3000/points/delete", requestOptions);
+        let data = await response.json();
+        await this.getRoutes();
+        console.log(data);
+
+        await this.getPoints(this.state.routeId);
+
+  }
+
   render() {
     
     if (this.state.redirect !== "/routes") {
@@ -105,25 +127,13 @@ class Routes extends Component {
     let ps=[]
     let UI = [];
 
-    if(this.state.points.length!=0){
-        this.state.points.forEach((element)=>{
-            console.log(element);
-            ps.push(
-                <div>
-                    <h4>{element.titulo}</h4>
-                    <h4>{element.descricao}</h4>
-                    <h4>{element.data}</h4>
-                    <h4>{element.coordenadas}</h4>
-                </div>
-            );
-        });
-    }
-
+    //vai buscar os roteiros
     if(this.state.routes.length!==0){
         this.state.routes.forEach((element) => {
           UI.push(
             <div
               onClick={() => {
+                this.setState({routeId:element.id});
                 this.getPoints(element.id)
               }}
             >
@@ -133,6 +143,22 @@ class Routes extends Component {
           );
         });
     }
+
+    console.log(this.state.points.length);
+
+    if(this.state.points.length!=0){
+      this.state.points.forEach((element)=>{
+          console.log(element);
+          ps.push(
+              <div>
+                  <h4>{element.titulo}</h4>
+                  <h4>{element.descricao}</h4>
+                  <h4>{element.data}</h4>
+                  <button onClick={()=> this.deletePoint(element.id)}>❌</button>
+              </div>
+          );
+    });
+  }
     
 
     return (
