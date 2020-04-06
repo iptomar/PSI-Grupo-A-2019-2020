@@ -30,20 +30,25 @@ class NotFoundPage extends React.Component {
         } 
         else{
             return (
-                <div>
-                    <NavBar redirecter={this.redirecter}></NavBar>
-                    <div id="PageMainDiv">
-                        <div id="PageCentralDiv">
-                            <div id="Div404">
-                                <img id="Img404" src="./assets/404.png" alt=""></img>
-                            </div>
+                <div id="body">
+                <NavBar redirecter={this.redirecter}></NavBar>
+                <div id="PageMainDiv">
+                    <div className="BackgroundDiv"></div>
+                    <div id="PageCenter">
+                    <div id="PageCentralDiv">
+                        <div id="Div404">
+                            <img id="Img404" src="./assets/404.png" alt=""></img>
                         </div>
-                        <footer id="FooterDiv">
-                            <p id="Footer1p">ToursTomar</p>
-                            <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
-                        </footer>
                     </div>
+                    <footer id="FooterDiv">
+                        <p id="Footer1p">ToursTomar</p>
+                        <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
+                    </footer>
+                    </div>
+                    <div className="BackgroundDiv"></div>
                 </div>
+                
+            </div>
             );
         }
     }
