@@ -73,11 +73,6 @@ router.delete("/delete", async function(req, res, next){
         await knex('Interesse')
         .where({id: req.body.id})
         .del();
-
-        // o conjunto de linhas abaixo vai ser apagado
-        await knex('Inter_Roteir')
-        .where({id_inter:req.body.id})
-        .del();
     }
 
     let errormesage= {sucess: true, mesage: "Point sucessfully deleted"};
@@ -162,5 +157,34 @@ router.post("/search", async function(req, res, next){
 
     let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
     res.send(errormesage);
+});
+
+//Usage:
+//Return all points id
+//body.data = idRoteiro
+router.post("/searchuser", async function(req, res, next){
+
+  await knex('Interesse')
+  .select("*")
+  .where({ user_id: req.body.data })
+  .then(rows => {
+      let errormesage = { sucess : true , mesage: rows };
+      res.send(errormesage);
+      
+    })
+  .catch(async function(err) {
+    var d = new Date();
+    await file(
+      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack()
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+  let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+  res.send(errormesage);
 });
 module.exports = router;
