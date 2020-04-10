@@ -73,6 +73,11 @@ router.delete("/delete", async function(req, res, next){
         await knex('Interesse')
         .where({id: req.body.id})
         .del();
+        
+        // o conjunto de linhas abaixo vai ser apagado
+        await knex('Inter_Roteir')
+        .where({id_inter:req.body.id})
+        .del();
     }
 
     let errormesage= {sucess: true, mesage: "Point sucessfully deleted"};
