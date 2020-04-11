@@ -11,7 +11,7 @@ import Profile from "./pages/profile_old";
 import Routes from "./pages/routes";
 import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
-
+import Points from "./pages/points";
 
 class App extends React.Component {
   render() {
@@ -25,6 +25,7 @@ class App extends React.Component {
           <Route exact path="/createPoint" component={InsertPoint}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/routes" component={Routes}></Route>
+          <Route exact path="/mypoints" component={Points}></Route>
           <Route exact path="/create" component={Create}></Route>
           <Route component={NotFoundPage} />
         </Switch>

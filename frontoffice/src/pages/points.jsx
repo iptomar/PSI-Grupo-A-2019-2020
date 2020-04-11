@@ -1,0 +1,133 @@
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import "./style/points.css";
+import "./style/pageframe.css";
+import NavBar from "./navBar";
+
+class Points extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false,
+      redirect: "/mypoints",
+      role: "",
+      userdata: null,
+      points: [],
+    };
+    this.redirecter = this.redirecter.bind(this);
+    this.getPoints = this.getPoints.bind(this);
+  }
+
+  async componentDidMount() {
+    if (sessionStorage.getItem("userData")) {
+      let data = JSON.parse(sessionStorage.getItem("userData"));
+      this.setState({ role: data.email });
+      this.setState({ userdata: data });
+      sessionStorage.setItem("token", data.token);
+      this.setState({ loggedIn: true });
+      await this.getPoints();
+    } else {
+      this.setState({ loggedIn: false });
+    }
+  }
+
+  async getPoints() {
+    let idUser = JSON.parse(sessionStorage.getItem("userData"));
+    idUser = idUser.id;
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ data: idUser });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
+    };
+
+    let response = await fetch(
+      "https://localhost:3000/points/searchuser",
+      requestOptions
+    );
+    let data = await response.json();
+    data = data.mesage;
+    console.log(data);
+    this.setState({ points: data });
+  }
+
+  redirecter(local) {
+    if (local === "/logout") {
+      sessionStorage.setItem("userdata", "");
+      sessionStorage.clear();
+      this.setState({ redirect: "/", loggedIn: false, data: null });
+    } else this.setState({ redirect: local });
+  }
+
+  async deletePoint(id) {
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ id: id });
+
+    var requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
+    };
+
+    let response = await fetch(
+      "https://localhost:3000/points/delete",
+      requestOptions
+    );
+    let data = await response.json();
+    await this.getPoints();
+    console.log(data);
+  }
+
+  render() {
+    if (this.state.redirect !== "/mypoints") {
+      return <Redirect to={this.state.redirect} />;
+    }
+
+    let UI = [];
+
+    if (this.state.points.length != 0) {
+      this.state.points.forEach((point) => {
+        UI.push(
+          <div>
+            <h4>{point.titulo}</h4>
+            <h4>{point.descricao}</h4>
+            <h4>{point.data}</h4>
+            <button onClick={()=> this.deletePoint(point.id)}>❌</button>
+          </div>
+        );
+      });
+    }
+
+    return (
+      <div id="body">
+        <NavBar redirecter={this.redirecter}></NavBar>
+        <div id="PageMainDiv">
+          <div className="BackgroundDiv"></div>
+          <div id="PageCenter">
+            <div id="PageCentralDiv">{UI}</div>
+            <footer id="FooterDiv">
+              <p id="Footer1p">ToursTomar</p>
+              <p id="Footer2p">
+                - Projeto desenvolvido no âmbito da cadeira de Projeto de
+                Sistemas de Informação - Instituto Politécnico de Tomar
+              </p>
+            </footer>
+          </div>
+          <div className="BackgroundDiv"></div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Points;

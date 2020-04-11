@@ -7,6 +7,7 @@ class NavBar extends Component {
         super(props);
         this.state = {
             loggedIn : false,
+            user: null
         };
         this.logout = this.logout.bind(this);
     }
@@ -14,6 +15,8 @@ class NavBar extends Component {
     componentDidMount(){
         if (sessionStorage.getItem("userData")) {
             this.setState({loggedIn : true});
+            let data = JSON.parse(sessionStorage.getItem("userData"));
+            this.setState({user:data.email});
         }
         else{
             this.setState({loggedIn : false});
@@ -40,12 +43,23 @@ class NavBar extends Component {
                             <div className="CenterNavButton" onClick={()=>this.props.redirecter("/routes")}>
                                 <p className="NavButtonsText">Roteiros</p>
                             </div>
+                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/mypoints")}>
+                                <p className="NavButtonsText">Pontos</p>
+                            </div>
+                            {this.state.user==="admin@admin.com"?
+                            <div style={{display:"flex", flexDirection:"row"}}>
                             <div className="CenterNavButton" onClick={()=>this.props.redirecter("/users")}>
                                 <p className="NavButtonsText">Utilizadores</p>
                             </div> 
                             <div className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>
                                 <p className="NavButtonsText">Perfil</p>
-                            </div>      
+                            </div>
+                            </div>
+                            :
+                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>
+                                <p className="NavButtonsText">Perfil</p>
+                            </div>
+                            }      
                         </div>
                     :
                         <div id="NavButtons">

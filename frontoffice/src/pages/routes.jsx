@@ -154,7 +154,6 @@ class Routes extends Component {
                   <h4>{element.titulo}</h4>
                   <h4>{element.descricao}</h4>
                   <h4>{element.data}</h4>
-                  <button onClick={()=> this.deletePoint(element.id)}>❌</button>
               </div>
           );
     });
