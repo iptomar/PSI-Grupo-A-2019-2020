@@ -7,10 +7,17 @@ class UpdatePoint extends React.Component {
         super(props);
         this.state = {
             redirect: "",
-            success: null
+            success: null,
+            point: null
         };
 
     }
+
+    componentDidMount(){
+        let point = JSON.parse(sessionStorage.getItem("point"));
+        this.setState({point:point});
+    }
+
 
     async submitUpdatePoint() {
         let titulo = document.getElementById("title").value;
@@ -62,7 +69,7 @@ class UpdatePoint extends React.Component {
     render() {
         return (
             <div className="inner-container">
-                <Link type="button" to="/home">
+                <Link type="button" to="/mypoints">
                     Voltar
             </Link>
 
