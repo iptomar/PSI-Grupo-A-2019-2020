@@ -1,15 +1,17 @@
 var express = require("express");
 var router = express.Router();
-
+var fs = require('fs');
 var knex = require("../utils/databaseConection");
 const {file } = require('../helpers')
 
 //Usage:
-//Return all owners
-router.get("/list", async function(req, res, next){
+//retorna todas imagens dado o ponto de interesse
+//body.data = <Interesse_id>
+router.get("/search", async function(req, res, next){
 
-    await knex('prop')
-    .select()
+    await knex('images')
+    .select("*")
+    .where({Interesse_id:req.body.data})
     .then(rows => {
         let errormesage = { sucess : true , mesage: rows };
         res.send(errormesage);
@@ -31,12 +33,14 @@ router.get("/list", async function(req, res, next){
 });
 
 //Usage:
-//body.data = { Path:"", Legenda:"Legenda", AutorFonte:"AutorFonte" , Interesse_id:"Interesse_id", usersid:"usersid"}
+//body.data.dados = { Path:"", Legenda:"Legenda", AutorFonte:"AutorFonte" , Interesse_id:"Interesse_id", usersid:"usersid"}
+//body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
     var d = new Date();
-    body.data.path = "images/"+ + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    body.data.path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    fs.writeFileSync("./files/"+body.data.path+".txt", body.data.imagem);
     await knex("images")
-    .insert(req.body.data)
+    .insert(req.body.data.dados)
     .catch(async function(err) {
       var d = new Date();
       await file(
@@ -55,11 +59,44 @@ router.post("/insert", async function(req, res, next){
 
 
 //Usage:
-//body.data = { name:"name", work:"work", user_id:"user_id" }
+//body.data = id para apagar
 router.post("/delete", async function(req, res, next){
 
-    await knex("prop")
-    .insert(req.body.data)
+  await knex("images")
+    .select("Path")
+    .where({ id: req.body.data })
+    .then(rows => {
+      for(var keys in rows)
+      fs.unlink("./files/"+body.data.path+".txt", body.data.imagem).catch(async function(err) {
+        var d = new Date();
+        await file(
+          "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+          "a",
+          err.stack()
+        );
+        let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+        res.send(errormesage);
+        console.log(err);
+      });
+    })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
+
+    let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
+    res.send(errormesage);
+
+    await knex("images")
+    .where({ id: req.body.data })
+    .del()
     .catch(async function(err) {
       var d = new Date();
       await file(
