@@ -8,16 +8,9 @@ class UpdatePoint extends React.Component {
         this.state = {
             redirect: "",
             success: null,
-            point: null
+            point: JSON.parse(sessionStorage.getItem("point"))
         };
-
     }
-
-    componentDidMount(){
-        let point = JSON.parse(sessionStorage.getItem("point"));
-        this.setState({point:point});
-    }
-
 
     async submitUpdatePoint() {
         let titulo = document.getElementById("title").value;
@@ -30,30 +23,29 @@ class UpdatePoint extends React.Component {
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
         var raw = JSON.stringify({
-            //ID por modificar
-          id:1,
-          data:{
-            "titulo": titulo,
-            "descricao": description,
-            "coordenadas": coordinates,
-            "data": dataEdif,
-            "tipoEdif": tipoEdificio,
-            "user_id": user.id,
-            "prop_id": 1
-        }
+            id: 1,
+            data: {
+                "titulo": titulo,
+                "descricao": description,
+                "coordenadas": coordinates,
+                "data": dataEdif,
+                "tipoEdif": tipoEdificio,
+                "user_id": user.id,
+                "prop_id": 1
+            }
         });
-    
-     
-    
+
+
+
         var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw, mode: 'cors',
-          redirect: 'follow'
-          };
+            method: 'POST',
+            headers: myHeaders,
+            body: raw, mode: 'cors',
+            redirect: 'follow'
+        };
 
         let response = await fetch("https://localhost:3000/points/update",
-         requestOptions);
+            requestOptions);
 
         let data = await response.json();
 
@@ -64,9 +56,11 @@ class UpdatePoint extends React.Component {
         } else {
             this.setState({ success: false });
         }
+
     }
 
     render() {
+
         return (
             <div className="inner-container">
                 <Link type="button" to="/mypoints">
@@ -86,6 +80,8 @@ class UpdatePoint extends React.Component {
                             name="title"
                             placeholder="Titulo"
                             className="login-input"
+                            value={this.state.point.titulo}
+                            onChange={(e) => {this.setState({point: e.target.value})}}
                         ></input>
                     </div>
 
@@ -97,6 +93,8 @@ class UpdatePoint extends React.Component {
                             name="descr"
                             placeholder="Descrição do ponto de interesse"
                             className="login-input"
+                            value={this.state.point.descricao}
+                            onChange={(e) => {this.setState({point: e.target.value})}}
                         >
                         </textarea>
                     </div>
@@ -110,6 +108,8 @@ class UpdatePoint extends React.Component {
                             name="tipoEdif"
                             placeholder="Tipo de edificio"
                             className="login-input"
+                            value={this.state.point.tipoEdif}
+                            onChange={(e) => {this.setState({point: e.target.value})}}
                         ></input>
                     </div>
 
@@ -122,6 +122,8 @@ class UpdatePoint extends React.Component {
                             name="date"
                             placeholder="Data"
                             className="login-input"
+                            value={this.state.point.data}
+                            onChange={(e) => {this.setState({point: e.target.value})}}
                         ></input>
                     </div>
 
@@ -134,6 +136,8 @@ class UpdatePoint extends React.Component {
                             name="coordinates"
                             placeholder="Coordenadas"
                             className="login-input"
+                            value={this.state.point.coordenadas}
+                            onChange={(e) => {this.setState({point: e.target.value})}}
                         ></input>
                     </div>
 
