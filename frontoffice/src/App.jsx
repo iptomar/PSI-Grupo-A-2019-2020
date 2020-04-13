@@ -12,6 +12,7 @@ import Routes from "./pages/routes";
 import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
 import Points from "./pages/points";
+import UpdatePoint from './pages/updatePoint';
 
 class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route exact path="/users/register" component={Register}></Route>
           <Route exact path="/users" component={Users}></Route>
           <Route exact path="/createPoint" component={InsertPoint}></Route>
+          <Route exact path="/UpdatePoint" component={UpdatePoint}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/routes" component={Routes}></Route>
           <Route exact path="/mypoints" component={Points}></Route>
