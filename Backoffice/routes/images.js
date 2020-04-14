@@ -48,7 +48,7 @@ router.post("/getimage", async function(req, res, next){
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
     var d = new Date();
-    req.body.data.dados.Path = d.now();
+    req.body.data.dados.Path = ""+Date.now();
     fs.writeFileSync("./files/images/"+req.body.data.dados.Path+".txt", req.body.data.imagem);
     await knex("images")
     .insert(req.body.data.dados)
