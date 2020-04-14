@@ -1,0 +1,61 @@
+Utilizadores 
+	Registar:Inserir utilizador na base de dados
+		Entrada:nome, apelido, password, idade, email
+		Saida:mensagem de confirmacao
+	Login: Fazer autenticacao do utilizador
+		Entrada: email, password
+		Saida:mensagem de confirmacao
+Roteiros
+	Criar:Inserir roteiro na base de dados mas precisa de aprovacao do admin
+		Entrada:nome, descricao
+		Saida:mensagem de confirmacao
+	Editar:Eliminar a entrada com esse id na base de dados e inserir uma nova com os dados alterados
+		Entrada:id,nome, descricao
+		Saida:mensagem de confirmacao
+	Ocultar(Remover):Oculta os dados ao utilizador mas permanece na base de dados
+		Entrada: id
+		Saida:mensagem de confirmacao
+	Listar:lista toda a tabela dos roteiro
+		Entrada:nada
+		Saida:lista dos pontos dos roteiros
+	Aprovar/Negar: Aprova/Nega um novo roteiro
+		Entrada: id
+		Saida:nada
+Interesses
+	Inserir:Inserir interesse na base de dados mas precisa de aprovacao do admin
+		Entrada:titulo, descricao, coordenadas, data,tipo de edificio, id proprietario
+		Saida:mensagem de confirmacao
+	Editar:Eliminar a entrada com esse id na base de dados e inserir uma nova com os dados alterados
+		Entrada:id,titulo, descricao, coordenadas, data,tipo de edificio, id proprietario
+		Saida:mensagem de confirmacao
+	Ocultar(Remover):Oculta os dados ao utilizador mas permanece na base de dados
+		Entrada:id
+		Saida:mensagem de confirmacao
+	Listar:lista toda a tabela dos interesses
+		Entrada:nada
+		Saida:lista dos interesses
+	Aprovar/Negar:Aprova/Nega um novo interesse
+		Entrada:id
+		Saida:nada
+Imagens
+	Inserir:Insere o caminho da imagem na bases de dados
+		Entrada: legenda,autor da imagem, caminho da imagem, id interesses, id autor
+		Saida:mensagem de confirmacao
+	Editar:Eliminar a entrada com esse id na base de dados e inserir uma nova com os dados alterados
+		Entrada:id, legenda,autor da imagem, caminho da imagem, id interesses, id autor
+		Saida:mensagem de confirmacao
+	Ocultar(Remover):Oculta os dados ao utilizador mas permanece na base de dados
+		Entrada:id
+		Saida:mensagem de confirmacao
+Proprietario
+	Inserir:Insere proprietario na base de dados
+		Entrada: nome, ocupacao
+		Saida:mensagem de confirmacao
+	Editar:Eliminar a entrada com esse id na base de dados e inserir uma nova com os dados alterados
+		Entrada:id, nome, ocupacao
+		Saida:mensagem de confirmacao
+	Ocultar(Remover):Oculta os dados ao utilizador mas permanece na base de dados
+		Entrada: id
+		Saida:mensagem de confirmacao
+
+	
