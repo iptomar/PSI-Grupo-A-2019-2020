@@ -39,6 +39,7 @@ app.use('/users', usersRouter);
 app.use('/routes', routesRouter);
 app.use('/points', pointsRouter);
 app.use('/props', propsRouter);
+app.use('/images', images);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
