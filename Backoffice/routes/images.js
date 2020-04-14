@@ -48,8 +48,8 @@ router.post("/getimage", async function(req, res, next){
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
     var d = new Date();
-    body.data.dados.path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    fs.writeFileSync("./files/"+body.data.dados.path+".txt", body.data.imagem);
+    req.body.data.dados.path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    fs.writeFileSync("./files/"+req.body.data.dados.path+".txt", req.body.data.imagem);
     await knex("images")
     .insert(req.body.data.dados)
     .catch(async function(err) {
