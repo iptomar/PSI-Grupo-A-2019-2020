@@ -7,7 +7,7 @@ const {file } = require('../helpers')
 //Usage:
 //retorna todas imagens dado o ponto de interesse
 //body.data = <Interesse_id>
-router.get("/search", async function(req, res, next){
+router.post("/search", async function(req, res, next){
 
     await knex('images')
     .select("*")
@@ -33,12 +33,31 @@ router.get("/search", async function(req, res, next){
 });
 
 //Usage:
+//retorna todas imagens dado o ponto de interesse
+//body.data = path
+router.post("/getimage", async function(req, res, next){
+      let errormesage = { sucess : true , mesage: await fs.readFileSync(body.data).catch(async function(err) {
+        var d = new Date();
+        await file(
+          "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+          "a",
+          err.stack()
+        );
+        let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+        res.send(errormesage);
+        console.log(err);
+      })
+    };
+    res.send(errormesage);
+});
+
+//Usage:
 //body.data.dados = { Path:"", Legenda:"Legenda", AutorFonte:"AutorFonte" , Interesse_id:"Interesse_id", usersid:"usersid"}
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
     var d = new Date();
-    body.data.path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    fs.writeFileSync("./files/"+body.data.path+".txt", body.data.imagem);
+    body.data.dados.path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    fs.writeFileSync("./files/"+body.data.dados.path+".txt", body.data.imagem);
     await knex("images")
     .insert(req.body.data.dados)
     .catch(async function(err) {
