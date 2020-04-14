@@ -36,7 +36,7 @@ router.post("/search", async function(req, res, next){
 //retorna todas imagens dado o ponto de interesse
 //body.data = path
 router.post("/getimage", async function(req, res, next){
-      let errormesage = { sucess : true , mesage: await fs.readFileSync("./files/"+req.body.data+".txt")
+      let errormesage = { sucess : true , mesage: await fs.readFileSync("./files/"+req.body.data+".txt", 'utf8')
     };
     if(errormesage.mesage==null)
        errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
