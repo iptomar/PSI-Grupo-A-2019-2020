@@ -36,7 +36,7 @@ router.post("/search", async function(req, res, next){
 //retorna todas imagens dado o ponto de interesse
 //body.data = path
 router.post("/getimage", async function(req, res, next){
-      let errormesage = { sucess : true , mesage: await fs.readFileSync(req.body.data).catch(async function(err) {
+      let errormesage = { sucess : true , mesage: await fs.readFileSync("./files/"+req.body.data+".txt").catch(async function(err) {
         var d = new Date();
         await file(
           "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
