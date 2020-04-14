@@ -62,6 +62,9 @@ Proprietario
 		Saida:mensagem de confirmacao
 
 Extras tentar implodir o projeto
-	Inserir o ID 1, tentar inserir mais do que um ID  
+	Inserir o ID 1,
+	tentar inserir mais do que um ID,
+	tentar entrar sem estar registado,
+	tentar editar código apartir das text box.
 	
 	
