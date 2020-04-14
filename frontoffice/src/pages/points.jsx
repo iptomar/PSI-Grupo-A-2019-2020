@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./style/points.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
@@ -88,8 +88,8 @@ class Points extends Component {
     console.log(data);
   }
 
-  updatePoint(point){
-    this.setState({redirect:"UpdatePoint"});
+  updatePoint(point) {
+    this.setState({ redirect: "UpdatePoint" });
     sessionStorage.setItem("point", JSON.stringify(point));
   }
 
@@ -107,8 +107,8 @@ class Points extends Component {
             <h4>{point.titulo}</h4>
             <h4>{point.descricao}</h4>
             <h4>{point.data}</h4>
-            <button onClick={()=> this.deletePoint(point.id)}>❌</button>
-            <button onClick={()=>this.updatePoint(point)}>📝</button>
+            <button onClick={() => this.deletePoint(point.id)}>❌</button>
+            <button onClick={() => this.updatePoint(point)}>📝</button>
           </div>
         );
       });
@@ -120,7 +120,13 @@ class Points extends Component {
         <div id="PageMainDiv">
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
-            <div id="PageCentralDiv">{UI}</div>
+            <div id="PageCentralDiv">
+              <br />
+              <Link type="button" to="/createPoint">
+                Criar ponto
+              </Link>
+              {UI}
+            </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>
               <p id="Footer2p">
