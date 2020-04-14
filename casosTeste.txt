@@ -34,6 +34,9 @@ Interesses
 	Listar:lista toda a tabela dos interesses
 		Entrada:nada
 		Saida:lista dos interesses
+	Pesquisar:Obter ponto de interesse dado id do ponto
+		Entrada:id
+		Saida:Dados desse interesse
 	Aprovar/Negar:Aprova/Nega um novo interesse
 		Entrada:id
 		Saida:nada
