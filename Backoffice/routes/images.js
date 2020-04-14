@@ -61,7 +61,7 @@ router.post("/insert", async function(req, res, next){
 //Usage:
 //body.data = id para apagar
 router.post("/delete", async function(req, res, next){
-
+  let errormesage
   await knex("images")
     .select("Path")
     .where({ id: req.body.data })
@@ -74,7 +74,7 @@ router.post("/delete", async function(req, res, next){
           "a",
           err.stack()
         );
-        let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+        errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
         res.send(errormesage);
         console.log(err);
       });
@@ -86,12 +86,12 @@ router.post("/delete", async function(req, res, next){
         "a",
         err.stack()
       );
-      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
       console.log(err);
     });
 
-    let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
+     errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
     res.send(errormesage);
 
     await knex("images")
@@ -104,12 +104,12 @@ router.post("/delete", async function(req, res, next){
         "a",
         err.stack()
       );
-      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
       console.log(err);
     });
 
-    let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
+    errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
     res.send(errormesage);
 });
 
