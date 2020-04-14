@@ -28,8 +28,8 @@ router.post("/search", async function(req, res, next){
       console.log(err);
     });
 
-    let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-    res.send(errormesage);
+    /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+    res.send(errormesage);*/
 });
 
 //Usage:
