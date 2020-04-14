@@ -36,7 +36,7 @@ router.post("/search", async function(req, res, next){
 //retorna todas imagens dado o ponto de interesse
 //body.data = path
 router.post("/getimage", async function(req, res, next){
-      let errormesage = { sucess : true , mesage: await fs.readFileSync("./files/"+req.body.data+".txt", 'utf8')
+      let errormesage = { sucess : true , mesage: await fs.readFileSync("./files/images/"+req.body.data+".txt", 'utf8')
     };
     if(errormesage.mesage==null)
        errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
@@ -48,8 +48,8 @@ router.post("/getimage", async function(req, res, next){
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
     var d = new Date();
-    req.body.data.dados.Path = "images/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    fs.writeFileSync("./files/"+req.body.data.dados.Path+".txt", req.body.data.imagem);
+    req.body.data.dados.Path = d.now();
+    fs.writeFileSync("./files/images/"+req.body.data.dados.Path+".txt", req.body.data.imagem);
     await knex("images")
     .insert(req.body.data.dados)
     .catch(async function(err) {
@@ -78,7 +78,7 @@ router.post("/delete", async function(req, res, next){
     .where({ id: req.body.data })
     .then(rows => {
       for(var keys in rows)
-      fs.unlink("./files/"+body.data.path+".txt", body.data.imagem).catch(async function(err) {
+      fs.unlink("./files/images/"+body.data.path+".txt", body.data.imagem).catch(async function(err) {
         var d = new Date();
         await file(
           "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
