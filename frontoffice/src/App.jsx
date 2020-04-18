@@ -13,6 +13,7 @@ import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
 import Points from "./pages/points";
 import UpdatePoint from './pages/updatePoint';
+import Images from './pages/image';
 
 class App extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class App extends React.Component {
           <Route exact path="/routes" component={Routes}></Route>
           <Route exact path="/mypoints" component={Points}></Route>
           <Route exact path="/create" component={Create}></Route>
+          <Route exact path="/image" component={Images}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

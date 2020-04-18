@@ -92,6 +92,10 @@ class Points extends Component {
     this.setState({ redirect: "UpdatePoint" });
     sessionStorage.setItem("point", JSON.stringify(point));
   }
+  getImages(point) {
+    this.setState({ redirect: "image" });
+    sessionStorage.setItem("point", JSON.stringify(point.id));
+  }
 
   render() {
     if (this.state.redirect !== "/mypoints") {
@@ -109,6 +113,7 @@ class Points extends Component {
             <h4>{point.data}</h4>
             <button onClick={() => this.deletePoint(point.id)}>❌</button>
             <button onClick={() => this.updatePoint(point)}>📝</button>
+            <button onClick={() => this.getImages(point)}>🖼</button>
           </div>
         );
       });

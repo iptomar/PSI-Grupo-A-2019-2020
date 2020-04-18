@@ -83,7 +83,6 @@ router.post("/delete", async function(req, res, next){
         await file(
           "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
           "a",
-          err.stack()
         );
         errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
         res.send(errormesage);
@@ -95,7 +94,6 @@ router.post("/delete", async function(req, res, next){
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
       );
        errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
