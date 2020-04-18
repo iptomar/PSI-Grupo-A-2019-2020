@@ -77,8 +77,19 @@ class Images extends Component {
   }
 
   render() {
+    let imgs=[];
     if (this.state.redirect !== "/image") {
       return <Redirect to={this.state.redirect} />;
+    }
+    if(this.state.images.length!=0){
+      this.state.images.forEach((img)=>{
+        imgs.push(
+          <div>
+            <img src={'data:image/jpg;base64,'+img.img}></img>
+          </div>
+        );
+
+      });
     }
     return (
       <div id="body">
@@ -86,7 +97,9 @@ class Images extends Component {
         <div id="PageMainDiv">
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
-            <div id="PageCentralDiv"></div>
+            <div id="PageCentralDiv">
+              {imgs}
+            </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>
               <p id="Footer2p">
