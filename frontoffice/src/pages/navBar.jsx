@@ -40,25 +40,15 @@ class NavBar extends Component {
                     </div>
                     {this.state.loggedIn?
                         <div id="NavButtons">
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/routes")}>
-                                <p className="NavButtonsText">Roteiros</p>
-                            </div>
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/mypoints")}>
-                                <p className="NavButtonsText">Pontos</p>
-                            </div>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/routes")}> Roteiros </button>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/mypoints")}>Pontos</button>
                             {this.state.user==="admin@admin.com"?
                             <div style={{display:"flex", flexDirection:"row"}}>
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/users")}>
-                                <p className="NavButtonsText">Utilizadores</p>
-                            </div> 
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>
-                                <p className="NavButtonsText">Perfil</p>
-                            </div>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/users")}>Utilizadores</button> 
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>Perfil</button>
                             </div>
                             :
-                            <div className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>
-                                <p className="NavButtonsText">Perfil</p>
-                            </div>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>Perfil</button>
                             }      
                         </div>
                     :
@@ -69,15 +59,15 @@ class NavBar extends Component {
                    
                     <div id="LogInOut">
                         {this.state.loggedIn?
-                            <div className="LogInOutDiv" onClick={this.logout}>
+                            <button className="LogInOutDiv" onClick={this.logout}>
                                 <span className="NavButtonsText">Logout</span>
                                 <img className="LogInOutIMG" src="./assets/logout.png" alt=""></img>
-                            </div>
+                            </button>
                         :
-                            <div className="LogInOutDiv" onClick={()=>this.props.redirecter("/login")}>
-                                <span className="NavButtonsText">Login</span>
+                            <button className="LogInOutDiv" onClick={()=>this.props.redirecter("/login")}>
+                                Login
                                 <img className="LogInOutIMG" src="./assets/login.png" alt=""></img>
-                            </div>
+                            </button>
                         }
                     </div>
 

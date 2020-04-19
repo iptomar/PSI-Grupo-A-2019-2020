@@ -90,9 +90,10 @@ class Users extends Component {
                         <td>{element.name} {element.surname}</td>
                         <td>{element.email}</td> 
                         <td>{element.age}</td> 
-                        <td>todo</td> 
+                        <td><i>todo...</i></td> 
                         <td>
-                        <button onClick={()=> this.deleteUser(element.id)}>Deletar</button>
+                        <button >✏️</button>
+                        <button onClick={()=> this.deleteUser(element.id)}>❌</button>
                         </td>
                     </tr>
                 );
@@ -113,11 +114,11 @@ class Users extends Component {
                         
                         <table id="UsersTable">
                            <tr>
-                               <th className="TableFields">Nome </th>
-                               <th className="TableFields">E-mail</th>
-                               <th className="TableFields">Idade</th>
-                               <th className="TableFields">Cargo</th>
-                               <th className="TableFields">Opções</th>
+                               <th className="TableHeader">Nome </th>
+                               <th className="TableHeader">E-mail</th>
+                               <th className="TableHeader">Idade</th>
+                               <th className="TableHeader">Cargo</th>
+                               <th className="TableHeader">Opções</th>
                             </tr>
                             {UI} 
                         </table>
