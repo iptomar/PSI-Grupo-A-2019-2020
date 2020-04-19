@@ -44,7 +44,7 @@ class UpdatePoint extends React.Component {
             redirect: 'follow'
         };
 
-        let response = await fetch("https://localhost:3000/points/update",
+        let response = await fetch("http://localhost:3000/points/update",
             requestOptions);
 
         let data = await response.json();

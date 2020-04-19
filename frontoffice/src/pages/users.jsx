@@ -60,14 +60,14 @@ class Users extends Component {
           redirect: 'follow'
         };
     
-        let response = await fetch("https://localhost:3000/users/delete", requestOptions);
+        let response = await fetch("http://localhost:3000/users/delete", requestOptions);
         let data = await response.json();
         await this.teste();
     }
     
     async teste(){
         let response = await fetch(
-          "https://localhost:3000/users/getUsers/" + sessionStorage.getItem("token")
+          "http://localhost:3000/users/getUsers/" + sessionStorage.getItem("token")
         ); 
     
         let dat = await response.json();

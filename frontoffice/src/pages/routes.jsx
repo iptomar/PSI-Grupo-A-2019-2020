@@ -39,7 +39,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      "https://localhost:3000/routes/list",
+      "http://localhost:3000/routes/list",
       requestOptions
     ).catch((error) => console.log("error", error));
     let json = await response.json();
@@ -59,7 +59,7 @@ class Routes extends Component {
       redirect: 'follow'
     };
 
-    let response = await fetch("https://localhost:3000/points/search", requestOptions);
+    let response = await fetch("http://localhost:3000/points/search", requestOptions);
     let data = await response.json();
 
     await this.getPointsInfo(data.mesage);
@@ -79,7 +79,7 @@ class Routes extends Component {
             redirect: 'follow'
         };
 
-        let response = await fetch("https://localhost:3000/points/searchpoint", requestOptions);
+        let response = await fetch("http://localhost:3000/points/searchpoint", requestOptions);
         let data = await response.json();
         newPontos.push(data.mesage[0]);
         if(pontos.length==newPontos.length){
@@ -109,7 +109,7 @@ class Routes extends Component {
           redirect: 'follow'
         };
     
-        let response = await fetch("https://localhost:3000/points/delete", requestOptions);
+        let response = await fetch("http://localhost:3000/points/delete", requestOptions);
         let data = await response.json();
         await this.getRoutes();
         console.log(data);

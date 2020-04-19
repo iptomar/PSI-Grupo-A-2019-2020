@@ -66,7 +66,7 @@ class Register extends React.Component {
     };
 
     let response = await fetch(
-      "https://localhost:3000/users/register",
+      "http://localhost:3000/users/register",
       requestOptions
     );
     let data = await response.json();

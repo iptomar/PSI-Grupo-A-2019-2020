@@ -48,7 +48,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      "https://localhost:3000/points/searchuser",
+      "http://localhost:3000/points/searchuser",
       requestOptions
     );
     let data = await response.json();
@@ -80,7 +80,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      "https://localhost:3000/points/delete",
+      "http://localhost:3000/points/delete",
       requestOptions
     );
     let data = await response.json();

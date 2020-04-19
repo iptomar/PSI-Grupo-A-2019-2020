@@ -53,7 +53,7 @@ class InsertPoint extends React.Component {
         };
 
         let response = await fetch(
-            "https://localhost:3000/points/insert",
+            "http://localhost:3000/points/insert",
             requestOptions
         )
         //Resposta por parte do server
@@ -89,7 +89,7 @@ class InsertPoint extends React.Component {
                             Interesse_id: 1,
                             usersid: 1,
                         },
-                        imagem: "ERRO AQUI",
+                        imagem: image,
                     },
                 });
 
@@ -104,7 +104,7 @@ class InsertPoint extends React.Component {
                 };
 
                 let response = await fetch(
-                    "https://localhost:3000/images/insert",
+                    "http://localhost:3000/images/insert",
                     requestOptions
                 )
                 //Resposta por parte do server

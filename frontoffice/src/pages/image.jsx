@@ -31,7 +31,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "https://localhost:3000/images/search",
+      "http://localhost:3000/images/search",
       requestOptions
     );
     let data = await response.json();
@@ -55,7 +55,7 @@ class Images extends Component {
       };
 
       let response = await fetch(
-        "https://localhost:3000/images/getimage",
+        "http://localhost:3000/images/getimage",
         requestOptions
       );
       let data = await response.json();
