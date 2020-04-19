@@ -77,6 +77,7 @@
 .LoginInput {
     margin: 10px;
     border: none;
+    border-radius: 0;
     border-bottom: #303030 2px solid;
     transition-duration: 300ms;
     padding: 12px;

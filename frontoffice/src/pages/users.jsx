@@ -108,7 +108,7 @@ class Users extends Component {
                     <div id="PageCenter">
                     <div id="PageCentralDiv">
 
-                    <div className="TitleDiv"></div>
+                        <div className="TitleDiv"></div>
                         <p className="TitleP">Utilizadores</p>
                         
                         <table id="UsersTable">

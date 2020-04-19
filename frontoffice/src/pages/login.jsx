@@ -50,7 +50,6 @@ class Login extends React.Component {
       this.setState({redirect:"/"});
     }else{
       this.setState({AccountStatus:"Email inexistente ou password incorreta"})
-      console.log("erro");
     }
 
   }
@@ -96,9 +95,7 @@ class Login extends React.Component {
         </div>
       </div>
     );
-
   }
-
 }
 
 export default Login;

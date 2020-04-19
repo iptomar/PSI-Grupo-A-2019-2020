@@ -7,7 +7,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import HomePage from "./pages/homepage";
 import Users from "./pages/users";
-import Profile from "./pages/profile_old";
+import Profile from "./pages/profile";
 import Routes from "./pages/routes";
 import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
