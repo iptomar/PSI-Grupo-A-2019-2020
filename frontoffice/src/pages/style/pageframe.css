@@ -68,7 +68,7 @@
 }
 
 .TitleP{
-    width: min-content;
+    width: max-content;
     font: 24px "Trebuchet MS";
     color: #202020;
     margin: 0px;

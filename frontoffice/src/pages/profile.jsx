@@ -19,7 +19,7 @@ class Profile extends Component {
         };
         this.redirecter = this.redirecter.bind(this);
         this.fixText=this.fixText.bind(this);
-        this.submitLogin=this.submitEdit.bind(this);
+        this.edit=this.edit.bind(this);
         this.reload=this.reload.bind(this);
     }
 
@@ -34,7 +34,7 @@ class Profile extends Component {
         }
     }
 
-    async submitEdit() {
+    async edit() {
         let name = document.getElementById("name").value;
         let surname = document.getElementById("surname").value;
         let age = document.getElementById("age").value;
@@ -189,7 +189,7 @@ class Profile extends Component {
 
                             <button
                                 id="SaveBtt"
-                                onClick={ this.submitEdit.bind(this)}
+                                onClick={ this.edit}
                             >Guardar</button>
 
                             <div id="EditStatusDiv">{this.state.EditStatus}</div>

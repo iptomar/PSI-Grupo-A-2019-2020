@@ -112,6 +112,12 @@ class Users extends Component {
                         <div className="TitleDiv"></div>
                         <p className="TitleP">Utilizadores</p>
                         
+                        <div id="RegisterRedirectDiv"> 
+                            <button id="RegisterRedirectBtt"
+                            onClick={()=>{this.setState({redirect: "/register"})}}
+                            >Novo utilizador</button>
+                        </div>
+
                         <table id="UsersTable">
                            <tr>
                                <th className="TableHeader">Nome </th>

@@ -45,3 +45,36 @@ button:hover{
 button:focus{
     background-color: #FF7A25;
 }
+
+#RegisterRedirectDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 100px;
+}
+
+#RegisterRedirectBtt{
+    width: 200px;
+    border:none;
+    margin-top: 20px;
+    border-radius: 0px;
+    font-family: Oxygen, sans-serif;
+    font-size: 19px;
+    color: #EDEDED;
+    background-color: #181818;
+    padding: 10px;
+    outline: none;
+    transition-duration: 300ms;
+    border-top: #181818 2px solid;
+}
+
+#RegisterRedirectBtt:hover{
+    border-top: #FF6600 2px solid;
+    background-color: #303030;
+}
+
+#RegisterRedirectBtt:focus{
+    border-top: #FF6600 2px solid;
+    background-color: #303030;
+}
