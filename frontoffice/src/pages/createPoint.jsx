@@ -127,7 +127,7 @@ class InsertPoint extends React.Component {
 
         return (
             <div className="inner-container">
-                <Link type="button" to="/home">
+                <Link type="button" to="/">
                     Voltar
             </Link>
 
