@@ -13,7 +13,7 @@ class Profile extends Component {
             redirect: "/profile",
             VerifyStatus: "",
             EditStatus: "",
-            userdata:null,
+            userdata: JSON.parse(sessionStorage.getItem("userData")),
             token: ""
 
         };
@@ -25,9 +25,7 @@ class Profile extends Component {
 
     componentDidMount(){
         if(sessionStorage.getItem("userData")){
-            let data = JSON.parse(sessionStorage.getItem("userData"));
-            this.setState({userdata: data});
-            this.setState({token: data.token });
+            this.setState({token: this.state.userdata.token });
             this.setState({loggedIn : true});            
         }else{
             this.setState({loggedIn : false});
@@ -77,6 +75,8 @@ class Profile extends Component {
         let response = await fetch("http://localhost:3000/users/update", requestOptions);
         let data = await response.json();
           
+        console.log(data);
+
         if (data.sucess) {
             div.style.color="#28a745";
             this.setState({EditStatus:"Perfil atualizado com sucesso!", VerifyStatus:""})
@@ -134,8 +134,10 @@ class Profile extends Component {
                                 name="name"
                                 placeholder="Nome"
                                 className="TextBox"
+                                value={this.state.userdata.name}
                                 onChange={
-                                    this.reload
+                                    this.reload,
+                                    (e) => {this.setState({userdata: e.target.value})}
                                 }
                             ></input>
                             <input
@@ -144,8 +146,10 @@ class Profile extends Component {
                                 name="surname"
                                 placeholder="Apelido"
                                 className="TextBox"
+                                value={this.state.userdata.surname}
                                 onChange={
-                                    this.reload
+                                    this.reload,
+                                    (e) => {this.setState({userdata: e.target.value})}
                                 }
                             ></input>
 
@@ -156,6 +160,7 @@ class Profile extends Component {
                                 placeholder="Email"
                                 className="TextBox"
                                 disabled="disabled"
+                                value={this.state.userdata.email}
                                 onFocus={this.fixText} 
                                 onChange={
                                     this.fixText,
@@ -169,6 +174,11 @@ class Profile extends Component {
                                 name="age"
                                 placeholder="Idade"
                                 className="TextBox"
+                                value={this.state.userdata.age}
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({userdata: e.target.value})}
+                                }
                                 onChange={
                                     this.reload
                                 }
@@ -180,8 +190,10 @@ class Profile extends Component {
                                 name="password"
                                 placeholder="Password"
                                 className="TextBox"
+                                value={this.state.userdata.password}
                                 onChange={
-                                    this.reload
+                                    this.reload,
+                                    (e) => {this.setState({userdata: e.target.value})}
                                 }
                             ></input>
 
