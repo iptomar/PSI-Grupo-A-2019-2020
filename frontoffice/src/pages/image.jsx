@@ -11,7 +11,7 @@ class Images extends Component {
       redirect: "/image",
       data: null,
       point: JSON.parse(sessionStorage.getItem("point")),
-      images:[]
+      images: [],
     };
     this.redirecter = this.redirecter.bind(this);
   }
@@ -39,7 +39,7 @@ class Images extends Component {
   }
 
   async getImages(images) {
-    let imgArr=[];
+    let imgArr = [];
     await images.forEach(async (img) => {
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
@@ -61,10 +61,9 @@ class Images extends Component {
       let data = await response.json();
       img.img = data.mesage;
       imgArr.push(img);
-      if(imgArr.length==images.length){
-        this.setState({images:imgArr});
+      if (imgArr.length == images.length) {
+        this.setState({ images: imgArr });
       }
-
     });
   }
 
@@ -77,18 +76,20 @@ class Images extends Component {
   }
 
   render() {
-    let imgs=[];
+    let imgs = [];
     if (this.state.redirect !== "/image") {
       return <Redirect to={this.state.redirect} />;
     }
-    if(this.state.images.length!=0){
-      this.state.images.forEach((img)=>{
+    if (this.state.images.length != 0) {
+      this.state.images.forEach((img) => {
+        console.log(img);
         imgs.push(
           <div>
-            <img src={'data:image/jpg;base64,'+img.img}></img>
+            <h4>{img.AutorFonte}</h4>
+            <img src={"data:image/jpg;base64," + img.img} width="500"></img>
+            <p>{img.Legenda}</p>
           </div>
         );
-
       });
     }
     return (
@@ -98,7 +99,11 @@ class Images extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              {imgs}
+              <br />
+              <Link type="button" to="/mypoints">
+                Voltar
+              </Link>
+              <div style={{ display: "flex", flexDirection:"column", alignItems:"center" }}>{imgs}</div>
             </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>

@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
         Legenda: "Tribunal da Comarca de Tomar: Fonte e estrutura da sala de audiências, 2017",
         AutorFonte: "Gonçalo Figueiredo, LabIPT",
         Path: "2",
-        Interesse_id: 1,
+        Interesse_id: 2,
         usersid: 1
 		},
       {
