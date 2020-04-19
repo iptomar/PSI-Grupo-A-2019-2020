@@ -48,7 +48,7 @@ class Profile extends Component {
           return;
         }
     
-        if(name===""||surname===""|| age===""|| email===""|| password==="" ){
+        if(name===""&&surname===""&& age===""&& email===""&& password==="" ){
             div.style.color="#dc3545";
             this.setState({EditStatus:"Nenhum campo alterado"});
             return;
