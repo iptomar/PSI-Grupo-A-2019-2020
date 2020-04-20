@@ -74,8 +74,6 @@ class Profile extends Component {
     
         let response = await fetch("http://localhost:3000/users/update", requestOptions);
         let data = await response.json();
-          
-        console.log(data);
 
         if (data.sucess) {
             div.style.color="#28a745";
