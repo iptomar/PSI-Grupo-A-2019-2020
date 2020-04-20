@@ -90,25 +90,35 @@ router.delete("/delete", async function(req, res, next){
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
 router.post("/insert", async function(req, res, next){
 
+  //ID do registo inserido
+  let idCreated;
+
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex("Interesse")
+  .returning('id')
   .insert(req.body.data)
+  .then(function (id) {
+    idCreated = id;
+    let errormesage= {sucess: true, mesage: "Point sucessfully inserted", id:idCreated};
+    res.send(errormesage);
+  })
   .catch(async function(err) {
     var d = new Date();
     await file(
       "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      //Está a dar problemas, corrigir.
+      //err.stack()
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
     console.log(err);
   });
 
-  let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
-  res.send(errormesage);
+  //let errormesage= {sucess: true, mesage: "Point sucessfully inserted", id:idCreated};
+  //res.send(errormesage);
 });
 
 //Usage:
