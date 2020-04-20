@@ -88,6 +88,7 @@ router.delete("/delete", async function(req, res, next){
 
 //Usage:
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
+//RETURN - {sucess: true/false, id do ponto inserido}
 router.post("/insert", async function(req, res, next){
 
   //ID do registo inserido
@@ -101,7 +102,7 @@ router.post("/insert", async function(req, res, next){
   .insert(req.body.data)
   .then(function (id) {
     idCreated = id;
-    let errormesage= {sucess: true, mesage: "Point sucessfully inserted", id:idCreated};
+    let errormesage= {sucess: true, id:idCreated};
     res.send(errormesage);
   })
   .catch(async function(err) {
