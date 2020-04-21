@@ -13,9 +13,6 @@ router.post("/update", async function(req, res, next){
     //um administrador ou o utilizador que criou o ponto
     //- Não poderá ser permitido o update ao ID do ponto
 
-    //Activar chaves estrangeiras
-    await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
     let upd = false;
 
     //Verificar se o ponto existe
@@ -52,9 +49,6 @@ router.delete("/delete", async function(req, res, next){
     //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
     //um administrador ou o utilizador que o criou
 
-    //Activar chaves estrangeiras
-    await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
     let del = false;
 
     //Verificar se o ponto existe
@@ -74,12 +68,16 @@ router.delete("/delete", async function(req, res, next){
       res.send(errormesage);
     });
 
-    
     //Eliminar o ponto
     if(del){
-      await knex('Interesse')
-      .where({id: req.body.id})
-      .del();
+        await knex('Interesse')
+        .where({id: req.body.id})
+        .del();
+        
+        // o conjunto de linhas abaixo vai ser apagado
+        await knex('Inter_Roteir')
+        .where({id_inter:req.body.id})
+        .del();
     }
 
     let errormesage= {sucess: true, mesage: "Point sucessfully deleted"};
@@ -88,38 +86,24 @@ router.delete("/delete", async function(req, res, next){
 
 //Usage:
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
-//RETURN - {sucess: true/false, id do ponto inserido}
 router.post("/insert", async function(req, res, next){
 
-  //ID do registo inserido
-  let idCreated;
+    await knex("Interesse")
+    .insert(req.body.data)
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
 
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
-  await knex("Interesse")
-  .returning('id')
-  .insert(req.body.data)
-  .then(function (id) {
-    idCreated = id;
-    let errormesage= {sucess: true, id:idCreated};
+    let errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
     res.send(errormesage);
-  })
-  .catch(async function(err) {
-    var d = new Date();
-    await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-      "a",
-      //Está a dar problemas, corrigir.
-      //err.stack()
-    );
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-    console.log(err);
-  });
-
-  //let errormesage= {sucess: true, mesage: "Point sucessfully inserted", id:idCreated};
-  //res.send(errormesage);
 });
 
 //Usage:
@@ -127,31 +111,26 @@ router.post("/insert", async function(req, res, next){
 //body.data = id
 router.post("/searchpoint", async function(req, res, next){
 
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
-  await knex('Interesse')
-  .select("*")
-  .where({ id: req.body.data })
-  .then(rows => {
-      let errormesage = { sucess : true , mesage: rows };
+    await knex('Interesse')
+    .select("*")
+    .where({ id: req.body.data })
+    .then(rows => {
+        let errormesage = { sucess : true , mesage: rows };
+        res.send(errormesage);
+        
+      })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
-      
-    })
-  .catch(async function(err) {
-    var d = new Date();
-    await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-      "a",
-      err.stack()
-    );
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-    console.log(err);
-  });
+      console.log(err);
+    });
 
-  let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-  res.send(errormesage);
 });
 
 //Usage:
@@ -159,40 +138,31 @@ router.post("/searchpoint", async function(req, res, next){
 //body.data = idRoteiro
 router.post("/search", async function(req, res, next){
 
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
-  await knex('Inter_Roteir')
-  .select("id_inter")
-  .where({ id_roteir: req.body.data })
-  .then(rows => {
-      let errormesage = { sucess : true , mesage: rows };
+    await knex('Inter_Roteir')
+    .select("id_inter")
+    .where({ id_roteir: req.body.data })
+    .then(rows => {
+        let errormesage = { sucess : true , mesage: rows };
+        res.send(errormesage);
+        
+      })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack()
+      );
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
-      
-    })
-  .catch(async function(err) {
-    var d = new Date();
-    await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-      "a",
-      err.stack()
-    );
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-    console.log(err);
-  });
-
-  /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-  res.send(errormesage);*/
+      console.log(err);
+    });
 });
 
 //Usage:
 //Return all points id
 //body.data = idRoteiro
 router.post("/searchuser", async function(req, res, next){
-
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex('Interesse')
   .select("*")
@@ -213,8 +183,5 @@ router.post("/searchuser", async function(req, res, next){
     res.send(errormesage);
     console.log(err);
   });
-
-  /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-  res.send(errormesage);*/
 });
 module.exports = router;
