@@ -158,7 +158,6 @@ class Profile extends Component {
                                 id="tipoEdif"
                                 name="tipoEdif"
                                 className="TextBox"
-                                disabled="disabled"
                                 onFocus={this.reload} 
                                 onChange={
                                     this.reload,
