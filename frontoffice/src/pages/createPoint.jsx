@@ -1,17 +1,30 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
-import ReactFileReader from 'react-file-reader';
+import { Redirect } from "react-router-dom";
+import './style/createPoint.css';
+import './style/pageframe.css';
+import NavBar from "./navBar";
 
-class InsertPoint extends React.Component {
+class Profile extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            redirect: "",
-            success: null,
-            images: [],
-            imageSuccess: null
-        };
+            loggedIn:false,
+            redirect: "/CreatePoint",
+            EditStatus: ""
 
+        };
+        this.redirecter = this.redirecter.bind(this);
+        this.submitPoint=this.submitPoint.bind(this);
+        this.reload=this.reload.bind(this);
+    }
+
+    componentDidMount(){
+        if(sessionStorage.getItem("userData")){
+            this.setState({loggedIn : true});            
+        }else{
+            this.setState({loggedIn : false});
+        }
     }
 
     async submitPoint() {
@@ -21,6 +34,7 @@ class InsertPoint extends React.Component {
         let tipoEdificio = document.getElementById("tipoEdif").value;
         let dataEdif = document.getElementById("date").value;
         let coordinates = document.getElementById("coordinates").value;
+        let div = document.getElementById("EditStatusDiv");
         //Caso algum deles não esteja preenchido não deixa
         if (titulo == "" || description == "" || tipoEdificio == "" || dataEdif == "" || coordinates == "") {
             this.setState({ success: false });
@@ -62,167 +76,155 @@ class InsertPoint extends React.Component {
         console.log(data.sucess);
         //Caso consiga inserir, inserir agora as imagens
         if (data.sucess === true) {
-            //Tamanho do array
-            let arraySize = this.state.images.length;
-            for (let index = 0; index < arraySize; index++) {
-                //Obter o index da virgula
-                let virgulaIndex = this.state.images[index].indexOf(',', 0);
-                console.log(virgulaIndex);
-                //Adicionar 1 ao valor do index obtido, pois quer-se o que está à frente
-                //da virgula
-                virgulaIndex += 1;
-                //Obter agora a substring da imagem
-                let image = this.state.images[index].substring(virgulaIndex);
-                image = '"' + image + '"';
-                console.log(image);
-                //Mandar a imagem para o servidor
-                var myHeaders = new Headers();
-                myHeaders.append("Accept", "application/json");
-                myHeaders.append("Content-type", "application/json");
-
-                var raw = JSON.stringify({
-                    data: {
-                        dados: {
-                            Path: "",
-                            Legenda: "Legenda",
-                            AutorFonte: "AutorFonte",
-                            Interesse_id: 1,
-                            usersid: 1,
-                        },
-                        imagem: image,
-                    },
-                });
-
-
-
-                var requestOptions = {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: raw,
-                    mode: "cors",
-                    redirect: "follow"
-                };
-
-                let response = await fetch(
-                    "http://localhost:3000/images/insert",
-                    requestOptions
-                )
-                //Resposta por parte do server
-                let data = await response.json();
-
-                console.log(data);
-            }
-            this.setState({ success: true });
+            div.style.color="#28a745";
+            this.setState({EditStatus:"Ponto criado com sucesso!", VerifyStatus:""})
         } else {
-            this.setState({ success: false });
+            div.style.color="#dc3545";
+            this.setState({EditStatus:"Houve um erro ao criar o ponto!", VerifyStatus:""})
         }
     }
 
-    handleFiles = files => {
-        //Set state imagens com os ficheiros a ser introduzidos
-        this.setState({ images: files.base64 });
+    redirecter(local){
+        if(local==="/Logout"){
+            sessionStorage.setItem("userdata","");
+            sessionStorage.clear();
+            this.setState({redirect: "/", loggedIn : false, data: null});    
+        } 
+        else      
+        this.setState({redirect: local});
+    }
+
+    reload(){
+        this.setState({
+            EditStatus:"",
+            VerifyStatus:""
+        })
     }
 
     render() {
-
+        if (this.state.redirect!=="/CreatePoint") {
+          return (<Redirect to={this.state.redirect} />);
+        }        
+        
         return (
-            <div className="inner-container">
-                <Link type="button" to="/">
-                    Voltar
-            </Link>
+            <div id="body">
+                <NavBar redirecter={this.redirecter}></NavBar>
+                <div id="PageMainDiv">
+                    <div className="BackgroundDiv"></div>
+                    <div id="PageCenter">
+                    <div id="PageCentralDiv">
+                        <div className="TitleDiv"></div>
+                        <p className="TitleP">Criar ponto de interesse</p>
+      
+                        <div id="PointBox">
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Nome</label>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    className="TextBox"
+                                    onChange={
+                                        this.reload,
+                                        (e) => {this.setState({point: e.target.value})}
+                                    }
+                                    onFocus={
+                                        this.reload
+                                    }
+                                ></input>
+                            </div>
 
-                <div className="header">Ponto de interesse</div>
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Descrição</label>
+                                <textarea
+                                type="text"
+                                id="descr"
+                                name="descr"
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></textarea>
+                            </div>
+                            
 
-                <div className="box">
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Tipo de edificio</label>
+                                <input
+                                type="text"
+                                id="tipoEdif"
+                                name="tipoEdif"
+                                className="TextBox"
+                                disabled="disabled"
+                                onFocus={this.reload} 
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                            ></input>
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Data de enauguração</label>
+                                <input
+                                type="text"
+                                id="date"
+                                name="date"
+                                className="TextBox"
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></input>
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Coordenadas</label>
+                                <textarea
+                                type="text"
+                                id="coordinates"
+                                name="coordinates"
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></textarea>
+                            </div>
+                            
+                            <div id="VerifyStatusDiv">{this.state.VerifyStatus}</div>
 
-                    <div className="input-group">
-                        <label htmlFor="surname">Titulo do ponto de interesse</label>
+                            <div id="CPButtonsDiv">
+                                <button className="CPBtts" onClick={()=>{this.setState({redirect: "/MyPoints"})}} >Voltar</button>
+                                <button className="CPBtts" onClick={ this.submitPoint} >Criar</button>
+                            </div>
+                                
+                            <div id="EditStatusDiv">{this.state.EditStatus}</div>
 
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            placeholder="Titulo"
-                            className="login-input"
-                        ></input>
+                        </div>
+
+                        
+
                     </div>
-
-                    <div className="input-group">
-                        <label htmlFor="name">Descrição do ponto de interesse</label>
-
-                        <textarea
-                            id="descr"
-                            name="descr"
-                            placeholder="Descrição do ponto de interesse"
-                            className="login-input"
-                        >
-                        </textarea>
+                    <footer id="FooterDiv">
+                        <p id="Footer1p">ToursTomar</p>
+                        <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
+                    </footer>
                     </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Tipo de edificio</label>
-
-                        <input
-                            type="text"
-                            id="tipoEdif"
-                            name="tipoEdif"
-                            placeholder="Tipo de edificio"
-                            className="login-input"
-                        ></input>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Fotografias do edificio</label>
-                        <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
-                            <button className='btn'>Upload</button>
-                        </ReactFileReader>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Data de criação do edificio</label>
-
-                        <input
-                            type="text"
-                            id="date"
-                            name="date"
-                            placeholder="Data"
-                            className="login-input"
-                        ></input>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Coordenadas</label>
-
-                        <input
-                            type="text"
-                            id="coordinates"
-                            name="coordinates"
-                            placeholder="Coordenadas"
-                            className="login-input"
-                        ></input>
-                    </div>
-
-                    <button
-                        className="login-btn"
-                        onClick={this.submitPoint.bind(this)}
-                    >
-                        Adicionar Ponto
-              </button>
+                    <div className="BackgroundDiv"></div>
                 </div>
-                {this.state.success === true && (
-                    <div>
-                        <p>Ponto inserido com sucesso!</p>
-                    </div>
-                )}
-                {this.state.success === false && (
-                    <div>
-                        <p>Erro! Dados mal inseridos</p>
-                    </div>
-                )}
+                
             </div>
         );
     }
-
 }
 
-export default InsertPoint;
+export default Profile;

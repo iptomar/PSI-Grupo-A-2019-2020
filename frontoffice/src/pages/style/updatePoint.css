@@ -1,7 +1,5 @@
-#ProfileBox{
-    margin: auto;
+#PointBox{
     margin-top: 40px;
-    width: min-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,11 +16,10 @@
     font-family: Oxygen, sans-serif;
     font-size: 18px;
     color: #1A1A1A;
-    width: 80px;
+    width: 100px;
 }
 
 .TextBox {
-    width: 250px;
     margin: 20px;
     border: none;
     border-radius: 0;
@@ -35,6 +32,23 @@
     color: #1A1A1A;
     background-color: #E8E8E8;
     outline: none;
+    width:500px
+}
+
+textarea {
+    margin: 20px;
+    border-radius: 0;
+    border: #303030 2px solid;
+    transition-duration: 300ms;
+    padding: 0;
+    padding-left: 10px;
+    font-family: Oxygen, sans-serif;
+    font-size: 16px;
+    color: #1A1A1A;
+    background-color: #E8E8E8;
+    outline: none;
+    width:500px;
+    height: 200px;
 }
 
 .TextBox:hover {
@@ -42,13 +56,18 @@
 }
 
 .TextBox:focus {
-    border:none;
     border-bottom: #FF6600 2px solid;
 
 }
-.TextBox::placeholder {
-    font-family: Oxygen, sans-serif;
-    color: #4A4A4A;
+
+textarea:hover {
+    border: #707070 2px solid;
+}
+
+textarea:focus {
+
+    border: #FF6600 2px solid;
+
 }
 
 #VerifyStatusDiv{
@@ -71,28 +90,34 @@
     padding: 0px;
 }
 
-#SaveBtt{
-    width: 250px;
-    margin: 10px;
+.CPBtts{
     border:none;
-    margin-top: 20px;
+    width: 100px;
     border-radius: 0px;
     font-family: Oxygen, sans-serif;
     font-size: 19px;
     color: #EDEDED;
     background-color: #181818;
-    padding: 10px;
     outline: none;
     transition-duration: 300ms;
     border-top: #181818 2px solid;
 }
 
-#SaveBtt:hover{
+.CPBtts:hover{
     border-top: #FF6600 2px solid;
     background-color: #303030;
 }
 
-#SaveBtt:focus{
+.CPBtts:focus{
     border-top: #FF6600 2px solid;
     background-color: #303030;
+}
+
+#CPButtonsDiv{
+    width: 400px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
 }

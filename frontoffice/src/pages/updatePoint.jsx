@@ -1,23 +1,40 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import './style/updatePoint.css';
+import './style/pageframe.css';
+import NavBar from "./navBar";
 
+class Profile extends Component {
 
-class UpdatePoint extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: "",
-            success: null,
-            point: JSON.parse(sessionStorage.getItem("point"))
+            loggedIn:false,
+            redirect: "/UpdatePoint",
+            EditStatus: "",
+            point: JSON.parse(sessionStorage.getItem("point")),
+
         };
+        this.redirecter = this.redirecter.bind(this);
+        this.updatePoint=this.updatePoint.bind(this);
+        this.reload=this.reload.bind(this);
     }
 
-    async submitUpdatePoint() {
+    componentDidMount(){
+        if(sessionStorage.getItem("userData")){
+            this.setState({loggedIn : true});            
+        }else{
+            this.setState({loggedIn : false});
+        }
+    }
+
+    async updatePoint() {
         let titulo = document.getElementById("title").value;
         let description = document.getElementById("descr").value;
         let tipoEdificio = document.getElementById("tipoEdif").value;
         let dataEdif = document.getElementById("date").value;
         let coordinates = document.getElementById("coordinates").value;
+        let div = document.getElementById("EditStatusDiv");
         let user = JSON.parse(sessionStorage.getItem("userData"));
 
         var myHeaders = new Headers();
@@ -35,8 +52,6 @@ class UpdatePoint extends React.Component {
             }
         });
 
-
-
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
@@ -51,117 +66,163 @@ class UpdatePoint extends React.Component {
 
         console.log(data);
 
-        if (data.sucess === true) {
-            this.setState({ success: true });
-        } else {
-            this.setState({ success: false });
+        if (data.sucess) {
+            div.style.color="#28a745";
+            this.setState({EditStatus:"Ponto atualizado com sucesso!", VerifyStatus:""})
+          } else {
+            div.style.color="#dc3545";
+            this.setState({EditStatus:"Houve um erro ao atulizar o ponto!", VerifyStatus:""})
         }
 
     }
 
+    redirecter(local){
+        if(local==="/Logout"){
+            sessionStorage.setItem("userdata","");
+            sessionStorage.clear();
+            this.setState({redirect: "/", loggedIn : false, data: null});    
+        } 
+        else      
+        this.setState({redirect: local});
+    }
+
+    reload(){
+        this.setState({
+            EditStatus:"",
+            VerifyStatus:""
+        })
+    }
+
     render() {
-
+        if (this.state.redirect!=="/UpdatePoint") {
+          return (<Redirect to={this.state.redirect} />);
+        }        
+        
         return (
-            <div className="inner-container">
-                <Link type="button" to="/mypoints">
-                    Voltar
-            </Link>
+            <div id="body">
+                <NavBar redirecter={this.redirecter}></NavBar>
+                <div id="PageMainDiv">
+                    <div className="BackgroundDiv"></div>
+                    <div id="PageCenter">
+                    <div id="PageCentralDiv">
+                        <div className="TitleDiv"></div>
+                        <p className="TitleP">Editar ponto de interesse</p>
+      
+                        <div id="PointBox">
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Nome</label>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    value={this.state.point.titulo}
+                                    className="TextBox"
+                                    onChange={
+                                        this.reload,
+                                        (e) => {this.setState({point: e.target.value})}
+                                    }
+                                    onFocus={
+                                        this.reload
+                                    }
+                                ></input>
+                            </div>
 
-                <div className="header">Ponto de interesse</div>
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Descrição</label>
+                                <textarea
+                                type="text"
+                                id="descr"
+                                name="descr"
+                                value={this.state.point.descricao}
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></textarea>
+                            </div>
+                            
 
-                <div className="box">
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Tipo de edificio</label>
+                                <input
+                                type="text"
+                                id="tipoEdif"
+                                name="tipoEdif"
+                                value={this.state.point.tipoEdif}
+                                className="TextBox"
+                                disabled="disabled"
+                                onFocus={this.reload} 
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                            ></input>
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Data de enauguração</label>
+                                <input
+                                type="text"
+                                id="date"
+                                name="date"
+                                value={this.state.point.data}
+                                className="TextBox"
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></input>
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Coordenadas</label>
+                                <textarea
+                                type="text"
+                                id="coordinates"
+                                name="coordinates"
+                                value={this.state.point.coordenadas}
+                                onChange={
+                                    this.reload,
+                                    (e) => {this.setState({point: e.target.value})}
+                                }
+                                onFocus={
+                                    this.reload
+                                }
+                            ></textarea>
+                            </div>
+                            
 
-                    <div className="input-group">
-                        <label htmlFor="surname">Titulo do ponto de interesse</label>
+                            <div id="VerifyStatusDiv">{this.state.VerifyStatus}</div>
 
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            placeholder="Titulo"
-                            className="login-input"
-                            value={this.state.point.titulo}
-                            onChange={(e) => {this.setState({point: e.target.value})}}
-                        ></input>
+                            <div id="CPButtonsDiv">
+                                <button className="CPBtts" onClick={()=>{this.setState({redirect: "/MyPoints"})}} >Voltar</button>
+                                <button className="CPBtts" onClick={ this.submitPoint} >Criar</button>
+                            </div>
+
+                            <div id="EditStatusDiv">{this.state.EditStatus}</div>
+
+                        </div>
+
+                        
+
                     </div>
-
-                    <div className="input-group">
-                        <label htmlFor="name">Descrição do ponto de interesse</label>
-
-                        <textarea
-                            id="descr"
-                            name="descr"
-                            placeholder="Descrição do ponto de interesse"
-                            className="login-input"
-                            value={this.state.point.descricao}
-                            onChange={(e) => {this.setState({point: e.target.value})}}
-                        >
-                        </textarea>
+                    <footer id="FooterDiv">
+                        <p id="Footer1p">ToursTomar</p>
+                        <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
+                    </footer>
                     </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Tipo de edificio</label>
-
-                        <input
-                            type="text"
-                            id="tipoEdif"
-                            name="tipoEdif"
-                            placeholder="Tipo de edificio"
-                            className="login-input"
-                            value={this.state.point.tipoEdif}
-                            onChange={(e) => {this.setState({point: e.target.value})}}
-                        ></input>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Data de criação do edificio</label>
-
-                        <input
-                            type="text"
-                            id="date"
-                            name="date"
-                            placeholder="Data"
-                            className="login-input"
-                            value={this.state.point.data}
-                            onChange={(e) => {this.setState({point: e.target.value})}}
-                        ></input>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="email">Coordenadas</label>
-
-                        <input
-                            type="text"
-                            id="coordinates"
-                            name="coordinates"
-                            placeholder="Coordenadas"
-                            className="login-input"
-                            value={this.state.point.coordenadas}
-                            onChange={(e) => {this.setState({point: e.target.value})}}
-                        ></input>
-                    </div>
-
-                    <button
-                        className="login-btn"
-                        onClick={this.submitUpdatePoint.bind(this)}
-                    >
-                        Atualizar Ponto
-              </button>
+                    <div className="BackgroundDiv"></div>
                 </div>
-                {this.state.success === true && (
-                    <div>
-                        <p>Update efetuado com sucesso!</p>
-                    </div>
-                )}
-                {this.state.success === false && (
-                    <div>
-                        <p>Erro! Update não efetuado!</p>
-                    </div>
-                )}
+                
             </div>
         );
     }
-
 }
 
-export default UpdatePoint;
+export default Profile;

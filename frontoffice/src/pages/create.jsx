@@ -10,7 +10,7 @@ class Create extends Component {
         super(props);
         this.state = {
             loggedIn:false,
-            redirect: "/create",
+            redirect: "/Create",
             role: "",
             userdata:null,
         };
@@ -30,7 +30,7 @@ class Create extends Component {
     }
 
     redirecter(local){
-        if(local==="/logout"){
+        if(local==="/Logout"){
             sessionStorage.setItem("userdata","");
             sessionStorage.clear();
             this.setState({redirect: "/", loggedIn : false, data: null});    
@@ -40,7 +40,7 @@ class Create extends Component {
     }
 
     render() {
-        if (this.state.redirect!=="/create") {
+        if (this.state.redirect!=="/Create") {
           return (<Redirect to={this.state.redirect} />);
         }        
         

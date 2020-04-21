@@ -9,7 +9,7 @@ class Images extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: "/image",
+      redirect: "/Image",
       data: null,
       point: JSON.parse(sessionStorage.getItem("point")),
       images: [],
@@ -132,7 +132,7 @@ class Images extends Component {
   }
 
   redirecter(local) {
-    if (local === "/logout") {
+    if (local === "/Logout") {
       sessionStorage.setItem("userdata", "");
       sessionStorage.clear();
       this.setState({ redirect: "/", data: null });
@@ -141,7 +141,7 @@ class Images extends Component {
 
   render() {
     let imgs = [];
-    if (this.state.redirect !== "/image") {
+    if (this.state.redirect !== "/Image") {
       return <Redirect to={this.state.redirect} />;
     }
     if (this.state.images.length != 0) {

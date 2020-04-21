@@ -9,7 +9,7 @@ class Routes extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: "/routes",
+      redirect: "/Routes",
       role: "",
       userdata: null,
       routes: [],
@@ -89,7 +89,7 @@ class Routes extends Component {
   }
 
   redirecter(local) {
-    if (local === "/logout") {
+    if (local === "/Logout") {
       sessionStorage.setItem("userdata", "");
       sessionStorage.clear();
       this.setState({ redirect: "/", loggedIn: false, data: null });
@@ -120,7 +120,7 @@ class Routes extends Component {
 
   render() {
     
-    if (this.state.redirect !== "/routes") {
+    if (this.state.redirect !== "/Routes") {
       return <Redirect to={this.state.redirect} />;
     }
 

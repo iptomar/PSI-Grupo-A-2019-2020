@@ -25,7 +25,7 @@ class NavBar extends Component {
 
     logout(){
         this.setState({loggedIn : false});
-        this.props.redirecter("/logout");
+        this.props.redirecter("/Logout");
     }
 
     render(){
@@ -40,15 +40,15 @@ class NavBar extends Component {
                     </div>
                     {this.state.loggedIn?
                         <div id="NavButtons">
-                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/routes")}> Roteiros </button>
-                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/mypoints")}>Pontos</button>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Routes")}> Roteiros </button>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/MyPoints")}>Pontos</button>
                             {this.state.user==="admin@admin.com"?
                             <div style={{display:"flex", flexDirection:"row"}}>
-                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/users")}>Utilizadores</button> 
-                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>Perfil</button>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Users")}>Utilizadores</button> 
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Profile")}>Perfil</button>
                             </div>
                             :
-                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/profile")}>Perfil</button>
+                            <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Profile")}>Perfil</button>
                             }      
                         </div>
                     :
@@ -64,7 +64,7 @@ class NavBar extends Component {
                                 <img className="LogInOutIMG" src="./assets/logout.png" alt=""></img>
                             </button>
                         :
-                            <button className="LogInOutDiv" onClick={()=>this.props.redirecter("/login")}>
+                            <button className="LogInOutDiv" onClick={()=>this.props.redirecter("/Login")}>
                                 Login
                                 <img className="LogInOutIMG" src="./assets/login.png" alt=""></img>
                             </button>

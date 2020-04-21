@@ -10,7 +10,7 @@ class Register extends Component {
         super(props);
         this.state = {
             loggedIn:false,
-            redirect: "/register",
+            redirect: "/Register",
             VerifyStatus: "",
             EditStatus: "",
             userdata:null,
@@ -99,7 +99,7 @@ class Register extends Component {
       }
 
     redirecter(local){
-        if(local==="/logout"){
+        if(local==="/Logout"){
             sessionStorage.setItem("userdata","");
             sessionStorage.clear();
             this.setState({redirect: "/", loggedIn : false, data: null});    
@@ -124,7 +124,7 @@ class Register extends Component {
     }
 
     render() {
-        if (this.state.redirect!=="/register") {
+        if (this.state.redirect!=="/Register") {
           return (<Redirect to={this.state.redirect} />);
         }        
         
@@ -198,7 +198,7 @@ class Register extends Component {
                             <div id="VerifyStatusDiv">{this.state.VerifyStatus}</div>
                             
                             <div id="RegButtonsDiv">
-                            <button className="RegisterBtts" onClick={()=>{this.setState({redirect: "/users"})}} >Voltar</button>
+                            <button className="RegisterBtts" onClick={()=>{this.setState({redirect: "/Users"})}} >Voltar</button>
                             <button className="RegisterBtts" onClick={ this.register} >Registar</button>
                             </div>
 

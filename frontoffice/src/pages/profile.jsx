@@ -10,7 +10,7 @@ class Profile extends Component {
         super(props);
         this.state = {
             loggedIn:false,
-            redirect: "/profile",
+            redirect: "/Profile",
             VerifyStatus: "",
             EditStatus: "",
             userdata: JSON.parse(sessionStorage.getItem("userData")),
@@ -86,7 +86,7 @@ class Profile extends Component {
       }
 
     redirecter(local){
-        if(local==="/logout"){
+        if(local==="/Logout"){
             sessionStorage.setItem("userdata","");
             sessionStorage.clear();
             this.setState({redirect: "/", loggedIn : false, data: null});    
@@ -111,7 +111,7 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.redirect!=="/profile") {
+        if (this.state.redirect!=="/Profile") {
           return (<Redirect to={this.state.redirect} />);
         }        
         
@@ -126,74 +126,90 @@ class Profile extends Component {
                         <p className="TitleP">Perfil</p>
       
                         <div id="ProfileBox">
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Nome"
-                                className="TextBox"
-                                value={this.state.userdata.name}
-                                onChange={
-                                    this.reload,
-                                    (e) => {this.setState({userdata: e.target.value})}
-                                }
-                            ></input>
-                            <input
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Nome</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder={this.state.userdata.name}
+                                    className="TextBox"
+                                    onChange={
+                                        this.reload
+                                    }
+                                    onFocus={
+                                        this.reload
+                                    }
+                                ></input>
+                            </div>
+
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Apelido</label>
+                                <input
                                 type="text"
                                 id="surname"
                                 name="surname"
-                                placeholder="Apelido"
+                                placeholder={this.state.userdata.surname}
                                 className="TextBox"
-                                value={this.state.userdata.surname}
                                 onChange={
-                                    this.reload,
-                                    (e) => {this.setState({userdata: e.target.value})}
+                                    this.reload
+                                }
+                                onFocus={
+                                    this.reload
                                 }
                             ></input>
+                            </div>
+                            
 
-                            <input
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Email</label>
+                                <input
                                 type="text"
                                 id="email"
                                 name="email"
-                                placeholder="Email"
+                                placeholder={this.state.userdata.email}
                                 className="TextBox"
                                 disabled="disabled"
-                                value={this.state.userdata.email}
-                                onFocus={this.fixText} 
+                                onFocus={this.fixText, this.reload} 
                                 onChange={
-                                    this.fixText,
-                                    this.reload
+                                    this.fixText, this.reload
                                 }
                             ></input>
-
-                            <input
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Idade</label>
+                                <input
                                 type="text"
                                 id="age"
                                 name="age"
-                                placeholder="Idade"
+                                placeholder={this.state.userdata.age}
                                 className="TextBox"
-                                value={this.state.userdata.age}
-                                onChange={
-                                    this.reload,
-                                    (e) => {this.setState({userdata: e.target.value})}
-                                }
                                 onChange={
                                     this.reload
                                 }
+                                onFocus={
+                                    this.reload
+                                }
                             ></input>
-
-                            <input
+                            </div>
+                            
+                            <div className="FieldDiv">
+                                <label className="FieldLabel">Password</label>
+                                <input
                                 type="password"
                                 id="password"
                                 name="password"
-                                placeholder="Password"
                                 className="TextBox"
-                                value={this.state.userdata.password}
                                 onChange={
-                                    this.reload,
-                                    (e) => {this.setState({userdata: e.target.value})}
+                                    this.reload
+                                }
+                                onFocus={
+                                    this.reload
                                 }
                             ></input>
+                            </div>
+                            
 
                             <div id="VerifyStatusDiv">{this.state.VerifyStatus}</div>
 

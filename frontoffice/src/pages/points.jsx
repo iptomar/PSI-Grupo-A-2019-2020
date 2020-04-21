@@ -9,7 +9,7 @@ class Points extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: "/mypoints",
+      redirect: "/MyPoints",
       role: "",
       userdata: null,
       points: [],
@@ -58,7 +58,7 @@ class Points extends Component {
   }
 
   redirecter(local) {
-    if (local === "/logout") {
+    if (local === "/Logout") {
       sessionStorage.setItem("userdata", "");
       sessionStorage.clear();
       this.setState({ redirect: "/", loggedIn: false, data: null });
@@ -93,12 +93,12 @@ class Points extends Component {
     sessionStorage.setItem("point", JSON.stringify(point));
   }
   getImages(point) {
-    this.setState({ redirect: "image" });
+    this.setState({ redirect: "Image" });
     sessionStorage.setItem("point", JSON.stringify(point.id));
   }
 
   render() {
-    if (this.state.redirect !== "/mypoints") {
+    if (this.state.redirect !== "/MyPoints") {
       return <Redirect to={this.state.redirect} />;
     }
 

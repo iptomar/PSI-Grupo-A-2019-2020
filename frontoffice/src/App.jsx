@@ -21,16 +21,16 @@ class App extends React.Component {
       <Router >
         <Switch>
           <Route exact path="/" component={HomePage}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/users" component={Users}></Route>
-          <Route exact path="/createPoint" component={InsertPoint}></Route>
+          <Route exact path="/Login" component={Login}></Route>
+          <Route exact path="/Register" component={Register}></Route>
+          <Route exact path="/Users" component={Users}></Route>
+          <Route exact path="/CreatePoint" component={InsertPoint}></Route>
           <Route exact path="/UpdatePoint" component={UpdatePoint}></Route>
-          <Route exact path="/profile" component={Profile}></Route>
-          <Route exact path="/routes" component={Routes}></Route>
-          <Route exact path="/mypoints" component={Points}></Route>
-          <Route exact path="/create" component={Create}></Route>
-          <Route exact path="/image" component={Images}></Route>
+          <Route exact path="/Profile" component={Profile}></Route>
+          <Route exact path="/Routes" component={Routes}></Route>
+          <Route exact path="/MyPoints" component={Points}></Route>
+          <Route exact path="/Create" component={Create}></Route>
+          <Route exact path="/Image" component={Images}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

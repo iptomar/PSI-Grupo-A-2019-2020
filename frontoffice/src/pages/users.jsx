@@ -10,7 +10,7 @@ class Users extends Component {
         super(props);
         this.state = {
             loggedIn:false,
-            redirect: "/users",
+            redirect: "/Users",
             role: "",
             user:null,
             //old
@@ -38,7 +38,7 @@ class Users extends Component {
     }
 
     redirecter(local){
-        if(local==="/logout"){
+        if(local==="/Logout"){
             sessionStorage.setItem("userdata","");
             sessionStorage.clear();
             this.setState({redirect: "/", loggedIn : false, data: null});    
@@ -61,7 +61,6 @@ class Users extends Component {
         };
     
         let response = await fetch("http://localhost:3000/users/delete", requestOptions);
-        let data = await response.json();
         await this.teste();
     }
     
@@ -73,11 +72,10 @@ class Users extends Component {
         let dat = await response.json();
     
         this.setState({listOfUsers:dat.mesage});
-        console.log(this.state.listOfUsers);
     }
 
     render() {
-        if (this.state.redirect!=="/users") {
+        if (this.state.redirect!=="/Users") {
           return (<Redirect to={this.state.redirect} />);
         }      
         
@@ -114,7 +112,7 @@ class Users extends Component {
                         
                         <div id="RegisterRedirectDiv"> 
                             <button id="RegisterRedirectBtt"
-                            onClick={()=>{this.setState({redirect: "/register"})}}
+                            onClick={()=>{this.setState({redirect: "/Register"})}}
                             >Novo utilizador</button>
                         </div>
 

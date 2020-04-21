@@ -15,7 +15,7 @@ class NotFoundPage extends React.Component {
     }
 
     redirecter(local){
-        if(local==="/logout"){
+        if(local==="/Logout"){
             sessionStorage.setItem("userdata","");
             sessionStorage.clear();
             this.setState({redirect: "/", loggedIn : false, data: null});    
