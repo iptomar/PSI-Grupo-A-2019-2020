@@ -25,6 +25,10 @@ var app = express();
  var cors = require('cors')
  app.use(cors())
 
+//Limite do tamanho das imagens de 5mb
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({"limit":'5mb'}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

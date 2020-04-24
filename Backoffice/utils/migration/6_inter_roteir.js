@@ -4,8 +4,8 @@ exports.up = (knex, Promise) => {
     table.integer('id_roteir').unsigned().notNullable();
     table.integer('id_inter').unsigned().notNullable();
     
-    table.foreign('id_roteir').references('Roteiro.id');
-    table.foreign('id_inter').references('Interesse.id');
+    table.foreign('id_roteir').references('Roteiro.id').onDelete('CASCADE').onUpdate('CASCADE');
+    table.foreign('id_inter').references('Interesse.id').onDelete('CASCADE').onUpdate('CASCADE');
     table.primary(['id_roteir', 'id_inter']);
   })
 }
