@@ -1,2 +1,3 @@
 Backoffice/node_modules
 **.log
+Backoffice/db/mydb.db
