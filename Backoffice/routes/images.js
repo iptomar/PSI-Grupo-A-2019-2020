@@ -81,61 +81,60 @@ router.post("/insert", async function(req, res, next){
 
 
 //Usage:
-//body.data = id para apagar
+//body.data = {id:<id>} para apagar
 router.post("/delete", async function(req, res, next){
 
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
   
   let errormesage
+  
   await knex("images")
     .select("Path")
-    .where({ id: req.body.data })
+    .where({ id: ""+req.body.data.id })
     .then(rows => {
       for(var keys in rows)
-      fs.unlink("./files/images/"+body.data.path+".txt", body.data.imagem).catch(async function(err) {
+      console.log(keys);
+      /*fs.unlink("./files/images/"+body.data.path+".txt").catch(async function(err) {
         var d = new Date();
         await file(
           "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
           "a",
-          err.stack()
+          err.stack
         );
-        errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+        errormesage = { sucess : false , mesage: "something went wrong and we are working on it 1" };
         res.send(errormesage);
         console.log(err);
-      });
+      });*/
     })
     .catch(async function(err) {
       var d = new Date();
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
-       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it 2" };
       res.send(errormesage);
       console.log(err);
     });
 
-     errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
-    res.send(errormesage);
-
     await knex("images")
-    .where({ id: req.body.data })
+    .where({ id: req.body.data.id })
     .del()
     .catch(async function(err) {
       var d = new Date();
       await file(
         "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
-       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" };
       res.send(errormesage);
       console.log(err);
     });
 
-    errormesage= {sucess: true, mesage: "Point sucessfully inserted"};
+    errormesage= {sucess: true, mesage: "image sucessfully deleted"};
     res.send(errormesage);
 });
 
