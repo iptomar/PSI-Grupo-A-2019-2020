@@ -104,8 +104,8 @@ router.post("/delete", async function(req, res, next){
         );
         errormesage = { sucess : false , mesage: "something went wrong and we are working on it 1" };
         res.send(errormesage);
-        console.log(err);*/
-      });
+        console.log(err);
+      });*/
     })
     .catch(async function(err) {
       var d = new Date();
