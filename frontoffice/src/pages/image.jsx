@@ -19,6 +19,10 @@ class Images extends Component {
   }
 
   async componentDidMount() {
+    await this.getUserImages();
+  }
+
+  async getUserImages(){
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
@@ -131,6 +135,29 @@ class Images extends Component {
     });
   }
 
+  async deleteImage(id){
+    var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Content-type", "application/json");
+      var raw = JSON.stringify({ data: {id:id} });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        mode: "cors",
+        redirect: "follow",
+      };
+
+      let response = await fetch(
+        "http://localhost:3000/images/delete",
+        requestOptions
+      );
+      let data = await response.json();
+      
+      await this.getUserImages();
+  }
+
   redirecter(local) {
     if (local === "/Logout") {
       sessionStorage.setItem("userdata", "");
@@ -150,6 +177,7 @@ class Images extends Component {
           <div>
             <h4>{img.AutorFonte}</h4>
             <img src={"data:image/jpg;base64," + img.img} width="500"></img>
+            <button onClick={() => this.deleteImage(img.id)}>❌</button>
             <p>{img.Legenda}</p>
           </div>
         );
