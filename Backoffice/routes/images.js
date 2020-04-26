@@ -95,7 +95,7 @@ router.post("/delete", async function(req, res, next){
     .then(rows => {
       for(var keys in rows)
       console.log(keys);
-      fs.unlink("./files/images/"+body.data.path+".txt").catch(async function(err) {
+      /*fs.unlink("./files/images/"+body.data.path+".txt").catch(async function(err) {
         var d = new Date();
         await file(
           "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
@@ -104,7 +104,7 @@ router.post("/delete", async function(req, res, next){
         );
         errormesage = { sucess : false , mesage: "something went wrong and we are working on it 1" };
         res.send(errormesage);
-        console.log(err);
+        console.log(err);*/
       });
     })
     .catch(async function(err) {
