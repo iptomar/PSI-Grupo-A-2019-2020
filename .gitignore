@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Cordova Global
 plugins/
 
@@ -69,3 +70,8 @@ $RECYCLE.BIN/
 .AppleDB
 .AppleDesktop
 .apdisk
+=======
+Backoffice/node_modules
+**.log
+Backoffice/db/mydb.db
+>>>>>>> backend-v.2

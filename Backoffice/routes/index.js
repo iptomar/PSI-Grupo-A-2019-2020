@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
+const {file } = require('../helpers')
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',async function(req, res, next) {
+    var d = new Date();
+await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //res.render('index', { title: 'Express' });
   res.send(
     [

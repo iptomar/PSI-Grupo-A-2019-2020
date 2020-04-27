@@ -9,6 +9,10 @@ dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var routesRouter = require('./routes/routes');
+var pointsRouter = require('./routes/points');
+var propsRouter = require('./routes/props');
+var imagesRouter = require('./routes/images');
 
 var app = express();
 
@@ -20,6 +24,10 @@ var app = express();
 // cors
  var cors = require('cors')
  app.use(cors())
+
+//Limite do tamanho das imagens de 5mb
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({"limit":'5mb'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/routes', routesRouter);
+app.use('/points', pointsRouter);
+app.use('/props', propsRouter);
+app.use('/images', imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+var updatedb=false;
 /**
  * Module dependencies.
  */
@@ -9,10 +9,14 @@ var debug = require('debug')('foo:server');
 const https = require('https');
 const fs = require('fs');
 
+const {file } = require('../helpers')
 var privateKey  = fs.readFileSync('./key.pem', 'utf8');
 var certificate = fs.readFileSync('./cert.pem', 'utf8');
-
+var knex = require("../utils/databaseConection");
 var credentials = {key: privateKey, cert: certificate};
+
+updateDatabase();
+
 /**
  * Get port from environment and store in Express.
  */
@@ -54,6 +58,30 @@ function normalizePort(val) {
   }
 
   return false;
+}
+
+async function updateDatabase() {
+  var d = new Date();
+  if(updatedb)
+  {
+    try{
+      // await knex.schema.dropTable('users');
+    await knex.migrate.list().catch(async function(err) {
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    });
+    await knex.migrate.latest().catch(async function(err) {
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    });
+    await knex.seed.run().catch(async function(err) {
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    });
+    }catch (err){
+      //console.log(error);
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    }
+  
+  }
+  //console.log(await knex.migrate.list());
 }
 
 /**
