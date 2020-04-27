@@ -58,5 +58,45 @@ router.post("/insert", async function(req, res, next){
   res.send(errormesage);
 });
 
+//Usage:
+//body.id = id do proprietário a actualizar
+//body.data = informação a actualizar(json)
+router.post("/update", async function(req, res, next){
+  //ToDo: 
+  //- Terá de ser verificado se o utilizador a solicitar o update é um administrador
+  //- Não poderá ser permitido o update ao ID do ponto
+
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  let upd = false;
+
+  //Verificar se o ponto existe
+  await knex('prop')
+  .where({id: req.body.id})
+  .then(result => {
+      if(!result.length == 0){
+          upd = true;
+      } else {
+          let errormesage = {sucess: false, mesage: "Proprietary doesn't exist"};
+          res.send(errormesage);
+      }
+  })
+  .catch(async function(err){
+      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    let errormesage = { sucess : false , mesage: "token not used" };
+    res.send(errormesage);
+  });
+
+  //Actualiza o ponto
+  if(upd){
+      await knex('prop')
+      .where({id: req.body.id})
+      .update(req.body.data);
+  }
+
+  let errormesage= {sucess: true, mesage: "Proprietary sucessfully updated"};
+  res.send(errormesage);
+});
 
 module.exports = router;
