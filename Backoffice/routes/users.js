@@ -178,14 +178,8 @@ router.post("/register", async function(req, res, next) {
     //res.status(401).send(error);
     return;
   }
-<<<<<<< HEAD
-  // criação da chave do utilizador 
-  var chars =
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz*&-%/!?*+=()";
-=======
   // criação da chave do utilizador
   var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
->>>>>>> backend-v.2
 
   var randomstring = "";
 
