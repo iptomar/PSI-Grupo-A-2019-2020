@@ -8,7 +8,6 @@ var app = {
     },
 
     // deviceready Event Handler
-    //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
 
@@ -39,7 +38,7 @@ var app = {
                     minZoom: 15,
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
-                alert('Entrou no modo Offline, vai encontrar algumas funcionabilidades limitadas.',  "Alert Title");
+                alert('Entrou no modo Offline, vai encontrar funcionabilidades limitadas.',  "Alert Title");
 
             }
 
@@ -84,7 +83,7 @@ var app = {
 
 
             //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON("http://localhost:3000/teste", function (json) {
+            $.getJSON("http://188.251.50.68:81", function (json) {
                 jsonData = json;
                 //let cada posição do ficheiro json e inserir numa variavel
                 for (var i = 0; i < jsonData.length; i++) {
@@ -340,12 +339,25 @@ var app = {
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
+            var btBack = document.getElementById('idBackBt');
             btSobre.onclick = mostraSobre => {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
                 divInfo.classList.add('hidden');
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
+            }
+            btBack.onclick = mostraMap => {
+                divInfo.innerHTML = "";
+                e.preventDefault();
+                window.scrollTo(0, 0);
+                btPos.classList.remove('hidden');
+                icon.classList.remove('hidden');
+                mapa.classList.remove('hidden');
+                divInfo.classList.add('hidden');
+                divAcerca.classList.add('hidden');
+                body.classList.add('overflow');
+                mymap.closePopup();
             }
             /****************************************************************/
 
