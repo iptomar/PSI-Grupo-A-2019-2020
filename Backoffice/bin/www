@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var updatedb=false;
+var updatedb=true;
 /**
  * Module dependencies.
  */
@@ -7,6 +7,7 @@ var updatedb=false;
 var app = require('../app');
 var debug = require('debug')('foo:server');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 const {file } = require('../helpers')
@@ -29,8 +30,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-//var server = http.createServer(app);
-var server = https.createServer(credentials,app);
+var server = http.createServer(app);
+//var server = https.createServer(credentials,app);
 
 /**
  * Listen on provided port, on all network interfaces.

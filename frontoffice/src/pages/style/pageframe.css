@@ -1,0 +1,84 @@
+#PageMainDiv{
+    width: 100%;
+    height: 100%;
+    background-color: #303030;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 68px;
+}
+
+#PageCenter{
+    height: 100%;
+    width: 100%;
+}
+
+#PageCentralDiv{
+    margin: 0 auto;
+    width: 1232px;
+    height: 100%;
+    background-color: #E8E8E8;
+    box-shadow: 0 0px 0px 0 #000, 0 10px 20px 0 #000;
+    display:flex;
+    flex-direction: column;
+    padding-left: 68px;
+    overflow: auto;
+}
+
+.BackgroundDiv{
+   width: 100%;
+    height: 100%;
+    background-image:url('./images/backpane.png');
+    background-size: cover;
+}
+
+#FooterDiv{
+    position: absolute;
+    left:0;
+    width: 100%;
+    border-top: #808080 2px solid;
+    height: 40px;
+    background-color: #000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0px 0px 0 #000, 0 10px 20px 0 #000;
+}
+
+#Footer1p{
+    font: 16px "Trebuchet MS";
+    color: #FF6600;
+    font-weight: bold;
+}
+#Footer2p{
+    font: 14px "Trebuchet MS";
+    color: #EEEEEE;
+    margin-left: 6px;
+}
+
+.TitleDiv{
+    border-top: #303030 3px solid;
+    margin-top: 68px;
+    margin-left: 30px;
+    height: min-content;
+    box-shadow: 2px 2px 4px #1A1A1A;
+
+}
+
+.TitleP{
+    width: max-content;
+    font: 24px "Trebuchet MS";
+    color: #202020;
+    margin: 0px;
+    margin-left: 30px;
+    padding: 2px 6px;
+    background-color: #FF7A25;
+    box-shadow: 2px 2px 14px #1A1A1A;
+}
+
+#body{
+    height: 100%;
+    width: 100%;
+}

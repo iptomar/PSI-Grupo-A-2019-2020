@@ -1,0 +1,106 @@
+#MainNavFrame{
+    background-color: #202020;
+    height: 68px;
+    width: 100%;
+    border-bottom: #FF7A25 2px solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow:  -2px 8px 15px #151515;
+    position: fixed;
+}
+
+#ShrinkedNav{
+    background-color: #181818;
+    width: 1300px;
+    margin:0 auto;
+    height: 68px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#NavButtons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#Logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#LogoImg{
+    width: 68px;
+    height: 68px;
+    cursor:pointer;
+}
+
+.LogInOutIMG{
+    margin-left: 10px;
+    width: 48px;
+    height: 48px;
+}
+
+.LogInOutDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 68px;
+    padding: 10px;
+    transition-duration: 300ms;
+    margin: 0;
+    padding: 8px 8px 8px 8px;
+    border:0;
+    border-radius: 0;
+    border-top: 2px #181818 solid;
+    background-color: #181818;
+    cursor:pointer;
+    font: 18px "Trebuchet MS";
+    color: #EEEEEE;
+    outline: 0;
+}
+.CenterNavButton{
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 68px;
+    margin:0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 300ms;
+    border-radius: 0;
+    border:0;
+    border-top: 2px #181818 solid;
+    cursor:pointer;
+    font: 18px "Trebuchet MS";
+    color: #EEEEEE;
+    background-color: #181818;
+    outline: 0;
+}
+
+.LogInOutDiv:hover{
+    background-color: #303030;
+    border-top: 2px #FF7A25 solid;
+}
+
+.LogInOutDiv:focus{
+    background-color: #303030;
+    border-top: 2px #FF7A25 solid;
+}
+
+.CenterNavButton:hover{
+    background-color: #303030;
+    border-top: 2px #FF7A25 solid;
+}
+.CenterNavButton:focus{
+    background-color: #303030;
+    border-top: 2px #FF7A25 solid;
+}

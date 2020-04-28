@@ -2,33 +2,35 @@ import React from 'react';
 import './style/login.css';
 import { Redirect } from "react-router-dom";
 
-function AccountLoginFailed() {
-  return <div>
-          <p>Nome de utilizador ou password errada</p>
-        </div>
-}
-
-class LoginBox extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      AccountStatus: "not-logged-in",
-      redirect: false
+      AccountStatus: "",
+      redirect:""
     };
-    
-    this.handleUserNameChange = this.handleUserNameChange.bind(this);
-    this.handleUserPasswordChange = this.handleUserPasswordChange.bind(this);
+    this.fixText=this.fixText.bind(this);
+    this.submitLogin=this.submitLogin.bind(this);
+    this.homepage=this.homepage.bind(this);
   }
 
   async submitLogin() {
-    this.state.username = document.getElementById("username").value;
-    this.state.password = document.getElementById("password").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if(email==="" || password===""){
+      this.setState({AccountStatus:"Email ou password em falta"})
+      return;
+    }
+
+    if(!email.includes("@")){
+      this.setState({AccountStatus:"Email inválido"})
+      return;
+    }
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ "user": this.state.username, "password": this.state.password });
+    var raw = JSON.stringify({ "email": email, "password": password });
 
 
     var requestOptions = {
@@ -38,75 +40,62 @@ class LoginBox extends React.Component {
       redirect: 'follow'
     };
 
-    let response = await fetch("https://localhost:3000/users/login", requestOptions);
+    let response = await fetch("http://localhost:3000/users/login", requestOptions);
     let data = await response.json();
     console.log(data);
+    data = data.mesage;
 
     if (data.hasOwnProperty('token')) {
       sessionStorage.setItem("userData", JSON.stringify(data));
-      this.setState({ AccountStatus: "logged-in", redirect: true});
+      this.setState({redirect:"/"});
     }else{
-      this.setState({ AccountStatus: "bad-login" });
-      console.log("erro");
+      this.setState({AccountStatus:"Email inexistente ou password incorreta"})
     }
 
   }
 
-
-  handleUserNameChange(event) {
-    this.setState({ username: event.target.value });
+  fixText(){
+    this.setState({AccountStatus:""})
+    let txt=document.getElementById("email").value;
+    txt=txt.trim();
+    txt=txt.toLowerCase();
+    document.getElementById("email").value=txt;
   }
 
-  handleUserPasswordChange(event) {
-    this.setState({ password: event.target.value });
+  homepage(){
+    this.setState({redirect:"/"})
   }
 
   render() {
 
-    if (this.state.redirect) {
-      return (<Redirect to={"/home"} />);
-    }
-
-    if (sessionStorage.getItem("userData")) {
-      return (<Redirect to={"/home"} />);
+    if (sessionStorage.getItem("userData")||this.state.redirect==="/") {
+      return (<Redirect to={"/"} />);
     }
 
     return (
-      <div className="inner-container">
-        <div className="header">
-          Login
+      <div id="LoginMainDiv">
+        <div id="LoginBackDiv">
+          <div id="BackBtt" onClick={this.homepage}>
+            <img id="BackImg" src="./assets/back.png" alt=""></img>
+          </div>
         </div>
+        <div id= "LoginInnerDiv">
+          
+          <img id="LoginLogoImg" src="./assets/logo.png" alt=""></img>
+          <div id="LoginText"> Login </div>
 
-        <div className="box">
+          <div id="LoginStatusDiv">{this.state.AccountStatus}</div>
+          
+          <input type="text" id="email" name="email" placeholder="Email" className="LoginInput" onFocus={this.fixText} onChange={this.fixText}/>
 
-          <div className="input-group">
-
-            <label htmlFor="username">Username</label>
-
-            <input type="text" id="username" name="username" placeholder="Nome de utilizador" className="login-input" value={this.state.username} onChange={this.handleUserNameChange}></input>
-
-          </div>
-
-          <div className="input-group">
-
-            <label htmlFor="username">Password</label>
-
-            <input type="password" id="password" name="password" placeholder="Password" className="login-input" value={this.state.password1} onChange={this.handleUserPasswordChange}></input>
-
-          </div>
-
-          <input type="submit" className="login-btn" onClick={this.submitLogin.bind(this)} value="Login" />
+          <input type="password" id="password" name="password" placeholder="Password" className="LoginInput" onFocus={this.fixText}/>
+      
+          <input id="LoginBtt" type="submit" value="Login" onClick={this.submitLogin}/>
 
         </div>
-
-          {this.state.AccountStatus==="bad-login" && (<AccountLoginFailed />)}
-
       </div>
-
     );
-
   }
-
 }
 
-export default LoginBox;
+export default Login;

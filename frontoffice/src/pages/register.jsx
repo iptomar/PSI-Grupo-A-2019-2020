@@ -1,120 +1,225 @@
-import React from 'react';
-import { Link, Redirect } from "react-router-dom";
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import './style/register.css';
+import './style/pageframe.css';
+import NavBar from "./navBar";
 
-class RegisterBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      redirect: false,
-      RegisterStatus: null
-    };
+class Register extends Component {
 
-    this.handleUserNameChange = this.handleUserNameChange.bind(this);
-    this.handleUserPasswordChange = this.handleUserPasswordChange.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedIn:false,
+            redirect: "/Register",
+            VerifyStatus: "",
+            EditStatus: "",
+            userdata:null,
+            token: ""
 
-  UNSAFE_componentWillMount() {
-    if (sessionStorage.getItem("userData")) {
-      let data = JSON.parse(sessionStorage.getItem("userData"));
-      this.setState({ role: data.role });
-    } else {
-      this.setState({ redirect: true });
-    }
-  }
-
-  async submitRegister() {
-
-    this.state.username = document.getElementById("username").value;
-    this.state.password = document.getElementById("password").value;
-
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ "user": this.state.username, "password": this.state.password, "token": "K(+?y/(Le0lMnpP+!vZ)GQToI=WesVRXapAc21AXqXx*M8S78KTgx7i-vn)dUu?0" });
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw, mode: 'cors',
-      redirect: 'follow'
-    };
-
-    let response = await fetch("https://localhost:3000/users/register", requestOptions);
-    let data = await response.json();
-    console.log(data);
-
-    if (data.hasOwnProperty('token')) {
-      this.setState({ RegisterStatus: true });
-    } else {
-      this.setState({ RegisterStatus: false });
+        };
+        this.redirecter = this.redirecter.bind(this);
+        this.fixText=this.fixText.bind(this);
+        this.register=this.register.bind(this);
+        this.reload=this.reload.bind(this);
     }
 
-  }
-
-  handleUserNameChange(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  handleUserPasswordChange(event) {
-    this.setState({ password: event.target.value });
-  }
-
-  render() {
-
-    if (this.state.redirect) {
-      return (<Redirect to={"/login"} />);
+    componentDidMount(){
+        if(sessionStorage.getItem("userData")){
+            let data = JSON.parse(sessionStorage.getItem("userData"));
+            this.setState({userdata: data});
+            this.setState({token: data.token });
+            this.setState({loggedIn : true});            
+        }else{
+            this.setState({loggedIn : false});
+        }
     }
 
-    if (this.state.role !== "admin") {
-      return (<Redirect to={"/home"} />);
+    async register() {
+        let name = document.getElementById("name").value;
+        let surname = document.getElementById("surname").value;
+        let age = document.getElementById("age").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let div = document.getElementById("RegisterStatusDiv");
+        let update ={};
+    
+
+        if(name===""|| surname==="" || age===""|| email===""|| password===""){
+          div.style.color="#dc3545";
+          this.setState({VerifyStatus:"Preencha todos os campos"});
+          return;
+        }
+
+        if(isNaN(age) || (age<0 || age>150)){
+          this.setState({VerifyStatus:"A idade especificada não é válida"});
+          return;
+        }
+
+        if(!email.includes("@")){
+          this.setState({VerifyStatus:"O email especificado não é válido"});
+          return ;
+        }
+    
+        
+
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-type", "application/json");
+        var raw = JSON.stringify({
+          name: name,
+          surname: surname,
+          password: password,
+          email: email,
+          age: age,
+          tokenAdmin: this.state.token
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          mode: "cors",
+          redirect: "follow"
+        };
+
+        let response = await fetch(
+          "http://localhost:3000/users/register",
+          requestOptions
+        );
+        let data = await response.json();
+          
+        if (data.sucess) {
+            div.style.color="#28a745";
+            this.setState({EditStatus:"Registado com sucesso!", VerifyStatus:""})
+          } else {
+            div.style.color="#dc3545";
+            this.setState({EditStatus:"Houve um erro ao registar utilizador!", VerifyStatus:""})
+        }
+
+      }
+
+    redirecter(local){
+        if(local==="/Logout"){
+            sessionStorage.setItem("userdata","");
+            sessionStorage.clear();
+            this.setState({redirect: "/", loggedIn : false, data: null});    
+        } 
+        else      
+        this.setState({redirect: local});
     }
 
-    return (
+    fixText(){
+        this.setState({AccountStatus:""})
+        let txt=document.getElementById("email").value;
+        txt=txt.trim();
+        txt=txt.toLowerCase();
+        document.getElementById("email").value=txt;
+    }
 
-      <div className="inner-container">
+    reload(){
+        this.setState({
+            EditStatus:"",
+            VerifyStatus:""
+        })
+    }
 
-        <Link type="button" to="/home">Voltar</Link>
+    render() {
+        if (this.state.redirect!=="/Register") {
+          return (<Redirect to={this.state.redirect} />);
+        }        
+        
+        return (
+            <div id="body">
+                <NavBar redirecter={this.redirecter}></NavBar>
+                <div id="PageMainDiv">
+                    <div className="BackgroundDiv"></div>
+                    <div id="PageCenter">
+                    <div id="PageCentralDiv">
+                        <div className="TitleDiv"></div>
+                        <p className="TitleP">Novo Utilizador</p>
+      
+                        <div id="ProfileBox">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Nome"
+                                className="TextBox"
+                                onChange={
+                                    this.reload
+                                }
+                            ></input>
+                            <input
+                                type="text"
+                                id="surname"
+                                name="surname"
+                                placeholder="Apelido"
+                                className="TextBox"
+                                onChange={
+                                    this.reload
+                                }
+                            ></input>
 
-        <div className="header">
-          Registar
-          </div>
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                className="TextBox"
+                                onFocus={this.fixText} 
+                                onChange={
+                                    this.fixText,
+                                    this.reload
+                                }
+                            ></input>
 
-        <div className="box">
+                            <input
+                                type="text"
+                                id="age"
+                                name="age"
+                                placeholder="Idade"
+                                className="TextBox"
+                                onChange={
+                                    this.reload
+                                }
+                            ></input>
 
-          <div className="input-group">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                className="TextBox"
+                                onChange={
+                                    this.reload
+                                }
+                            ></input>
 
-            <label htmlFor="username">Username</label>
+                            <div id="VerifyStatusDiv">{this.state.VerifyStatus}</div>
+                            
+                            <div id="RegButtonsDiv">
+                            <button className="RegisterBtts" onClick={()=>{this.setState({redirect: "/Users"})}} >Voltar</button>
+                            <button className="RegisterBtts" onClick={ this.register} >Registar</button>
+                            </div>
 
-            <input type="text" id="username" name="username" placeholder="Nome de utilizador" className="login-input" value={this.state.username} onChange={this.handleUserNameChange}></input>
+                            <div id="RegisterStatusDiv">{this.state.EditStatus}</div>
 
-          </div>
+                        </div>
 
-          <div className="input-group">
+                        
 
-            <label htmlFor="username">Password</label>
-
-            <input type="password" id="password" name="password" placeholder="Password" className="login-input" value={this.state.password} onChange={this.handleUserPasswordChange}></input>
-
-          </div>
-
-          <button className="login-btn" onClick={this.submitRegister.bind(this)}>Register</button>
-
-        </div>
-
-        {this.state.RegisterStatus === true && (<div>
-          <p>Utilizador registado com sucesso!</p>
-        </div>)}
-
-        {this.state.RegisterStatus === false && (<div>
-          <p>Este utilizador já existe!</p>
-        </div>)}
-
-      </div>
-    );
-  }
-
+                    </div>
+                    <footer id="FooterDiv">
+                        <p id="Footer1p">ToursTomar</p>
+                        <p id="Footer2p">- Projeto desenvolvido no âmbito da cadeira de Projeto de Sistemas de Informação - Instituto Politécnico de Tomar</p>
+                    </footer>
+                    </div>
+                    <div className="BackgroundDiv"></div>
+                </div>
+                
+            </div>
+        );
+    }
 }
 
-export default RegisterBox;
+export default Register;
