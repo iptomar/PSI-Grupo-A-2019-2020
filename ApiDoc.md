@@ -5,11 +5,11 @@
  Regista o utilizador
 * metodo: **POST**
 * O body deve conter: 
-  * name(string) 
-  * surname(string) 
-  * password(string) 
-  * email(string) 
-  * age(string) 
+  * name
+  * surname
+  * password
+  * email
+  * age
 * Requer token: **tokenAdmin**
 * Retorna:
   * ```"status": "OK"```
@@ -20,8 +20,8 @@
 Autetica o utilizador
 * metodo: **POST**
 * O body deve conter:  
-  * password(string) 
-  * email(string)  
+  * password
+  * email 
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
