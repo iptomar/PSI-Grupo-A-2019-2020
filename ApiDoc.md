@@ -1,8 +1,8 @@
 # Backend
 ## EndPoints
 ### Autenticação
-#### /register
-Regista o utilizador
+#### * /register
+.. Regista o utilizador
 * metodo: **POST**
 * O body deve conter: 
   * name(string) 
