@@ -1,8 +1,8 @@
 # Backend
 ## EndPoints
 ### Autenticação
-#### * /register
-.. Regista o utilizador
+####  /register
+ Regista o utilizador
 * metodo: **POST**
 * O body deve conter: 
   * name(string) 
@@ -34,3 +34,18 @@ Lista os utilizadores
   * ```"status": "OK"```
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Carolina\",\n            \"surname\": \"Silva\",\n            \"email\": \"b@email.com\",\n            \"age\": 34\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hugo\",\n            \"surname\": \"Oliveira\",\n            \"email\": \"c@email.com\",\n            \"age\": 52\n        }\n    ]\n}"```
+
+####  /update
+ Regista o utilizador
+* metodo: **POST**
+* O body deve conter: 
+  * name(string) 
+  * surname(string) 
+  * password(string) 
+  * email(string) 
+  * age(string) 
+* Requer token: **tokenAdmin**
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
