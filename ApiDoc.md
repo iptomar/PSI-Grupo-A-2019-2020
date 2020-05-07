@@ -1,10 +1,12 @@
 # Backend
 ## EndPoints
-[Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#autentica%C3%A7%C3%A3o)
+* [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#autentica%C3%A7%C3%A3o)
+  * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#register)
+  * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#login)
 ### Autenticação
 ####  /register
  Regista o utilizador
-* metodo: **POST**
+ * metodo: **POST**
 * O body deve conter: 
   * name
   * surname
