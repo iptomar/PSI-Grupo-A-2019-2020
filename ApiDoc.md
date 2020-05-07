@@ -41,7 +41,7 @@ Lista os utilizadores
 * O body deve conter:
   * user 
   * data
-   * email
+    * email
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
@@ -73,9 +73,9 @@ Lista os utilizadores
 * metodo: **POST**
 * O body deve conter:
   * data
-   * nome
-   * descricao
-   * user id			
+    * nome
+    * descricao
+    * user id			
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
@@ -87,9 +87,9 @@ Lista os utilizadores
 * O body deve conter:
   * user 
   * data
-   * nome
-   * descricao
-   * user id		
+    * nome
+    * descricao
+    * user id		
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
