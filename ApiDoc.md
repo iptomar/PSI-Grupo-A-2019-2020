@@ -125,6 +125,72 @@ Lista os utilizadores
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
-
 ### Points
 #### /search
+Lista os pontos de interesse dado id do roteiro
+* metodo: **POST**
+* O body deve conter:
+  * data
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+#### /searchpoint
+Lista os pontos de interesse dado o seu id
+* metodo: **POST**
+* O body deve conter:
+  * data
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        }\n    ]\n}"```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+ ####  /insert
+ Adiciona um ponto de interesse
+* metodo: **POST**
+* O body deve conter:
+  * data
+    * titulo
+    * descricao
+    * coordenadas
+    * data
+    * tipoEdif
+    * user id
+    * prop id
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+ ####  /delete
+ Apaga os dados do ponto de interesse
+* metodo: **Delete**
+* O body deve conter: 
+  * id
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully deleted\"\n}"```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+
+####  /update
+ Atualiza os dados do ponto de interesse
+* metodo: **POST**
+* O body deve conter:
+  * id 
+  * data
+    * titulo
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+#### /searchUser
+ Procura o utilizador que criou esse ponto de interesse
+* metodo: **Post**
+* O body deve conter: 
+  * data
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
