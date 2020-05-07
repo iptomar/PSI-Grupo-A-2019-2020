@@ -26,6 +26,7 @@
   * ```"status": "OK"```
   * ```"code": 200```
   * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
+
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### /login
 Autetica o utilizador
