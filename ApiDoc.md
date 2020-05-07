@@ -25,9 +25,7 @@
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#deleteimage)
 ### Autenticação
 ####  /register
-
-⋅⋅⋅Regista o utilizador
-
+Regista o utilizador
  * metodo: **POST**
 * O body deve conter: 
   * name
@@ -43,7 +41,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### /login
-...Autetica o utilizador
+Autetica o utilizador
 * metodo: **POST**
 * O body deve conter:  
   * password
@@ -55,7 +53,7 @@
  
  [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints) 
 #### /getUsers/{tokenAdmin}
-...Lista os utilizadores
+Lista os utilizadores
 * metodo: **Get** 
 * Retorna:
   * ```"status": "OK"```
@@ -64,7 +62,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ####  /update
-...Atualiza os dados do utilizador
+Atualiza os dados do utilizador
 * metodo: **POST**
 * O body deve conter:
   * user 
@@ -77,7 +75,7 @@
  
  [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
-...Apaga os dados do utilizador
+ Apaga os dados do utilizador
 * metodo: **Delete**
 * O body deve conter:
   * user 
@@ -90,7 +88,7 @@
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ### Roteiros
  ##### /list
-...Retorna a lista de roteiros
+Retorna a lista de roteiros
 * metodo: **Get** 
 * Retorna:
   * ```"status": "OK"```
@@ -99,7 +97,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints) 
  ####  /insert
-...Adiciona um roteiro
+Adiciona um roteiro
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -113,7 +111,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ####  /update
-...Atualiza os dados do roteiro
+Atualiza os dados do roteiro
 * metodo: **POST**
 * O body deve conter:
   * user 
@@ -128,7 +126,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
-...Apaga os dados do roteiro
+Apaga os dados do roteiro
 * metodo: **Delete**
 * O body deve conter:
   * user 
@@ -141,7 +139,7 @@
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ### Pontos de interesse
 #### /search
-...Lista os pontos de interesse dado id do roteiro
+Lista os pontos de interesse dado id do roteiro
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -152,7 +150,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### /searchpoint
-...Lista os pontos de interesse dado o seu id
+Lista os pontos de interesse dado o seu id
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -163,7 +161,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /insert
-...Adiciona um ponto de interesse
+Adiciona um ponto de interesse
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -181,7 +179,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
-...Apaga os dados do ponto de interesse
+Apaga os dados do ponto de interesse
 * metodo: **Delete**
 * O body deve conter: 
   * id
@@ -193,7 +191,7 @@
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 
 ####  /update
-...Atualiza os dados do ponto de interesse
+Atualiza os dados do ponto de interesse
 * metodo: **POST**
 * O body deve conter:
   * id 
@@ -202,7 +200,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### /searchUser
-...Procura o utilizador que criou esse ponto de interesse
+Procura o utilizador que criou esse ponto de interesse
 * metodo: **Post**
 * O body deve conter: 
   * data
@@ -210,7 +208,7 @@
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ### Imagens
 #### /search
-...Lista as imagens
+Lista as imagens
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -221,7 +219,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ####  /insert
-...Adiciona uma imagem
+Adiciona uma imagem
 * metodo: **POST**
 * O body deve conter:
   * data
@@ -239,7 +237,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### getImage
-...Lista as imagens
+Lista as imagens
 * metodo: **Get** 
 * O body deve conter:
   * data
@@ -250,7 +248,7 @@
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /deleteImage
-...Apaga os dados da imagem
+Apaga os dados da imagem
 * metodo: **Delete**
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
