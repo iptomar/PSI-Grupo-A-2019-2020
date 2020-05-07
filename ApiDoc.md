@@ -132,7 +132,7 @@ Lista os utilizadores
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
-### Pontes de interesse
+### Pontos de interesse
 #### /search
 Lista os pontos de interesse dado id do roteiro
 * metodo: **POST**
