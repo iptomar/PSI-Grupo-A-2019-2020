@@ -37,7 +37,7 @@ Lista os utilizadores
 
 ####  /update
  Atualiza os dados do utilizador
- * metodo: **POST**
+* metodo: **POST**
 * O body deve conter:
  * user 
  * data
