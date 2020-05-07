@@ -248,7 +248,7 @@ Lista as imagens
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /deleteImage
- Apaga os dados do ponto de interesse
+ Apaga os dados da imagem
 * metodo: **Delete**
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
