@@ -25,7 +25,7 @@
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#deleteimage)
 ### Autenticação
 ####  /register
-...Regista o utilizador
+⋅⋅⋅Regista o utilizador
  * metodo: **POST**
 * O body deve conter: 
   * name
