@@ -58,9 +58,9 @@ Lista os utilizadores
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"User successfully deleted\"\n}"```
 
- ###Roteiros
+ ### Roteiros
  
- #####/list
+ ##### /list
  Retorna a lista de roteiros
 * metodo: **Get** 
 * Retorna:
@@ -106,4 +106,6 @@ Lista os utilizadores
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 
- 
+### Points
+
+####
