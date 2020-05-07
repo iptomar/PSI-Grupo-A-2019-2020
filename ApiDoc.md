@@ -1,6 +1,6 @@
 # Backend
 ## EndPoints
-[Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#1-autentica%C3%A7%C3%A3o)
+[Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#autentica%C3%A7%C3%A3o)
 ### Autenticação
 ####  /register
  Regista o utilizador
