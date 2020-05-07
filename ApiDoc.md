@@ -1,6 +1,7 @@
 # Backend
 ## EndPoints
-### Autenticação
+[Autenticação][1]
+### 1. Autenticação
 ####  /register
  Regista o utilizador
 * metodo: **POST**
