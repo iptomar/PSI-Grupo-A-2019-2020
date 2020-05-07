@@ -3,6 +3,14 @@
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#autentica%C3%A7%C3%A3o)
   * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#register)
   * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#login)
+  * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#getuserstokenadmin)
+  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#update)
+  * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#delete)
+* [Roteiros](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#roteiros)
+  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#list)
+  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#insert)
+  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#update)
+  * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#delete)
 ### Autenticação
 ####  /register
  Regista o utilizador
