@@ -11,8 +11,10 @@ class Routes extends Component {
             loggedIn: false,
             redirect: "/AddRoute",
             userdata: null,
+            CreateStatus: ""
         };
         this.redirecter = this.redirecter.bind(this);
+        this.submitRoute = this.submitRoute.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +33,54 @@ class Routes extends Component {
             sessionStorage.clear();
             this.setState({ redirect: "/", loggedIn: false, data: null });
         } else this.setState({ redirect: local });
+    }
+
+    //Função relativa à submissão do roteiro
+    async submitRoute() {
+        let RouteName = document.getElementById("title").value; //Obter o nome do roteiro
+        let RouteDescription = document.getElementById("descr").value; //Obter a descrição do roteiro
+        let RouteUser = this.state.userdata.id; //Obter o ID do utilizador que está a criar o roteiro
+        let div = document.getElementById("CreateStatusDiv"); //DIV que irá conter a resposta se o roteiro foi criado com sucesso ou não
+
+        //Headers
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-type", "application/json");
+        var raw = JSON.stringify({
+            "data": {
+                "nome": RouteName,
+                "descricao": RouteDescription,
+                "user_id": 1
+            }
+        });
+
+        //Tipo de request
+        var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            mode: "cors",
+            redirect: "follow"
+        };
+
+        //Colocar os dados na base de dados
+        let response = await fetch(
+            "http://localhost:3000/routes/insert",
+            requestOptions
+        )
+
+        //Resposta por parte do server
+        let data = await response.json();
+
+        //Caso consiga inserir, mostrar a mensagem de sucesso
+        if (data.sucess === true) {
+            div.style.color="#28a745";
+            this.setState({ CreateStatus: "Roteiro criado com sucesso!"})
+        } 
+        //Senão mostra a mensagem de erro
+        else {
+            this.setState({ CreateStatus: "Houve um erro ao criar o roteiro!"})
+        }
     }
 
     render() {
@@ -70,8 +120,10 @@ class Routes extends Component {
 
                                 <div id="CRButtonsDiv">
                                     <button className="CRBtts" onClick={() => { this.setState({ redirect: "/Routes" }) }} >Voltar</button>
-                                    <button className="CRBtts">Criar</button>
+                                    <button className="CRBtts" onClick={ this.submitRoute}>Criar</button>
                                 </div>
+
+                                <div id="CreateStatusDiv">{this.state.CreateStatus}</div>
 
                             </div>
                         </div>
