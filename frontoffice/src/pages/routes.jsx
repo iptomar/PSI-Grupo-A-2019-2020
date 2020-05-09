@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./style/routes.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
@@ -47,10 +47,10 @@ class Routes extends Component {
     console.log(json.mesage);
   }
 
-  async getPoints(id){
+  async getPoints(id) {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({"data":id});
+    var raw = JSON.stringify({ "data": id });
 
     var requestOptions = {
       method: 'POST',
@@ -65,26 +65,26 @@ class Routes extends Component {
     await this.getPointsInfo(data.mesage);
   }
 
-  async getPointsInfo(pontos){
-      let newPontos=[];
-      await pontos.forEach(async (element)=>{
-        var myHeaders = new Headers();
-        myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-        var raw = JSON.stringify({"data":element.id_inter});
-        
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw, mode: 'cors',
-            redirect: 'follow'
-        };
+  async getPointsInfo(pontos) {
+    let newPontos = [];
+    await pontos.forEach(async (element) => {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
+      var raw = JSON.stringify({ "data": element.id_inter });
 
-        let response = await fetch("http://localhost:3000/points/searchpoint", requestOptions);
-        let data = await response.json();
-        newPontos.push(data.mesage[0]);
-        if(pontos.length==newPontos.length){
-            this.setState({points:newPontos});
-        }
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw, mode: 'cors',
+        redirect: 'follow'
+      };
+
+      let response = await fetch("http://localhost:3000/points/searchpoint", requestOptions);
+      let data = await response.json();
+      newPontos.push(data.mesage[0]);
+      if (pontos.length == newPontos.length) {
+        this.setState({ points: newPontos });
+      }
     });
   }
 
@@ -96,69 +96,69 @@ class Routes extends Component {
     } else this.setState({ redirect: local });
   }
 
-  async deletePoint(id){
+  async deletePoint(id) {
     var myHeaders = new Headers();
-        myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-        var raw = JSON.stringify({  "id": id });
-    
-    
-        var requestOptions = {
-          method: 'DELETE',
-          headers: myHeaders,
-          body: raw, mode: 'cors',
-          redirect: 'follow'
-        };
-    
-        let response = await fetch("http://localhost:3000/points/delete", requestOptions);
-        let data = await response.json();
-        await this.getRoutes();
-        console.log(data);
+    myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ "id": id });
 
-        await this.getPoints(this.state.routeId);
+
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      body: raw, mode: 'cors',
+      redirect: 'follow'
+    };
+
+    let response = await fetch("http://localhost:3000/points/delete", requestOptions);
+    let data = await response.json();
+    await this.getRoutes();
+    console.log(data);
+
+    await this.getPoints(this.state.routeId);
 
   }
 
   render() {
-    
+
     if (this.state.redirect !== "/Routes") {
       return <Redirect to={this.state.redirect} />;
     }
 
-    let ps=[]
+    let ps = []
     let UI = [];
 
     //vai buscar os roteiros
-    if(this.state.routes.length!==0){
-        this.state.routes.forEach((element) => {
-          UI.push(
-            <div
-              onClick={() => {
-                this.setState({routeId:element.id});
-                this.getPoints(element.id)
-              }}
-            >
-              <h4>{element.nome}</h4>
-              <h4>{element.descricao}</h4>
-            </div>
-          );
-        });
+    if (this.state.routes.length !== 0) {
+      this.state.routes.forEach((element) => {
+        UI.push(
+          <div
+            onClick={() => {
+              this.setState({ routeId: element.id });
+              this.getPoints(element.id)
+            }}
+          >
+            <h4>{element.nome}</h4>
+            <h4>{element.descricao}</h4>
+          </div>
+        );
+      });
     }
 
     console.log(this.state.points.length);
 
-    if(this.state.points.length!=0){
-      this.state.points.forEach((element)=>{
-          console.log(element);
-          ps.push(
-              <div>
-                  <h4>{element.titulo}</h4>
-                  <h4>{element.descricao}</h4>
-                  <h4>{element.data}</h4>
-              </div>
-          );
-    });
-  }
-    
+    if (this.state.points.length != 0) {
+      this.state.points.forEach((element) => {
+        console.log(element);
+        ps.push(
+          <div>
+            <h4>{element.titulo}</h4>
+            <h4>{element.descricao}</h4>
+            <h4>{element.data}</h4>
+          </div>
+        );
+      });
+    }
+
 
     return (
       <div id="body">
@@ -167,15 +167,19 @@ class Routes extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-                <div id="routesdiv">
+              <div id="routesdiv">
                 <div className="gemeny">
-                    {UI}
+                  {UI}
                 </div>
                 <div className="gemeny">
-                    {ps}
+                  {ps}
                 </div>
-                </div>
-                
+                <Link to="/Routes/addRoute">
+                  <button className="btn">
+                    Adicionar Roteiro
+                    </button>
+                </Link>
+              </div>
             </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>
