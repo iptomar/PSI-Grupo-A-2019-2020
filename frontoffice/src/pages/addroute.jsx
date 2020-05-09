@@ -85,7 +85,7 @@ class Routes extends Component {
 
     render() {
 
-        if(this.state.loggedIn === false){
+        if(!sessionStorage.getItem("userData")){
             this.setState({ redirect: "/" });
             return <Redirect to={this.state.redirect} />;
         }

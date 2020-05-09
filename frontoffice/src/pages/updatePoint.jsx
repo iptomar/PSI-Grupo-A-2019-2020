@@ -201,7 +201,7 @@ class Profile extends Component {
 
                             <div id="CPButtonsDiv">
                                 <button className="CPBtts" onClick={()=>{this.setState({redirect: "/MyPoints"})}} >Voltar</button>
-                                <button className="CPBtts" onClick={ this.submitPoint} >Criar</button>
+                                <button className="CPBtts" onClick={ this.updatePoint} >Criar</button>
                             </div>
 
                             <div id="EditStatusDiv">{this.state.EditStatus}</div>
