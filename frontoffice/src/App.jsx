@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route exact path="/UpdatePoint" component={UpdatePoint}></Route>
           <Route exact path="/Profile" component={Profile}></Route>
           <Route exact path="/Routes" component={Routes}></Route>
-          <Route exact path="/Routes/AddRoute" component={AddRoute}></Route>
+          <Route exact path="/AddRoute" component={AddRoute}></Route>
           <Route exact path="/MyPoints" component={Points}></Route>
           <Route exact path="/Create" component={Create}></Route>
           <Route exact path="/Image" component={Images}></Route>

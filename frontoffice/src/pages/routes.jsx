@@ -174,7 +174,7 @@ class Routes extends Component {
                 <div className="gemeny">
                   {ps}
                 </div>
-                <Link to="/Routes/addRoute">
+                <Link to="/AddRoute">
                   <button className="btn">
                     Adicionar Roteiro
                     </button>
