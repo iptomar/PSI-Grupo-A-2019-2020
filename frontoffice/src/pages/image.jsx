@@ -22,7 +22,7 @@ class Images extends Component {
     await this.getUserImages();
   }
 
-  async getUserImages(){
+  async getUserImages() {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
@@ -42,68 +42,6 @@ class Images extends Component {
     );
     let data = await response.json();
     await this.getImages(data.mesage);
-  }
-
-  async addImages() {
-    //Tamanho do array
-    let id = this.state.point;
-    console.log(id);
-    let arraySize = this.state.imags.length;
-    for (let index = 0; index < arraySize; index++) {
-      //Obter o index da virgula
-      let virgulaIndex = this.state.imags[index].indexOf(',', 0);
-      console.log(virgulaIndex);
-      //Adicionar 1 ao valor do index obtido, pois quer-se o que está à frente
-      //da virgula
-      virgulaIndex += 1;
-      //Obter agora a substring da imagem
-      let image = this.state.imags[index].substring(virgulaIndex);
-      console.log(image);
-      //Mandar a imagem para o servidor
-      var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-type", "application/json");
-
-      var raw = JSON.stringify({
-        data: {
-          dados: {
-            Path: "",
-            Legenda: "Legenda",
-            AutorFonte: "AutorFonte",
-            Interesse_id: id,
-            usersid: 1,
-          },
-          imagem: image,
-        },
-      });
-
-
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        mode: "cors",
-        redirect: "follow"
-      };
-
-      let response = await fetch(
-        "http://localhost:3000/images/insert",
-        requestOptions
-      )
-      //Resposta por parte do server
-      let data = await response.json();
-
-      console.log(data);
-
-      window.location.reload();
-    }
-  }
-
-  handleFiles = files => {
-    //Set state imagens com os ficheiros a ser introduzidos
-    this.setState({ imags: files.base64 });
-    this.addImages();
   }
 
   async getImages(images) {
@@ -135,27 +73,27 @@ class Images extends Component {
     });
   }
 
-  async deleteImage(id){
+  async deleteImage(id) {
     var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-type", "application/json");
-      var raw = JSON.stringify({ data: {id:id} });
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ data: { id: id } });
 
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        mode: "cors",
-        redirect: "follow",
-      };
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
+    };
 
-      let response = await fetch(
-        "http://localhost:3000/images/delete",
-        requestOptions
-      );
-      let data = await response.json();
-      
-      await this.getUserImages();
+    let response = await fetch(
+      "http://localhost:3000/images/delete",
+      requestOptions
+    );
+    let data = await response.json();
+
+    await this.getUserImages();
   }
 
   redirecter(local) {
@@ -196,9 +134,11 @@ class Images extends Component {
               </Link>
               <div className="input-group">
                 <label htmlFor="email">Fotografias do edificio</label>
-                <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
-                  <button className='btn'>Upload</button>
-                </ReactFileReader>
+                <Link to="/AddImages">
+                  <button className="btn">
+                    Adicionar Imagens
+                    </button>
+                </Link>
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>{imgs}</div>
