@@ -128,6 +128,14 @@ class Register extends Component {
           return (<Redirect to={this.state.redirect} />);
         }        
         
+        /**
+        * Apenas pode ter acesso a esta página o utilizador "admin"
+        */
+       if (sessionStorage.getItem("token") !== "VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57") {
+        this.setState({ redirect: "/" });
+        return (<Redirect to={this.state.redirect} />);
+        }
+
         return (
             <div id="body">
                 <NavBar redirecter={this.redirecter}></NavBar>

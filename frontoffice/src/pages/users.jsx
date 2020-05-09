@@ -78,7 +78,16 @@ class Users extends Component {
         if (this.state.redirect!=="/Users") {
           return (<Redirect to={this.state.redirect} />);
         }      
+
+        /**
+         * Apenas pode ter acesso a esta página o utilizador "admin"
+         */
+        if(sessionStorage.getItem("token") !== "VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57"){
+            this.setState({ redirect: "/"});
+            return (<Redirect to={this.state.redirect} />);
+        }
         
+        //Array que irá conter a lista de utilizadores
         let UI = [];
 
         if(this.state.listOfUsers!==[]){
@@ -100,6 +109,8 @@ class Users extends Component {
 
         
         return (
+
+
             <div id="body">
                 <NavBar redirecter={this.redirecter}></NavBar>
                 <div id="PageMainDiv">
