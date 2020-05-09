@@ -217,4 +217,31 @@ router.post("/searchuser", async function(req, res, next){
   /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
   res.send(errormesage);*/
 });
+
+//Usage:
+//Return all points
+router.get("/list", async function(req, res, next){
+
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  await knex('Interesse')
+  .select()
+  .then(rows => {
+      let errormesage = { sucess : true , mesage: rows };
+      res.send(errormesage);
+    })
+  .catch(async function(err) {
+    var d = new Date();
+    await file(
+      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack()
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+});
+
 module.exports = router;
