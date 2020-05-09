@@ -85,6 +85,11 @@ class Routes extends Component {
 
     render() {
 
+        if(this.state.loggedIn === false){
+            this.setState({ redirect: "/" });
+            return <Redirect to={this.state.redirect} />;
+        }
+
         if (this.state.redirect !== "/AddRoute") {
             return <Redirect to={this.state.redirect} />;
         }
