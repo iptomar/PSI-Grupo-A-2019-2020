@@ -141,10 +141,16 @@ class Routes extends Component {
             <h4>{element.descricao}</h4>
           </div>
         );
+        UI.push(
+          <button onClick={() => {
+            sessionStorage.setItem("nomeRoteiro", element.nome);
+            sessionStorage.setItem("descricaoRoteiro", element.descricao);
+            sessionStorage.setItem("routeID", element.id);
+            this.setState({ redirect: "/UpdateRoute" });
+          }}>📝</button>
+        );
       });
     }
-
-    console.log(this.state.points.length);
 
     if (this.state.points.length != 0) {
       this.state.points.forEach((element) => {

@@ -4,17 +4,20 @@ import './style/addRoute.css';
 import "./style/pageframe.css";
 import NavBar from "./navBar";
 
-class Routes extends Component {
+class UpdateRoute extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loggedIn: false,
-            redirect: "/AddRoute",
+            redirect: "/UpdateRoute",
             userdata: null,
-            CreateStatus: ""
+            EditStatus: "",
+            nome: sessionStorage.getItem("nomeRoteiro"),
+            descricao: sessionStorage.getItem("descricaoRoteiro"),
+            id: sessionStorage.getItem("routeID")
         };
         this.redirecter = this.redirecter.bind(this);
-        this.submitRoute = this.submitRoute.bind(this);
+        this.updateRoute = this.updateRoute.bind(this);
     }
 
     componentDidMount() {
@@ -35,54 +38,48 @@ class Routes extends Component {
         } else this.setState({ redirect: local });
     }
 
-    //Função relativa à submissão do roteiro
-    async submitRoute() {
-        let RouteName = document.getElementById("title").value; //Obter o nome do roteiro
-        let RouteDescription = document.getElementById("descr").value; //Obter a descrição do roteiro
-        let RouteUser = this.state.userdata.id; //Obter o ID do utilizador que está a criar o roteiro
-        let div = document.getElementById("CreateStatusDiv"); //DIV que irá conter a resposta se o roteiro foi criado com sucesso ou não
+    async updateRoute(){
+        let userID = this.state.userdata.id;
+        let id = this.state.id;
+        let nome = document.getElementById("title").value;
+        let descricao = document.getElementById("descr").value;
+        let div = document.getElementById("CreateStatusDiv");
 
-        //Headers
         var myHeaders = new Headers();
-        myHeaders.append("Accept", "application/json");
-        myHeaders.append("Content-type", "application/json");
+        myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
         var raw = JSON.stringify({
+            "id": id,
             "data": {
-                "nome": RouteName,
-                "descricao": RouteDescription,
-                "user_id": 1
+                "nome": nome,
+                "descricao": descricao,
+                "user_id": userID
             }
         });
 
-        //Tipo de request
         var requestOptions = {
-            method: "POST",
+            method: 'POST',
             headers: myHeaders,
-            body: raw,
-            mode: "cors",
-            redirect: "follow"
+            body: raw, mode: 'cors',
+            redirect: 'follow'
         };
 
-        //Colocar os dados na base de dados
-        let response = await fetch(
-            "http://localhost:3000/routes/insert",
-            requestOptions
-        )
+        let response = await fetch("http://localhost:3000/routes/update",
+            requestOptions);
 
-        //Resposta por parte do server
         let data = await response.json();
-
+        
         //Caso consiga inserir, mostrar a mensagem de sucesso
         if (data.sucess === true) {
             div.style.color="#28a745";
-            this.setState({ CreateStatus: "Roteiro criado com sucesso!"})
+            this.setState({ EditStatus: "Roteiro alterado com sucesso!"})
         } 
         //Senão mostra a mensagem de erro
         else {
             div.style.color="#dc3545";
-            this.setState({ CreateStatus: "Houve um erro ao criar o roteiro!"})
+            this.setState({ EditStatus: "Houve um erro ao alterar o roteiro!"})
         }
     }
+
 
     render() {
 
@@ -91,7 +88,7 @@ class Routes extends Component {
             return <Redirect to={this.state.redirect} />;
         }
 
-        if (this.state.redirect !== "/AddRoute") {
+        if (this.state.redirect !== "/UpdateRoute") {
             return <Redirect to={this.state.redirect} />;
         }
 
@@ -103,7 +100,7 @@ class Routes extends Component {
                     <div id="PageCenter">
                         <div id="PageCentralDiv">
                             <div className="TitleDiv"></div>
-                            <p className="TitleP">Criar roteiro</p>
+                            <p className="TitleP">Atualizar roteiro</p>
                             <div id="RouteBox">
                                 <div className="FieldDiv">
                                     <label className="FieldLabel">Nome</label>
@@ -111,6 +108,10 @@ class Routes extends Component {
                                         type="text"
                                         id="title"
                                         name="title"
+                                        value = {this.state.nome}
+                                        onChange={
+                                            (e) => {this.setState({nome: e.target.value})}
+                                        }
                                         className="TextBox"
                                     ></input>
                                 </div>
@@ -120,16 +121,20 @@ class Routes extends Component {
                                     <textarea
                                         type="text"
                                         id="descr"
+                                        value = {this.state.descricao}
+                                        onChange={
+                                            (e) => {this.setState({descricao: e.target.value})}
+                                        }
                                         name="descr"
                                     ></textarea>
                                 </div>
 
                                 <div id="CRButtonsDiv">
                                     <button className="CRBtts" onClick={() => { this.setState({ redirect: "/Routes" }) }} >Voltar</button>
-                                    <button className="CRBtts" onClick={ this.submitRoute}>Criar</button>
+                                    <button className="CRBtts" onClick={ this.updateRoute}>Atualizar</button>
                                 </div>
 
-                                <div id="CreateStatusDiv">{this.state.CreateStatus}</div>
+                                <div id="CreateStatusDiv">{this.state.EditStatus}</div>
 
                             </div>
                         </div>
@@ -148,4 +153,4 @@ class Routes extends Component {
     }
 }
 
-export default Routes;
+export default UpdateRoute;
