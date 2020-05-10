@@ -96,7 +96,7 @@ class Routes extends Component {
     } else this.setState({ redirect: local });
   }
 
-  async deletePoint(id) {
+  async deleteRoute(id) {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
     var raw = JSON.stringify({ "id": id });
@@ -109,10 +109,11 @@ class Routes extends Component {
       redirect: 'follow'
     };
 
-    let response = await fetch("http://localhost:3000/points/delete", requestOptions);
+    let response = await fetch("http://localhost:3000/routes/delete", requestOptions);
+    
     let data = await response.json();
+
     await this.getRoutes();
-    console.log(data);
 
     await this.getPoints(this.state.routeId);
 
@@ -148,6 +149,9 @@ class Routes extends Component {
             sessionStorage.setItem("routeID", element.id);
             this.setState({ redirect: "/UpdateRoute" });
           }}>📝</button>
+        );
+        UI.push(
+          <button onClick={() => this.deleteRoute(element.id)}>❌</button>
         );
       });
     }
