@@ -38,7 +38,7 @@ var app = {
                     minZoom: 15,
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
-                alert('Entrou no modo Offline, vai encontrar funcionabilidades limitadas.',  "Alert Title");
+                alert('Entrou no modo Offline, vai encontrar funcionabilidades limitadas.', "Alert Title");
 
             }
 
@@ -81,253 +81,246 @@ var app = {
 
             var br = document.createElement('br');
 
+
             //metodo de jQuery para ir buscar à API do BackOffice
-            // $.getJSON("http://188.251.50.68:3000/points/list", function (json) {
-            //     console.log('Here', json);
 
-            //     jsonData = json;
-            //     //let cada posição do ficheiro json e inserir numa variavel
-            //     //tem de ignorar agora o inicio ""sucess":true,"mesage":"
-            //     for (var i = 1; i < jsonData.length; i++) {
-            //         let jsons = jsonData[i];
-            //         //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
-            //         var polygon = L.polygon([jsons.coordenadas], {
-            //             color: 'red',
-            //             weight: '0.5',
-            //             fillOpacity: '0.2',
-            //         }).addTo(mymap);
+            $.getJSON("http://188.251.50.68:3000/points/list", result => {
+                // Iterar todos os pontos de interesse
+                result.rows.forEach(row => {
+                    // Converter string de coordenadas para um array de coordenadas
+                    let coordenadas = JSON.parse(`[${row.coordenadas}]`);
 
-            //         //criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
-            //         var divPopup = document.createElement('div');
-            //         divPopup.setAttribute('id', 'iDdivPopup');
-            //         var popUpTipo = document.createElement('p');
-            //         popUpTipo.setAttribute('id', 'idPopUpTipo');
-            //         popUpTipo.classList.add('item1');
-            //         var popUpNome = document.createElement('p');
-            //         popUpNome.setAttribute('id', 'idPopUpNome');
-            //         popUpNome.classList.add('item2');
+                    // Obter um array com as duas primeiras coordenadas
+                    let coordCentral = [coordenadas[0], coordenadas[1]];
 
-            //         var btWaypoint = document.createElement('button');
-            //         btWaypoint.setAttribute('id', 'idBtWaypoint');
-            //         btWaypoint.classList.add('btn', 'btn-warning', 'item4');
-            //         btWaypoint.textContent = "Traçar caminho  ";
-            //         var iShoes = document.createElement('i');
-            //         iShoes.classList.add('fas', 'fa-shoe-prints');
-            //         btWaypoint.appendChild(iShoes);
+                    // Obter um array sem as duas primeiras coordenadas
+                    let arryCoords = coordenadas.slice(2);
 
+                    // Agrupar as coordenadas em pares
+                    let poligCoords = [];
+                    for (let i = 0; i < arryCoords.length; i += 2) {
+                        poligCoords.push([arryCoords[i], arryCoords[i + 1]]);
+                    }
 
-            //         var greenIcon = new L.Icon({
-            //             iconUrl: './img/green.png',
-            //             shadowUrl: '../img/shadow.png',
-            //             iconSize: [25, 41],
-            //             iconAnchor: [12, 41],
-            //             popupAnchor: [1, -34],
-            //             shadowSize: [41, 41]
-            //         });
+                    // Desenhar o poligono do edificio
+                    let polygon = L.polygon([poligCoords], {
+                        color: 'red',
+                        weight: '0.5',
+                        fillOpacity: '0.2',
+                    }).addTo(mymap);
 
-            //         //onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
-            //         //em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
-            //         btWaypoint.onclick = waypoint => {
+                    // Criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
+                    let divPopup = document.createElement('div');
+                    divPopup.setAttribute('id', 'iDdivPopup');
 
-            //             removeRoutingControl();
+                    let popUpTipo = document.createElement('p');
+                    popUpTipo.setAttribute('id', 'idPopUpTipo');
+                    popUpTipo.classList.add('item1');
 
-            //             console.log(current_position._latlng.lat);
+                    let popUpNome = document.createElement('p');
+                    popUpNome.setAttribute('id', 'idPopUpNome');
+                    popUpNome.classList.add('item2');
 
-            //             control = L.Routing.control({
-            //                 waypoints: [
-            //                     L.latLng(current_position._latlng),
-            //                     L.latLng(jsons.IconCoordenadas)
-            //                 ],
-            //                 createMarker: function (i, wp, nWps) {
-            //                     if (i === nWps - 1) {
-            //                         // here change the starting and ending icons
-            //                         return L.marker(wp.latLng, {
-            //                             icon: greenIcon // here pass the custom marker icon instance
-            //                         });
-            //                     }
-            //                 },
-            //                 lineOptions: {
-            //                     styles: [{ color: 'red', opacity: 1, weight: 5 }],
-            //                 },
-            //                 draggableWaypoints: false,
+                    let btWaypoint = document.createElement('button');
+                    btWaypoint.setAttribute('id', 'idBtWaypoint');
+                    btWaypoint.classList.add('btn', 'btn-warning', 'item4');
+                    btWaypoint.textContent = "Traçar caminho  ";
 
-            //             }).addTo(mymap);
+                    let iShoes = document.createElement('i');
+                    iShoes.classList.add('fas', 'fa-shoe-prints');
+                    btWaypoint.appendChild(iShoes);
 
+                    let greenIcon = new L.Icon({
+                        iconUrl: './img/green.png',
+                        shadowUrl: '../img/shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    });
 
-            //         }
+                    // Onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
+                    // em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
+                    btWaypoint.onclick = waypoint => {
 
+                        removeRoutingControl();
 
-            //         popUpTipo.textContent = jsons.tipoEdif;
-            //         popUpNome.textContent = jsons.titulo;
-            //         divPopup.appendChild(popUpTipo);
-            //         divPopup.appendChild(popUpNome);
+                        // console.log(current_position._latlng.lat);
 
+                        control = L.Routing.control({
+                            waypoints: [
+                                L.latLng(current_position._latlng),
+                                L.latLng(coordCentral)
+                            ],
+                            createMarker: function (i, wp, nWps) {
+                                if (i === nWps - 1) {
+                                    // here change the starting and ending icons
+                                    return L.marker(wp.latLng, {
+                                        icon: greenIcon // here pass the custom marker icon instance
+                                    });
+                                }
+                            },
+                            lineOptions: {
+                                styles: [{ color: 'red', opacity: 1, weight: 5 }],
+                            },
+                            draggableWaypoints: false,
 
-            //         //criação do icon dos edificios
-            //         var myIcon = L.icon({
-            //             iconUrl: 'icon.png',
-            //             iconSize: [30, 48],
-            //             iconAnchor: [15, 48],
-            //             popupAnchor: [-7, -45]
+                        }).addTo(mymap);
+                    }
 
-            //         });
+                    popUpTipo.textContent = 'jsons.tipoEdif';
+                    popUpNome.textContent = 'jsons.titulo';
 
-            //         //Não existe ICON coordenadas agora. 
-            //         //To do: 
-            //             //- Pegar as primeiras 2 coordenadas do 
-            //             //ANTES : "IconCoordenadas":[39.60092678,-8.41364175],
-            //             //AGORA apanhar isto: coordenadas":"39.60738269, -8.41146648 , 
-                    
-            //         console.log('JSON', jsons);
+                    divPopup.appendChild(popUpTipo);
+                    divPopup.appendChild(popUpNome);
 
-            //         L.marker(jsons.IconCoordenadas, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
+                    // Criação do icon dos edificios
+                    let myIcon = L.icon({
+                        iconUrl: 'icon.png',
+                        iconSize: [30, 48],
+                        iconAnchor: [15, 48],
+                        popupAnchor: [-7, -45]
 
-            //         //atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
-            //         var link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
-            //             // class="speciallink badge badge-info" margin-left: 0.7em; margin-right: -10em;
+                    });
 
-            //             body.classList.remove('overflow');
-            //             btPos.classList.add('hidden');
-            //             divInfo.classList.remove("hidden");
-            //             mapa.classList.add('hidden');
-            //             mymap.closePopup();
+                    L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
 
-            //             //criação de elementos e adicionados ao html
-            //             var hr = document.createElement('hr');
-            //             hr.setAttribute('id', 'idHr');
+                    // Atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
+                    let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
+                        body.classList.remove('overflow');
+                        btPos.classList.add('hidden');
+                        divInfo.classList.remove("hidden");
+                        mapa.classList.add('hidden');
+                        mymap.closePopup();
 
-            //             var spanLinha = document.createElement('span');
-            //             spanLinha.setAttribute('id', 'idSpanLinha');
-            //             spanLinha.textContent = "";
+                        // Criação de elementos e adicionados ao html
+                        let hr = document.createElement('hr');
+                        hr.setAttribute('id', 'idHr');
 
-            //             var autoresTab = document.createElement('div');
-            //             autoresTab.setAttribute('id', 'idAutoresTab');
-            //             autoresTab.textContent = "Autores do projeto: ";
+                        let spanLinha = document.createElement('span');
+                        spanLinha.setAttribute('id', 'idSpanLinha');
+                        spanLinha.textContent = "";
 
+                        let autoresTab = document.createElement('div');
+                        autoresTab.setAttribute('id', 'idAutoresTab');
+                        autoresTab.textContent = "Autores do projeto: ";
 
-            //             var pNomeEdificio = document.createElement('h2');
-            //             pNomeEdificio.setAttribute('id', 'idNomeEdificio');
-            //             var pLocalizacao = document.createElement('p');
-            //             pLocalizacao.setAttribute('id', 'idLocalizacao');
-            //             var pAutores = document.createElement('p');
-            //             pAutores.setAttribute('id', 'idAutores');
-            //             var pDescricao = document.createElement('p');
-            //             pDescricao.setAttribute('id', 'idDescricao');
-            //             var pTipoEdificio = document.createElement('h3');
-            //             pTipoEdificio.setAttribute('id', 'idTipoEdificio');
-            //             var pData = document.createElement('p');
-            //             pData.setAttribute('id', 'idData');
-
+                        let pNomeEdificio = document.createElement('h2');
+                        pNomeEdificio.setAttribute('id', 'idNomeEdificio');
+                        let pLocalizacao = document.createElement('p');
+                        pLocalizacao.setAttribute('id', 'idLocalizacao');
+                        let pAutores = document.createElement('p');
+                        pAutores.setAttribute('id', 'idAutores');
+                        let pDescricao = document.createElement('p');
+                        pDescricao.setAttribute('id', 'idDescricao');
+                        let pTipoEdificio = document.createElement('h3');
+                        pTipoEdificio.setAttribute('id', 'idTipoEdificio');
+                        let pData = document.createElement('p');
+                        pData.setAttribute('id', 'idData');
 
 
-            //             //atribuição dos valores existentes no json
-            //             //Done
-            //             pNomeEdificio.textContent = jsons.titulo;
-
-                        
-            //             pLocalizacao.textContent = jsons.Localizacao;
-            //             pAutores.textContent = jsons.Autores;
-            //             pDescricao.textContent = jsons.descricao;
-            //             spanLinha.textContent = jsons.tipoEdif;
-            //             pTipoEdificio.appendChild(spanLinha);
-            //             pData.textContent = jsons.Data;
-
-            //             divInfo.appendChild(pTipoEdificio);
-            //             divInfo.appendChild(pNomeEdificio);
-            //             divInfo.appendChild(pData);
-            //             divInfo.appendChild(pLocalizacao);
-            //             divInfo.appendChild(autoresTab);
-
-            //             //dividir a string dos autores por virgulas e let autor a autor
-            //             var rString = pAutores.textContent;
-            //             var rArray = rString.split(",");
-
-            //             for (var k = 0; k < rArray.length; k++) {
-            //                 var sAutores = rArray[k];
-
-            //                 var singleAutor = document.createElement('p');
-            //                 singleAutor.setAttribute('id', 'idSingleAutors');
-            //                 singleAutor.textContent = sAutores;
-
-            //                 divInfo.appendChild(singleAutor);
-
-            //             }
+                        //atribuição dos valores existentes no json
+                        //Done
+                        pNomeEdificio.textContent = row.titulo;
 
 
-            //             divInfo.appendChild(hr);
-            //             divInfo.appendChild(pDescricao);
+                        pLocalizacao.textContent = coordCentral;
+                        pAutores.textContent = 'Vadims Zinatulins, João Almeida';
+                        pDescricao.textContent = row.descricao;
+                        spanLinha.textContent = row.tipoEdif;
+                        pTipoEdificio.appendChild(spanLinha);
+                        pData.textContent = row.data;
 
-            //             var divRow = document.createElement('div');
-            //             divRow.setAttribute('id', 'idDivRow');
-            //             divRow.setAttribute('class', 'row');
+                        divInfo.appendChild(pTipoEdificio);
+                        divInfo.appendChild(pNomeEdificio);
+                        divInfo.appendChild(pData);
+                        divInfo.appendChild(pLocalizacao);
+                        divInfo.appendChild(autoresTab);
 
+                        // Dividir a string dos autores por virgulas e let autor a autor
+                        pAutores.textContent.split(",").forEach(autor => {
 
+                            let singleAutor = document.createElement('p');
+                            singleAutor.setAttribute('id', 'idSingleAutors');
+                            singleAutor.textContent = autor;
 
-            //             //ler arrays de imagens existente no json e criar os elementos para cada imagens com a legendas e o autores da imagem
-            //             //TO-DO: 
-            //             //VAI TER DE LER AS IMAGENS DE OUTRO SÍTIO! 
+                            divInfo.appendChild(singleAutor);
 
-            //             for (var j = 0; j < jsons.Imagens.length; j++) {
-            //                 var imgEdificio = jsons.Imagens[j];
+                        });
 
+                        divInfo.appendChild(hr);
+                        divInfo.appendChild(pDescricao);
 
-            //                 var divColMd = document.createElement('div');
-            //                 divColMd.setAttribute('id', 'idDivColMd');
-            //                 divColMd.setAttribute('class', 'col-md-4');
-            //                 divColMd.setAttribute('class', 'content');
-            //                 var divThumb = document.createElement('div');
-            //                 divThumb.setAttribute('class', 'thumbnail');
-            //                 divThumb.setAttribute('id', 'idDivThumb');
-            //                 var divCaption = document.createElement('div')
-            //                 divCaption.setAttribute('id', 'idDivCaption');
-            //                 divCaption.setAttribute('class', 'caption');
-            //                 divCaption.setAttribute('class', 'rounded-bottom');
+                        let divRow = document.createElement('div');
+                        divRow.setAttribute('id', 'idDivRow');
+                        divRow.setAttribute('class', 'row');
 
-            //                 var img = document.createElement('img');
-            //                 var imgLegenda = document.createElement('p');
-            //                 var imgAutor = document.createElement('p');
+                        // To-do: Ir buscar as imagens e listar as imagens
+                        // $.getJSON("http://188.251.50.68:3000/points/list", images => {
 
-            //                 //lida a path da imagem para a pasta das imagens
-            //                 img.src = imgEdificio.Path;
-            //                 img.setAttribute('id', 'idImagens');
-            //                 img.setAttribute('class', 'rounded');
+                        // });
 
-            //                 //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-            //                 img.setAttribute('data-Path', imgEdificio.Path);
-            //                 img.onclick = fullImg => {
-            //                     var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
-            //                     //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-            //                     ecraImagem(pathId);
-            //                 }
-
-            //                 //atribuição dos valores existentes no json
-            //                 imgLegenda.textContent = imgEdificio.Legenda;
-            //                 imgAutor.textContent = imgEdificio.AutorFonte;
-
-            //                 divCaption.appendChild(imgLegenda);
-            //                 divCaption.appendChild(imgAutor);
-
-            //                 divThumb.appendChild(img);
-            //                 divThumb.appendChild(divCaption);
+                        // for (var j = 0; j < jsons.Imagens.length; j++) {
+                        //     var imgEdificio = jsons.Imagens[j];
 
 
-            //                 divColMd.appendChild(divThumb);
+                        //     var divColMd = document.createElement('div');
+                        //     divColMd.setAttribute('id', 'idDivColMd');
+                        //     divColMd.setAttribute('class', 'col-md-4');
+                        //     divColMd.setAttribute('class', 'content');
+                        //     var divThumb = document.createElement('div');
+                        //     divThumb.setAttribute('class', 'thumbnail');
+                        //     divThumb.setAttribute('id', 'idDivThumb');
+                        //     var divCaption = document.createElement('div')
+                        //     divCaption.setAttribute('id', 'idDivCaption');
+                        //     divCaption.setAttribute('class', 'caption');
+                        //     divCaption.setAttribute('class', 'rounded-bottom');
 
-            //                 divRow.appendChild(divColMd);
+                        //     var img = document.createElement('img');
+                        //     var imgLegenda = document.createElement('p');
+                        //     var imgAutor = document.createElement('p');
 
-            //                 divInfo.appendChild(divRow);
+                        //     //lida a path da imagem para a pasta das imagens
+                        //     img.src = imgEdificio.Path;
+                        //     img.setAttribute('id', 'idImagens');
+                        //     img.setAttribute('class', 'rounded');
 
-            //             }
+                        //     //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                        //     img.setAttribute('data-Path', imgEdificio.Path);
+                        //     img.onclick = fullImg => {
+                        //         var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
+                        //         //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                        //         ecraImagem(pathId);
+                        //     }
 
-            //         })[0];
-            //         divPopup.appendChild(link);
-            //         divPopup.appendChild(br);
-            //         divPopup.appendChild(btWaypoint);
+                        //     //atribuição dos valores existentes no json
+                        //     imgLegenda.textContent = imgEdificio.Legenda;
+                        //     imgAutor.textContent = imgEdificio.AutorFonte;
 
-            //         polygon.bindPopup(divPopup);
-            //     }
+                        //     divCaption.appendChild(imgLegenda);
+                        //     divCaption.appendChild(imgAutor);
 
-            // });
+                        //     divThumb.appendChild(img);
+                        //     divThumb.appendChild(divCaption);
+
+
+                        //     divColMd.appendChild(divThumb);
+
+                        //     divRow.appendChild(divColMd);
+
+                        //     divInfo.appendChild(divRow);
+
+                        // }
+
+                    })[0];
+
+                    divPopup.appendChild(link);
+                    divPopup.appendChild(br);
+                    divPopup.appendChild(btWaypoint);
+
+                    polygon.bindPopup(divPopup);
+                });
+            });
 
             //funcap para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
@@ -366,7 +359,7 @@ var app = {
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
             }
-           
+
             /****************************************************************/
 
             var idP = document.createElement('p');
