@@ -240,7 +240,7 @@ Adiciona uma imagem
 Lista as imagens
 * metodo: **Get** 
 * O body deve conter:
-  * data
+  * data (nome da imagem)
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
@@ -250,5 +250,7 @@ Lista as imagens
  ####  /deleteImage
 Apaga os dados da imagem
 * metodo: **Delete**
-
+* O body deve conter:
+  * id 
+  
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
