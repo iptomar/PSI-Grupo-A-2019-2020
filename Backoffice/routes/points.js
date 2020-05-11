@@ -228,7 +228,7 @@ router.get("/list", async function(req, res, next){
   await knex('Interesse')
   .select()
   .then(rows => {
-      let errormesage = { sucess : true , mesage: rows };
+    let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
     })
   .catch(async function(err) {

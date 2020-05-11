@@ -83,13 +83,13 @@ var app = {
 
 
             //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON("http://188.251.50.68:81", function (json) {
+            $.getJSON("http://188.251.50.68:3000/points/list", function (json) {
                 jsonData = json;
                 //let cada posição do ficheiro json e inserir numa variavel
-                for (var i = 0; i < jsonData.length; i++) {
+                for (var i = 1; i < jsonData.length; i++) {
                     let jsons = jsonData[i];
                     //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
-                    var polygon = L.polygon([jsons.Coordernadas], {
+                    var polygon = L.polygon([jsons.coordenadas], {
                         color: 'red',
                         weight: '0.5',
                         fillOpacity: '0.2',
@@ -155,8 +155,8 @@ var app = {
                     }
 
 
-                    popUpTipo.textContent = jsons.TipoEdificio;
-                    popUpNome.textContent = jsons.NomeEdificio;
+                    popUpTipo.textContent = jsons.tipoEdif;
+                    popUpNome.textContent = jsons.titulo;
                     divPopup.appendChild(popUpTipo);
                     divPopup.appendChild(popUpNome);
 
@@ -210,11 +210,11 @@ var app = {
 
 
                         //atribuição dos valores existentes no json
-                        pNomeEdificio.textContent = jsons.NomeEdificio;
+                        pNomeEdificio.textContent = jsons.titulo;
                         pLocalizacao.textContent = jsons.Localizacao;
                         pAutores.textContent = jsons.Autores;
-                        pDescricao.textContent = jsons.Descricao;
-                        spanLinha.textContent = jsons.TipoEdificio;
+                        pDescricao.textContent = jsons.descricao;
+                        spanLinha.textContent = jsons.tipoEdif;
                         pTipoEdificio.appendChild(spanLinha);
                         pData.textContent = jsons.Data;
 
@@ -347,18 +347,7 @@ var app = {
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
             }
-            btBack.onclick = mostraMap => {
-                divInfo.innerHTML = "";
-                e.preventDefault();
-                window.scrollTo(0, 0);
-                btPos.classList.remove('hidden');
-                icon.classList.remove('hidden');
-                mapa.classList.remove('hidden');
-                divInfo.classList.add('hidden');
-                divAcerca.classList.add('hidden');
-                body.classList.add('overflow');
-                mymap.closePopup();
-            }
+           
             /****************************************************************/
 
             var idP = document.createElement('p');

@@ -82,14 +82,16 @@ var app = {
             var br = document.createElement('br');
 
 
-            //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON("http://188.251.50.68:81", function (json) {
+            //metodo de jQuery para ir buscar à API do BackOffice
+            $.getJSON("http://188.251.50.68:3000/points/list", function (json) {
+
                 jsonData = json;
                 //let cada posição do ficheiro json e inserir numa variavel
-                for (var i = 0; i < jsonData.length; i++) {
+                //tem de ignorar agora o inicio ""sucess":true,"mesage":"
+                for (var i = 1; i < jsonData.length; i++) {
                     let jsons = jsonData[i];
                     //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
-                    var polygon = L.polygon([jsons.Coordernadas], {
+                    var polygon = L.polygon([jsons.coordenadas], {
                         color: 'red',
                         weight: '0.5',
                         fillOpacity: '0.2',
@@ -155,8 +157,8 @@ var app = {
                     }
 
 
-                    popUpTipo.textContent = jsons.TipoEdificio;
-                    popUpNome.textContent = jsons.NomeEdificio;
+                    popUpTipo.textContent = jsons.tipoEdif;
+                    popUpNome.textContent = jsons.titulo;
                     divPopup.appendChild(popUpTipo);
                     divPopup.appendChild(popUpNome);
 
@@ -169,6 +171,13 @@ var app = {
                         popupAnchor: [-7, -45]
 
                     });
+
+                    //Não existe ICON coordenadas agora. 
+                    //To do: 
+                        //- Pegar as primeiras 2 coordenadas do 
+                        //ANTES : "IconCoordenadas":[39.60092678,-8.41364175],
+                        //AGORA apanhar isto: coordenadas":"39.60738269, -8.41146648 , 
+                    
                     L.marker(jsons.IconCoordenadas, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
 
                     //atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
@@ -210,11 +219,14 @@ var app = {
 
 
                         //atribuição dos valores existentes no json
-                        pNomeEdificio.textContent = jsons.NomeEdificio;
+                        //Done
+                        pNomeEdificio.textContent = jsons.titulo;
+
+                        
                         pLocalizacao.textContent = jsons.Localizacao;
                         pAutores.textContent = jsons.Autores;
-                        pDescricao.textContent = jsons.Descricao;
-                        spanLinha.textContent = jsons.TipoEdificio;
+                        pDescricao.textContent = jsons.descricao;
+                        spanLinha.textContent = jsons.tipoEdif;
                         pTipoEdificio.appendChild(spanLinha);
                         pData.textContent = jsons.Data;
 
@@ -247,7 +259,12 @@ var app = {
                         divRow.setAttribute('id', 'idDivRow');
                         divRow.setAttribute('class', 'row');
 
+
+
                         //ler arrays de imagens existente no json e criar os elementos para cada imagens com a legendas e o autores da imagem
+                        //TO-DO: 
+                        //VAI TER DE LER AS IMAGENS DE OUTRO SÍTIO! 
+
                         for (var j = 0; j < jsons.Imagens.length; j++) {
                             var imgEdificio = jsons.Imagens[j];
 
@@ -310,7 +327,7 @@ var app = {
 
             });
 
-            //funcap +ara remover painel de direções gerado automaticamente para o trajeto
+            //funcap para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
                 if (control != null) {
                     mymap.removeControl(control);
@@ -347,18 +364,7 @@ var app = {
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
             }
-            btBack.onclick = mostraMap => {
-                divInfo.innerHTML = "";
-                e.preventDefault();
-                window.scrollTo(0, 0);
-                btPos.classList.remove('hidden');
-                icon.classList.remove('hidden');
-                mapa.classList.remove('hidden');
-                divInfo.classList.add('hidden');
-                divAcerca.classList.add('hidden');
-                body.classList.add('overflow');
-                mymap.closePopup();
-            }
+           
             /****************************************************************/
 
             var idP = document.createElement('p');
