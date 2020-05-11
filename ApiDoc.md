@@ -244,7 +244,7 @@ Lista as imagens
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"asdfasdfasdf\"\n}"```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \Image sucessfully inserted\"\n}"```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /deleteImage
@@ -252,5 +252,9 @@ Apaga os dados da imagem
 * metodo: **Delete**
 * O body deve conter:
   * id 
+  * Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
