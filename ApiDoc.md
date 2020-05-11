@@ -142,7 +142,7 @@ Apaga os dados do roteiro
 Lista os pontos de interesse dado id do roteiro
 * metodo: **POST**
 * O body deve conter:
-  * data
+  * data (id do Roteiro)
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
@@ -153,7 +153,7 @@ Lista os pontos de interesse dado id do roteiro
 Lista os pontos de interesse dado o seu id
 * metodo: **POST**
 * O body deve conter:
-  * data
+  * data (id do ponto)
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
@@ -179,7 +179,7 @@ Adiciona um ponto de interesse
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
-Apaga os dados do ponto de interesse
+Apaga os dados do ponto de interesse. Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
 * O body deve conter: 
   * id
@@ -191,19 +191,25 @@ Apaga os dados do ponto de interesse
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 
 ####  /update
-Atualiza os dados do ponto de interesse
+Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o utilizador que criou o ponto. Não poderá ser permitido o update ao ID do ponto
 * metodo: **POST**
 * O body deve conter:
   * id 
   * data
     * titulo
+    * descricao
+    * coordenadas
+    * data
+    * tipoEdif
+    * user id
+    * prop id
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 #### /searchUser
 Procura o utilizador que criou esse ponto de interesse
 * metodo: **Post**
 * O body deve conter: 
-  * data
+  * data (id do Roteiro)
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ### Imagens
@@ -211,7 +217,7 @@ Procura o utilizador que criou esse ponto de interesse
 Lista as imagens
 * metodo: **POST**
 * O body deve conter:
-  * data
+  * data 
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
