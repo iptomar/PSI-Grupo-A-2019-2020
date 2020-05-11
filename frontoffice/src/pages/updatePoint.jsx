@@ -59,7 +59,7 @@ class Profile extends Component {
             redirect: 'follow'
         };
 
-        let response = await fetch("http://localhost:3000/points/update",
+        let response = await fetch("http://188.251.50.68:3000/points/update",
             requestOptions);
 
         let data = await response.json();

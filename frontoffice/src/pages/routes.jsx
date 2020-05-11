@@ -39,7 +39,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      "http://localhost:3000/routes/list",
+      "http://188.251.50.68:3000/routes/list",
       requestOptions
     ).catch((error) => console.log("error", error));
     let json = await response.json();
@@ -49,17 +49,22 @@ class Routes extends Component {
 
   async getPoints(id) {
     var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ "data": id });
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ data: id });
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
-      body: raw, mode: 'cors',
-      redirect: 'follow'
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
     };
 
-    let response = await fetch("http://localhost:3000/points/search", requestOptions);
+    let response = await fetch(
+      "http://188.251.50.68:3000/points/search",
+      requestOptions
+    );
     let data = await response.json();
 
     await this.getPointsInfo(data.mesage);
@@ -69,17 +74,22 @@ class Routes extends Component {
     let newPontos = [];
     await pontos.forEach(async (element) => {
       var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-      var raw = JSON.stringify({ "data": element.id_inter });
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Content-type", "application/json");
+      var raw = JSON.stringify({ data: element.id_inter });
 
       var requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: myHeaders,
-        body: raw, mode: 'cors',
-        redirect: 'follow'
+        body: raw,
+        mode: "cors",
+        redirect: "follow",
       };
 
-      let response = await fetch("http://localhost:3000/points/searchpoint", requestOptions);
+      let response = await fetch(
+        "http://188.251.50.68:3000/points/searchpoint",
+        requestOptions
+      );
       let data = await response.json();
       newPontos.push(data.mesage[0]);
       if (pontos.length == newPontos.length) {
@@ -98,34 +108,36 @@ class Routes extends Component {
 
   async deleteRoute(id) {
     var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json"); myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ "id": id });
-
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ id: id });
 
     var requestOptions = {
-      method: 'DELETE',
+      method: "DELETE",
       headers: myHeaders,
-      body: raw, mode: 'cors',
-      redirect: 'follow'
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
     };
 
-    let response = await fetch("http://localhost:3000/routes/delete", requestOptions);
-    
+    let response = await fetch(
+      "http://188.251.50.68:3000/routes/delete",
+      requestOptions
+    );
+
     let data = await response.json();
 
     await this.getRoutes();
 
     await this.getPoints(this.state.routeId);
-
   }
 
   render() {
-
     if (this.state.redirect !== "/Routes") {
       return <Redirect to={this.state.redirect} />;
     }
 
-    let ps = []
+    let ps = [];
     let UI = [];
 
     //vai buscar os roteiros
@@ -135,24 +147,31 @@ class Routes extends Component {
           <div
             onClick={() => {
               this.setState({ routeId: element.id });
-              this.getPoints(element.id)
+              this.getPoints(element.id);
             }}
           >
             <h4>{element.nome}</h4>
             <h4>{element.descricao}</h4>
           </div>
         );
-        UI.push(
-          <button onClick={() => {
-            sessionStorage.setItem("nomeRoteiro", element.nome);
-            sessionStorage.setItem("descricaoRoteiro", element.descricao);
-            sessionStorage.setItem("routeID", element.id);
-            this.setState({ redirect: "/UpdateRoute" });
-          }}>📝</button>
-        );
-        UI.push(
-          <button onClick={() => this.deleteRoute(element.id)}>❌</button>
-        );
+        if (element.user_id == this.state.userdata.id) {
+          console.log(this.userdata);
+          UI.push(
+            <button
+              onClick={() => {
+                sessionStorage.setItem("nomeRoteiro", element.nome);
+                sessionStorage.setItem("descricaoRoteiro", element.descricao);
+                sessionStorage.setItem("routeID", element.id);
+                this.setState({ redirect: "/UpdateRoute" });
+              }}
+            >
+              📝
+            </button>
+          );
+          UI.push(
+            <button onClick={() => this.deleteRoute(element.id)}>❌</button>
+          );
+        }
       });
     }
 
@@ -169,7 +188,6 @@ class Routes extends Component {
       });
     }
 
-
     return (
       <div id="body">
         <NavBar redirecter={this.redirecter}></NavBar>
@@ -178,16 +196,10 @@ class Routes extends Component {
           <div id="PageCenter">
             <div id="PageCentralDiv">
               <div id="routesdiv">
-                <div className="gemeny">
-                  {UI}
-                </div>
-                <div className="gemeny">
-                  {ps}
-                </div>
+                <div className="gemeny">{UI}</div>
+                <div className="gemeny">{ps}</div>
                 <Link to="/AddRoute">
-                  <button className="btn">
-                    Adicionar Roteiro
-                    </button>
+                  <button className="btn">Adicionar Roteiro</button>
                 </Link>
               </div>
             </div>

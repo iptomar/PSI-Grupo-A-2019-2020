@@ -65,7 +65,7 @@ class AddImages extends Component {
       };
 
       let response = await fetch(
-        "http://localhost:3000/images/insert",
+        "http://188.251.50.68:3000/images/insert",
         requestOptions
       )
       //Resposta por parte do server
@@ -100,7 +100,7 @@ class AddImages extends Component {
       };
 
       let response = await fetch(
-        "http://localhost:3000/images/getimage",
+        "http://188.251.50.68:3000/images/getimage",
         requestOptions
       );
       let data = await response.json();

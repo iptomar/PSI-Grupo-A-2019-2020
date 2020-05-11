@@ -65,7 +65,7 @@ class Routes extends Component {
 
         //Colocar os dados na base de dados
         let response = await fetch(
-            "http://localhost:3000/routes/insert",
+            "http://188.251.50.68:3000/routes/insert",
             requestOptions
         )
 

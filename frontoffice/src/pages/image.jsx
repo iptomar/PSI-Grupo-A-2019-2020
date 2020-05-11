@@ -37,7 +37,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "http://localhost:3000/images/search",
+      "http://188.251.50.68:3000/images/search",
       requestOptions
     );
     let data = await response.json();
@@ -61,7 +61,7 @@ class Images extends Component {
       };
 
       let response = await fetch(
-        "http://localhost:3000/images/getimage",
+        "http://188.251.50.68:3000/images/getimage",
         requestOptions
       );
       let data = await response.json();
@@ -88,7 +88,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "http://localhost:3000/images/delete",
+      "http://188.251.50.68:3000/images/delete",
       requestOptions
     );
     let data = await response.json();
