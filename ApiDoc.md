@@ -25,7 +25,7 @@
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#deleteimage)
 ### Autenticação
 ####  /register
-Regista o utilizador
+Regista o utilizador.Obrigatório preencher todos os campos.
  * metodo: **POST**
 * O body deve conter: 
   * name
@@ -39,9 +39,15 @@ Regista o utilizador
   * ```"code": 200```
   * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
 * Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
-  * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
+  * ```"code": 401```
   * ``` errormesage = { sucess : false , mesage: "User already exists" }```
+  
+  * ```"code": 400```
+  * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
+  
+  * ```"code": 401```
+  * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
+  
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
@@ -56,7 +62,12 @@ Autetica o utilizador
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 1,\n        \"name\": \"admin\",\n        \"surname\": \"admin\",\n        \"password\": \"admin\",\n        \"age\": 20,\n        \"email\": \"admin@admin.com\",\n        \"token\": \"VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57\"\n    }\n}"```	
 * Mensagens de erro:
+  * ```"code": 401```
   * ``` errormesage = { sucess : false , mesage: "User or password incorret" }```
+  
+  * ```"code": 400```
+  * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
+  
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
  [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints) 
@@ -68,7 +79,9 @@ Lista os utilizadores
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Carolina\",\n            \"surname\": \"Silva\",\n            \"email\": \"b@email.com\",\n            \"age\": 34\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hugo\",\n            \"surname\": \"Oliveira\",\n            \"email\": \"c@email.com\",\n            \"age\": 52\n        }\n    ]\n}"```
 * Mensagens de erro:
+  * ```"code": 401```
   * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
+  
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
@@ -90,7 +103,7 @@ Atualiza os dados do utilizador
 
  [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
- Apaga os dados do utilizador
+ Apaga os dados do utilizador. Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
 * metodo: **Delete**
 * O body deve conter:
   * user 
@@ -134,7 +147,8 @@ Adiciona um roteiro
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
 ####  /update
-Atualiza os dados do roteiro
+Atualiza os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o criador do roteiro.
+Não poderá ser permitido o update ao ID do roteiro
 * metodo: **POST**
 * O body deve conter:
   * user 
@@ -152,7 +166,7 @@ Atualiza os dados do roteiro
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
  ####  /delete
-Apaga os dados do roteiro
+Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
 * O body deve conter:
   * user 
