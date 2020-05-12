@@ -229,9 +229,9 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "cordova-plugin-file": "6.0.1",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-geolocation": "4.0.1",
-    "cordova-plugin-file": "6.0.1",
     "cordova-plugin-network-information": "2.0.2",
     "cordova-plugin-inappbrowser": "3.1.0",
     "es.keensoft.fullscreenimage": "1.0.1"

@@ -8,7 +8,6 @@ var app = {
     },
 
     // deviceready Event Handler
-    //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
 
@@ -39,7 +38,7 @@ var app = {
                     minZoom: 15,
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
-                alert('Entrou no modo Offline, vai encontrar algumas funcionabilidades limitadas.',  "Alert Title");
+                alert('Entrou no modo Offline, vai encontrar funcionabilidades limitadas.', "Alert Title");
 
             }
 
@@ -83,39 +82,55 @@ var app = {
             var br = document.createElement('br');
 
 
-            //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON("http://10.0.2.2:3000/teste", function (json) {
-                jsonData = json;
-                //let cada posição do ficheiro json e inserir numa variavel
-                for (var i = 0; i < jsonData.length; i++) {
-                    let jsons = jsonData[i];
-                    //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
-                    var polygon = L.polygon([jsons.Coordernadas], {
+            //metodo de jQuery para ir buscar à API do BackOffice
+
+            $.getJSON("http://188.251.50.68:3000/points/list", result => {
+                // Iterar todos os pontos de interesse
+                result.rows.forEach(row => {
+                    // Converter string de coordenadas para um array de coordenadas
+                    let coordenadas = JSON.parse(`[${row.coordenadas}]`);
+
+                    // Obter um array com as duas primeiras coordenadas
+                    let coordCentral = [coordenadas[0], coordenadas[1]];
+
+                    // Obter um array sem as duas primeiras coordenadas
+                    let arryCoords = coordenadas.slice(2);
+
+                    // Agrupar as coordenadas em pares
+                    let poligCoords = [];
+                    for (let i = 0; i < arryCoords.length; i += 2) {
+                        poligCoords.push([arryCoords[i], arryCoords[i + 1]]);
+                    }
+
+                    // Desenhar o poligono do edificio
+                    let polygon = L.polygon([poligCoords], {
                         color: 'red',
                         weight: '0.5',
                         fillOpacity: '0.2',
                     }).addTo(mymap);
 
-                    //criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
-                    var divPopup = document.createElement('div');
+                    // Criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
+                    let divPopup = document.createElement('div');
                     divPopup.setAttribute('id', 'iDdivPopup');
-                    var popUpTipo = document.createElement('p');
+
+                    let popUpTipo = document.createElement('p');
                     popUpTipo.setAttribute('id', 'idPopUpTipo');
                     popUpTipo.classList.add('item1');
-                    var popUpNome = document.createElement('p');
+
+                    let popUpNome = document.createElement('p');
                     popUpNome.setAttribute('id', 'idPopUpNome');
                     popUpNome.classList.add('item2');
 
-                    var btWaypoint = document.createElement('button');
+                    let btWaypoint = document.createElement('button');
                     btWaypoint.setAttribute('id', 'idBtWaypoint');
                     btWaypoint.classList.add('btn', 'btn-warning', 'item4');
                     btWaypoint.textContent = "Traçar caminho  ";
-                    var iShoes = document.createElement('i');
+
+                    let iShoes = document.createElement('i');
                     iShoes.classList.add('fas', 'fa-shoe-prints');
                     btWaypoint.appendChild(iShoes);
 
-
-                    var greenIcon = new L.Icon({
+                    let greenIcon = new L.Icon({
                         iconUrl: './img/green.png',
                         shadowUrl: '../img/shadow.png',
                         iconSize: [25, 41],
@@ -124,18 +139,18 @@ var app = {
                         shadowSize: [41, 41]
                     });
 
-                    //onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
-                    //em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
+                    // Onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
+                    // em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
                     btWaypoint.onclick = waypoint => {
 
                         removeRoutingControl();
 
-                        console.log(current_position._latlng.lat);
+                        // console.log(current_position._latlng.lat);
 
                         control = L.Routing.control({
                             waypoints: [
                                 L.latLng(current_position._latlng),
-                                L.latLng(jsons.IconCoordenadas)
+                                L.latLng(coordCentral)
                             ],
                             createMarker: function (i, wp, nWps) {
                                 if (i === nWps - 1) {
@@ -151,73 +166,70 @@ var app = {
                             draggableWaypoints: false,
 
                         }).addTo(mymap);
-
-
                     }
 
+                    popUpTipo.textContent = 'jsons.tipoEdif';
+                    popUpNome.textContent = 'jsons.titulo';
 
-                    popUpTipo.textContent = jsons.TipoEdificio;
-                    popUpNome.textContent = jsons.NomeEdificio;
                     divPopup.appendChild(popUpTipo);
                     divPopup.appendChild(popUpNome);
 
-
-                    //criação do icon dos edificios
-                    var myIcon = L.icon({
+                    // Criação do icon dos edificios
+                    let myIcon = L.icon({
                         iconUrl: 'icon.png',
                         iconSize: [30, 48],
                         iconAnchor: [15, 48],
                         popupAnchor: [-7, -45]
 
                     });
-                    L.marker(jsons.IconCoordenadas, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
 
-                    //atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
-                    var link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
-                        // class="speciallink badge badge-info" margin-left: 0.7em; margin-right: -10em;
+                    L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
 
+                    // Atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
+                    let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
                         body.classList.remove('overflow');
                         btPos.classList.add('hidden');
                         divInfo.classList.remove("hidden");
                         mapa.classList.add('hidden');
                         mymap.closePopup();
 
-                        //criação de elementos e adicionados ao html
-                        var hr = document.createElement('hr');
+                        // Criação de elementos e adicionados ao html
+                        let hr = document.createElement('hr');
                         hr.setAttribute('id', 'idHr');
 
-                        var spanLinha = document.createElement('span');
+                        let spanLinha = document.createElement('span');
                         spanLinha.setAttribute('id', 'idSpanLinha');
                         spanLinha.textContent = "";
 
-                        var autoresTab = document.createElement('div');
+                        let autoresTab = document.createElement('div');
                         autoresTab.setAttribute('id', 'idAutoresTab');
                         autoresTab.textContent = "Autores do projeto: ";
 
-
-                        var pNomeEdificio = document.createElement('h2');
+                        let pNomeEdificio = document.createElement('h2');
                         pNomeEdificio.setAttribute('id', 'idNomeEdificio');
-                        var pLocalizacao = document.createElement('p');
+                        let pLocalizacao = document.createElement('p');
                         pLocalizacao.setAttribute('id', 'idLocalizacao');
-                        var pAutores = document.createElement('p');
+                        let pAutores = document.createElement('p');
                         pAutores.setAttribute('id', 'idAutores');
-                        var pDescricao = document.createElement('p');
+                        let pDescricao = document.createElement('p');
                         pDescricao.setAttribute('id', 'idDescricao');
-                        var pTipoEdificio = document.createElement('h3');
+                        let pTipoEdificio = document.createElement('h3');
                         pTipoEdificio.setAttribute('id', 'idTipoEdificio');
-                        var pData = document.createElement('p');
+                        let pData = document.createElement('p');
                         pData.setAttribute('id', 'idData');
 
 
-
                         //atribuição dos valores existentes no json
-                        pNomeEdificio.textContent = jsons.NomeEdificio;
-                        pLocalizacao.textContent = jsons.Localizacao;
-                        pAutores.textContent = jsons.Autores;
-                        pDescricao.textContent = jsons.Descricao;
-                        spanLinha.textContent = jsons.TipoEdificio;
+                        //Done
+                        pNomeEdificio.textContent = row.titulo;
+
+
+                        pLocalizacao.textContent = coordCentral;
+                        pAutores.textContent = 'Vadims Zinatulins, João Almeida';
+                        pDescricao.textContent = row.descricao;
+                        spanLinha.textContent = row.tipoEdif;
                         pTipoEdificio.appendChild(spanLinha);
-                        pData.textContent = jsons.Data;
+                        pData.textContent = row.data;
 
                         divInfo.appendChild(pTipoEdificio);
                         divInfo.appendChild(pNomeEdificio);
@@ -225,93 +237,92 @@ var app = {
                         divInfo.appendChild(pLocalizacao);
                         divInfo.appendChild(autoresTab);
 
-                        //dividir a string dos autores por virgulas e let autor a autor
-                        var rString = pAutores.textContent;
-                        var rArray = rString.split(",");
+                        // Dividir a string dos autores por virgulas e let autor a autor
+                        pAutores.textContent.split(",").forEach(autor => {
 
-                        for (var k = 0; k < rArray.length; k++) {
-                            var sAutores = rArray[k];
-
-                            var singleAutor = document.createElement('p');
+                            let singleAutor = document.createElement('p');
                             singleAutor.setAttribute('id', 'idSingleAutors');
-                            singleAutor.textContent = sAutores;
+                            singleAutor.textContent = autor;
 
                             divInfo.appendChild(singleAutor);
 
-                        }
-
+                        });
 
                         divInfo.appendChild(hr);
                         divInfo.appendChild(pDescricao);
 
-                        var divRow = document.createElement('div');
+                        let divRow = document.createElement('div');
                         divRow.setAttribute('id', 'idDivRow');
                         divRow.setAttribute('class', 'row');
 
-                        //ler arrays de imagens existente no json e criar os elementos para cada imagens com a legendas e o autores da imagem
-                        for (var j = 0; j < jsons.Imagens.length; j++) {
-                            var imgEdificio = jsons.Imagens[j];
+                        // To-do: Ir buscar as imagens e listar as imagens
+                        // $.getJSON("http://188.251.50.68:3000/points/list", images => {
+
+                        // });
+
+                        // for (var j = 0; j < jsons.Imagens.length; j++) {
+                        //     var imgEdificio = jsons.Imagens[j];
 
 
-                            var divColMd = document.createElement('div');
-                            divColMd.setAttribute('id', 'idDivColMd');
-                            divColMd.setAttribute('class', 'col-md-4');
-                            divColMd.setAttribute('class', 'content');
-                            var divThumb = document.createElement('div');
-                            divThumb.setAttribute('class', 'thumbnail');
-                            divThumb.setAttribute('id', 'idDivThumb');
-                            var divCaption = document.createElement('div')
-                            divCaption.setAttribute('id', 'idDivCaption');
-                            divCaption.setAttribute('class', 'caption');
-                            divCaption.setAttribute('class', 'rounded-bottom');
+                        //     var divColMd = document.createElement('div');
+                        //     divColMd.setAttribute('id', 'idDivColMd');
+                        //     divColMd.setAttribute('class', 'col-md-4');
+                        //     divColMd.setAttribute('class', 'content');
+                        //     var divThumb = document.createElement('div');
+                        //     divThumb.setAttribute('class', 'thumbnail');
+                        //     divThumb.setAttribute('id', 'idDivThumb');
+                        //     var divCaption = document.createElement('div')
+                        //     divCaption.setAttribute('id', 'idDivCaption');
+                        //     divCaption.setAttribute('class', 'caption');
+                        //     divCaption.setAttribute('class', 'rounded-bottom');
 
-                            var img = document.createElement('img');
-                            var imgLegenda = document.createElement('p');
-                            var imgAutor = document.createElement('p');
+                        //     var img = document.createElement('img');
+                        //     var imgLegenda = document.createElement('p');
+                        //     var imgAutor = document.createElement('p');
 
-                            //lida a path da imagem para a pasta das imagens
-                            img.src = imgEdificio.Path;
-                            img.setAttribute('id', 'idImagens');
-                            img.setAttribute('class', 'rounded');
+                        //     //lida a path da imagem para a pasta das imagens
+                        //     img.src = imgEdificio.Path;
+                        //     img.setAttribute('id', 'idImagens');
+                        //     img.setAttribute('class', 'rounded');
 
-                            //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-                            img.setAttribute('data-Path', imgEdificio.Path);
-                            img.onclick = fullImg => {
-                                var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
-                                //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-                                ecraImagem(pathId);
-                            }
+                        //     //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                        //     img.setAttribute('data-Path', imgEdificio.Path);
+                        //     img.onclick = fullImg => {
+                        //         var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
+                        //         //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                        //         ecraImagem(pathId);
+                        //     }
 
-                            //atribuição dos valores existentes no json
-                            imgLegenda.textContent = imgEdificio.Legenda;
-                            imgAutor.textContent = imgEdificio.AutorFonte;
+                        //     //atribuição dos valores existentes no json
+                        //     imgLegenda.textContent = imgEdificio.Legenda;
+                        //     imgAutor.textContent = imgEdificio.AutorFonte;
 
-                            divCaption.appendChild(imgLegenda);
-                            divCaption.appendChild(imgAutor);
+                        //     divCaption.appendChild(imgLegenda);
+                        //     divCaption.appendChild(imgAutor);
 
-                            divThumb.appendChild(img);
-                            divThumb.appendChild(divCaption);
+                        //     divThumb.appendChild(img);
+                        //     divThumb.appendChild(divCaption);
 
 
-                            divColMd.appendChild(divThumb);
+                        //     divColMd.appendChild(divThumb);
 
-                            divRow.appendChild(divColMd);
+                        //     divRow.appendChild(divColMd);
 
-                            divInfo.appendChild(divRow);
+                        //     divInfo.appendChild(divRow);
 
-                        }
+                        // }
 
                     })[0];
+
                     divPopup.appendChild(link);
                     divPopup.appendChild(br);
                     divPopup.appendChild(btWaypoint);
 
                     polygon.bindPopup(divPopup);
-                }
-
+                });
             });
 
-            //funcap +ara remover painel de direções gerado automaticamente para o trajeto
+            //funcap para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
                 if (control != null) {
                     mymap.removeControl(control);
@@ -340,6 +351,7 @@ var app = {
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
+            var btBack = document.getElementById('idBackBt');
             btSobre.onclick = mostraSobre => {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
@@ -347,6 +359,7 @@ var app = {
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
             }
+
             /****************************************************************/
 
             var idP = document.createElement('p');
