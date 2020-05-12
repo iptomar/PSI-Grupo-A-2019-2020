@@ -302,7 +302,7 @@ Adiciona uma imagem
 Lista as imagens
 * metodo: **Get** 
 * O body deve conter:
-  * data (nome da imagem)
+  * data (path da imagem)
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
