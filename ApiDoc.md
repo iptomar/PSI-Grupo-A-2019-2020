@@ -275,7 +275,7 @@ Procura o utilizador que criou esse ponto de interesse
 Lista as imagens
 * metodo: **POST**
 * O body deve conter:
-  * data 
+  * data (id do ponto de interesse)
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
