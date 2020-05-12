@@ -89,7 +89,7 @@ router.post("/delete", async function(req, res, next){
   
   let errormesage
   
-  await knex("images")
+  /*await knex("images")
     .select("Path")
     .where({ id: ""+req.body.data.id })
     .then(rows => {
@@ -106,7 +106,7 @@ router.post("/delete", async function(req, res, next){
         res.send(errormesage);
         console.log(err);
       });*/
-    })
+    /*})
     .catch(async function(err) {
       var d = new Date();
       await file(
@@ -118,7 +118,7 @@ router.post("/delete", async function(req, res, next){
       res.send(errormesage);
       console.log(err);
     });
-
+*/
     await knex("images")
     .where({ id: req.body.data.id })
     .del()
