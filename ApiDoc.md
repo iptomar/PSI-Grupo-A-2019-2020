@@ -298,7 +298,7 @@ Adiciona uma imagem
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
-#### getImage
+#### /getImage
 Lista as imagens
 * metodo: **Get** 
 * O body deve conter:
