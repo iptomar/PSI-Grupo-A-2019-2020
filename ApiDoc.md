@@ -23,6 +23,10 @@
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#insert-2)
   * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#getimage)
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#deleteimage)
+* [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#propriet%C3%A1rios)
+  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#list-1)
+  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#insert-3)
+  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#update-3)
 ### Autenticação
 ####  /register
 Regista o utilizador.Obrigatório preencher todos os campos.
@@ -337,7 +341,7 @@ Devolve a lista de todos os proprietários
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
-### /insert
+#### /insert
 Adiciona um proprietário
 * metodo: **POST**
 * O body deve conter:
