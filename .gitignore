@@ -71,5 +71,5 @@ $RECYCLE.BIN/
 .apdisk
 
 # Visual Studio Cache/options and Visual Studio Code
-.vs
-.vscode
+.vs/
+.vscode/
