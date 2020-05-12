@@ -5,7 +5,62 @@ var knex = require("../utils/databaseConection");
 const {file } = require('../helpers')
 
 //Usage:
-//retorna todas imagens dado o ponto de interesse
+//retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de interesse
+//id =  <Interesse_id> (isto no url)
+router.get("/searchgetimage", async function(req, res, next){
+
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+  var datas=[];
+  await knex('images')
+  .select("*")
+  .where({Interesse_id:req.query.id})
+  .then(async rows => {
+      for(var i = 0;i<rows.length;i++){
+      try{
+        console.log(i);
+        datas.push({
+          "id": rows[i].id,
+          "img": await fs.readFileSync("./files/images/"+rows[i].Path+".txt", 'utf8'),
+          "Legenda": rows[i].Legenda,
+          "AutorFonte": rows[i].AutorFonte,
+          "Interesse_id": rows[i].Interesse_id,
+          "usersid": rows[i].usersid
+        });
+      }
+      catch (err) {
+        await file(
+          "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+          "a",
+          err.stack
+        );
+      }
+      finally{
+        continue;
+      }
+    }
+    console.log(datas);
+      let errormesage = { sucess : true , mesage: datas };
+      res.send(errormesage);
+    })
+  .catch(async function(err) {
+    var d = new Date();
+    await file(
+      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+  /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+  res.send(errormesage);*/
+});
+
+//Usage:
+//retorna todos os dados das imagens dado o ponto de interesse
 //body.data = <Interesse_id>
 router.post("/search", async function(req, res, next){
 
@@ -34,6 +89,8 @@ router.post("/search", async function(req, res, next){
   /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
   res.send(errormesage);*/
 });
+
+
 
 //Usage:
 //retorna todas imagens dado o ponto de interesse
@@ -98,7 +155,7 @@ router.delete("/delete", async function(req, res, next){
         "a",
         err.stack
       );
-       errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" };
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
       console.log(err);
     });

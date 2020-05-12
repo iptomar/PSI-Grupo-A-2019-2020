@@ -5,7 +5,7 @@ var knex = require("../utils/databaseConection");
 const {file } = require('../helpers')
 
 //Usage:
-//Return all owners
+//Return all routes
 router.get("/list", async function(req, res, next){
 
   //Activar chaves estrangeiras
