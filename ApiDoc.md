@@ -325,3 +325,49 @@ Apaga os dados da imagem
    * ```errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" }```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+### Proprietários
+#### /list
+Devolve a lista de todos os proprietários
+* metodo: **Get** 
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+ 
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+### /insert
+Adiciona um proprietário
+* metodo: **POST**
+* O body deve conter:
+  * data
+    * name
+    * work
+    * user id	
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
+####  /update
+Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a solicitar o update é um administrador. Não poderá ser permitido o update ao ID do ponto
+* metodo: **POST**
+* O body deve conter:
+  * id 
+  * data
+    * name
+    * work
+    * user id
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Proprietary sucessfully updated\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "Proprietary doesn't exist" }```
+  * ``` errormesage = { sucess : false , mesage: "token not used" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
