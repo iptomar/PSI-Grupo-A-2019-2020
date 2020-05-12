@@ -40,14 +40,11 @@ Regista o utilizador.Obrigatório preencher todos os campos.
   * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
 * Mensagens de erro:
   * ```"code": 401```
-  * ``` errormesage = { sucess : false , mesage: "User already exists" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "User already exists" }```
   * ```"code": 400```
-  * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
   * ```"code": 401```
-  * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
@@ -63,11 +60,9 @@ Autetica o utilizador
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 1,\n        \"name\": \"admin\",\n        \"surname\": \"admin\",\n        \"password\": \"admin\",\n        \"age\": 20,\n        \"email\": \"admin@admin.com\",\n        \"token\": \"VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57\"\n    }\n}"```	
 * Mensagens de erro:
   * ```"code": 401```
-  * ``` errormesage = { sucess : false , mesage: "User or password incorret" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "User or password incorret" }```
   * ```"code": 400```
-  * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
  [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints) 
@@ -80,8 +75,7 @@ Lista os utilizadores
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Carolina\",\n            \"surname\": \"Silva\",\n            \"email\": \"b@email.com\",\n            \"age\": 34\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hugo\",\n            \"surname\": \"Oliveira\",\n            \"email\": \"c@email.com\",\n            \"age\": 52\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ```"code": 401```
-  * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
-  
+    * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/ApiDoc.md#endpoints)
