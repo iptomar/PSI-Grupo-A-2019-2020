@@ -69,3 +69,7 @@ $RECYCLE.BIN/
 .AppleDB
 .AppleDesktop
 .apdisk
+
+# Visual Studio Cache/options and Visual Studio Code
+.vs
+.vscode
