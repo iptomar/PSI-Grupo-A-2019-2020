@@ -90,6 +90,7 @@ router.post("/update", async function(req, res, next){
       }
   })
   .catch(async function(err){
+    var d = new Date();
     aux=!aux;
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
@@ -140,6 +141,7 @@ router.delete("/delete", async function(req, res, next){
       }
   })
   .catch(async function(err){
+    var d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",

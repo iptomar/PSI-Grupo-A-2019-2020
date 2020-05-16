@@ -29,6 +29,7 @@ router.get("/searchgetimage", async function(req, res, next){
         });
       }
       catch (err) {
+        var d = new Date();
         await file(
           "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
           "a",
