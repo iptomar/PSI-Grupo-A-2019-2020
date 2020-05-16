@@ -169,5 +169,35 @@ router.delete("/delete", async function(req, res, next){
 });
 
 
+//Usage:
+//body.data = {"iduser" = "<id do utilizador>" }
+router.post("/userSearch", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  await knex('Roteiro')
+  .select("*")
+  .where({user_id:req.body.data.iduser})
+  .then(rows => {
+      let errormesage = { sucess : true , mesage: rows };
+      res.send(errormesage);
+    })
+  .catch(async function(err) {
+    d = new Date();
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+});
+
+
 
 module.exports = router;
