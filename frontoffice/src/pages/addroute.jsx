@@ -65,7 +65,7 @@ class Routes extends Component {
 
         //Colocar os dados na base de dados
         let response = await fetch(
-            "http://188.251.50.68:3000/routes/insert",
+            this.props.ApiPath+"routes/insert",
             requestOptions
         )
 

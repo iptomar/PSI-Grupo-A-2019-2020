@@ -65,7 +65,7 @@ class AddImages extends Component {
       };
 
       let response = await fetch(
-        "http://188.251.50.68:3000/images/insert",
+        this.props.ApiPath+"images/insert",
         requestOptions
       )
       //Resposta por parte do server

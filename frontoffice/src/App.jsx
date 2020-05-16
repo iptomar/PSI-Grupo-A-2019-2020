@@ -18,25 +18,27 @@ import AddImages from './pages/addimages';
 import AddRoute from './pages/addroute';
 import UpdateRoute from './pages/updateRoute';
 
+const ApiPath = "http://localhost:3000/"
+
 class App extends React.Component {
   render() {
     return (
       <Router >
         <Switch>
-          <Route exact path="/" component={HomePage}></Route>
-          <Route exact path="/Login" component={Login}></Route>
-          <Route exact path="/Register" component={Register}></Route>
-          <Route exact path="/Users" component={Users}></Route>
-          <Route exact path="/CreatePoint" component={InsertPoint}></Route>
-          <Route exact path="/UpdatePoint" component={UpdatePoint}></Route>
-          <Route exact path="/Profile" component={Profile}></Route>
-          <Route exact path="/Routes" component={Routes}></Route>
-          <Route exact path="/UpdateRoute" component={UpdateRoute}></Route>
-          <Route exact path="/AddRoute" component={AddRoute}></Route>
-          <Route exact path="/MyPoints" component={Points}></Route>
-          <Route exact path="/Create" component={Create}></Route>
-          <Route exact path="/Image" component={Images}></Route>
-          <Route exact path="/AddImages" component={AddImages}></Route>
+          <Route exact path="/" render={(props) => <HomePage {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Login" render={(props) => <Login {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Register" render={(props) => <Register {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Users" render={(props) => <Users {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/CreatePoint" render={(props) => <InsertPoint {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/UpdatePoint" render={(props) => <UpdatePoint {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Profile" render={(props) => <Profile {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Routes" render={(props) => <Routes {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/UpdateRoute" render={(props) => <UpdateRoute {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/AddRoute" render={(props) => <AddRoute {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/MyPoints" render={(props) => <Points {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Create" render={(props) => <Create {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Image" render={(props) => <Images {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/AddImages" render={(props) => <AddImages {...props} ApiPath={ApiPath} />}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

@@ -48,7 +48,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/points/searchuser",
+      this.props.ApiPath+"points/searchuser",
       requestOptions
     );
     let data = await response.json();

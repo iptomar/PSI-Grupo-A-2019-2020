@@ -37,7 +37,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/images/search",
+      this.props.ApiPath+"images/search",
       requestOptions
     );
     let data = await response.json();

@@ -40,7 +40,7 @@ class Login extends React.Component {
       redirect: 'follow'
     };
 
-    let response = await fetch("http://188.251.50.68:3000/users/login", requestOptions);
+    let response = await fetch(this.props.ApiPath+"users/login", requestOptions);
     let data = await response.json();
     console.log(data);
     data = data.mesage;

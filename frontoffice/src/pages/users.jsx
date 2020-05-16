@@ -60,13 +60,13 @@ class Users extends Component {
           redirect: 'follow'
         };
     
-        let response = await fetch("http://188.251.50.68:3000/users/delete", requestOptions);
+        let response = await fetch(this.props.ApiPath+"users/delete", requestOptions);
         await this.teste();
     }
     
     async teste(){
         let response = await fetch(
-          "http://188.251.50.68:3000/users/getUsers/" + sessionStorage.getItem("token")
+            this.props.ApiPath+"users/getUsers/" + sessionStorage.getItem("token")
         ); 
     
         let dat = await response.json();

@@ -39,7 +39,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/routes/list",
+      this.props.ApiPath+"routes/list",
       requestOptions
     ).catch((error) => console.log("error", error));
     let json = await response.json();

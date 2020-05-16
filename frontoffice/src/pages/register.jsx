@@ -83,7 +83,7 @@ class Register extends Component {
         };
 
         let response = await fetch(
-          "http://188.251.50.68:3000/users/register",
+            this.props.ApiPath+"users/register",
           requestOptions
         );
         let data = await response.json();
