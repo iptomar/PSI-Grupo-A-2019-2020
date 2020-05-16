@@ -17,8 +17,8 @@ var imagesRouter = require('./routes/images');
 var app = express();
 
 // body parser
-var bodyParser = require('body-parser');
-app.use(bodyParser.json({"limit":'5mb'}));
+//var bodyParser = require('body-parser');
+//app.use(bodyParser.json({"limit":'5mb'}));
 
 // cors
  var cors = require('cors')
