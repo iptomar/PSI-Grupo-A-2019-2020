@@ -8,7 +8,7 @@ const {file } = require('../helpers')
 //retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de interesse
 //id =  <Interesse_id> (isto no url)
 router.get("/searchgetimage", async function(req, res, next){
-
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
   var datas=[];
@@ -46,7 +46,7 @@ router.get("/searchgetimage", async function(req, res, next){
   .catch(async function(err) {
     var d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
       err.stack
     );
@@ -63,7 +63,7 @@ router.get("/searchgetimage", async function(req, res, next){
 //retorna todos os dados das imagens dado o ponto de interesse
 //body.data = <Interesse_id>
 router.post("/search", async function(req, res, next){
-
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -77,9 +77,9 @@ router.post("/search", async function(req, res, next){
   .catch(async function(err) {
     var d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -96,7 +96,7 @@ router.post("/search", async function(req, res, next){
 //retorna todas imagens dado o ponto de interesse
 //body.data = path
 router.post("/getimage", async function(req, res, next){
-
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -111,7 +111,7 @@ router.post("/getimage", async function(req, res, next){
 //body.data.dados = { Path:"", Legenda:"Legenda", AutorFonte:"AutorFonte" , Interesse_id:"Interesse_id", usersid:"usersid"}
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
-
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -123,9 +123,9 @@ router.post("/insert", async function(req, res, next){
   .catch(async function(err) {
     var d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -140,7 +140,7 @@ router.post("/insert", async function(req, res, next){
 //Usage:
 //body.data = {id:<id>} para apagar
 router.delete("/delete", async function(req, res, next){
-
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
   
@@ -151,7 +151,7 @@ router.delete("/delete", async function(req, res, next){
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
         err.stack
       );

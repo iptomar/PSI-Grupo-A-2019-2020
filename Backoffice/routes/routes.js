@@ -7,6 +7,7 @@ const {file } = require('../helpers')
 //Usage:
 //Return all routes
 router.get("/list", async function(req, res, next){
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -20,7 +21,7 @@ router.get("/list", async function(req, res, next){
   .catch(async function(err) {
     var d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
       err.stack
     );
@@ -33,6 +34,8 @@ router.get("/list", async function(req, res, next){
 //Usage:
 //body.data = { nome:"nome", descricao:"descrição", user_id:"user_id" }
 router.post("/insert", async function(req, res, next){
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+
  var aux = true;
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -42,7 +45,7 @@ router.post("/insert", async function(req, res, next){
   .catch(async function(err) {
     var d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
       err.stack
     );
@@ -62,6 +65,8 @@ if(aux){
 //body.id = id do proprietário a actualizar
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+
   var aux = true;
   //ToDo: 
   //- Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o criador do roteiro
@@ -86,7 +91,11 @@ router.post("/update", async function(req, res, next){
   })
   .catch(async function(err){
     aux=!aux;
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
     let errormesage = { sucess : false , mesage: "token not used" };
     res.send(errormesage);
   });
@@ -107,6 +116,8 @@ router.post("/update", async function(req, res, next){
 //Usage:
 //body.data = id do roteiro a eliminar(json)
 router.delete("/delete", async function(req, res, next){
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+
   var aux = true;
   //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
   //um administrador ou o utilizador que o criou
@@ -129,8 +140,11 @@ router.delete("/delete", async function(req, res, next){
       }
   })
   .catch(async function(err){
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      aux=!aux;
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );      aux=!aux;
     let errormesage = { sucess : false , mesage: "token not used" };
     res.send(errormesage);
   });
