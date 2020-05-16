@@ -45,8 +45,10 @@ class Profile extends Component {
     let y = document.getElementById("coordy").value;
     let pcoordinates = document.getElementById("pcoordinates").value;
     let div = document.getElementById("EditStatusDiv");
-    let div2 = document.getElementById("VerifyStatusDiv");
     let user = JSON.parse(sessionStorage.getItem("userData"));
+    pcoordinates = pcoordinates.replace(/\n/g, ",");
+    pcoordinates = pcoordinates.replace(/[\(\)]+/g, "");
+    pcoordinates = pcoordinates.substring(0, pcoordinates.length - 1);
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -56,7 +58,7 @@ class Profile extends Component {
       data: {
         titulo: titulo,
         descricao: description,
-        coordenadas: pcoordinates,
+        coordenadas: x + "," + y + "," + pcoordinates,
         data: dataEdif,
         tipoEdif: tipoEdificio,
         user_id: user.id,
