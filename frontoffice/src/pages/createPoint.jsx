@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import "./style/createPoint.css";
 import "./style/pageframe.css";
+import "./style/createPoint.css";
 import NavBar from "./navBar";
-import { findByLabelText } from "@testing-library/react";
 
 class Profile extends Component {
   constructor(props) {
@@ -45,15 +44,19 @@ class Profile extends Component {
       description == "" ||
       tipoEdificio == "" ||
       dataEdif == "" ||
-      x == ""||
-      y == ""||
+      x == "" ||
+      y == "" ||
       pcoordinates == ""
     ) {
       div2.style.color = "#dc3545";
-      this.setState({ success: false, VerifyStatus: "Preencha todos os campos" });
+      this.setState({
+        success: false,
+        VerifyStatus: "Preencha todos os campos",
+      });
       return;
     }
-    pcoordinates=pcoordinates.replace(/\n/g,",");
+    pcoordinates = pcoordinates.replace(/\n/g, ",");
+    pcoordinates = pcoordinates.replace(/[\(\)]+/g, "");
     pcoordinates = pcoordinates.substring(0, pcoordinates.length - 1);
     //Dados do utilizador
     let user = JSON.parse(sessionStorage.getItem("userData"));
@@ -65,7 +68,7 @@ class Profile extends Component {
       data: {
         titulo: titulo,
         descricao: description,
-        coordenadas: x+","+y+","+pcoordinates,
+        coordenadas: x + "," + y + "," + pcoordinates,
         data: dataEdif,
         tipoEdif: tipoEdificio,
         user_id: user.id,
@@ -82,7 +85,7 @@ class Profile extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"points/insert",
+      this.props.ApiPath + "points/insert",
       requestOptions
     );
     //Resposta por parte do server
@@ -96,13 +99,13 @@ class Profile extends Component {
         EditStatus: "Ponto criado com sucesso!",
         VerifyStatus: "",
       });
-      document.getElementById("title").value="";
-    document.getElementById("descr").value="";
-    document.getElementById("tipoEdif").value="";
-    document.getElementById("date").value="";
-    document.getElementById("coordx").value="";
-    document.getElementById("coordy").value="";
-    document.getElementById("pcoordinates").value="";
+      document.getElementById("title").value = "";
+      document.getElementById("descr").value = "";
+      document.getElementById("tipoEdif").value = "";
+      document.getElementById("date").value = "";
+      document.getElementById("coordx").value = "";
+      document.getElementById("coordy").value = "";
+      document.getElementById("pcoordinates").value = "";
     } else {
       div.style.color = "#dc3545";
       this.setState({
@@ -110,7 +113,6 @@ class Profile extends Component {
         VerifyStatus: "",
       });
     }
-    
   }
 
   redirecter(local) {
@@ -129,21 +131,24 @@ class Profile extends Component {
   }
 
   addPolignPoint() {
-    let point = document.getElementById("apcoord");
+    let pointx = document.getElementById("apcoordx");
+    let pointy = document.getElementById("apcoordy");
     let listpoint = document.getElementById("pcoordinates");
-    if (point.value !== "") {
-      listpoint.value = listpoint.value + point.value + "\n";
-      point.value = "";
+    if (pointx.value !== "" && pointy.value !== "") {
+      listpoint.value =
+        listpoint.value + "(" + pointx.value + "," + pointy.value + ")" + "\n";
+      pointx.value = "";
+      pointy.value = "";
     } else return;
   }
   removePolignPoint() {
     let listpoint = document.getElementById("pcoordinates");
     if (listpoint.value !== "") {
-        var aux = listpoint.value.split("\n");
-        listpoint.value="";
-        for(let i=0; i<aux.length-2;i++){
-            listpoint.value = listpoint.value + aux[i] + "\n";
-        }
+      var aux = listpoint.value.split("\n");
+      listpoint.value = "";
+      for (let i = 0; i < aux.length - 2; i++) {
+        listpoint.value = listpoint.value + aux[i] + "\n";
+      }
     } else return;
   }
 
@@ -242,14 +247,23 @@ class Profile extends Component {
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
-                      
                     }}
-                    
                   >
                     <input
                       type="text"
-                      id="apcoord"
-                      name="apcoord"
+                      id="apcoordx"
+                      name="apcoordx"
+                      placeholder="X"
+                      className="TextBox"
+                      style={{ width: "220px" }}
+                      onChange={this.reload}
+                      onFocus={this.reload}
+                    ></input>
+                    <input
+                      type="text"
+                      id="apcoordy"
+                      name="apcoordy"
+                      placeholder="Y"
                       className="TextBox"
                       style={{ width: "220px" }}
                       onChange={this.reload}
@@ -257,24 +271,24 @@ class Profile extends Component {
                     ></input>
                     <button
                       className="CPBtts"
-                      style={{ width: "140px" ,margin:"4px"}}
+                      style={{ width: "140px", margin: "4px" }}
                       onClick={this.addPolignPoint}
                     >
                       Adicionar >
                     </button>
                     <button
                       className="CPBtts"
-                      style={{ width: "140px" ,margin:"4px"}}
+                      style={{ width: "140px", margin: "4px" }}
                       onClick={this.removePolignPoint}
                     >
-                     {"< Remover"}
+                      {"< Remover"}
                     </button>
                   </div>
                   <textarea
                     type="text"
                     id="pcoordinates"
                     name="pcoordinates"
-                    style={{ width: "220px" }}
+                    style={{ width: "220px", height: "300px" }}
                     disabled={true}
                   ></textarea>
                 </div>
@@ -284,7 +298,6 @@ class Profile extends Component {
                 <div id="CPButtonsDiv">
                   <button
                     className="CPBtts"
-                    
                     onClick={() => {
                       this.setState({ redirect: "/MyPoints" });
                     }}

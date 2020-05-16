@@ -61,7 +61,7 @@ class Images extends Component {
       };
 
       let response = await fetch(
-        "http://188.251.50.68:3000/images/getimage",
+        this.props.ApiPath+"images/getimage",
         requestOptions
       );
       let data = await response.json();
@@ -88,7 +88,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/images/delete",
+      this.props.ApiPath+"images/delete",
       requestOptions
     );
     let data = await response.json();

@@ -80,7 +80,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/points/delete",
+      this.props.ApiPath+"points/delete",
       requestOptions
     );
     let data = await response.json();
