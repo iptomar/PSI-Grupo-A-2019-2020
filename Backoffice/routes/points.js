@@ -8,6 +8,7 @@ const {file } = require('../helpers')
 //body.id = id do ponto a actualizar
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
     //ToDo: 
     //- Terá de ser verificado se o utilizador a solicitar o update é
@@ -31,7 +32,7 @@ router.post("/update", async function(req, res, next){
         }
     })
     .catch(async function(err){
-      var d = new Date();
+      d = new Date();
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
@@ -54,6 +55,7 @@ router.post("/update", async function(req, res, next){
 //Usage:
 //body.data = id do ponto a eliminar(json)
 router.delete("/delete", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
     //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
     //um administrador ou o utilizador que o criou
@@ -75,7 +77,7 @@ router.delete("/delete", async function(req, res, next){
         }
     })
     .catch(async function(err){
-      var d = new Date();
+      d = new Date();
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
@@ -100,6 +102,7 @@ router.delete("/delete", async function(req, res, next){
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
 //RETURN - {sucess: true/false, id do ponto inserido}
 router.post("/insert", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //ID do registo inserido
   let idCreated;
@@ -116,7 +119,7 @@ router.post("/insert", async function(req, res, next){
     res.send(errormesage);
   })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -135,6 +138,7 @@ router.post("/insert", async function(req, res, next){
 //point to return data
 //body.data = id
 router.post("/searchpoint", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -148,7 +152,7 @@ router.post("/searchpoint", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -167,6 +171,7 @@ router.post("/searchpoint", async function(req, res, next){
 //Return all points id
 //body.data = idRoteiro
 router.post("/search", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -180,7 +185,7 @@ router.post("/search", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -199,6 +204,7 @@ router.post("/search", async function(req, res, next){
 //Return all points id
 //body.data = idRoteiro
 router.post("/searchuser", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -212,7 +218,7 @@ router.post("/searchuser", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -231,6 +237,7 @@ router.post("/searchuser", async function(req, res, next){
 //associa um ponto a uma rota
 //body.data = {"idrot" = "<idroteiro>" , "idpoint" = "<idponto>"}
 router.post("/pointtoroute", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -238,7 +245,7 @@ router.post("/pointtoroute", async function(req, res, next){
   await knex("images")
   .insert({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -258,6 +265,7 @@ router.post("/pointtoroute", async function(req, res, next){
 //desassocia um ponto a uma rota
 //body.data = {"idrot" = "<idroteiro>" , "idpoint" = "<idponto>"}
 router.delete("/pointoutroute", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
         //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -267,7 +275,7 @@ router.delete("/pointoutroute", async function(req, res, next){
     .where({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
     .del()
     .catch(async function(err) {
-      var d = new Date();
+      d = new Date();
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",

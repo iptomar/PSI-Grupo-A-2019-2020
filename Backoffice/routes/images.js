@@ -8,6 +8,7 @@ const {file } = require('../helpers')
 //retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de interesse
 //id =  <Interesse_id> (isto no url)
 router.get("/searchgetimage", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -29,7 +30,7 @@ router.get("/searchgetimage", async function(req, res, next){
         });
       }
       catch (err) {
-        var d = new Date();
+        d = new Date();
         await file(
           "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
           "a",
@@ -45,7 +46,7 @@ router.get("/searchgetimage", async function(req, res, next){
       res.send(errormesage);
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -64,6 +65,7 @@ router.get("/searchgetimage", async function(req, res, next){
 //retorna todos os dados das imagens dado o ponto de interesse
 //body.data = <Interesse_id>
 router.post("/search", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -76,7 +78,7 @@ router.post("/search", async function(req, res, next){
       res.send(errormesage);
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -97,6 +99,7 @@ router.post("/search", async function(req, res, next){
 //retorna todas imagens dado o ponto de interesse
 //body.data = path
 router.post("/getimage", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -112,17 +115,18 @@ router.post("/getimage", async function(req, res, next){
 //body.data.dados = { Path:"", Legenda:"Legenda", AutorFonte:"AutorFonte" , Interesse_id:"Interesse_id", usersid:"usersid"}
 //body.data.imagem = <base 64 da imagem>
 router.post("/insert", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  var d = new Date();
+  d = new Date();
   req.body.data.dados.Path = ""+Date.now();
   fs.writeFileSync("./files/images/"+req.body.data.dados.Path+".txt", req.body.data.imagem);
   await knex("images")
   .insert(req.body.data.dados)
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
       "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
@@ -141,6 +145,7 @@ router.post("/insert", async function(req, res, next){
 //Usage:
 //body.data = {id:<id>} para apagar
 router.delete("/delete", async function(req, res, next){
+  var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -150,7 +155,7 @@ router.delete("/delete", async function(req, res, next){
     .where({ id: req.body.data.id })
     .del()
     .catch(async function(err) {
-      var d = new Date();
+      d = new Date();
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
