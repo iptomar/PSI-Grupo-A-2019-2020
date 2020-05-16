@@ -75,8 +75,8 @@ router.delete("/delete", async function(req, res, next){
         }
     })
     .catch(async function(err){
+      var d = new Date();
       await file(
-        var d = new Date();
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
         err.stack
