@@ -8,6 +8,8 @@ const {file } = require('../helpers')
 //body.id = id do ponto a actualizar
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
     //ToDo: 
     //- Terá de ser verificado se o utilizador a solicitar o update é
     //um administrador ou o utilizador que criou o ponto
@@ -30,8 +32,12 @@ router.post("/update", async function(req, res, next){
         }
     })
     .catch(async function(err){
-        await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      d = new Date();
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
     });
 
@@ -49,6 +55,8 @@ router.post("/update", async function(req, res, next){
 //Usage:
 //body.data = id do ponto a eliminar(json)
 router.delete("/delete", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
     //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
     //um administrador ou o utilizador que o criou
 
@@ -69,8 +77,12 @@ router.delete("/delete", async function(req, res, next){
         }
     })
     .catch(async function(err){
-        await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      d = new Date();
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
     });
 
@@ -90,7 +102,8 @@ router.delete("/delete", async function(req, res, next){
 //body.data = { titulo:"titulo", descricao:"descricao" , coordenadas:"coordenadas" , data:"data" , tipoEdif:"tipoEdif" , user_id:user_id , prop_id:prop_id }
 //RETURN - {sucess: true/false, id do ponto inserido}
 router.post("/insert", async function(req, res, next){
-
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //ID do registo inserido
   let idCreated;
 
@@ -106,12 +119,11 @@ router.post("/insert", async function(req, res, next){
     res.send(errormesage);
   })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      //Está a dar problemas, corrigir.
-      //err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -126,7 +138,8 @@ router.post("/insert", async function(req, res, next){
 //point to return data
 //body.data = id
 router.post("/searchpoint", async function(req, res, next){
-
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -139,11 +152,11 @@ router.post("/searchpoint", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -158,7 +171,8 @@ router.post("/searchpoint", async function(req, res, next){
 //Return all points id
 //body.data = idRoteiro
 router.post("/search", async function(req, res, next){
-
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -171,11 +185,11 @@ router.post("/search", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -190,7 +204,8 @@ router.post("/search", async function(req, res, next){
 //Return all points id
 //body.data = idRoteiro
 router.post("/searchuser", async function(req, res, next){
-
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
@@ -203,11 +218,11 @@ router.post("/searchuser", async function(req, res, next){
       
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -217,4 +232,62 @@ router.post("/searchuser", async function(req, res, next){
   /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
   res.send(errormesage);*/
 });
+
+//Usage:
+//associa um ponto a uma rota
+//body.data = {"idrot" = "<idroteiro>" , "idpoint" = "<idponto>"}
+router.post("/pointtoroute", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  await knex("images")
+  .insert({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
+  .catch(async function(err) {
+    d = new Date();
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+  let errormesage= {sucess: true, mesage: "Image sucessfully inserted"};
+  res.send(errormesage);
+});
+
+
+//Usage:
+//desassocia um ponto a uma rota
+//body.data = {"idrot" = "<idroteiro>" , "idpoint" = "<idponto>"}
+router.delete("/pointoutroute", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+        //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+  
+  let errormesage
+    await knex("Inter_Roteir")
+    .where({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
+    .del()
+    .catch(async function(err) {
+      d = new Date();
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );
+       errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+      console.log(err);
+    });
+
+    errormesage= {sucess: true, mesage: "image sucessfully deleted"};
+    res.send(errormesage);
+});
+
 module.exports = router;

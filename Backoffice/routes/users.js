@@ -45,9 +45,9 @@ router.post("/login", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
 
       console.log(err);
@@ -78,9 +78,9 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       console.log(err);
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
@@ -139,9 +139,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
 
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
@@ -165,9 +165,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
 
       console.log(err);
@@ -200,9 +200,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
@@ -221,9 +221,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
@@ -252,15 +252,21 @@ router.post("/update", async function(req, res, next) {
         let errormesage = { sucess : true , mesage: "update sucessfull" };
         res.send(errormesage);
     }).catch(async function(err) {
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
         });
 
   }
   catch (err){
-    await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
   }
 
@@ -291,8 +297,11 @@ router.delete("/delete", async function(req, res, next) {
       }
     })
     .catch(async function(err){
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
     });
 
