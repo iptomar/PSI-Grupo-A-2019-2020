@@ -242,7 +242,7 @@ router.post("/pointtoroute", async function(req, res, next){
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  await knex("images")
+  await knex("Inter_Roteir")
   .insert({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
   .catch(async function(err) {
     d = new Date();
