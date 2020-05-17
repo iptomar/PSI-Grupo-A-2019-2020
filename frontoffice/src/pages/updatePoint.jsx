@@ -29,10 +29,10 @@ class Profile extends Component {
     let x = document.getElementById("coordx");
     let y = document.getElementById("coordy");
     let pcoordinates = document.getElementById("pcoordinates");
-    x.value=aux[0];
-    y.value=aux[1];
-    for(let i=2;i<aux.length;i+=2){
-        pcoordinates.value+="("+aux[i]+","+aux[i+1]+")\n"
+    x.value = aux[0];
+    y.value = aux[1];
+    for (let i = 2; i < aux.length; i += 2) {
+      pcoordinates.value += "(" + aux[i] + "," + aux[i + 1] + ")\n";
     }
   }
 
@@ -80,8 +80,6 @@ class Profile extends Component {
     );
 
     let data = await response.json();
-
-    console.log(data);
 
     if (data.sucess) {
       div.style.color = "#28a745";

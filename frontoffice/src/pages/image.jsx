@@ -3,7 +3,6 @@ import { Redirect, Link } from "react-router-dom";
 import "./style/points.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
-import ReactFileReader from 'react-file-reader';
 
 class Images extends Component {
   constructor(props) {
@@ -13,9 +12,12 @@ class Images extends Component {
       data: null,
       point: JSON.parse(sessionStorage.getItem("point")),
       images: [],
-      imags: []
+      imags: [],
     };
     this.redirecter = this.redirecter.bind(this);
+    this.deleteImage = this.deleteImage.bind(this);
+    this.getUserImages = this.getUserImages.bind(this);
+    this.getImages = this.getImages.bind(this);
   }
 
   async componentDidMount() {
@@ -37,7 +39,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"images/search",
+      this.props.ApiPath + "images/search",
       requestOptions
     );
     let data = await response.json();
@@ -61,7 +63,7 @@ class Images extends Component {
       };
 
       let response = await fetch(
-        this.props.ApiPath+"images/getimage",
+        this.props.ApiPath + "images/getimage",
         requestOptions
       );
       let data = await response.json();
@@ -80,7 +82,7 @@ class Images extends Component {
     var raw = JSON.stringify({ data: { id: id } });
 
     var requestOptions = {
-      method: "POST",
+      method: "DELETE",
       headers: myHeaders,
       body: raw,
       mode: "cors",
@@ -88,7 +90,7 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"images/delete",
+      this.props.ApiPath + "images/delete",
       requestOptions
     );
     let data = await response.json();
@@ -112,12 +114,24 @@ class Images extends Component {
     if (this.state.images.length != 0) {
       this.state.images.forEach((img) => {
         imgs.push(
-          <div>
-            <h4>{img.AutorFonte}</h4>
-            <img src={"data:image/jpg;base64," + img.img} width="500"></img>
-            <button onClick={() => this.deleteImage(img.id)}>❌</button>
-            <p>{img.Legenda}</p>
-          </div>
+          <table id="UsersTable">
+            <tr>
+              <th className="TableHeader" colspan="2">
+                {img.AutorFonte}
+              </th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <img src={"data:image/jpg;base64," + img.img} width="600"></img>
+              </td>
+            </tr>
+            <tr>
+              <td>{img.Legenda}</td>
+              <td>
+                <button onClick={() => this.deleteImage(img.id)}>❌</button>
+              </td>
+            </tr>
+          </table>
         );
       });
     }
@@ -128,20 +142,45 @@ class Images extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              <br />
-              <Link type="button" to="/mypoints">
-                Voltar
-              </Link>
-              <div className="input-group">
-                <label htmlFor="email">Fotografias do edificio</label>
-                <Link to="/AddImages">
-                  <button className="btn">
-                    Adicionar Imagens
-                    </button>
-                </Link>
+              <div className="TitleDiv"></div>
+              <p className="TitleP">Imagens do ponto</p>
+              <div id="RegisterRedirectDiv">
+                <button
+                  id="RegisterRedirectBtt"
+                  onClick={() => {
+                    this.setState({ redirect: "/AddImages" });
+                  }}
+                >
+                  Adicionar imagens
+                </button>
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>{imgs}</div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                {imgs}
+                <div
+                  style={{
+                    padding: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <button
+                    className="CPBtts"
+                    onClick={() => {
+                      this.setState({ redirect: "/MyPoints" });
+                    }}
+                  >
+                    Voltar
+                  </button>
+                </div>
+              </div>
             </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>

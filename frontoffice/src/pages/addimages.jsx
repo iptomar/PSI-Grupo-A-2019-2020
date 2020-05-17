@@ -3,7 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import "./style/points.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
-import ReactFileReader from 'react-file-reader';
+import ReactFileReader from "react-file-reader";
 
 class AddImages extends Component {
   constructor(props) {
@@ -13,9 +13,10 @@ class AddImages extends Component {
       data: null,
       point: JSON.parse(sessionStorage.getItem("point")),
       images: [],
-      imags: []
+      imags: [],
     };
     this.redirecter = this.redirecter.bind(this);
+    this.addIMGS = this.addIMGS.bind(this);
   }
 
   async addIMGS() {
@@ -24,18 +25,17 @@ class AddImages extends Component {
     let legendaImagem = document.getElementById("legenda").value;
     //Tamanho do array
     let id = this.state.point;
-    console.log(id);
     let arraySize = this.state.imags.length;
     for (let index = 0; index < arraySize; index++) {
       //Obter o index da virgula
-      let virgulaIndex = this.state.imags[index].indexOf(',', 0);
-      console.log(virgulaIndex);
+      let virgulaIndex = this.state.imags[index].indexOf(",", 0);
+
       //Adicionar 1 ao valor do index obtido, pois quer-se o que está à frente
       //da virgula
       virgulaIndex += 1;
       //Obter agora a substring da imagem
       let image = this.state.imags[index].substring(virgulaIndex);
-      console.log(image);
+
       //Mandar a imagem para o servidor
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
@@ -54,43 +54,6 @@ class AddImages extends Component {
         },
       });
 
-
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        mode: "cors",
-        redirect: "follow"
-      };
-
-      let response = await fetch(
-        this.props.ApiPath+"images/insert",
-        requestOptions
-      )
-      //Resposta por parte do server
-      let data = await response.json();
-
-      console.log(data);
-
-      window.location.reload();
-    }
-  }
-
-  handleFiles = files => {
-    //Set state imagens com os ficheiros a ser introduzidos
-    this.setState({ imags: files.base64 });
-    this.addIMGS();
-  }
-
-  async getImages(images) {
-    let imgArr = [];
-    await images.forEach(async (img) => {
-      var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-type", "application/json");
-      var raw = JSON.stringify({ data: img.Path });
-
       var requestOptions = {
         method: "POST",
         headers: myHeaders,
@@ -100,17 +63,20 @@ class AddImages extends Component {
       };
 
       let response = await fetch(
-        "http://188.251.50.68:3000/images/getimage",
+        this.props.ApiPath + "images/insert",
         requestOptions
       );
+      //Resposta por parte do server
       let data = await response.json();
-      img.img = data.mesage;
-      imgArr.push(img);
-      if (imgArr.length == images.length) {
-        this.setState({ images: imgArr });
-      }
-    });
+
+      this.setState({ redirect: "/Image" });
+    }
   }
+
+  handleFiles = (files) => {
+    //Set state imagens com os ficheiros a ser introduzidos
+    this.setState({ imags: files.base64 });
+  };
 
   redirecter(local) {
     if (local === "/Logout") {
@@ -127,6 +93,12 @@ class AddImages extends Component {
       return <Redirect to={this.state.redirect} />;
     }
 
+    if (this.state.imags.length !== 0) {
+      this.state.imags.forEach((img) => {
+        imgs.push(<img style={{ margin: "8px" }} src={img} width="300"></img>);
+      });
+    }
+
     return (
       <div id="body">
         <NavBar redirecter={this.redirecter}></NavBar>
@@ -134,22 +106,60 @@ class AddImages extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              <br />
-              <Link type="button" to="/Image">
-                Voltar
-              </Link>
-              <div className="input-group">
-                <label htmlFor="email">Fotografias do edificio</label>
-                <label htmlFor="email">Legenda</label>
-                <input type="text" id="legenda" name="legenda" placeholder="Legenda da imagem" className="LoginInput" />
-                <label htmlFor="email">Nome do autor da imagem</label>
-                <input type="text" id="autor" name="autor" placeholder="Nome do autor da imagem" className="LoginInput" />
-                <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
-                  <button className='btn'>Upload</button>
-                </ReactFileReader>
-              </div>
+              <div className="TitleDiv"></div>
+              <p className="TitleP">Nova Foto</p>
+              <div id="PointBox">
+                <input
+                  type="text"
+                  id="legenda"
+                  name="legenda"
+                  placeholder="Legenda"
+                  className="TextBox"
+                  onChange={this.reload}
+                ></input>
 
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>{imgs}</div>
+                <input
+                  type="text"
+                  id="autor"
+                  name="autor"
+                  placeholder="Autor"
+                  className="TextBox"
+                  onChange={this.reload}
+                ></input>
+
+                <ReactFileReader
+                  base64={true}
+                  multipleFiles={true}
+                  handleFiles={this.handleFiles}
+                >
+                  <button className="CPBtts">Upload</button>
+                </ReactFileReader>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    margin: "20px",
+                  }}
+                >
+                  {imgs}
+                </div>
+                <div id="CPButtonsDiv">
+                  <button
+                    className="CPBtts"
+                    onClick={() => {
+                      this.setState({ redirect: "/Image" });
+                    }}
+                  >
+                    Voltar
+                  </button>
+                  <button onClick={this.addIMGS} className="CPBtts">
+                    Guardar
+                  </button>
+                </div>
+              </div>
             </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>
