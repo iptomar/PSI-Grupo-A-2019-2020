@@ -39,7 +39,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"routes/list",
+      this.props.ApiPath + "routes/list",
       requestOptions
     ).catch((error) => console.log("error", error));
     let json = await response.json();
@@ -62,7 +62,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/points/search",
+      this.props.ApiPath + "points/search",
       requestOptions
     );
     let data = await response.json();
@@ -87,7 +87,7 @@ class Routes extends Component {
       };
 
       let response = await fetch(
-        "http://188.251.50.68:3000/points/searchpoint",
+        this.props.ApiPath + "points/searchpoint",
         requestOptions
       );
       let data = await response.json();
@@ -121,7 +121,7 @@ class Routes extends Component {
     };
 
     let response = await fetch(
-      "http://188.251.50.68:3000/routes/delete",
+      this.props.ApiPath + "routes/delete",
       requestOptions
     );
 
@@ -144,46 +144,63 @@ class Routes extends Component {
     if (this.state.routes.length !== 0) {
       this.state.routes.forEach((element) => {
         UI.push(
-          <div
-            onClick={() => {
-              this.setState({ routeId: element.id });
-              this.getPoints(element.id);
-            }}
-          >
-            <h4>{element.nome}</h4>
-            <h4>{element.descricao}</h4>
-          </div>
+          <table id="UsersTable">
+            <tr>
+              <th className="TableHeader">{element.nome}</th>
+            </tr>
+            <tr>
+              <td>{element.descricao}</td>
+            </tr>
+            <tr>
+              <td>
+                <button
+                  onClick={() => {
+                    this.setState({ routeId: element.id });
+                    this.getPoints(element.id);
+                  }}
+                >
+                  👁️‍🗨️
+                </button>
+                {element.user_id == this.state.userdata.id ? (
+                  <button
+                    onClick={() => {
+                      sessionStorage.setItem("nomeRoteiro", element.nome);
+                      sessionStorage.setItem(
+                        "descricaoRoteiro",
+                        element.descricao
+                      );
+                      sessionStorage.setItem("routeID", element.id);
+                      this.setState({ redirect: "/UpdateRoute" });
+                    }}
+                  >
+                    📝
+                  </button>
+                ) : null}
+                {element.user_id == this.state.userdata.id ? (
+                  <button onClick={() => this.deleteRoute(element.id)}>
+                    ❌
+                  </button>
+                ) : null}
+              </td>
+            </tr>
+          </table>
         );
-        if (element.user_id == this.state.userdata.id) {
-          console.log(this.userdata);
-          UI.push(
-            <button
-              onClick={() => {
-                sessionStorage.setItem("nomeRoteiro", element.nome);
-                sessionStorage.setItem("descricaoRoteiro", element.descricao);
-                sessionStorage.setItem("routeID", element.id);
-                this.setState({ redirect: "/UpdateRoute" });
-              }}
-            >
-              📝
-            </button>
-          );
-          UI.push(
-            <button onClick={() => this.deleteRoute(element.id)}>❌</button>
-          );
-        }
       });
     }
 
     if (this.state.points.length != 0) {
       this.state.points.forEach((element) => {
-        console.log(element);
         ps.push(
-          <div>
-            <h4>{element.titulo}</h4>
-            <h4>{element.descricao}</h4>
-            <h4>{element.data}</h4>
-          </div>
+          <table id="UsersTable">
+            <tr>
+              <th className="TableHeader">
+                {element.titulo} - {element.data}
+              </th>
+            </tr>
+            <tr>
+              <td>{element.descricao}</td>
+            </tr>
+          </table>
         );
       });
     }
@@ -195,12 +212,21 @@ class Routes extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              <div id="routesdiv">
+              <div className="TitleDiv"></div>
+              <p className="TitleP">Roteiros</p>
+              <div id="RegisterRedirectDiv">
+                <button
+                  id="RegisterRedirectBtt"
+                  onClick={() => {
+                    this.setState({ redirect: "/AddRoute" });
+                  }}
+                >
+                  Novo Roteiro
+                </button>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
                 <div className="gemeny">{UI}</div>
                 <div className="gemeny">{ps}</div>
-                <Link to="/AddRoute">
-                  <button className="btn">Adicionar Roteiro</button>
-                </Link>
               </div>
             </div>
             <footer id="FooterDiv">

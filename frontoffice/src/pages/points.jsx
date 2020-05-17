@@ -48,7 +48,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"points/searchuser",
+      this.props.ApiPath + "points/searchuser",
       requestOptions
     );
     let data = await response.json();
@@ -80,7 +80,7 @@ class Points extends Component {
     };
 
     let response = await fetch(
-      this.props.ApiPath+"points/delete",
+      this.props.ApiPath + "points/delete",
       requestOptions
     );
     let data = await response.json();
@@ -107,14 +107,23 @@ class Points extends Component {
     if (this.state.points.length != 0) {
       this.state.points.forEach((point) => {
         UI.push(
-          <div>
-            <h4>{point.titulo}</h4>
-            <h4>{point.descricao}</h4>
-            <h4>{point.data}</h4>
-            <button onClick={() => this.deletePoint(point.id)}>❌</button>
-            <button onClick={() => this.updatePoint(point)}>📝</button>
-            <button onClick={() => this.getImages(point)}>🖼</button>
-          </div>
+          <table id="UsersTable">
+            <tr>
+              <th className="TableHeader">
+                {point.titulo} - {point.data}
+              </th>
+            </tr>
+            <tr>
+              <td>{point.descricao}</td>
+            </tr>
+            <tr>
+              <td>
+                <button onClick={() => this.deletePoint(point.id)}>❌</button>
+                <button onClick={() => this.updatePoint(point)}>📝</button>
+                <button onClick={() => this.getImages(point)}>🖼</button>
+              </td>
+            </tr>
+          </table>
         );
       });
     }
@@ -126,10 +135,18 @@ class Points extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              <br />
-              <Link type="button" to="/createPoint">
-                Criar ponto
-              </Link>
+              <div className="TitleDiv"></div>
+              <p className="TitleP">Pontos</p>
+              <div id="RegisterRedirectDiv">
+                <button
+                  id="RegisterRedirectBtt"
+                  onClick={() => {
+                    this.setState({ redirect: "/createPoint" });
+                  }}
+                >
+                  Novo ponto
+                </button>
+              </div>
               {UI}
             </div>
             <footer id="FooterDiv">
