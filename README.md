@@ -47,6 +47,7 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-1)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-1)
+  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
 * [Pontos de Interesse](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pontos-de-interesse)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search)
   * [searchpoint](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchpoint)
@@ -63,7 +64,6 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getimage)
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#deleteimage)
 * [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#propriet%C3%A1rios)
-  * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
   * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
@@ -215,6 +215,19 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /userSearch
+* metodo: **POST**
+* O body deve conter:
+  * data 
+      * user id
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  *falta adicionar*
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Pontos de interesse
