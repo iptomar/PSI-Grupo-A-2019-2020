@@ -54,12 +54,16 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-2)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-2)
   * [searchUser](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchuser)
+  * [pointtoroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointtoroute)
+  * [pointoutroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointoutroute)
 * [Imagens](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#imagens)
+  * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search-1)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-2)
   * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getimage)
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#deleteimage)
 * [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#propriet%C3%A1rios)
+  * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
   * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
@@ -300,13 +304,56 @@ Procura o utilizador que criou esse ponto de interesse
 * metodo: **Post**
 * O body deve conter: 
   * data (id do Roteiro)
+* Retorna:*falta adicionar
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+####  /pointtoroute
+Associa um ponto a uma rota
+* metodo: **POST**
+* O body deve conter:
+  * id 
+  * data
+    * idrot (id do roteiro)
+    * idpoint (id do ponto)
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Image sucessfully inserted\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+####  /pointoutroute
+Desassocia um ponto a uma rota
+* metodo: **DELETE**
+* O body deve conter:
+  * id 
+  * data
+    * idrot (id do roteiro)
+    * idpoint (id do ponto)
+* Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Imagens
+#### /searchgetimage
+Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de interesse.
+* metodo: **GET**
+* O body deve conter:
+  * id do ponto de interesse
+* Retorna: *falta adicionar
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /search
-Lista as imagens
+Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
 * O body deve conter:
   * data (id do ponto de interesse)
@@ -339,7 +386,7 @@ Adiciona uma imagem
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /getImage
-Lista as imagens
+Retorna todas imagens dado o ponto de interesse
 * metodo: **Get** 
 * O body deve conter:
   * data (path da imagem)
