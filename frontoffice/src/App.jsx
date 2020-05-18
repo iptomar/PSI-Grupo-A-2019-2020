@@ -19,7 +19,7 @@ import AddImages from './pages/addimages';
 import AddRoute from './pages/addroute';
 import UpdateRoute from './pages/updateRoute';
 
-const ApiPath = "http://localhost:3000/"
+const ApiPath = "http://188.251.50.68:3000/"
 
 class App extends React.Component {
   render() {
