@@ -9,6 +9,7 @@ import HomePage from "./pages/homepage";
 import Users from "./pages/users";
 import Profile from "./pages/profile";
 import Routes from "./pages/routes";
+import AddPointToRoute from "./pages/addpointtoroute";
 import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
 import Points from "./pages/points";
@@ -35,6 +36,7 @@ class App extends React.Component {
           <Route exact path="/Routes" render={(props) => <Routes {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/UpdateRoute" render={(props) => <UpdateRoute {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/AddRoute" render={(props) => <AddRoute {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/AddPointToRoute" render={(props) => <AddPointToRoute {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/MyPoints" render={(props) => <Points {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/Create" render={(props) => <Create {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/Image" render={(props) => <Images {...props} ApiPath={ApiPath} />}></Route>

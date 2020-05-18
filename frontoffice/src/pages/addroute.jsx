@@ -50,7 +50,7 @@ class Routes extends Component {
             "data": {
                 "nome": RouteName,
                 "descricao": RouteDescription,
-                "user_id": 1
+                "user_id": RouteUser
             }
         });
 

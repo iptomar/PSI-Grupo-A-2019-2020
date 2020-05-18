@@ -223,6 +223,14 @@ class Routes extends Component {
                 >
                   Novo Roteiro
                 </button>
+                <button
+                  id="RegisterRedirectBtt"
+                  onClick={() => {
+                    this.setState({ redirect: "/AddPointToRoute" });
+                  }}
+                >
+                  Associar ponto a rota
+                </button>
               </div>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div className="gemeny">{UI}</div>
