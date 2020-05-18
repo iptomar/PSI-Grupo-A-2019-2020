@@ -37,8 +37,8 @@ fetch("https://localhost:3000/users/register", requestOptions)
 -----------
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#autentica%C3%A7%C3%A3o)
-  * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#register)
-  * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#login)
+  * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#register-1)
+  * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#login-1)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#getuserstokenadmin)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#update)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/blob/backend_v3/README.md#delete)
