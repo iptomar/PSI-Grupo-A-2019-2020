@@ -40,7 +40,7 @@ typings/
 .serverless/
 .fusebox/
 .dynamodb/
-platforms
+platforms/
 
 # Windows
 ehthumbs.db
