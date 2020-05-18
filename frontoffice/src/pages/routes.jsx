@@ -68,8 +68,12 @@ class Routes extends Component {
     let data = await response.json();
 
     console.log(data);
-    
-    await this.getPointsInfo(data.mesage);
+
+    if (data.mesage.length == 0) {
+      this.setState({ points: [] });
+    } else {
+      await this.getPointsInfo(data.mesage);
+    }
   }
 
   async getPointsInfo(pontos) {
@@ -169,7 +173,6 @@ class Routes extends Component {
     await this.getRoutes();
     //Obter os pontos
     await this.getPoints(this.state.routeId);
-
   }
 
   render() {
@@ -245,10 +248,7 @@ class Routes extends Component {
             </button>
           </table>
         );
-        console.log(this.state.points.length);
       });
-    } else {
-      console.log(this.state.points.length);
     }
 
     return (
