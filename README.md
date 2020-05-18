@@ -218,6 +218,7 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /userSearch
+Devolve os roteiros que um utilizador criou
 * metodo: **POST**
 * O body deve conter:
   * data 
@@ -225,7 +226,7 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
 * Retorna:
   * ```"status": "OK"```
   * ```"code": 200```
-  *falta adicionar*
+  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -317,7 +318,8 @@ Procura o utilizador que criou esse ponto de interesse
 * metodo: **Post**
 * O body deve conter: 
   * data (id do Roteiro)
-* Retorna:*falta adicionar
+* Retorna:
+  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -360,7 +362,8 @@ Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de
 * metodo: **GET**
 * O body deve conter:
   * id do ponto de interesse
-* Retorna: *falta adicionar
+* Retorna: 
+    * *falta adicionar
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
