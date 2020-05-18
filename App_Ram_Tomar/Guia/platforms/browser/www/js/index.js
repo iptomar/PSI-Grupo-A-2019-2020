@@ -86,7 +86,7 @@ var app = {
 
             $.getJSON("http://188.251.50.68:3000/points/list", result => {
                 // Iterar todos os pontos de interesse
-                result.rows.forEach(row => {
+                result.mesage.forEach(row => {
                     // Converter string de coordenadas para um array de coordenadas
                     let coordenadas = JSON.parse(`[${row.coordenadas}]`);
 
@@ -218,13 +218,12 @@ var app = {
                         let pData = document.createElement('p');
                         pData.setAttribute('id', 'idData');
 
-
                         //atribuição dos valores existentes no json
                         //Done
                         pNomeEdificio.textContent = row.titulo;
 
-
                         pLocalizacao.textContent = coordCentral;
+                        console.log(row);
                         pAutores.textContent = 'Vadims Zinatulins, João Almeida';
                         pDescricao.textContent = row.descricao;
                         spanLinha.textContent = row.tipoEdif;
@@ -245,7 +244,6 @@ var app = {
                             singleAutor.textContent = autor;
 
                             divInfo.appendChild(singleAutor);
-
                         });
 
                         divInfo.appendChild(hr);
@@ -255,63 +253,48 @@ var app = {
                         divRow.setAttribute('id', 'idDivRow');
                         divRow.setAttribute('class', 'row');
 
-                        // To-do: Ir buscar as imagens e listar as imagens
-                        // $.getJSON("http://188.251.50.68:3000/points/list", images => {
+                        $.getJSON(`http://188.251.50.68:3000/images/searchgetimage?id=${row.id}`, images => {
+                            images.mesage.forEach(imagem => {
+                                let divColMd = document.createElement('div');
+                                divColMd.setAttribute('id', 'idDivColMd');
+                                divColMd.setAttribute('class', 'col-md-4');
+                                divColMd.setAttribute('class', 'content');
 
-                        // });
+                                let divThumb = document.createElement('div');
+                                divThumb.setAttribute('class', 'thumbnail');
+                                divThumb.setAttribute('id', 'idDivThumb');
 
-                        // for (var j = 0; j < jsons.Imagens.length; j++) {
-                        //     var imgEdificio = jsons.Imagens[j];
+                                let divCaption = document.createElement('div')
+                                divCaption.setAttribute('id', 'idDivCaption');
+                                divCaption.setAttribute('class', 'caption');
+                                divCaption.setAttribute('class', 'rounded-bottom');
 
+                                let img = document.createElement('img');
+                                let imgLegenda = document.createElement('p');
+                                let imgAutor = document.createElement('p');
 
-                        //     var divColMd = document.createElement('div');
-                        //     divColMd.setAttribute('id', 'idDivColMd');
-                        //     divColMd.setAttribute('class', 'col-md-4');
-                        //     divColMd.setAttribute('class', 'content');
-                        //     var divThumb = document.createElement('div');
-                        //     divThumb.setAttribute('class', 'thumbnail');
-                        //     divThumb.setAttribute('id', 'idDivThumb');
-                        //     var divCaption = document.createElement('div')
-                        //     divCaption.setAttribute('id', 'idDivCaption');
-                        //     divCaption.setAttribute('class', 'caption');
-                        //     divCaption.setAttribute('class', 'rounded-bottom');
+                                //lida a path da imagem para a pasta das imagens
+                                img.src = `data:image/png;base64,${imagem.img}`;
+                                img.setAttribute('id', 'idImagens');
+                                img.setAttribute('class', 'rounded');
 
-                        //     var img = document.createElement('img');
-                        //     var imgLegenda = document.createElement('p');
-                        //     var imgAutor = document.createElement('p');
+                                //atribuição dos valores existentes no json
+                                imgLegenda.textContent = imagem.Legenda;
+                                imgAutor.textContent = imagem.AutorFonte;
 
-                        //     //lida a path da imagem para a pasta das imagens
-                        //     img.src = imgEdificio.Path;
-                        //     img.setAttribute('id', 'idImagens');
-                        //     img.setAttribute('class', 'rounded');
+                                divCaption.appendChild(imgLegenda);
+                                divCaption.appendChild(imgAutor);
 
-                        //     //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-                        //     img.setAttribute('data-Path', imgEdificio.Path);
-                        //     img.onclick = fullImg => {
-                        //         var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
-                        //         //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-                        //         ecraImagem(pathId);
-                        //     }
+                                divThumb.appendChild(img);
+                                divThumb.appendChild(divCaption);
 
-                        //     //atribuição dos valores existentes no json
-                        //     imgLegenda.textContent = imgEdificio.Legenda;
-                        //     imgAutor.textContent = imgEdificio.AutorFonte;
+                                divColMd.appendChild(divThumb);
 
-                        //     divCaption.appendChild(imgLegenda);
-                        //     divCaption.appendChild(imgAutor);
+                                divRow.appendChild(divColMd);
 
-                        //     divThumb.appendChild(img);
-                        //     divThumb.appendChild(divCaption);
-
-
-                        //     divColMd.appendChild(divThumb);
-
-                        //     divRow.appendChild(divColMd);
-
-                        //     divInfo.appendChild(divRow);
-
-                        // }
-
+                                divInfo.appendChild(divRow);
+                            });
+                        });
                     })[0];
 
                     divPopup.appendChild(link);
