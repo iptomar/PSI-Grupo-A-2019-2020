@@ -314,11 +314,13 @@ Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador 
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /searchUser
-Procura o utilizador que criou esse ponto de interesse
+Procura o utilizador que adicionao esses pontos de interesse ao roteiro
 * metodo: **Post**
 * O body deve conter: 
   * data (id do Roteiro)
 * Retorna:
+  * ```"status": "OK"```
+  * ```"code": 200```
   * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
@@ -363,7 +365,9 @@ Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de
 * O body deve conter:
   * id do ponto de interesse
 * Retorna: 
-    * *falta adicionar
+  * ```"status": "OK"```
+  * ```"code": 200```
+  * *falta adicionar
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
