@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import "./style/addRoute.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
-import Select from "react-dropdown-select";
 
 class Routes extends Component {
   constructor(props) {

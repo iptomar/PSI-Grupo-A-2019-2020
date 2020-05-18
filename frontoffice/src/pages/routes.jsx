@@ -67,6 +67,8 @@ class Routes extends Component {
     );
     let data = await response.json();
 
+    console.log(data);
+    
     await this.getPointsInfo(data.mesage);
   }
 
@@ -91,6 +93,7 @@ class Routes extends Component {
         requestOptions
       );
       let data = await response.json();
+      console.log(data);
       newPontos.push(data.mesage[0]);
       if (pontos.length == newPontos.length) {
         this.setState({ points: newPontos });
@@ -130,6 +133,43 @@ class Routes extends Component {
     await this.getRoutes();
 
     await this.getPoints(this.state.routeId);
+  }
+
+  //Função que irá apagar o ponto de um roteiro
+  async deletePointFromRoute(idRoteiro, idPonto) {
+    //Headers
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    //Campos
+    var raw = JSON.stringify({
+      data: {
+        idrot: idRoteiro,
+        idpoint: idPonto
+      },
+    });
+    //Request options
+    var requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
+    };
+    //Enviar os dados para o nodejs
+    let response = await fetch(
+      this.props.ApiPath + "points/pointoutroute",
+      requestOptions
+    );
+    //Resposta por parte do servidor
+    let data = await response.json();
+
+    console.log(data);
+    //Obter os roteiros
+    await this.getRoutes();
+    //Obter os pontos
+    await this.getPoints(this.state.routeId);
+
   }
 
   render() {
@@ -200,9 +240,15 @@ class Routes extends Component {
             <tr>
               <td>{element.descricao}</td>
             </tr>
+            <button onClick={() => this.deletePointFromRoute(this.state.routeId, element.id)}>
+              ❌
+            </button>
           </table>
         );
+        console.log(this.state.points.length);
       });
+    } else {
+      console.log(this.state.points.length);
     }
 
     return (
