@@ -42,7 +42,7 @@ var server3 = https.createServer(credentials,app1);
  * Listen on provided port, on all network interfaces.
  */
 
-server1.listen(port1);
+server1.listen(port3);
 server1.on('error', onError);
 server1.on('listening', onListening);
 
@@ -50,7 +50,7 @@ server2.listen(port2);
 server2.on('error', onError);
 server2.on('listening', onListening);
 
-server3.listen(port3);
+server3.listen(port1);
 server3.on('error', onError);
 server3.on('listening', onListening);
 
@@ -174,7 +174,7 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  
+
   var addr = server3.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
