@@ -4,8 +4,11 @@ var updatedb=false;
  * Module dependencies.
  */
 
-var app = require('../app');
+var app1 = require('../app');
+var app2 = require('../app');
+var app3 = require('../app');
 var debug = require('debug')('foo:server');
+const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
@@ -21,24 +24,35 @@ deletemage();
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.port);
-app.set('port', port);
-
+var port1 = normalizePort(process.env.port1);
+app1.set('port', port1);
+var port2 = normalizePort(process.env.port2);
+app2.set('port', port2);
+var port3 = normalizePort(process.env.port3);
+app3.set('port', port3);
 
 /**
  * Create HTTP server.
  */
-
-//var server = http.createServer(app);
-var server = https.createServer(credentials,app);
+var server1 = http.createServer(app3);
+var server2 = http.createServer(app2);
+var server3 = https.createServer(credentials,app1);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server1.listen(port1);
+server1.on('error', onError);
+server1.on('listening', onListening);
+
+server2.listen(port2);
+server2.on('error', onError);
+server2.on('listening', onListening);
+
+server3.listen(port3);
+server3.on('error', onError);
+server3.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -149,7 +163,19 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
+  var addr = server1.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+
+  var addr = server2.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+  
+  var addr = server3.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
