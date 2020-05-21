@@ -1,0 +1,78 @@
+#RouteBox{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FieldDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.FieldLabel{
+    font-family: Oxygen, sans-serif;
+    font-size: 18px;
+    color: #1A1A1A;
+    width: 100px;
+}
+
+textarea {
+    margin: 20px;
+    border-radius: 0;
+    border: #303030 2px solid;
+    transition-duration: 300ms;
+    padding: 0;
+    padding-left: 10px;
+    font-family: Oxygen, sans-serif;
+    font-size: 16px;
+    color: #1A1A1A;
+    background-color: #E8E8E8;
+    outline: none;
+    width:500px;
+    height: 200px;
+}
+
+textarea:hover {
+    border: #707070 2px solid;
+}
+
+textarea:focus {
+
+    border: #FF6600 2px solid;
+
+}
+
+.ERBtts{
+    border:none;
+    width: 100px;
+    border-radius: 0px;
+    font-family: Oxygen, sans-serif;
+    font-size: 19px;
+    color: #EDEDED;
+    background-color: #181818;
+    outline: none;
+    transition-duration: 300ms;
+    border-top: #181818 2px solid;
+}
+
+.ERBtts:hover{
+    border-top: #FF6600 2px solid;
+    background-color: #303030;
+}
+
+.ERBtts:focus{
+    border-top: #FF6600 2px solid;
+    background-color: #303030;
+}
+
+#ERButtonsDiv{
+    width: 400px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}

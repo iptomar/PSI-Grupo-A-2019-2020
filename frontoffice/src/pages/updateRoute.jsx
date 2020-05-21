@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import './style/addRoute.css';
+import './style/updateRoute.css';
 import "./style/pageframe.css";
 import NavBar from "./navBar";
 
@@ -129,9 +129,9 @@ class UpdateRoute extends Component {
                                     ></textarea>
                                 </div>
 
-                                <div id="CRButtonsDiv">
-                                    <button className="CRBtts" onClick={() => { this.setState({ redirect: "/Routes" }) }} >Voltar</button>
-                                    <button className="CRBtts" onClick={ this.updateRoute}>Atualizar</button>
+                                <div id="ERButtonsDiv">
+                                    <button className="ERBtts" onClick={() => { this.setState({ redirect: "/Routes" }) }} >Voltar</button>
+                                    <button className="ERBtts" onClick={ this.updateRoute}>Atualizar</button>
                                 </div>
 
                                 <div id="CreateStatusDiv">{this.state.EditStatus}</div>
