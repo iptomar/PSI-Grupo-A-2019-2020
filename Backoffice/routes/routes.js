@@ -38,7 +38,7 @@ router.post("/insert", async function(req, res, next){
   d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
-  if(await validation(email)){
+  if(await validation(req.body.data.email)){
       var aux = true;
         //Activar chaves estrangeiras
         await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -76,7 +76,7 @@ router.post("/update", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
-  if(await validation(email)){
+  if(await validation(req.body.data.email)){
     var aux = true;
     //ToDo: 
     //- Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o criador do roteiro
