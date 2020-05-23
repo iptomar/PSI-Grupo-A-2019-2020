@@ -134,7 +134,7 @@ Lista os utilizadores
       * id
       * name
       * surname
-      * passwordº
+      * password
       * email
       * age
   * Exemplo:
