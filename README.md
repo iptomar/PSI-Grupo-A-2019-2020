@@ -591,7 +591,7 @@ Adiciona um proprietário
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Proprietary sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
