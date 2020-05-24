@@ -62,6 +62,7 @@ class AddImages extends Component {
         redirect: "follow",
       };
 
+      //Enviar o POST para o servidor
       let response = await fetch(
         this.props.ApiPath + "images/insert",
         requestOptions
@@ -69,7 +70,18 @@ class AddImages extends Component {
       //Resposta por parte do server
       let data = await response.json();
 
+      //Caso tenha enviado as imagens com sucesso
+      if (data.sucess == true) {
+        alert("Imagens inseridas com sucesso");
+      } 
+      //Caso contrário
+      else {
+        alert("Ocorreu um erro na inserção das imagens");
+      }
+
+      //Redirect para as imagens
       this.setState({ redirect: "/Image" });
+
     }
   }
 
