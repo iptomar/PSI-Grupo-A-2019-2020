@@ -79,9 +79,14 @@ Regista o utilizador.Obrigatório preencher todos os campos.
   * age
 * Requer token: **tokenAdmin**
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
+  * sucess: true
+  * message :
+      * id
+      * email
+  * Exemplo:
+      * ```"status": "OK"```
+      * ```"code": 200```
+      * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
 * Mensagens de erro:
   * ```"code": 401```
     * ``` errormesage = { sucess : false , mesage: "User already exists" }```
@@ -93,15 +98,25 @@ Regista o utilizador.Obrigatório preencher todos os campos.
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /login
-Autetica o utilizador
+Autentica o utilizador
 * metodo: **POST**
 * O body deve conter:  
   * password
   * email 
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 1,\n        \"name\": \"admin\",\n        \"surname\": \"admin\",\n        \"password\": \"admin\",\n        \"age\": 20,\n        \"email\": \"admin@admin.com\",\n        \"token\": \"VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57\"\n    }\n}"```	
+  * sucess: true
+  * message :
+      * id
+      * name
+      * surname
+      * password
+      * age
+      * email
+      * token
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 1,\n        \"name\": \"admin\",\n        \"surname\": \"admin\",\n        \"password\": \"admin\",\n        \"age\": 20,\n        \"email\": \"admin@admin.com\",\n        \"token\": \"VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57\"\n    }\n}"```	
 * Mensagens de erro:
   * ```"code": 401```
     * ``` errormesage = { sucess : false , mesage: "User or password incorret" }```
@@ -114,9 +129,18 @@ Autetica o utilizador
 Lista os utilizadores
 * metodo: **Get** 
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Carolina\",\n            \"surname\": \"Silva\",\n            \"email\": \"b@email.com\",\n            \"age\": 34\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hugo\",\n            \"surname\": \"Oliveira\",\n            \"email\": \"c@email.com\",\n            \"age\": 52\n        }\n    ]\n}"```
+  * sucess: true
+  * message :
+      * id
+      * name
+      * surname
+      * password
+      * email
+      * age
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Carolina\",\n            \"surname\": \"Silva\",\n            \"email\": \"b@email.com\",\n            \"age\": 34\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hugo\",\n            \"surname\": \"Oliveira\",\n            \"email\": \"c@email.com\",\n            \"age\": 52\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ```"code": 401```
     * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
@@ -131,9 +155,12 @@ Atualiza os dados do utilizador
   * data
     * email
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "WE CANT UPDATE THIS" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
@@ -147,9 +174,12 @@ Atualiza os dados do utilizador
   * user 
   * id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"User successfully deleted\"\n}"```
+  * sucess: true
+  * message : User successfully deleted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"User successfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "User doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
@@ -161,6 +191,13 @@ Atualiza os dados do utilizador
 Retorna a lista de roteiros
 * metodo: **Get** 
 * Retorna:
+  * sucess: true
+  * message : 
+      * id
+      * nome
+      * descricao
+      * user_id
+  * Exemplo:
   * ```"status": "OK"```
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Roteiro dos Bares\",\n            \"descricao\": \"Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. \",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Roteiro de Tomar\",\n            \"descricao\": \"A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. \",\n            \"user_id\": 1\n        }\n    ]\n}"```
@@ -177,9 +214,12 @@ Adiciona um roteiro
     * descricao
     * user id			
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : Route sucessfully inserted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -195,9 +235,12 @@ Não poderá ser permitido o update ao ID do roteiro
     * descricao
     * user id		
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully updated\"\n}"```
+  * sucess: true
+  * message : Route sucessfully updated
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully updated\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
@@ -210,9 +253,12 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
   * user 
   * id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
+  * sucess: true
+  * message : Route sucessfully deleted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
 
@@ -224,9 +270,16 @@ Devolve os roteiros que um utilizador criou
   * data 
       * user id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
+  * sucess: true
+  * message : 
+      * id
+      * nome
+      * descricao
+      * user_id
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -238,9 +291,13 @@ Lista os pontos de interesse dado id do roteiro
 * O body deve conter:
   * data (id do Roteiro)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
+  * sucess: true
+  * message : 
+      * id_inter
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -251,9 +308,20 @@ Lista os pontos de interesse dado o seu id
 * O body deve conter:
   * data (id do ponto)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        }\n    ]\n}"```
+  * sucess: true
+  * message :
+      * id
+      * titulo
+      * descricao
+      * coordenadas
+      * data
+      * tipoEdif
+      * user_id
+      * prop_id
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -271,9 +339,12 @@ Adiciona um ponto de interesse
     * user id
     * prop id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : Point sucessfully inserted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -284,9 +355,12 @@ Apaga os dados do ponto de interesse. Terá de ser verificado se o utilizador a 
 * O body deve conter: 
   * id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully deleted\"\n}"```
+  * sucess: true
+  * message : Point sucessfully deleted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Point doesn't exist" }```
 
@@ -305,9 +379,12 @@ Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador 
     * user id
     * prop id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully updated\"\n}"```
+  * sucess: true
+  * message : Point sucessfully updated
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully updated\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Point doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
@@ -319,9 +396,17 @@ Procura o utilizador que adicionao esses pontos de interesse ao roteiro
 * O body deve conter: 
   * data (id do Roteiro)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
+  * sucess: true
+  * message : 
+      * id
+      * name
+      * surname
+      * email
+      * age
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -335,9 +420,12 @@ Associa um ponto a uma rota
     * idrot (id do roteiro)
     * idpoint (id do ponto)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Image sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : Image sucessfully inserted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Image sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -351,9 +439,12 @@ Desassocia um ponto a uma rota
     * idrot (id do roteiro)
     * idpoint (id do ponto)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
+  * sucess: true
+  * message : Image sucessfully deleted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -365,9 +456,19 @@ Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de
 * O body deve conter:
   * id do ponto de interesse
 * Retorna: 
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar
+  * sucess: true
+  * message : 
+    * id
+    * Path
+    * Legenda
+    * AutorFonte
+    * Interesse_id
+    * usersid
+    * ( imagem em base 64)( *falta nome do atri* )
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -378,9 +479,18 @@ Retorna todos os dados das imagens dado o ponto de interesse
 * O body deve conter:
   * data (id do ponto de interesse)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_5300.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Vista exterior, 2017\",\n            \"AutorFonte\": \"Filipe Marques, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 2,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_6587.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Fonte e estrutura da sala de audiências, 2017\",\n            \"AutorFonte\": \"Gonçalo Figueiredo, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 3,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_6591.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Pátio interno, 2017\",\n            \"AutorFonte\": \"Gonçalo Figueiredo, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 4,\n            \"Path\": \"1586889539564\",\n            \"Legenda\": \"Legenda\",\n            \"AutorFonte\": \"AutorFonte\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        }\n    ]\n}"```
+  * sucess: true
+  * message : 
+    * id
+    * Path
+    * Legenda
+    * AutorFonte
+    * Interesse_id
+    * usersid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_5300.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Vista exterior, 2017\",\n            \"AutorFonte\": \"Filipe Marques, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 2,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_6587.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Fonte e estrutura da sala de audiências, 2017\",\n            \"AutorFonte\": \"Gonçalo Figueiredo, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 3,\n            \"Path\": \"../www/img/2_Edif_Publicos/A_PalacJustica/_MG_6591.jpg\",\n            \"Legenda\": \"Tribunal da Comarca de Tomar: Pátio interno, 2017\",\n            \"AutorFonte\": \"Gonçalo Figueiredo, LabIPT\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        },\n        {\n            \"id\": 4,\n            \"Path\": \"1586889539564\",\n            \"Legenda\": \"Legenda\",\n            \"AutorFonte\": \"AutorFonte\",\n            \"Interesse_id\": 1,\n            \"usersid\": 1\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -398,9 +508,12 @@ Adiciona uma imagem
     * usersid
     * imagem					
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Image sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : Image sucessfully inserted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Image sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -411,9 +524,19 @@ Retorna todas imagens dado o ponto de interesse
 * O body deve conter:
   * data (path da imagem)
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \Image sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : 
+    * Path
+    * Legenda
+    * AutorFonte
+    * Interesse_id
+    * tipoEdif
+    * usersid
+    * imagem
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -424,9 +547,12 @@ Apaga os dados da imagem
 * O body deve conter:
   * id 
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
+  * sucess: true
+  * message : image sucessfully deleted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"image sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it 2" }```
    * ```errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" }```
@@ -437,9 +563,16 @@ Apaga os dados da imagem
 Devolve a lista de todos os proprietários
 * metodo: **Get** 
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
- 
+  * sucess: true
+  * message : 
+    * id
+    * name
+    * work
+    * user_id
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar* 
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -453,9 +586,12 @@ Adiciona um proprietário
     * work
     * user id	
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+  * sucess: true
+  * message : Point sucessfully inserted
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Proprietary sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -470,9 +606,12 @@ Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a sol
     * work
     * user id
 * Retorna:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Proprietary sucessfully updated\"\n}"```
+  * sucess: true
+  * message : Proprietary sucessfully updated
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Proprietary sucessfully updated\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Proprietary doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
