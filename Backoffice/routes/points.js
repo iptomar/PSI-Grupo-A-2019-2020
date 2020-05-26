@@ -5,32 +5,6 @@ var knex = require("../utils/databaseConection");
 const {file } = require('../helpers')
 
 //Usage:
-//Return all points
-router.get("/list", async function(req, res, next){
-
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
-  await knex('Interesse')
-  .select()
-  .then(rows => {
-      let errormesage = { sucess : true , mesage: rows };
-      res.send(errormesage);
-    })
-  .catch(async function(err) {
-    var d = new Date();
-    await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-      "a",
-      err.stack()
-    );
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-    console.log(err);
-  });
-});
-
-//Usage:
 //body.id = id do ponto a actualizar
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
@@ -268,7 +242,7 @@ router.post("/pointtoroute", async function(req, res, next){
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  await knex("Inter_Roteir")
+  await knex("images")
   .insert({ id_roteir: req.body.data.idrot, id_inter: req.body.data.idpoint})
   .catch(async function(err) {
     d = new Date();
