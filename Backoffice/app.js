@@ -18,8 +18,7 @@ var app = express();
 
 // body parser
 //var bodyParser = require('body-parser');
-// parse application/json
-//app.use(bodyParser.json());
+//app.use(bodyParser.json({"limit":'5mb'}));
 
 // cors
  var cors = require('cors')

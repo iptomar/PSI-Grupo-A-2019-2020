@@ -1,15 +1,13 @@
 #!/usr/bin/env node
-var updatedb=false;
+var updatedb=true;
 /**
  * Module dependencies.
  */
 
-var app1 = require('../app');
-var app2 = require('../app');
-var app3 = require('../app');
+var app = require('../app');
 var debug = require('debug')('foo:server');
-const http = require('http');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 const {file } = require('../helpers')
@@ -19,40 +17,29 @@ var knex = require("../utils/databaseConection");
 var credentials = {key: privateKey, cert: certificate};
 
 updateDatabase();
-deletemage();
+
 /**
  * Get port from environment and store in Express.
  */
 
-var port1 = normalizePort(process.env.port1);
-app1.set('port', port1);
-var port2 = normalizePort(process.env.port2);
-app2.set('port', port2);
-var port3 = normalizePort(process.env.port3);
-app3.set('port', port3);
+var port = normalizePort(process.env.port);
+app.set('port', port);
+
 
 /**
  * Create HTTP server.
  */
-var server1 = http.createServer(app3);
-var server2 = http.createServer(app2);
-var server3 = https.createServer(credentials,app1);
+
+var server = http.createServer(app);
+//var server = https.createServer(credentials,app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server1.listen(port3);
-server1.on('error', onError);
-server1.on('listening', onListening);
-
-server2.listen(port2);
-server2.on('error', onError);
-server2.on('listening', onListening);
-
-server3.listen(port1);
-server3.on('error', onError);
-server3.on('listening', onListening);
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -98,38 +85,6 @@ async function updateDatabase() {
   //console.log(await knex.migrate.list());
 }
 
-async function deletemage() {
-  setInterval(async function() {
-
-    /*fs.readdir(directoryPath, function (err, files) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan directory: ' + err);
-      } 
-      //listing all files using forEach
-      files.forEach(function (file) {
-          // Do whatever you want to do with the file
-          console.log(file); 
-      });*/
-  
-
-
-
-    /*fs.unlink("./files/images/"+body.data.path+".txt").catch(async function(err) {
-      var d = new Date();
-      await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-        "a",
-        err.stack
-      );
-      errormesage = { sucess : false , mesage: "something went wrong and we are working on it 1" };
-      res.send(errormesage);
-      console.log(err);
-    });*/
-
-    }, 3600000);
-}
-
 /**
  * Event listener for HTTP server "error" event.
  */
@@ -163,19 +118,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server1.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-
-  var addr = server2.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-
-  var addr = server3.address();
+  var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;

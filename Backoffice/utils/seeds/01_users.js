@@ -11,8 +11,7 @@ exports.seed = function(knex, Promise) {
         name: "admin",
         surname: "admin" ,
         age: 20,
-        token: "VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57",
-        isadmin:true
+        token: "VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57"
       },
       {
         id: 2,
@@ -21,8 +20,7 @@ exports.seed = function(knex, Promise) {
         name: "Jacinto",
         surname: "Ribeiro" ,
         age: 21,
-        token: "Rx7US4kBzWu2m7GXcTUFiCqy5yqHSuxcwxkL2cRKqHUFAF2SKAJHeUSwM5OKT6Io",
-        isadmin:false
+        token: "Rx7US4kBzWu2m7GXcTUFiCqy5yqHSuxcwxkL2cRKqHUFAF2SKAJHeUSwM5OKT6Io"
 
       },
       {
@@ -32,8 +30,7 @@ exports.seed = function(knex, Promise) {
         name: "Carolina",
         surname: "Silva" ,
         age: 34,
-        token: "TKfmQhXnGtIX8cTwftOwcSQd6TqiRNTCFNyi8myvyFimhA12gcesrTm3mntUAtJV",
-        isadmin:false
+        token: "TKfmQhXnGtIX8cTwftOwcSQd6TqiRNTCFNyi8myvyFimhA12gcesrTm3mntUAtJV"
       },
       {
         id: 4,
@@ -42,8 +39,7 @@ exports.seed = function(knex, Promise) {
         name: "Hugo",
         surname: "Oliveira" ,
         age: 52,
-        token: "6ESr3WTBO6ab0nfhhiZoDXwRaoMfmVU4A62qIp8REzUDPqTqtQed1NJqovCid61S",
-        isadmin:false
+        token: "6ESr3WTBO6ab0nfhhiZoDXwRaoMfmVU4A62qIp8REzUDPqTqtQed1NJqovCid61S"
       }
     ]);
   });

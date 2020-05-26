@@ -195,8 +195,7 @@ router.post("/register", async function(req, res, next) {
       password: req.body.password,
       age: req.body.age,
       email: req.body.email,
-      token: randomstring,
-      isadmin:true
+      token: randomstring
     })
     .catch(async function(err) {
       var d = new Date();
