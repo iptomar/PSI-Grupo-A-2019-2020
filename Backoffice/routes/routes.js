@@ -15,6 +15,7 @@ router.get("/list", async function(req, res, next){
 
   await knex('Roteiro')
   .select()
+  .where({ isvalid:true })
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
@@ -37,7 +38,7 @@ router.get("/list", async function(req, res, next){
 router.post("/insert", async function(req, res, next){
   d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
-
+  req.body.data.isvalid=false;
   if(await validation(req.body.data.email)){
     if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
       var aux = true;
@@ -81,7 +82,7 @@ router.post("/insert", async function(req, res, next){
 router.post("/update", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
-
+  req.body.data.isvalid=false;
   if(await validation(req.body.data.email)){
     if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
       var aux = true;

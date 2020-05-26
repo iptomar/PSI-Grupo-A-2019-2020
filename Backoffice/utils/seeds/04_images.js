@@ -10,7 +10,8 @@ exports.seed = function(knex, Promise) {
         AutorFonte: "Filipe Marques, LabIPT",
         Path: "1",
         Interesse_id: 1,
-        usersid: 1
+        usersid: 1,
+        isvalid:true
 	  },    
       {
         id:"2" ,
@@ -18,7 +19,8 @@ exports.seed = function(knex, Promise) {
         AutorFonte: "Gonçalo Figueiredo, LabIPT",
         Path: "2",
         Interesse_id: 2,
-        usersid: 1
+        usersid: 1,
+        isvalid:false
 		},
       {
         id:"3" ,
@@ -26,7 +28,8 @@ exports.seed = function(knex, Promise) {
         AutorFonte: "Gonçalo Figueiredo, LabIPT",
         Path: "3",
         Interesse_id: 1,
-        usersid: 1
+        usersid: 1,
+        isvalid:false
 		}
     ]);
   });

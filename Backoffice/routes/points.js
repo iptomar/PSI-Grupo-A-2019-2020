@@ -17,7 +17,7 @@ router.post("/update", async function(req, res, next){
 
     //Activar chaves estrangeiras
     await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
+    req.body.data.isvalid=false;
     let upd = false;
 
     //Verificar se o ponto existe
@@ -106,6 +106,7 @@ router.post("/insert", async function(req, res, next){
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //ID do registo inserido
   let idCreated;
+  req.body.data.isvalid=false;
 
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -145,7 +146,7 @@ router.post("/searchpoint", async function(req, res, next){
 
   await knex('Interesse')
   .select("*")
-  .where({ id: req.body.data })
+  .where({ id: req.body.data,isvalid:true })
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
@@ -178,7 +179,7 @@ router.post("/search", async function(req, res, next){
 
   await knex('Inter_Roteir')
   .select("id_inter")
-  .where({ id_roteir: req.body.data })
+  .where({ id_roteir: req.body.data,isvalid:true })
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);

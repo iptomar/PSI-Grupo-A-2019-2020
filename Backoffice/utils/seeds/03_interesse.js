@@ -12,7 +12,8 @@ exports.seed = function(knex, Promise) {
 		data: '1951',
     tipoEdif: 'Edifício Público',
     user_id: 1,
-    prop_id: 1
+    prop_id: 1,
+    isvalid:true
 	  },
       {
        id: 2,
@@ -22,7 +23,8 @@ exports.seed = function(knex, Promise) {
 		data: '1952-1969',
     tipoEdif: 'Edifício Público',
     user_id: 1,
-    prop_id: 1
+    prop_id: 1,
+    isvalid:true
 		},
       {
         id: 3,
@@ -32,7 +34,8 @@ exports.seed = function(knex, Promise) {
 		data: '1951-1957',
 		tipoEdif: 'Edifício Público',
     user_id: 3,
-    prop_id: 1
+    prop_id: 1,
+    isvalid:false
 		}
 		
     ]);

@@ -15,7 +15,7 @@ router.get("/searchgetimage", async function(req, res, next){
   var datas=[];
   await knex('images')
   .select("*")
-  .where({Interesse_id:req.query.id})
+  .where({Interesse_id:req.query.id,isvalid:true})
   .then(async rows => {
       for(var i = 0;i<rows.length;i++){
       try{
@@ -72,7 +72,7 @@ router.post("/search", async function(req, res, next){
 
   await knex('images')
   .select("*")
-  .where({Interesse_id:req.body.data})
+  .where({Interesse_id:req.body.data,isvalid:true})
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
@@ -119,7 +119,7 @@ router.post("/insert", async function(req, res, next){
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
-
+  req.body.data.dados.isvalid=false;
   d = new Date();
   req.body.data.dados.Path = ""+Date.now();
   fs.writeFileSync("./files/images/"+req.body.data.dados.Path+".txt", req.body.data.imagem);
