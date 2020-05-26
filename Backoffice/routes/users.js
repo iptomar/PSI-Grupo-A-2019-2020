@@ -279,8 +279,7 @@ router.post("/update", async function(req, res, next) {
 //body.email = e-mail do utilizador a eliminar
 router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
-  if(await validation(req.body.email)){
-  //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
+  if(!(await validation(req.body.email))){
 
   let del = false;
 
@@ -325,5 +324,87 @@ router.delete("/delete", async function(req, res, next) {
     res.send(errormesage);
   }
 });
+
+//usage:
+//body.user = email do utilizador para dar administrador
+//body.email = email do utilizador atual
+router.post("/giveadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validation(req.body.email)){
+  try{
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  var admin = false;
+      return await knex('users').where({ token: email.body.user }).update({isadmin:true}).then(async function( resp ){ 
+        let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);
+    }).catch(async function(err) {
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
+      res.send(errormesage);
+        });
+
+  }
+  catch (err){
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+  }
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "only admins can do this"};
+    res.send(errormesage);
+  }
+
+});
+
+
+//usage:
+//body.user = email do utilizador para dar administrador
+//body.email = email do utilizador atual
+router.post("/removeadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validation(req.body.email)){
+  try{
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  var admin = false;
+      return await knex('users').where({ token: email.body.user }).update({isadmin:false}).then(async function( resp ){ 
+        let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);
+    }).catch(async function(err) {
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
+      res.send(errormesage);
+        });
+
+  }
+  catch (err){
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+  }
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "only admins can do this"};
+    res.send(errormesage);
+  }
+
+});
+
 
 module.exports = router;
