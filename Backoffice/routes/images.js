@@ -236,5 +236,70 @@ router.delete("/delete", async function(req, res, next){
 });
 
 
+//Usage:
+//body.email = email do utilizador atual
+router.post("/getnonvalidated", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+
+  if(await validation(req.body.email)){
+  
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  await knex('images')
+  .select("*")
+  .where({isvalid:false})
+  .then(rows => {
+      let errormesage = { sucess : true , mesage: rows };
+      res.send(errormesage);
+    })
+  .catch(async function(err) {
+    d = new Date();
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+  /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+  res.send(errormesage);*/
+}else
+{
+  let errormesage= {sucess: false, mesage: "only admins can do this"};
+  res.send(errormesage);
+}
+});
+
+//Usage:
+//body.data = <id imagem>
+//body.email = email do utilizador atual
+router.post("/validate", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  if(await validation(req.body.email)){
+    await knex('images')
+    .where({id: req.body.id})
+    .update({isvalid:true}).then(async function( resp ){ 
+      let errormesage = { sucess : true , mesage: "update sucessfull" };
+      res.send(errormesage);
+  }).catch(async function(err) {
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );      let errormesage = { sucess : false , mesage: "token not used" };
+    res.send(errormesage);
+      });
+}else
+{
+  let errormesage= {sucess: false, mesage: "only admins can do this"};
+  res.send(errormesage);
+}
+});
 
 module.exports = router;

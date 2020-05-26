@@ -406,5 +406,22 @@ router.post("/removeadmin", async function(req, res, next) {
 
 });
 
+//usage:
+//body.email = email do utilizador atual
+router.post("/isadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validation(req.body.email)){
+ 
+    let errormesage = { sucess : true , mesage: "is admin" };
+    res.send(errormesage)
+  
+  }
+  else
+  {
+    let errormesage= {sucess : true , mesage: "is not admin" };
+    res.send(errormesage);
+  }
+
+});
 
 module.exports = router;
