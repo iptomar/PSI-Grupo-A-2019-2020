@@ -44,7 +44,6 @@ class Routes extends Component {
     ).catch((error) => console.log("error", error));
     let json = await response.json();
     this.setState({ routes: json.mesage });
-    console.log(json.mesage);
   }
 
   async getPoints(id) {
@@ -66,8 +65,6 @@ class Routes extends Component {
       requestOptions
     );
     let data = await response.json();
-
-    console.log(data);
 
     if (data.mesage.length == 0) {
       this.setState({ points: [] });
@@ -97,8 +94,26 @@ class Routes extends Component {
         requestOptions
       );
       let data = await response.json();
-      console.log(data);
-      newPontos.push(data.mesage[0]);
+      data = data.mesage[0];
+      console.log(data.id);
+      //
+      //
+      // vai buscar imagens
+      requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        mode: "cors",
+        redirect: "follow",
+      };
+      let res = await fetch(
+        this.props.ApiPath + "images/searchgetimage?id="+data.id,
+        requestOptions
+      );
+      let dataImg = await res.json();
+      data.img = dataImg.mesage;
+      
+
+      newPontos.push(data);
       if (pontos.length == newPontos.length) {
         this.setState({ points: newPontos });
       }
@@ -149,7 +164,7 @@ class Routes extends Component {
     var raw = JSON.stringify({
       data: {
         idrot: idRoteiro,
-        idpoint: idPonto
+        idpoint: idPonto,
       },
     });
     //Request options
@@ -168,7 +183,6 @@ class Routes extends Component {
     //Resposta por parte do servidor
     let data = await response.json();
 
-    console.log(data);
     //Obter os roteiros
     await this.getRoutes();
     //Obter os pontos
@@ -233,6 +247,14 @@ class Routes extends Component {
 
     if (this.state.points.length != 0) {
       this.state.points.forEach((element) => {
+        var imgArr = [];
+        if(element.img.length!=0){
+           element.img.forEach(async(image)=>{
+            imgArr.push(
+              <img src={"data:image/jpg;base64," + image.img} width="200"></img>
+            )
+          })
+        }
         ps.push(
           <table id="UsersTable">
             <tr>
@@ -243,7 +265,12 @@ class Routes extends Component {
             <tr>
               <td>{element.descricao}</td>
             </tr>
-            <button onClick={() => this.deletePointFromRoute(this.state.routeId, element.id)}>
+            {imgArr}
+            <button
+              onClick={() =>
+                this.deletePointFromRoute(this.state.routeId, element.id)
+              }
+            >
               ❌
             </button>
           </table>
