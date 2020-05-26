@@ -79,15 +79,16 @@ router.post("/insert", async function(req, res, next){
 //Usage:
 //body.id = id do proprietário a actualizar
 //body.data = informação a actualizar(json)
+//body.email = e-mail do utilizador
 router.post("/update", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   req.body.data.isvalid=false;
-  if(await validation(req.body.data.email)){
+  if(await validation(req.body.email)){
     if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
       var aux = true;
       //ToDo: 
-      //- Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o criador do roteiro
+      //- Terá de ser verificado se o utilizador a solicitar o update é o criador do roteiro
       //- Não poderá ser permitido o update ao ID do roteiro
 
       //Activar chaves estrangeiras
@@ -143,52 +144,61 @@ router.post("/update", async function(req, res, next){
 
 //Usage:
 //body.data = id do roteiro a eliminar(json)
+//body.email = e-mail do utilizador
 router.delete("/delete", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
   var aux = true;
-  //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
-  //um administrador ou o utilizador que o criou
+  if(await validation(req.body.email)){
+    
+    //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
+    //um administrador ou o utilizador que o criou
 
-  //Activar chaves estrangeiras
-  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+    //Activar chaves estrangeiras
+    await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  let del = false;
+    let del = false;
 
-  //Verificar se o ponto existe
-  await knex('Roteiro')
-  .where({id: req.body.id})
-  .then(result => {
-      if(!result.length == 0){
-          del = true;
-      } else {
-        aux=!aux;
-          let errormesage = {sucess: false, mesage: "Route doesn't exist"};
-          res.send(errormesage);
-      }
-  })
-  .catch(async function(err){
-    d = new Date();
-    await file(
-      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-      "a",
-      err.stack
-    );      aux=!aux;
-    let errormesage = { sucess : false , mesage: "token not used" };
-    res.send(errormesage);
-  });
-
-  
-  //Eliminar o ponto
-  if(del){
+    //Verificar se o ponto existe
     await knex('Roteiro')
     .where({id: req.body.id})
-    .del();
+    .then(result => {
+        if(!result.length == 0){
+            del = true;
+        } else {
+          aux=!aux;
+            let errormesage = {sucess: false, mesage: "Route doesn't exist"};
+            res.send(errormesage);
+        }
+    })
+    .catch(async function(err){
+      d = new Date();
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      aux=!aux;
+      let errormesage = { sucess : false , mesage: "token not used" };
+      res.send(errormesage);
+    });
+
+    
+    //Eliminar o ponto
+    if(del){
+      await knex('Roteiro')
+      .where({id: req.body.id})
+      .del();
+    }
+    if(aux){
+    let errormesage= {sucess: true, mesage: "Route sucessfully deleted"};
+    res.send(errormesage);
+    }
   }
-  if(aux){
-  let errormesage= {sucess: true, mesage: "Route sucessfully deleted"};
-  res.send(errormesage);
+  else
+  {
+    let errormesage= {sucess: false, mesage: "admin only"};
+    res.send(errormesage);
   }
 });
 

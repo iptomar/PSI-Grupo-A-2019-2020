@@ -276,9 +276,10 @@ router.post("/update", async function(req, res, next) {
 //usage:
 //body.user = token
 //body.data = id do utilizador a eliminar(json)
+//body.email = e-mail do utilizador a eliminar
 router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
-
+  if(await validation(req.body.email)){
   //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
 
   let del = false;
@@ -317,6 +318,12 @@ router.delete("/delete", async function(req, res, next) {
     let errormesage = { sucess : true , mesage: "User successfully deleted" };
       res.send(errormesage);
     //res.send(msg);
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "admins cant be deleted"};
+    res.send(errormesage);
+  }
 });
 
 module.exports = router;
