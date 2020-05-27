@@ -17,12 +17,12 @@ public class LoginSuccessTest {
     @Test
     public void loginSuccess() {
         try {
-            driver.get("http://188.251.50.68:4000/");
+            driver.get("http://localhost:4000");
             Thread.sleep(5000);
             driver.findElement(By.id("LogInOut")).click();
             Thread.sleep(2000);
              String url = driver.getCurrentUrl();
-             Assert.assertEquals(true,url.contains("Login"));
+             Assert.assertEquals(true,url.contains("login"));
              driver.findElement(By.name("email")).click();
              driver.findElement(By.name("email")).sendKeys("admin@admin.com");
              Thread.sleep(500);
@@ -53,7 +53,7 @@ public class LoginSuccessTest {
         try {
             //*[@id="NavButtons"]/button[1]
             driver.findElement(By.xpath("//*[@id='NavButtons']/button[1]")).click();
-            if(!driver.getCurrentUrl().contains("Routes")){
+            if(!driver.getCurrentUrl().contains("routes")){
                 Assert.fail();
                 driver.quit();
             }
@@ -71,7 +71,7 @@ public class LoginSuccessTest {
         try {
             //*[@id="NavButtons"]/button[1]
             driver.findElement(By.xpath("//*[@id='NavButtons']/button[2]")).click();
-            if(!driver.getCurrentUrl().contains("MyPoints")){
+            if(!driver.getCurrentUrl().contains("mypoints")){
                 Assert.fail();
                 
                 driver.quit();

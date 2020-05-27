@@ -16,7 +16,7 @@ public class Capabilities {
     
     
     public Capabilities(){
-	System.setProperty("webdriver.chrome.driver","C:\\Users\\Carlos\\Desktop\\selenium-java-3.141.59\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver","C:\\Users\\Tiago Costa\\Desktop\\selenium-java-3.141.59\\chromedriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("chrome.switches", Arrays.asList("--test-type","--ignore-certificate-errors"));
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

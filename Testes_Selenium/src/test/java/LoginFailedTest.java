@@ -15,12 +15,12 @@ public class LoginFailedTest {
     @Test
     public void loginFail() {
         try {
-            driver.get("http://188.251.50.68:4000/");
+            driver.get("http://localhost:4000");
             Thread.sleep(5000);
             driver.findElement(By.id("LogInOut")).click();
             Thread.sleep(2000);
              String url = driver.getCurrentUrl();
-             Assert.assertEquals(true,url.contains("Login"));
+             Assert.assertEquals(true,url.contains("login"));
              driver.findElement(By.name("email")).click();
              driver.findElement(By.name("email")).sendKeys("user-inexistente");
              Thread.sleep(500);
