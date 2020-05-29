@@ -179,7 +179,7 @@ router.post("/search", async function(req, res, next){
 
   await knex('Inter_Roteir')
   .select("id_inter")
-  .where({ id_roteir: req.body.data,isvalid:true })
+  .where({ id_roteir: req.body.data })
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
