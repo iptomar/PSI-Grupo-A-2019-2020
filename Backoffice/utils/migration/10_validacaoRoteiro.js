@@ -1,5 +1,5 @@
 exports.up = (knex, Promise) => {
-    return knex.schema.table('images', table => {
+    return knex.schema.table('Roteiro', table => {
     table.boolean('isvalid');
 })
 }
