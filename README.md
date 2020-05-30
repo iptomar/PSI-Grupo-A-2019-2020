@@ -37,8 +37,8 @@ fetch("https://localhost:3000/users/register", requestOptions)
 -----------
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
-  * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#)
-  * [/ (?)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-1)
+  * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-list)
+  * [/ (?)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-?)
   * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#register-1)
   * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#login-1)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
@@ -91,7 +91,7 @@ Devolve lista de utilizadores
 
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### /
+#### / (?)
 Devolve lista de utilizadores???
 * metodo: **POST**
 * O body deve conter: 
@@ -635,7 +635,7 @@ Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse???
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /list
-Mostra os pontos não válidos
+Retorna a lista dos pontos de interesse
 * metodo: **GET**
 * Retorna:
   * sucess: true
