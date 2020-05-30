@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file } = require('../helpers')
+const {file,validateUser } = require('../helpers')
 
 //Usage:
 //Return all owners
@@ -64,13 +64,13 @@ router.post("/insert", async function(req, res, next){
 
 //Usage:
 //body.id = id do proprietário a actualizar
+//body.user = e-mail do utilizador
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
-
+if(await validateUser(req.body.user)){
   //ToDo: 
-  //- Terá de ser verificado se o utilizador a solicitar o update é um administrador
   //- Não poderá ser permitido o update ao ID do ponto
 
   //Activar chaves estrangeiras
@@ -108,6 +108,12 @@ router.post("/update", async function(req, res, next){
 
   let errormesage= {sucess: true, mesage: "Proprietary sucessfully updated"};
   res.send(errormesage);
+}
+else
+{
+  let errormesage= {sucess: false, mesage: "admin only"};
+  res.send(errormesage);
+}
 });
 
 module.exports = router;
