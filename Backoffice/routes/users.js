@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file } = require('../helpers')
+const {file,validation,validateUser } = require('../helpers')
 
 /* GET users listing. */
 router.get("/", async function(req, res, next) {
@@ -62,9 +62,10 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // o token é o do administrador?
   await knex("users")
     .select("*")
-    .where({ token: req.params.tokenAdmin })
+    .where({ email: "admin@admin.com" })
     .then(result => {
-      if (!result[0].isadmin) {
+      console.log(result[0].token);
+      if (result[0].token != req.params.tokenAdmin) {
         let errormesage = {
           sucess: false,
           mesage: "The token provided is not the admin's",
@@ -89,7 +90,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 
   // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
-    .select('id','name','surname','email','age','isadmin')
+    .select('id','name','surname','email','age')
     .whereNot({ name: "admin" })
     .then(response => {
       let errormesage = { sucess : true , mesage: response };
@@ -101,13 +102,16 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
 router.post("/register", async function(req, res, next) {
+  if(await validation(req.body.data.email)){
+    if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
   // o body está preenchido? se não pede para preencher todos os campos
   if (
     req.body.email == null ||
     req.body.password == null ||
     req.body.name == null ||
     req.body.surname == null ||
-    req.body.age == null
+    req.body.age == null ||
+    req.body.tokenAdmin == null
   ) {
     //let error = { error: "Incorrect parameters" };
     let errormesage = { sucess : false , mesage: "Incorrect parameters" };
@@ -115,6 +119,39 @@ router.post("/register", async function(req, res, next) {
     //res.status(400).send(error);
     return;
   }
+
+  // o token enviado é o do admin
+  await knex("users")
+    .select("*")
+    .where({ email: "admin@admin.com" })
+    .then(result => {
+      result = result[0];
+
+      // O token enviado tem que ser o do admin
+      if (req.body.tokenAdmin != result.token) {
+        let errormesage = {
+          sucess: false,
+          mesage: "The token provided is not the admin's"
+        };
+        res.send(errormesage);
+        //res.status(401).send(error);
+        return;
+      }
+    })
+    .catch(async function(err) {
+      var d = new Date();
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );
+
+      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+      console.log(err);
+
+      //res.send(err);
+    });
 
   let query;
 
@@ -161,7 +198,7 @@ router.post("/register", async function(req, res, next) {
       age: req.body.age,
       email: req.body.email,
       token: randomstring,
-      isadmin: false
+      isadmin:true
     })
     .catch(async function(err) {
       var d = new Date();
@@ -196,6 +233,16 @@ router.post("/register", async function(req, res, next) {
       console.log(err);
 
     });
+  }
+  else{
+    let errormesage= {sucess: false , mesage: "not valid age"};
+  res.send(errormesage);
+  }
+}
+  else{
+    let errormesage= {sucess: false , mesage: "not valid e-mail"};
+  res.send(errormesage);
+  }
 });
 
 //usage:
@@ -244,7 +291,7 @@ router.post("/update", async function(req, res, next) {
 //body.email = e-mail do utilizador a eliminar
 router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
-  if(!(await validation(req.body.email))){
+  if(!(await validateUser(req.body.email))){
 
   let del = false;
 
@@ -295,12 +342,12 @@ router.delete("/delete", async function(req, res, next) {
 //body.email = email do utilizador atual
 router.post("/giveadmin", async function(req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
   try{
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
-      return await knex('users').where({ token: email.body.user }).update({isadmin:true}).then(async function( resp ){ 
+      return await knex('users').where({ email: req.body.user }).update({isadmin:true}).then(async function( resp ){ 
         let errormesage = { sucess : true , mesage: "update sucessfull" };
         res.send(errormesage);
     }).catch(async function(err) {
@@ -308,7 +355,7 @@ router.post("/giveadmin", async function(req, res, next) {
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
         err.stack
-      );      let errormesage = { sucess : false , mesage: "token not used" };
+      );      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
         });
 
@@ -336,12 +383,12 @@ router.post("/giveadmin", async function(req, res, next) {
 //body.email = email do utilizador atual
 router.post("/removeadmin", async function(req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
   try{
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
-      return await knex('users').where({ token: email.body.user }).update({isadmin:false}).then(async function( resp ){ 
+      return await knex('users').where({ email: req.body.user }).update({isadmin:false}).then(async function( resp ){ 
         let errormesage = { sucess : true , mesage: "update sucessfull" };
         res.send(errormesage);
     }).catch(async function(err) {
@@ -349,7 +396,7 @@ router.post("/removeadmin", async function(req, res, next) {
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
         err.stack
-      );      let errormesage = { sucess : false , mesage: "token not used" };
+      );      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
         });
 
@@ -375,7 +422,7 @@ router.post("/removeadmin", async function(req, res, next) {
 //body.email = email do utilizador atual
 router.post("/isadmin", async function(req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
  
     let errormesage = { sucess : true , mesage: "is admin" };
     res.send(errormesage)
