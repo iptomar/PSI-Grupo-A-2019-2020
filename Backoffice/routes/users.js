@@ -62,10 +62,9 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // o token é o do administrador?
   await knex("users")
     .select("*")
-    .where({ email: "admin@admin.com" })
+    .where({ token: req.params.tokenAdmin })
     .then(result => {
-      console.log(result[0].token);
-      if (result[0].token != req.params.tokenAdmin) {
+      if (!result[0].isadmin) {
         let errormesage = {
           sucess: false,
           mesage: "The token provided is not the admin's",
@@ -90,7 +89,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 
   // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
-    .select('id','name','surname','email','age')
+    .select('id','name','surname','email','age','isadmin')
     .whereNot({ name: "admin" })
     .then(response => {
       let errormesage = { sucess : true , mesage: response };
@@ -102,16 +101,13 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
 router.post("/register", async function(req, res, next) {
-  if(await validation(req.body.data.email)){
-    if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
   // o body está preenchido? se não pede para preencher todos os campos
   if (
     req.body.email == null ||
     req.body.password == null ||
     req.body.name == null ||
     req.body.surname == null ||
-    req.body.age == null ||
-    req.body.tokenAdmin == null
+    req.body.age == null
   ) {
     //let error = { error: "Incorrect parameters" };
     let errormesage = { sucess : false , mesage: "Incorrect parameters" };
@@ -119,39 +115,6 @@ router.post("/register", async function(req, res, next) {
     //res.status(400).send(error);
     return;
   }
-
-  // o token enviado é o do admin
-  await knex("users")
-    .select("*")
-    .where({ email: "admin@admin.com" })
-    .then(result => {
-      result = result[0];
-
-      // O token enviado tem que ser o do admin
-      if (req.body.tokenAdmin != result.token) {
-        let errormesage = {
-          sucess: false,
-          mesage: "The token provided is not the admin's"
-        };
-        res.send(errormesage);
-        //res.status(401).send(error);
-        return;
-      }
-    })
-    .catch(async function(err) {
-      var d = new Date();
-      await file(
-        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-        "a",
-        err.stack
-      );
-
-      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-      console.log(err);
-
-      //res.send(err);
-    });
 
   let query;
 
@@ -198,7 +161,7 @@ router.post("/register", async function(req, res, next) {
       age: req.body.age,
       email: req.body.email,
       token: randomstring,
-      isadmin:true
+      isadmin: false
     })
     .catch(async function(err) {
       var d = new Date();
@@ -233,16 +196,6 @@ router.post("/register", async function(req, res, next) {
       console.log(err);
 
     });
-  }
-  else{
-    let errormesage= {sucess: false , mesage: "not valid age"};
-  res.send(errormesage);
-  }
-}
-  else{
-    let errormesage= {sucess: false , mesage: "not valid e-mail"};
-  res.send(errormesage);
-  }
 });
 
 //usage:
