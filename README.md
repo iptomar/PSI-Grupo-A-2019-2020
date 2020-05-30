@@ -44,17 +44,17 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete)
-  * [giveadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#giveadmin)
-  * [removeadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#removeadmin)
-  * [isadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#isadmin)
+  * [giveadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#giveadmin)
+  * [removeadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#removeadmin)
+  * [isadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#isadmin)
 * [Roteiros](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#roteiros)
   * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-1)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-1)
-  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
+  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
+  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated)
+  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate)
 * [Pontos de Interesse](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pontos-de-interesse)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search)
   * [searchpoint](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchpoint)
@@ -64,6 +64,9 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [searchUser](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchuser)
   * [pointtoroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointtoroute)
   * [pointoutroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointoutroute)
+  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated-1)
+  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate-1)
+  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
 * [Imagens](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#imagens)
   * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search-1)
@@ -71,11 +74,11 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getimage)
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#deleteimage)
 * [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#propriet%C3%A1rios)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
+  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-2)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
 ### Autenticação
-#### /
+#### / (list)
 Devolve lista de utilizadores
 * metodo: **GET**
 * Retorna:
@@ -459,10 +462,11 @@ Lista os pontos de interesse dado o seu id
       * tipoEdif
       * user_id
       * prop_id
+      * isvalid
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        }\n    ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        ,\n            \"isvalid\": true\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -481,11 +485,12 @@ Adiciona um ponto de interesse
     * prop id
 * Retorna:
   * sucess: true
-  * message : Point sucessfully inserted
+  * message : 
+    * id (id do ponto)
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1    }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -518,7 +523,7 @@ Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador 
     * data
     * tipoEdif
     * user id
-    * prop id
+    * prop id        
 * Retorna:
   * sucess: true
   * message : Point sucessfully updated
@@ -539,16 +544,11 @@ Procura o utilizador que adicionao esses pontos de interesse ao roteiro
 * Retorna:
   * sucess: true
   * message : 
-      * id
-      * name
-      * surname
-      * email
-      * age
+      * id ( id do ponto)
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n\n}"```
-* Mensagens de erro:
+     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
@@ -589,6 +589,73 @@ Desassocia um ponto a uma rota
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /getnonvalidated
+Mostra os pontos não válidos
+* metodo: **POST**
+* O body deve conter:
+  * email
+* Retorna:
+  * sucess: true
+  * message : 
+    * id
+    * titulo
+    * descricao
+    * coordenadas
+    * data
+    * tipoEdif
+    * user id
+    * prop id
+    * isvalid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n,\n            \"isvalid\": true\n        }\n    ]\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### //validate
+Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse??? *falta confirmar*
+* metodo: **POST**
+* O body deve conter:
+  * id (id do Ponto)
+  * email
+* Retorna:
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"updated sucessfull\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "token not used" }```
+  * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /list
+Mostra os pontos não válidos
+* metodo: **GET**
+* Retorna:
+  * sucess: true
+  * message : 
+    * id
+    * titulo
+    * descricao
+    * coordenadas
+    * data
+    * tipoEdif
+    * user id
+    * prop id
+    * isvalid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n,\n            \"isvalid\": true\n        }\n    ]\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }````
+  
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Imagens
 #### /searchgetimage
