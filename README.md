@@ -37,17 +37,24 @@ fetch("https://localhost:3000/users/register", requestOptions)
 -----------
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
+  * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#)
+  * [/ (?)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-1)
   * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#register-1)
   * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#login-1)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete)
+  * [giveadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#giveadmin)
+  * [removeadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#removeadmin)
+  * [isadmin)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#isadmin)
 * [Roteiros](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#roteiros)
   * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-1)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-1)
-  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
+  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate)
+  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
+  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
 * [Pontos de Interesse](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pontos-de-interesse)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search)
   * [searchpoint](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchpoint)
@@ -68,6 +75,33 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
 ### Autenticação
+#### /
+Devolve lista de utilizadores
+* metodo: **GET**
+* Retorna:
+    * id
+    * name
+    * surname
+    * password
+    * email
+    * age
+
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /
+Devolve lista de utilizadores???
+* metodo: **POST**
+* O body deve conter: 
+    * *falta adicionar*
+* Retorna:
+    * id
+    * name
+    * surname
+    * password
+    * email
+    * age
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ####  /register
 Regista o utilizador.Obrigatório preencher todos os campos.
  * metodo: **POST**
@@ -129,6 +163,8 @@ Autentica o utilizador
 Lista os utilizadores
 * metodo: **Get** 
 * Retorna:
+* O body deve conter:  
+    * tokenAdmin
   * sucess: true
   * message :
       * id
@@ -153,7 +189,11 @@ Atualiza os dados do utilizador
 * O body deve conter:
   * user 
   * data
+    * name
+    * surname
+    * password
     * email
+    * age
 * Retorna:
   * sucess: true
   * message : update sucessfull
@@ -172,7 +212,10 @@ Atualiza os dados do utilizador
 * metodo: **Delete**
 * O body deve conter:
   * user 
-  * id
+    * token
+  * data
+    * id
+  * email
 * Retorna:
   * sucess: true
   * message : User successfully deleted
@@ -184,6 +227,58 @@ Atualiza os dados do utilizador
   * ``` errormesage = { sucess : false , mesage: "User doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ``` errormesage = {sucess: false, mesage: "admins cant be deleted"}``` 
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+####  /giveadmin
+Torna um utilizador administrador
+* metodo: **POST**
+* O body deve conter:
+  * user (email do utilizador para dar administrador)
+  * email (email do utilizador atual)
+* Retorna:
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+####  /removeadmin
+Torna um administrador num utilizador (aka retira previlégios de administrador de um utilizador)
+* metodo: **POST**
+* O body deve conter:
+  * user (email do utilizador para dar administrador)
+  * email (email do utilizador atual)
+* Retorna:
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+####  /isadmin
+Verifica se um utilizador é administrador
+* metodo: **POST**
+* O body deve conter:
+  * email (email do utilizador atual)
+* Retorna:
+  * sucess: true
+  * message : is admin ou is not admin
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is admin\"\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is not admin\"\n}"```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
  ### Roteiros
@@ -197,10 +292,11 @@ Retorna a lista de roteiros
       * nome
       * descricao
       * user_id
+      * isvalid
   * Exemplo:
   * ```"status": "OK"```
   * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Roteiro dos Bares\",\n            \"descricao\": \"Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. \",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Roteiro de Tomar\",\n            \"descricao\": \"A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. \",\n            \"user_id\": 1\n        }\n    ]\n}"```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n ,\n            \"isvalid:\"true\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Roteiro dos Bares\",\n            \"descricao\": \"Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. \",\n            \"user_id\": 1\n ,\n            \"isvalid:\"true\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Roteiro de Tomar\",\n            \"descricao\": \"A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. \",\n            \"user_id\": 1\n,\n            \"isvalid:\"true\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -229,11 +325,13 @@ Atualiza os dados do roteiro.Terá de ser verificado se o utilizador a solicitar
 Não poderá ser permitido o update ao ID do roteiro
 * metodo: **POST**
 * O body deve conter:
-  * user 
+  * id (id do proprietário a actualizar)
+  * email  
   * data
     * nome
     * descricao
-    * user id		
+    * user id	
+    * isvalid
 * Retorna:
   * sucess: true
   * message : Route sucessfully updated
@@ -250,8 +348,9 @@ Não poderá ser permitido o update ao ID do roteiro
 Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
 * O body deve conter:
-  * user 
-  * id
+  * email 
+  * data
+    * id
 * Retorna:
   * sucess: true
   * message : Route sucessfully deleted
@@ -261,6 +360,8 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
+  * ``` errormesage = { sucess : false , mesage: "token not used" }```
+  * ```errormesage= {sucess: false, mesage: "admin only"}```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /userSearch
@@ -276,12 +377,52 @@ Devolve os roteiros que um utilizador criou
       * nome
       * descricao
       * user_id
+      * isvalid
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n,\n            \"isvalid:\"true\n        },\n ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /getnonvalidated
+Mostra os roteiros não válidos
+* metodo: **POST**
+* O body deve conter:
+  * email
+* Retorna:
+  * sucess: true
+  * message : 
+      * id
+      * nome
+      * descricao
+      * user_id
+      * isvalid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n,\n            \"isvalid:\"false\n        },\n ]\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### //validate
+Valida um roteiro
+* metodo: **POST**
+* O body deve conter:
+  * id (id Roteiro)
+  * email
+* Retorna:
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"updated sucessfull\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "token not used" }```
+  * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Pontos de interesse
