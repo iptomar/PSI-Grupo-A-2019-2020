@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file,validation } = require('../helpers')
+const {file,validateUser } = require('../helpers')
 
 //Usage:
 //Return all routes
@@ -39,8 +39,6 @@ router.post("/insert", async function(req, res, next){
   d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   req.body.data.isvalid=false;
-  if(await validation(req.body.data.email)){
-    if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
       var aux = true;
         //Activar chaves estrangeiras
         await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -64,16 +62,6 @@ router.post("/insert", async function(req, res, next){
         let errormesage= {sucess: true, mesage: "Route sucessfully inserted"};
         res.send(errormesage);
       }
-  }
-  else{
-    let errormesage= {sucess: false , mesage: "not valid age"};
-  res.send(errormesage);
-  }
-}
-  else{
-    let errormesage= {sucess: false , mesage: "not valid e-mail"};
-  res.send(errormesage);
-  }
 });
 
 //Usage:
@@ -84,8 +72,7 @@ router.post("/update", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   req.body.data.isvalid=false;
-  if(await validation(req.body.email)){
-    if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
+  
       var aux = true;
       //ToDo: 
       //- Terá de ser verificado se o utilizador a solicitar o update é o criador do roteiro
@@ -130,15 +117,7 @@ router.post("/update", async function(req, res, next){
       let errormesage= {sucess: true, mesage: "Route sucessfully updated"};
       res.send(errormesage);
       }
-    }
-    else{
-      let errormesage= {sucess: false , mesage: "not valid age"};
-    res.send(errormesage);
-    }
-  }else{
-    let errormesage= {sucess: false , mesage: "not valid e-mail"};
-  res.send(errormesage);
-  }
+
 });
 
 
@@ -150,7 +129,7 @@ router.delete("/delete", async function(req, res, next){
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
   var aux = true;
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
     
     //ToDo: Terá de ser verificado se o utilizador a solicitar o delete é
     //um administrador ou o utilizador que o criou
@@ -238,7 +217,7 @@ router.post("/getnonvalidated", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
   
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -277,7 +256,7 @@ router.post("/getnonvalidated", async function(req, res, next){
 router.post("/validate", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
     await knex('Roteiro')
     .where({id: req.body.id})
     .update({isvalid:true}).then(async function( resp ){ 

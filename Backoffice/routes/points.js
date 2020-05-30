@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file } = require('../helpers')
+const {file,validateUser } = require('../helpers')
 
 //Usage:
 //body.id = id do ponto a actualizar
@@ -298,7 +298,7 @@ router.post("/getnonvalidated", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
   
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -338,7 +338,7 @@ router.post("/getnonvalidated", async function(req, res, next){
 router.post("/validate", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
-  if(await validation(req.body.email)){
+  if(await validateUser(req.body.email)){
     await knex('Interesse')
     .where({id: req.body.id})
     .update({isvalid:true}).then(async function( resp ){ 
