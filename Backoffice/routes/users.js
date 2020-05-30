@@ -90,7 +90,6 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
     .select('id','name','surname','email','age','isadmin')
-    .whereNot({ name: "admin" })
     .then(response => {
       let errormesage = { sucess : true , mesage: response };
       res.send(errormesage);
