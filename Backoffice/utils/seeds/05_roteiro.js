@@ -16,14 +16,14 @@ exports.seed = function(knex, Promise) {
         nome: 'Roteiro dos Bares',
         descricao: 'Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. ',
         user_id:1,
-        isvalid:false
+        isvalid:true
 	  },
       {
         id: 3,
         nome: 'Roteiro de Tomar',
         descricao: 'A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. ',
-        user_id:1,
-        isvalid:false
+        user_id:2,
+        isvalid:true
       }
     ]);
   });
