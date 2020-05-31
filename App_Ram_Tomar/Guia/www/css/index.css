@@ -40,6 +40,29 @@ html, body {
     left: 1.2em;
     box-shadow: 1px 1px 10px 1px #888888;
 }
+.routesButton{
+    z-index: 2;
+    position: absolute;
+    top: 13em; 
+    left: 1.2em;
+    box-shadow: 1px 1px 10px 1px #888888;
+}
+.btBack{
+    z-index: 2;
+    position: absolute;
+    top: 13em; 
+    left: 1.2em;
+    box-shadow: 1px 1px 10px 1px #888888;
+}
+/* 
+
+.refreshButton{
+    z-index: 2;
+    position: absolute;
+    top: 10em; 
+    left: 1.2em;
+    box-shadow: 1px 1px 10px 1px #888888;
+}
 /* 
 .leaflet-control-container{
     display: none !important;
@@ -100,6 +123,12 @@ html, body {
     left: 90%;
 }
 
+/*#rotTest{
+    position: absolute;
+    top: 25%;
+    left: 75%;
+}
+  */
 #idAcerca{
     position: absolute;
     /* margin: 20px; */

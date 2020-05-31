@@ -8,10 +8,7 @@ var app = {
     },
 
     // deviceready Event Handler
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-
-    onDeviceReady: function () {
+      onDeviceReady: function () {
         this.receivedEvent('deviceready');
 
 
@@ -20,6 +17,7 @@ var app = {
             var body = document.body;
             body.classList.add('overflow');
 
+            let testeRoteiro; 
 
             //buscar o div criado no html
             var mapa = document.getElementById('mapid');
@@ -61,11 +59,11 @@ var app = {
                 onOffline();
             }
 
-
+//TO-DO 
+//-Se estiver longe, definir zona central dos pontos!
             //vai buscar a posição inicial quando inicia a app
             navigator.geolocation.getCurrentPosition(function (location) {
                 var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                //var marker = L.marker(latlng).addTo(mymap);
             });
 
 
@@ -76,10 +74,13 @@ var app = {
             var icon = document.getElementById('idIcon');
             var divInfo = document.getElementById('infoAdicional');
             var divFullImg = document.getElementById('fullImg');
-
+//TESTES ROTEIROS
+            var btRot = document.getElementById('btRoteiro');
+            var divRot = document.getElementById('infoRoteiro');
 
 
             var br = document.createElement('br');
+
 
 
             //metodo de jQuery para ir buscar à API do BackOffice
@@ -145,8 +146,6 @@ var app = {
 
                         removeRoutingControl();
 
-                        // console.log(current_position._latlng.lat);
-
                         control = L.Routing.control({
                             waypoints: [
                                 L.latLng(current_position._latlng),
@@ -168,8 +167,9 @@ var app = {
                         }).addTo(mymap);
                     }
 
-                    popUpTipo.textContent = 'jsons.tipoEdif';
-                    popUpNome.textContent = 'jsons.titulo';
+                    //Pop, up done! 
+                    popUpTipo.textContent = row.tipoEdif;
+                    popUpNome.textContent = row.titulo;
 
                     divPopup.appendChild(popUpTipo);
                     divPopup.appendChild(popUpNome);
@@ -180,7 +180,6 @@ var app = {
                         iconSize: [30, 48],
                         iconAnchor: [15, 48],
                         popupAnchor: [-7, -45]
-
                     });
 
                     L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
@@ -189,6 +188,8 @@ var app = {
                     let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
                         body.classList.remove('overflow');
                         btPos.classList.add('hidden');
+                        btRot.classList.add('hidden');
+
                         divInfo.classList.remove("hidden");
                         mapa.classList.add('hidden');
                         mymap.closePopup();
@@ -221,10 +222,19 @@ var app = {
                         //atribuição dos valores existentes no json
                         //Done
                         pNomeEdificio.textContent = row.titulo;
-
                         pLocalizacao.textContent = coordCentral;
-                        console.log(row);
-                        pAutores.textContent = 'Vadims Zinatulins, João Almeida';
+
+
+ //TO-do 
+                        //autores! 
+//NÃO FUNCIONAL! 
+                      teste= $.getJSON(`http://188.251.50.68:3000/props/list`, function(json) {
+                             console.log(teste);
+                      pAutores.textContent =   teste.name; 
+       });
+                        //pAutores.textContent = "Teste"; 
+
+
                         pDescricao.textContent = row.descricao;
                         spanLinha.textContent = row.tipoEdif;
                         pTipoEdificio.appendChild(spanLinha);
@@ -304,6 +314,7 @@ var app = {
                     polygon.bindPopup(divPopup);
                 });
             });
+       
 
             //funcap para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
@@ -334,15 +345,21 @@ var app = {
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
-            var btBack = document.getElementById('idBackBt');
+            var btRot = document.getElementById('btRoteiro');
             btSobre.onclick = mostraSobre => {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
                 divInfo.classList.add('hidden');
+                btPos.classList.remove('overflow');
                 btPos.classList.add('hidden');
+
+                 btRot.classList.add('hidden');
+
                 body.classList.remove('overflow');
             }
 
+         
+       
             /****************************************************************/
 
             var idP = document.createElement('p');
