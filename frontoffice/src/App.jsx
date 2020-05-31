@@ -19,6 +19,7 @@ import AddImages from './pages/addimages';
 import AddRoute from './pages/addroute';
 import UpdateRoute from './pages/updateRoute';
 import PointDetails from './pages/PointDetails';
+import PointsToValidate from './pages/pointsToValidate';
 
 //const ApiPath = "http://188.251.50.68:3000/";
 const ApiPath = "http://localhost:3000/";
@@ -43,6 +44,7 @@ class App extends React.Component {
           <Route exact path="/Create" render={(props) => <Create {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/Image" render={(props) => <Images {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/AddImages" render={(props) => <AddImages {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/PointsToValidate" render={(props) => <PointsToValidate {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/PointDetails" render={(props) => <PointDetails {...props} ApiPath={ApiPath} />}></Route>
           <Route component={NotFoundPage} />
         </Switch>
