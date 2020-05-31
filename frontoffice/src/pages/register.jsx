@@ -14,7 +14,7 @@ class Register extends Component {
             VerifyStatus: "",
             EditStatus: "",
             userdata:null,
-            token: ""
+            isadmin: true
 
         };
         this.redirecter = this.redirecter.bind(this);
@@ -27,10 +27,11 @@ class Register extends Component {
         if(sessionStorage.getItem("userData")){
             let data = JSON.parse(sessionStorage.getItem("userData"));
             this.setState({userdata: data});
-            this.setState({token: data.token });
-            this.setState({loggedIn : true});            
+            this.setState({isadmin: data.isadmin });
+            this.setState({loggedIn : true});          
         }else{
             this.setState({loggedIn : false});
+            this.setState({isadmin: false });
         }
     }
 
@@ -43,6 +44,7 @@ class Register extends Component {
         let div = document.getElementById("RegisterStatusDiv");
         let update ={};
     
+        console.log(isadmin);
 
         if(name===""|| surname==="" || age===""|| email===""|| password===""){
           div.style.color="#dc3545";
@@ -70,8 +72,7 @@ class Register extends Component {
           surname: surname,
           password: password,
           email: email,
-          age: age,
-          tokenAdmin: this.state.token
+          age: age
         });
 
         var requestOptions = {
@@ -131,7 +132,7 @@ class Register extends Component {
         /**
         * Apenas pode ter acesso a esta página o utilizador "admin"
         */
-       if (sessionStorage.getItem("token") !== "VNIMKOeoP0VBOIphd0RJGzlKytNMAREAR3mS6p4O7WCzpbZSGmg4yNUyEnkZni57") {
+       if (this.state.isadmin == false && sessionStorage.getItem("userData")) {
         this.setState({ redirect: "/" });
         return (<Redirect to={this.state.redirect} />);
         }
