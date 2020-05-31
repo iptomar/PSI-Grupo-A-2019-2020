@@ -43,8 +43,6 @@ class Register extends Component {
         let password = document.getElementById("password").value;
         let div = document.getElementById("RegisterStatusDiv");
         let update ={};
-    
-        console.log(isadmin);
 
         if(name===""|| surname==="" || age===""|| email===""|| password===""){
           div.style.color="#dc3545";
