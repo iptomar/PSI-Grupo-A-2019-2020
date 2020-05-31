@@ -102,8 +102,8 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 // RECEBE {email: "", password:"", name:"", surname:"", age:"", tokenAdmin:""}
 // DEVOLVE {sucess: true}
 router.post("/register", async function(req, res, next) {
-  if(await validation(req.body.data.email)){
-    if(typeof req.body.data.age === "number" && req.body.data.age>10  && req.body.data.age<130){
+  if(await validation(req.body.email)){
+    if(typeof req.body.age === "number" && req.body.age>10  && req.body.age<130){
   // o body está preenchido? se não pede para preencher todos os campos
   if (
     req.body.email == null ||
