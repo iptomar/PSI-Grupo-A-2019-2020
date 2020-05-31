@@ -37,24 +37,17 @@ fetch("https://localhost:3000/users/register", requestOptions)
 -----------
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
-  * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-list)
-  * [/ (?)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-?)
   * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#register-1)
   * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#login-1)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete)
-  * [giveadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#giveadmin)
-  * [removeadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#removeadmin)
-  * [isadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#isadmin)
 * [Roteiros](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#roteiros)
   * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-1)
   * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-1)
   * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate)
 * [Pontos de Interesse](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pontos-de-interesse)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search)
   * [searchpoint](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchpoint)
@@ -64,9 +57,6 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [searchUser](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchuser)
   * [pointtoroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointtoroute)
   * [pointoutroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointoutroute)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated-1)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate-1)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
 * [Imagens](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#imagens)
   * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
   * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search-1)
@@ -74,37 +64,10 @@ fetch("https://localhost:3000/users/register", requestOptions)
   * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getimage)
   * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#deleteimage)
 * [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#propriet%C3%A1rios)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-2)
+  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
   * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
   * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
 ### Autenticação
-#### / (list)
-Devolve lista de utilizadores
-* metodo: **GET**
-* Retorna:
-    * id
-    * name
-    * surname
-    * password
-    * email
-    * age
-
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### / (?)
-Devolve lista de utilizadores???
-* metodo: **POST**
-* O body deve conter: 
-    * *falta adicionar*
-* Retorna:
-    * id
-    * name
-    * surname
-    * password
-    * email
-    * age
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ####  /register
 Regista o utilizador.Obrigatório preencher todos os campos.
  * metodo: **POST**
@@ -166,8 +129,6 @@ Autentica o utilizador
 Lista os utilizadores
 * metodo: **Get** 
 * Retorna:
-* O body deve conter:  
-    * tokenAdmin
   * sucess: true
   * message :
       * id
@@ -192,11 +153,7 @@ Atualiza os dados do utilizador
 * O body deve conter:
   * user 
   * data
-    * name
-    * surname
-    * password
     * email
-    * age
 * Retorna:
   * sucess: true
   * message : update sucessfull
@@ -215,10 +172,7 @@ Atualiza os dados do utilizador
 * metodo: **Delete**
 * O body deve conter:
   * user 
-    * token
-  * data
-    * id
-  * email
+  * id
 * Retorna:
   * sucess: true
   * message : User successfully deleted
@@ -230,58 +184,6 @@ Atualiza os dados do utilizador
   * ``` errormesage = { sucess : false , mesage: "User doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-  * ``` errormesage = {sucess: false, mesage: "admins cant be deleted"}``` 
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-####  /giveadmin
-Torna um utilizador administrador
-* metodo: **POST**
-* O body deve conter:
-  * user (email do utilizador para dar administrador)
-  * email (email do utilizador atual)
-* Retorna:
-  * sucess: true
-  * message : update sucessfull
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-  * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-####  /removeadmin
-Torna um administrador num utilizador (aka retira previlégios de administrador de um utilizador)
-* metodo: **POST**
-* O body deve conter:
-  * user (email do utilizador para dar administrador)
-  * email (email do utilizador atual)
-* Retorna:
-  * sucess: true
-  * message : update sucessfull
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"update sucessfull\"\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-  * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-####  /isadmin
-Verifica se um utilizador é administrador
-* metodo: **POST**
-* O body deve conter:
-  * email (email do utilizador atual)
-* Retorna:
-  * sucess: true
-  * message : is admin ou is not admin
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is admin\"\n}"```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is not admin\"\n}"```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
  ### Roteiros
@@ -295,11 +197,10 @@ Retorna a lista de roteiros
       * nome
       * descricao
       * user_id
-      * isvalid
   * Exemplo:
   * ```"status": "OK"```
   * ```"code": 200```
-  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n ,\n            \"isvalid:\"true\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Roteiro dos Bares\",\n            \"descricao\": \"Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. \",\n            \"user_id\": 1\n ,\n            \"isvalid:\"true\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Roteiro de Tomar\",\n            \"descricao\": \"A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. \",\n            \"user_id\": 1\n,\n            \"isvalid:\"true\n        }\n    ]\n}"```
+  * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Roteiro dos Bares\",\n            \"descricao\": \"Restaurantes, bares, loja de discos, cafés, lojas de decoração  trouxeram uma vida de agitação constante e não faltam sítios para exercitar o cotovelo. \",\n            \"user_id\": 1\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Roteiro de Tomar\",\n            \"descricao\": \"A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. \",\n            \"user_id\": 1\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -328,13 +229,11 @@ Atualiza os dados do roteiro.Terá de ser verificado se o utilizador a solicitar
 Não poderá ser permitido o update ao ID do roteiro
 * metodo: **POST**
 * O body deve conter:
-  * id (id do proprietário a actualizar)
-  * email  
+  * user 
   * data
     * nome
     * descricao
-    * user id	
-    * isvalid
+    * user id		
 * Retorna:
   * sucess: true
   * message : Route sucessfully updated
@@ -351,9 +250,8 @@ Não poderá ser permitido o update ao ID do roteiro
 Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
 * O body deve conter:
-  * email 
-  * data
-    * id
+  * user 
+  * id
 * Retorna:
   * sucess: true
   * message : Route sucessfully deleted
@@ -363,8 +261,6 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Route sucessfully deleted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
-  * ``` errormesage = { sucess : false , mesage: "token not used" }```
-  * ```errormesage= {sucess: false, mesage: "admin only"}```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /userSearch
@@ -380,52 +276,12 @@ Devolve os roteiros que um utilizador criou
       * nome
       * descricao
       * user_id
-      * isvalid
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n,\n            \"isvalid:\"true\n        },\n ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n        },\n ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### /getnonvalidated
-Mostra os roteiros não válidos
-* metodo: **POST**
-* O body deve conter:
-  * email
-* Retorna:
-  * sucess: true
-  * message : 
-      * id
-      * nome
-      * descricao
-      * user_id
-      * isvalid
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Roteiro dos Monumentos\",\n            \"descricao\": \"Se tem algo que eu adoro no centro oeste de Portugal é poder andar poucos quilômetros entre suas cidades. Tomar é um desses casos.\",\n            \"user_id\": 1\n,\n            \"isvalid:\"false\n        },\n ]\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### //validate
-Valida um roteiro
-* metodo: **POST**
-* O body deve conter:
-  * id (id Roteiro)
-  * email
-* Retorna:
-  * sucess: true
-  * message : update sucessfull
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"updated sucessfull\"\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "token not used" }```
-  * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Pontos de interesse
@@ -462,11 +318,10 @@ Lista os pontos de interesse dado o seu id
       * tipoEdif
       * user_id
       * prop_id
-      * isvalid
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        ,\n            \"isvalid\": true\n        }\n    ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n        }\n    ]\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -485,12 +340,11 @@ Adiciona um ponto de interesse
     * prop id
 * Retorna:
   * sucess: true
-  * message : 
-    * id (id do ponto)
+  * message : Point sucessfully inserted
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1    }\n    ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"Point sucessfully inserted\"\n}"```
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
@@ -523,7 +377,7 @@ Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador 
     * data
     * tipoEdif
     * user id
-    * prop id        
+    * prop id
 * Retorna:
   * sucess: true
   * message : Point sucessfully updated
@@ -544,11 +398,16 @@ Procura o utilizador que adicionao esses pontos de interesse ao roteiro
 * Retorna:
   * sucess: true
   * message : 
-      * id ( id do ponto)
+      * id
+      * name
+      * surname
+      * email
+      * age
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
-     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
+    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 2,\n            \"name\": \"Jacinto\",\n            \"surname\": \"Ribeiro\",\n            \"email\": \"a@email.com\",\n            \"age\": 21\n        },\n\n}"```
+* Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
@@ -589,73 +448,6 @@ Desassocia um ponto a uma rota
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### /getnonvalidated
-Mostra os pontos não válidos
-* metodo: **POST**
-* O body deve conter:
-  * email
-* Retorna:
-  * sucess: true
-  * message : 
-    * id
-    * titulo
-    * descricao
-    * coordenadas
-    * data
-    * tipoEdif
-    * user id
-    * prop id
-    * isvalid
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n,\n            \"isvalid\": true\n        }\n    ]\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
-  * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
-  
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### //validate
-Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse??? *falta confirmar*
-* metodo: **POST**
-* O body deve conter:
-  * id (id do Ponto)
-  * email
-* Retorna:
-  * sucess: true
-  * message : update sucessfull
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"updated sucessfull\"\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "token not used" }```
-  * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### /list
-Retorna a lista dos pontos de interesse
-* metodo: **GET**
-* Retorna:
-  * sucess: true
-  * message : 
-    * id
-    * titulo
-    * descricao
-    * coordenadas
-    * data
-    * tipoEdif
-    * user id
-    * prop id
-    * isvalid
-  * Exemplo:
-    * ```"status": "OK"```
-    * ```"code": 200```
-    * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n,\n            \"isvalid\": true\n        }\n    ]\n}"```
-* Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }````
-  
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Imagens
 #### /searchgetimage
