@@ -348,8 +348,12 @@ router.post("/giveadmin", async function(req, res, next) {
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
       return await knex('users').where({ email: req.body.user }).update({isadmin:true}).then(async function( resp ){ 
-        let errormesage = { sucess : true , mesage: "update sucessfull" };
-        res.send(errormesage);
+        if(resp!= 0)
+        {let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);}
+        else
+        {let errormesage = { sucess : true , mesage: "e-mail not found" };
+        res.send(errormesage);}
     }).catch(async function(err) {
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
@@ -389,8 +393,12 @@ router.post("/removeadmin", async function(req, res, next) {
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
   var admin = false;
       return await knex('users').where({ email: req.body.user }).update({isadmin:false}).then(async function( resp ){ 
-        let errormesage = { sucess : true , mesage: "update sucessfull" };
-        res.send(errormesage);
+        if(resp!= 0)
+        {let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);}
+        else
+        {let errormesage = { sucess : true , mesage: "e-mail not found" };
+        res.send(errormesage);}
     }).catch(async function(err) {
       await file(
         "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
