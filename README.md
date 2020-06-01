@@ -414,7 +414,7 @@ Mostra os roteiros não válidos
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### //validate
+#### /validate
 Valida um roteiro
 * metodo: **POST**
 * O body deve conter:
@@ -620,7 +620,7 @@ Mostra os pontos não válidos
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### //validate
+#### /validate
 Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse??? *falta confirmar*
 * metodo: **POST**
 * O body deve conter:
