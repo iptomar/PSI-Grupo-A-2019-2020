@@ -136,6 +136,7 @@ Regista o utilizador.Obrigatório preencher todos os campos.
   * ```"code": 401```
     * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ```errormesage = { sucess : true , mesage: { id: select[0].id, email: select[0].email }```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /login
@@ -839,7 +840,7 @@ Mostra as imagens não válidas
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### //validate
+#### /validate
 Valida uma imagem. Retorna todos os dados das imagens.
 * metodo: **POST**
 * O body deve conter:
