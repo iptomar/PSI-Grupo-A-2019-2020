@@ -273,7 +273,9 @@ Verifica se um utilizador é administrador
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is admin\"\n}"```
 
 [Indice](#endpoints)
- -------------
+
+
+-------------
  ### Roteiros
  ##### /list
 Retorna a lista de roteiros
@@ -418,6 +420,7 @@ Valida um roteiro
   * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
 [Indice](#endpoints)
+
 -------------
 ### Pontos de interesse
 #### /search
@@ -648,6 +651,7 @@ Retorna a lista dos pontos de interesse
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }````
   
 [Indice](#endpoints)
+
 -------------
 ### Imagens
 #### /searchgetimage
@@ -845,6 +849,7 @@ Valida uma imagem. Retorna todos os dados das imagens.
   * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
 [Indice](#endpoints)
+
 -------------
 ### Proprietários
 #### /list
