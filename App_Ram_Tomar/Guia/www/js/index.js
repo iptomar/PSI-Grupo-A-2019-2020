@@ -69,7 +69,6 @@ var app = {
             });
 
 
-            var jsonData;
             var control;
             //buscas do elementos criados no html
             var btPos = document.getElementById('btPosicao');
@@ -77,231 +76,270 @@ var app = {
             var divInfo = document.getElementById('infoAdicional');
             var divFullImg = document.getElementById('fullImg');
 
-
-
             var br = document.createElement('br');
 
+            // Lista de pontos e polygonos gerados. Isto é necessário porque para remover pontos é necessário a sua referência, assim eles 
+            // eles são guardados nesta lista.
+            let pontos_e_poligonos = [];
 
-            //metodo de jQuery para ir buscar à API do BackOffice
+            let mostrarPontosDeInteresse = roteiro => {
+                // Converter string de coordenadas para um array de coordenadas
+                let coordenadas = JSON.parse(`[${roteiro.coordenadas}]`);
 
-            $.getJSON("http://188.251.50.68:3000/points/list", result => {
-                // Iterar todos os pontos de interesse
-                result.mesage.forEach(row => {
-                    // Converter string de coordenadas para um array de coordenadas
-                    let coordenadas = JSON.parse(`[${row.coordenadas}]`);
+                // Obter um array com as duas primeiras coordenadas
+                let coordCentral = [coordenadas[0], coordenadas[1]];
 
-                    // Obter um array com as duas primeiras coordenadas
-                    let coordCentral = [coordenadas[0], coordenadas[1]];
+                // Obter um array sem as duas primeiras coordenadas
+                let arryCoords = coordenadas.slice(2);
 
-                    // Obter um array sem as duas primeiras coordenadas
-                    let arryCoords = coordenadas.slice(2);
+                // Agrupar as coordenadas em pares
+                let poligCoords = [];
+                for (let i = 0; i < arryCoords.length; i += 2) {
+                    poligCoords.push([arryCoords[i], arryCoords[i + 1]]);
+                }
 
-                    // Agrupar as coordenadas em pares
-                    let poligCoords = [];
-                    for (let i = 0; i < arryCoords.length; i += 2) {
-                        poligCoords.push([arryCoords[i], arryCoords[i + 1]]);
-                    }
+                // Desenhar o poligono do edificio
+                let polygon = L.polygon([poligCoords], {
+                    color: 'red',
+                    weight: '0.5',
+                    fillOpacity: '0.2',
+                }).addTo(mymap);
 
-                    // Desenhar o poligono do edificio
-                    let polygon = L.polygon([poligCoords], {
-                        color: 'red',
-                        weight: '0.5',
-                        fillOpacity: '0.2',
+                pontos_e_poligonos.push(polygon);
+
+                // Criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
+                let divPopup = document.createElement('div');
+                divPopup.setAttribute('id', 'iDdivPopup');
+
+                let popUpTipo = document.createElement('p');
+                popUpTipo.setAttribute('id', 'idPopUpTipo');
+                popUpTipo.classList.add('item1');
+
+                let popUpNome = document.createElement('p');
+                popUpNome.setAttribute('id', 'idPopUpNome');
+                popUpNome.classList.add('item2');
+
+                let btWaypoint = document.createElement('button');
+                btWaypoint.setAttribute('id', 'idBtWaypoint');
+                btWaypoint.classList.add('btn', 'btn-warning', 'item4');
+                btWaypoint.textContent = "Traçar caminho  ";
+
+                let iShoes = document.createElement('i');
+                iShoes.classList.add('fas', 'fa-shoe-prints');
+                btWaypoint.appendChild(iShoes);
+
+                let greenIcon = new L.Icon({
+                    iconUrl: './img/green.png',
+                    shadowUrl: '../img/shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                // Onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
+                // em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
+                btWaypoint.onclick = waypoint => {
+
+                    removeRoutingControl();
+
+                    // console.log(current_position._latlng.lat);
+
+                    console.log(current_position, coordCentral);
+
+                    control = L.Routing.control({
+                        waypoints: [
+                            L.latLng(current_position._latlng),
+                            L.latLng(coordCentral)
+                        ],
+                        createMarker: function (i, wp, nWps) {
+                            if (i === nWps - 1) {
+                                // here change the starting and ending icons
+                                return L.marker(wp.latLng, {
+                                    icon: greenIcon // here pass the custom marker icon instance
+                                });
+                            }
+                        },
+                        lineOptions: {
+                            styles: [{ color: 'red', opacity: 1, weight: 5 }],
+                        },
+                        draggableWaypoints: false,
+
                     }).addTo(mymap);
+                }
 
-                    // Criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
-                    let divPopup = document.createElement('div');
-                    divPopup.setAttribute('id', 'iDdivPopup');
+                popUpTipo.textContent = roteiro.tipoEdif;
+                popUpNome.textContent = roteiro.titulo;
 
-                    let popUpTipo = document.createElement('p');
-                    popUpTipo.setAttribute('id', 'idPopUpTipo');
-                    popUpTipo.classList.add('item1');
+                divPopup.appendChild(popUpTipo);
+                divPopup.appendChild(popUpNome);
 
-                    let popUpNome = document.createElement('p');
-                    popUpNome.setAttribute('id', 'idPopUpNome');
-                    popUpNome.classList.add('item2');
+                // Criação do icon dos edificios
+                let myIcon = L.icon({
+                    iconUrl: 'icon.png',
+                    iconSize: [30, 48],
+                    iconAnchor: [15, 48],
+                    popupAnchor: [-7, -45]
 
-                    let btWaypoint = document.createElement('button');
-                    btWaypoint.setAttribute('id', 'idBtWaypoint');
-                    btWaypoint.classList.add('btn', 'btn-warning', 'item4');
-                    btWaypoint.textContent = "Traçar caminho  ";
+                });
 
-                    let iShoes = document.createElement('i');
-                    iShoes.classList.add('fas', 'fa-shoe-prints');
-                    btWaypoint.appendChild(iShoes);
+                let mark = L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
+                pontos_e_poligonos.push(mark);
 
-                    let greenIcon = new L.Icon({
-                        iconUrl: './img/green.png',
-                        shadowUrl: '../img/shadow.png',
-                        iconSize: [25, 41],
-                        iconAnchor: [12, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
+                // Atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
+                let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
+                    body.classList.remove('overflow');
+                    btPos.classList.add('hidden');
+                    divInfo.classList.remove("hidden");
+                    mapa.classList.add('hidden');
+                    mymap.closePopup();
+
+                    // Criação de elementos e adicionados ao html
+                    let hr = document.createElement('hr');
+                    hr.setAttribute('id', 'idHr');
+
+                    let spanLinha = document.createElement('span');
+                    spanLinha.setAttribute('id', 'idSpanLinha');
+                    spanLinha.textContent = "";
+
+                    let autoresTab = document.createElement('div');
+                    autoresTab.setAttribute('id', 'idAutoresTab');
+                    autoresTab.textContent = "Autores do projeto: ";
+
+                    let pNomeEdificio = document.createElement('h2');
+                    pNomeEdificio.setAttribute('id', 'idNomeEdificio');
+                    let pLocalizacao = document.createElement('p');
+                    pLocalizacao.setAttribute('id', 'idLocalizacao');
+                    let pAutores = document.createElement('p');
+                    pAutores.setAttribute('id', 'idAutores');
+                    let pDescricao = document.createElement('p');
+                    pDescricao.setAttribute('id', 'idDescricao');
+                    let pTipoEdificio = document.createElement('h3');
+                    pTipoEdificio.setAttribute('id', 'idTipoEdificio');
+                    let pData = document.createElement('p');
+                    pData.setAttribute('id', 'idData');
+
+                    //atribuição dos valores existentes no json
+                    //Done
+                    pNomeEdificio.textContent = roteiro.titulo;
+
+                    pLocalizacao.textContent = coordCentral;
+                    pAutores.textContent = 'Vadims Zinatulins, João Almeida';
+                    pDescricao.textContent = roteiro.descricao;
+                    spanLinha.textContent = roteiro.tipoEdif;
+                    pTipoEdificio.appendChild(spanLinha);
+                    pData.textContent = roteiro.data;
+
+                    divInfo.appendChild(pTipoEdificio);
+                    divInfo.appendChild(pNomeEdificio);
+                    divInfo.appendChild(pData);
+                    divInfo.appendChild(pLocalizacao);
+                    divInfo.appendChild(autoresTab);
+
+                    // Dividir a string dos autores por virgulas e let autor a autor
+                    pAutores.textContent.split(",").forEach(autor => {
+
+                        let singleAutor = document.createElement('p');
+                        singleAutor.setAttribute('id', 'idSingleAutors');
+                        singleAutor.textContent = autor;
+
+                        divInfo.appendChild(singleAutor);
                     });
 
-                    // Onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
-                    // em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
-                    btWaypoint.onclick = waypoint => {
+                    divInfo.appendChild(hr);
+                    divInfo.appendChild(pDescricao);
 
-                        removeRoutingControl();
+                    let divRow = document.createElement('div');
+                    divRow.setAttribute('id', 'idDivRow');
+                    divRow.setAttribute('class', 'row');
 
-                        // console.log(current_position._latlng.lat);
+                    $.getJSON(`http://188.251.50.68:3000/images/searchgetimage?id=${roteiro.id}`, images => {
+                        images.mesage.forEach(imagem => {
+                            let divColMd = document.createElement('div');
+                            divColMd.setAttribute('id', 'idDivColMd');
+                            divColMd.setAttribute('class', 'col-md-4');
+                            divColMd.setAttribute('class', 'content');
 
-                        control = L.Routing.control({
-                            waypoints: [
-                                L.latLng(current_position._latlng),
-                                L.latLng(coordCentral)
-                            ],
-                            createMarker: function (i, wp, nWps) {
-                                if (i === nWps - 1) {
-                                    // here change the starting and ending icons
-                                    return L.marker(wp.latLng, {
-                                        icon: greenIcon // here pass the custom marker icon instance
-                                    });
-                                }
-                            },
-                            lineOptions: {
-                                styles: [{ color: 'red', opacity: 1, weight: 5 }],
-                            },
-                            draggableWaypoints: false,
+                            let divThumb = document.createElement('div');
+                            divThumb.setAttribute('class', 'thumbnail');
+                            divThumb.setAttribute('id', 'idDivThumb');
 
-                        }).addTo(mymap);
-                    }
+                            let divCaption = document.createElement('div')
+                            divCaption.setAttribute('id', 'idDivCaption');
+                            divCaption.setAttribute('class', 'caption');
+                            divCaption.setAttribute('class', 'rounded-bottom');
 
-                    popUpTipo.textContent = 'jsons.tipoEdif';
-                    popUpNome.textContent = 'jsons.titulo';
+                            let img = document.createElement('img');
+                            let imgLegenda = document.createElement('p');
+                            let imgAutor = document.createElement('p');
 
-                    divPopup.appendChild(popUpTipo);
-                    divPopup.appendChild(popUpNome);
+                            //lida a path da imagem para a pasta das imagens
+                            img.src = `data:image/png;base64,${imagem.img}`;
+                            img.setAttribute('id', 'idImagens');
+                            img.setAttribute('class', 'rounded');
 
-                    // Criação do icon dos edificios
-                    let myIcon = L.icon({
-                        iconUrl: 'icon.png',
-                        iconSize: [30, 48],
-                        iconAnchor: [15, 48],
-                        popupAnchor: [-7, -45]
+                            //atribuição dos valores existentes no json
+                            imgLegenda.textContent = imagem.Legenda;
+                            imgAutor.textContent = imagem.AutorFonte;
 
+                            divCaption.appendChild(imgLegenda);
+                            divCaption.appendChild(imgAutor);
+                            divThumb.appendChild(img);
+                            divThumb.appendChild(divCaption);
+
+                            divColMd.appendChild(divThumb);
+
+                            divRow.appendChild(divColMd);
+
+                            divInfo.appendChild(divRow);
+                        });
                     });
+                })[0];
 
-                    L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
+                divPopup.appendChild(link);
+                divPopup.appendChild(br);
+                divPopup.appendChild(btWaypoint);
 
-                    // Atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
-                    let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
-                        body.classList.remove('overflow');
-                        btPos.classList.add('hidden');
-                        divInfo.classList.remove("hidden");
-                        mapa.classList.add('hidden');
-                        mymap.closePopup();
+                polygon.bindPopup(divPopup);
+            }
 
-                        // Criação de elementos e adicionados ao html
-                        let hr = document.createElement('hr');
-                        hr.setAttribute('id', 'idHr');
+            let removerTodosOsPontos = () => {
+                // Remover os pontos do mapa
+                pontos_e_poligonos.forEach(p => mymap.removeLayer(p));
+                // Limpar o array dos pontos
+                pontos_e_poligonos = [];
+            };
 
-                        let spanLinha = document.createElement('span');
-                        spanLinha.setAttribute('id', 'idSpanLinha');
-                        spanLinha.textContent = "";
+            window.listarTodosOsPontos = () => {
+                removerTodosOsPontos();
+                
+                //metodo de jQuery para ir buscar à API do BackOffice
+                $.getJSON("http://188.251.50.68:3000/points/list", result => {
+                    // Iterar todos os pontos de interesse
+                    result.mesage.forEach(row => mostrarPontosDeInteresse(row));
+                });
+            };
 
-                        let autoresTab = document.createElement('div');
-                        autoresTab.setAttribute('id', 'idAutoresTab');
-                        autoresTab.textContent = "Autores do projeto: ";
+            listarTodosOsPontos();
 
-                        let pNomeEdificio = document.createElement('h2');
-                        pNomeEdificio.setAttribute('id', 'idNomeEdificio');
-                        let pLocalizacao = document.createElement('p');
-                        pLocalizacao.setAttribute('id', 'idLocalizacao');
-                        let pAutores = document.createElement('p');
-                        pAutores.setAttribute('id', 'idAutores');
-                        let pDescricao = document.createElement('p');
-                        pDescricao.setAttribute('id', 'idDescricao');
-                        let pTipoEdificio = document.createElement('h3');
-                        pTipoEdificio.setAttribute('id', 'idTipoEdificio');
-                        let pData = document.createElement('p');
-                        pData.setAttribute('id', 'idData');
+            $.getJSON("http://188.251.50.68:3000/routes/list", result => {
+                // listaRoteiros
+                let divLista = document.getElementById('listaRoteiros');
 
-                        //atribuição dos valores existentes no json
-                        //Done
-                        pNomeEdificio.textContent = row.titulo;
+                result.mesage.forEach(roteiro => {
+                    anchRoteio = document.createElement('a');
+                    anchRoteio.setAttribute('href', '#');
+                    anchRoteio.textContent = roteiro.nome;
+                    anchRoteio.onclick = () => {
+                        removerTodosOsPontos();
 
-                        pLocalizacao.textContent = coordCentral;
-                        console.log(row);
-                        pAutores.textContent = 'Vadims Zinatulins, João Almeida';
-                        pDescricao.textContent = row.descricao;
-                        spanLinha.textContent = row.tipoEdif;
-                        pTipoEdificio.appendChild(spanLinha);
-                        pData.textContent = row.data;
-
-                        divInfo.appendChild(pTipoEdificio);
-                        divInfo.appendChild(pNomeEdificio);
-                        divInfo.appendChild(pData);
-                        divInfo.appendChild(pLocalizacao);
-                        divInfo.appendChild(autoresTab);
-
-                        // Dividir a string dos autores por virgulas e let autor a autor
-                        pAutores.textContent.split(",").forEach(autor => {
-
-                            let singleAutor = document.createElement('p');
-                            singleAutor.setAttribute('id', 'idSingleAutors');
-                            singleAutor.textContent = autor;
-
-                            divInfo.appendChild(singleAutor);
+                        $.post("http://188.251.50.68:3000/points/searchpoint", { data: roteiro.id }, result => {
+                            // Iterar todos os pontos de interesse
+                            result.mesage.forEach(row => mostrarPontosDeInteresse(row));
                         });
+                    };
 
-                        divInfo.appendChild(hr);
-                        divInfo.appendChild(pDescricao);
-
-                        let divRow = document.createElement('div');
-                        divRow.setAttribute('id', 'idDivRow');
-                        divRow.setAttribute('class', 'row');
-
-                        $.getJSON(`http://188.251.50.68:3000/images/searchgetimage?id=${row.id}`, images => {
-                            images.mesage.forEach(imagem => {
-                                let divColMd = document.createElement('div');
-                                divColMd.setAttribute('id', 'idDivColMd');
-                                divColMd.setAttribute('class', 'col-md-4');
-                                divColMd.setAttribute('class', 'content');
-
-                                let divThumb = document.createElement('div');
-                                divThumb.setAttribute('class', 'thumbnail');
-                                divThumb.setAttribute('id', 'idDivThumb');
-
-                                let divCaption = document.createElement('div')
-                                divCaption.setAttribute('id', 'idDivCaption');
-                                divCaption.setAttribute('class', 'caption');
-                                divCaption.setAttribute('class', 'rounded-bottom');
-
-                                let img = document.createElement('img');
-                                let imgLegenda = document.createElement('p');
-                                let imgAutor = document.createElement('p');
-
-                                //lida a path da imagem para a pasta das imagens
-                                img.src = `data:image/png;base64,${imagem.img}`;
-                                img.setAttribute('id', 'idImagens');
-                                img.setAttribute('class', 'rounded');
-
-                                //atribuição dos valores existentes no json
-                                imgLegenda.textContent = imagem.Legenda;
-                                imgAutor.textContent = imagem.AutorFonte;
-
-                                divCaption.appendChild(imgLegenda);
-                                divCaption.appendChild(imgAutor);
-
-                                divThumb.appendChild(img);
-                                divThumb.appendChild(divCaption);
-
-                                divColMd.appendChild(divThumb);
-
-                                divRow.appendChild(divColMd);
-
-                                divInfo.appendChild(divRow);
-                            });
-                        });
-                    })[0];
-
-                    divPopup.appendChild(link);
-                    divPopup.appendChild(br);
-                    divPopup.appendChild(btWaypoint);
-
-                    polygon.bindPopup(divPopup);
+                    divLista.appendChild(anchRoteio);
                 });
             });
 
@@ -442,9 +480,10 @@ var app = {
                 //var marker = L.marker(latlng).addTo(mymap);
             }
 
+            locate();
 
             // call locate every 3 seconds... forever
-            setInterval(locate, 3000);
+            // setInterval(locate, 3000);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

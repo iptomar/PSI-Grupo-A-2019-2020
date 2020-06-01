@@ -26,14 +26,22 @@
 </head>
 
 <body>
+    <div id="listaRoteiros" class="sidenav">
+        <h2 style="color: #fff; text-align: center;">Roteiros</h2>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" onclick="listarTodosOsPontos()">Todos os Pontos de interesse</a>
+    </div>
+        
     <div id="topo">
-        <h2 id="idTitulo">Guia Virtual do Roteiro Arquitetura Moderna de Tomar</h2>
-        <div id="idSobreBt">
-            <i class="fas fa-info-circle fa-2x"></i>
+        <h2 id="idTitulo">Guia Virtual do Roteiro</h2>
+        <div id="btnTopo">
+            <div id="idBackBt" onclick="openNav()">
+                <i class="fa fa-compass fa-2x"></i>
+            </div>
+            <div id="idSobreBt">
+                <i class="fa fa-info-circle fa-2x"></i>
+            </div>
         </div>
-     <!--    <div id="idBackBt">
-            <i class="fa fa-file"></i>
-        </div>-->
     </div>
 
     <div id="container">
@@ -89,6 +97,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("listaRoteiros").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("listaRoteiros").style.width = "0";
+        }
+    </script>
 </body>
 
 </html>
