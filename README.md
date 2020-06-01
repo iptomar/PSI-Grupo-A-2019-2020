@@ -35,6 +35,14 @@ fetch("https://localhost:3000/users/register", requestOptions)
 
 
 -----------
+* [/ (list)](#-list)
+* ```javascript 
+"status": "OK"
+"code": 200 
+"body!: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}
+```	
+
+
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
   * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-list)
@@ -109,7 +117,7 @@ Regista o utilizador.Obrigatório preencher todos os campos.
     * id
     * email
 * Exemplo:
-  * ```"status": "OK"```
+  * ```javascript "status": "OK"```
   * ```"code": 200```
   * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
 * Mensagens de erro:
