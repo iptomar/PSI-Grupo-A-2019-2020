@@ -23,7 +23,7 @@ exports.seed = function(knex, Promise) {
         nome: 'Roteiro de Tomar',
         descricao: 'A cidade de Tomar, merece, sem dúvida alguma, uma visita, pela sua riqueza artística e cultural. Esta cidade encantadora, banhada pelo Rio Nabão, promete um dia em cheio. ',
         user_id:2,
-        isvalid:true
+        isvalid:false
       }
     ]);
   });
