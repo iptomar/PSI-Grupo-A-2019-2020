@@ -35,55 +35,52 @@ fetch("https://localhost:3000/users/register", requestOptions)
 
 
 -----------
-* [/ (list)](#-list)
-* ```javascript "status": "OK" "code": 200  "body!: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}```	
-
-
 ## EndPoints
-* [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
-  * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-list)
-  * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#register-1)
-  * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#login-1)
-  * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
-  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update)
-  * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete)
-  * [giveadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#giveadmin)
-  * [removeadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#removeadmin)
-  * [isadmin](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#isadmin)
-* [Roteiros](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#roteiros)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list)
-  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert)
-  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-1)
-  * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-1)
-  * [userSearch](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#userSearch)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate)
-* [Pontos de Interesse](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pontos-de-interesse)
-  * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search)
-  * [searchpoint](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchpoint)
-  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-1)
-  * [delete](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#delete-2)
-  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-2)
-  * [searchUser](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchuser)
-  * [pointtoroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointtoroute)
-  * [pointoutroute](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointoutroute)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated-1)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate-1)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-1)
-* [Imagens](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#imagens)
-  * [searchgetimage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchgetimage)
-  * [search](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#search-1)
-  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-2)
-  * [getImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getimage)
-  * [deleteImage](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#deleteimage)
-  * [searchinterest](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#searchinterest)
-  * [pointdata](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#pointdata)
-  * [getnonvalidated](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getnonvalidated-2)
-  * [validate](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#validate-2)
-* [Proprietários](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#propriet%C3%A1rios)
-  * [list](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#list-2)
-  * [insert](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#insert-3)
-  * [update](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#update-3)
+* [Autenticação](#autentica%C3%A7%C3%A3o)
+  * [/ (list)](#-list)
+  * [register](#register-1)
+  * [login](#login-1)
+  * [getusers](#getuserstokenadmin)
+  * [update](#update)
+  * [delete](#delete)
+  * [giveadmin](#giveadmin)
+  * [removeadmin](#removeadmin)
+  * [isadmin](#isadmin)
+* [Roteiros](#roteiros)
+  * [list](#list)
+  * [insert](#insert)
+  * [update](#update-1)
+  * [delete](#delete-1)
+  * [userSearch](#userSearch)
+  * [getnonvalidated](#getnonvalidated)
+  * [validate](#validate)
+* [Pontos de Interesse](#pontos-de-interesse)
+  * [search](#search)
+  * [searchpoint](#searchpoint)
+  * [insert](#insert-1)
+  * [delete](#delete-2)
+  * [update](#update-2)
+  * [searchUser](#searchuser)
+  * [pointtoroute](#pointtoroute)
+  * [pointoutroute](#pointoutroute)
+  * [getnonvalidated](#getnonvalidated-1)
+  * [validate](#validate-1)
+  * [list](#list-1)
+* [Imagens](#imagens)
+  * [searchgetimage](#searchgetimage)
+  * [search](#search-1)
+  * [insert](#insert-2)
+  * [getImage](#getimage)
+  * [deleteImage](#deleteimage)
+  * [searchinterest](#searchinterest)
+  * [pointdata](#pointdata)
+  * [getnonvalidated](#getnonvalidated-2)
+  * [validate](#validate-2)
+* [Proprietários](#propriet%C3%A1rios)
+  * [list](#list-2)
+  * [insert](#insert-3)
+  * [update](#update-3)
+-------------
 ### Autenticação
 #### / (list)
 Devolve lista de utilizadores
@@ -96,7 +93,7 @@ Devolve lista de utilizadores
   * email
   * age
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /register
 Regista o utilizador.Obrigatório preencher todos os campos.
  * metodo: **POST**
@@ -126,7 +123,7 @@ Regista o utilizador.Obrigatório preencher todos os campos.
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ```errormesage = { sucess : true , mesage: { id: select[0].id, email: select[0].email }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /login
 Autentica o utilizador
 * metodo: **POST**
@@ -154,7 +151,7 @@ Autentica o utilizador
     * ``` errormesage = { sucess : false , mesage: "Incorrect parameters" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /getUsers/{tokenAdmin}
 Lista os utilizadores
 * metodo: **Get** 
@@ -178,7 +175,7 @@ Lista os utilizadores
     * ``` errormesage = { sucess : false , mesage: "The token provided is not the admin's" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /update
 Atualiza os dados do utilizador
 * metodo: **POST**
@@ -202,7 +199,7 @@ Atualiza os dados do utilizador
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /delete
  Apaga os dados do utilizador. Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
 * metodo: **Delete**
@@ -225,7 +222,7 @@ Atualiza os dados do utilizador
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ``` errormesage = {sucess: false, mesage: "admins cant be deleted"}``` 
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /giveadmin
 Torna um utilizador administrador
 * metodo: **POST**
@@ -243,7 +240,7 @@ Torna um utilizador administrador
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /removeadmin
 Torna um administrador num utilizador (aka retira previlégios de administrador de um utilizador)
 * metodo: **POST**
@@ -261,7 +258,7 @@ Torna um administrador num utilizador (aka retira previlégios de administrador 
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ``` errormesage= {sucess: false, mesage: "only admins can do this"}``` 
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /isadmin
 Verifica se um utilizador é administrador
 * metodo: **POST**
@@ -275,7 +272,8 @@ Verifica se um utilizador é administrador
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"is admin\"\n}"```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
+ -------------
  ### Roteiros
  ##### /list
 Retorna a lista de roteiros
@@ -295,7 +293,7 @@ Retorna a lista de roteiros
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /insert
 Adiciona um roteiro
 * metodo: **POST**
@@ -314,7 +312,7 @@ Adiciona um roteiro
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /update
 Atualiza os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o criador do roteiro.
 Não poderá ser permitido o update ao ID do roteiro
@@ -338,7 +336,7 @@ Não poderá ser permitido o update ao ID do roteiro
   * ``` errormesage = { sucess : false , mesage: "Route doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /delete
 Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
@@ -358,7 +356,7 @@ Apaga os dados do roteiro.Terá de ser verificado se o utilizador a solicitar o 
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ```errormesage= {sucess: false, mesage: "admin only"}```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /userSearch
 Devolve os roteiros que um utilizador criou
 * metodo: **POST**
@@ -380,7 +378,7 @@ Devolve os roteiros que um utilizador criou
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /getnonvalidated
 Mostra os roteiros não válidos
 * metodo: **POST**
@@ -401,7 +399,7 @@ Mostra os roteiros não válidos
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /validate
 Valida um roteiro
 * metodo: **POST**
@@ -419,7 +417,8 @@ Valida um roteiro
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
+-------------
 ### Pontos de interesse
 #### /search
 Lista os pontos de interesse dado id do roteiro
@@ -437,7 +436,7 @@ Lista os pontos de interesse dado id do roteiro
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /searchpoint
 Lista os pontos de interesse dado o seu id
 * metodo: **POST**
@@ -462,7 +461,7 @@ Lista os pontos de interesse dado o seu id
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /insert
 Adiciona um ponto de interesse
 * metodo: **POST**
@@ -486,7 +485,7 @@ Adiciona um ponto de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /delete
 Apaga os dados do ponto de interesse. Terá de ser verificado se o utilizador a solicitar o delete é um administrador ou o utilizador que o criou
 * metodo: **Delete**
@@ -502,7 +501,7 @@ Apaga os dados do ponto de interesse. Terá de ser verificado se o utilizador a 
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Point doesn't exist" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /update
 Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador a solicitar o update é um administrador ou o utilizador que criou o ponto. Não poderá ser permitido o update ao ID do ponto
 * metodo: **POST**
@@ -527,7 +526,7 @@ Atualiza os dados do ponto de interesse.Terá de ser verificado se o utilizador 
   * ``` errormesage = { sucess : false , mesage: "Point doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /searchUser
 Procura o utilizador que adicionao esses pontos de interesse ao roteiro
 * metodo: **Post**
@@ -543,7 +542,7 @@ Procura o utilizador que adicionao esses pontos de interesse ao roteiro
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id_inter\": 1\n        },\n        {\n            \"id_inter\": 2\n        },\n        {\n            \"id_inter\": 3\n        }\n    ]\n}"```
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /pointtoroute
 Associa um ponto a uma rota
 * metodo: **POST**
@@ -562,7 +561,7 @@ Associa um ponto a uma rota
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /pointoutroute
 Desassocia um ponto a uma rota
 * metodo: **DELETE**
@@ -581,7 +580,7 @@ Desassocia um ponto a uma rota
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /getnonvalidated
 Mostra os pontos não válidos
 * metodo: **POST**
@@ -607,7 +606,7 @@ Mostra os pontos não válidos
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /validate
 Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
@@ -625,7 +624,7 @@ Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /list
 Retorna a lista dos pontos de interesse
 * metodo: **GET**
@@ -648,7 +647,8 @@ Retorna a lista dos pontos de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }````
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
+-------------
 ### Imagens
 #### /searchgetimage
 Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de interesse.
@@ -672,7 +672,7 @@ Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /search
 Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
@@ -694,7 +694,7 @@ Retorna todos os dados das imagens dado o ponto de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /insert
 Adiciona uma imagem
 * metodo: **POST**
@@ -717,7 +717,7 @@ Adiciona uma imagem
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /getImage
 Retorna todas imagens dado o ponto de interesse
 * metodo: **Get** 
@@ -740,7 +740,7 @@ Retorna todas imagens dado o ponto de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
  ####  /deleteImage
 Apaga os dados da imagem
 * metodo: **Delete**
@@ -757,7 +757,7 @@ Apaga os dados da imagem
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it 2" }```
    * ```errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /searchinterest
 Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
@@ -779,7 +779,7 @@ Retorna todos os dados das imagens dado o ponto de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /pointdata
 Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
@@ -802,7 +802,7 @@ Retorna todos os dados das imagens dado o ponto de interesse
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /getnonvalidated
 Mostra as imagens não válidas
 * metodo: **POST**
@@ -826,7 +826,7 @@ Mostra as imagens não válidas
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
   
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /validate
 Valida uma imagem. Retorna todos os dados das imagens.
 * metodo: **POST**
@@ -844,7 +844,8 @@ Valida uma imagem. Retorna todos os dados das imagens.
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
+-------------
 ### Proprietários
 #### /list
 Devolve a lista de todos os proprietários
@@ -863,7 +864,7 @@ Devolve a lista de todos os proprietários
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 #### /insert
 Adiciona um proprietário
 * metodo: **POST**
@@ -882,7 +883,7 @@ Adiciona um proprietário
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
 ####  /update
 Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a solicitar o update é um administrador. Não poderá ser permitido o update ao ID do ponto
 * metodo: **POST**
@@ -905,4 +906,4 @@ Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a sol
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
 
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+[Indice](#endpoints)
