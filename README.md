@@ -86,12 +86,12 @@ fetch("https://localhost:3000/users/register", requestOptions)
 Devolve lista de utilizadores
 * metodo: **GET**
 * Retorna:
-    * id
-    * name
-    * surname
-    * password
-    * email
-    * age
+  * id
+  * name
+  * surname
+  * password
+  * email
+  * age
 
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
@@ -122,12 +122,12 @@ Regista o utilizador.Obrigatório preencher todos os campos.
 * Retorna:
   * sucess: true
   * message :
-      * id
-      * email
+    * id
+    * email
   * Exemplo:
-      * ```"status": "OK"```
-      * ```"code": 200```
-      * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * ```body: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}"```					
 * Mensagens de erro:
   * ```"code": 401```
     * ``` errormesage = { sucess : false , mesage: "User already exists" }```
@@ -148,13 +148,13 @@ Autentica o utilizador
 * Retorna:
   * sucess: true
   * message :
-      * id
-      * name
-      * surname
-      * password
-      * age
-      * email
-      * token
+    * id
+    * name
+    * surname
+    * password
+    * age
+    * email
+    * token
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
@@ -175,12 +175,12 @@ Lista os utilizadores
     * tokenAdmin
   * sucess: true
   * message :
-      * id
-      * name
-      * surname
-      * password
-      * email
-      * age
+    * id
+    * name
+    * surname
+    * password
+    * email
+    * age
   * Exemplo:
     * ```"status": "OK"```
     * ```"code": 200```
