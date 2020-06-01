@@ -75,6 +75,8 @@ class Routes extends Component {
 
   async getPointsInfo(pontos) {
     let newPontos = [];
+    let i = pontos.length;
+    let iterator=0;
     await pontos.forEach(async (element) => {
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
@@ -94,8 +96,8 @@ class Routes extends Component {
         requestOptions
       );
       let data = await response.json();
-      data = data.mesage[0];
-      if (data != []) {
+      if (data.mesage.length != 0) {
+        data = data.mesage[0];
         //
         //
         // vai buscar imagens
@@ -113,7 +115,13 @@ class Routes extends Component {
         data.img = dataImg.mesage;
 
         newPontos.push(data);
-        if (pontos.length == newPontos.length) {
+        iterator++;
+        if (i == iterator) {
+          this.setState({ points: newPontos });
+        }
+      }else{
+        iterator++;
+        if (i == iterator) {
           this.setState({ points: newPontos });
         }
       }
