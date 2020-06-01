@@ -249,7 +249,7 @@ var app = {
                     pNomeEdificio.textContent = roteiro.titulo;
 
                     pLocalizacao.textContent = coordCentral;
-                    pAutores.textContent = 'Vadims Zinatulins, João Almeida';
+                    pAutores.textContent = roteiro.name + " - " + roteiro.work;
                     pDescricao.textContent = roteiro.descricao;
                     spanLinha.textContent = roteiro.tipoEdif;
                     pTipoEdificio.appendChild(spanLinha);
