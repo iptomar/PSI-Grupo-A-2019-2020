@@ -16,7 +16,7 @@ class NavBar extends Component {
         if (sessionStorage.getItem("userData")) {
             this.setState({loggedIn : true});
             let data = JSON.parse(sessionStorage.getItem("userData"));
-            this.setState({user:data.email});
+            this.setState({user:data});
         }
         else{
             this.setState({loggedIn : false});
@@ -42,7 +42,7 @@ class NavBar extends Component {
                         <div id="NavButtons">
                             <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Routes")}> Roteiros </button>
                             <button className="CenterNavButton" onClick={()=>this.props.redirecter("/MyPoints")}>Pontos</button>
-                            {this.state.user==="admin@admin.com"?
+                            {this.state.user.isadmin===1?
                             <div style={{display:"flex", flexDirection:"row"}}>
                             <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Users")}>Utilizadores</button> 
                             <button className="CenterNavButton" onClick={()=>this.props.redirecter("/Profile")}>Perfil</button>
