@@ -95,27 +95,27 @@ class Routes extends Component {
       );
       let data = await response.json();
       data = data.mesage[0];
-      console.log(data.id);
-      //
-      //
-      // vai buscar imagens
-      requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        mode: "cors",
-        redirect: "follow",
-      };
-      let res = await fetch(
-        this.props.ApiPath + "images/searchgetimage?id="+data.id,
-        requestOptions
-      );
-      let dataImg = await res.json();
-      data.img = dataImg.mesage;
-      
+      if (data != []) {
+        //
+        //
+        // vai buscar imagens
+        requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          mode: "cors",
+          redirect: "follow",
+        };
+        let res = await fetch(
+          this.props.ApiPath + "images/searchgetimage?id=" + data.id,
+          requestOptions
+        );
+        let dataImg = await res.json();
+        data.img = dataImg.mesage;
 
-      newPontos.push(data);
-      if (pontos.length == newPontos.length) {
-        this.setState({ points: newPontos });
+        newPontos.push(data);
+        if (pontos.length == newPontos.length) {
+          this.setState({ points: newPontos });
+        }
       }
     });
   }
@@ -248,12 +248,12 @@ class Routes extends Component {
     if (this.state.points.length != 0) {
       this.state.points.forEach((element) => {
         var imgArr = [];
-        if(element.img.length!=0){
-           element.img.forEach(async(image)=>{
+        if (element.img.length != 0) {
+          element.img.forEach(async (image) => {
             imgArr.push(
               <img src={"data:image/jpg;base64," + image.img} width="200"></img>
-            )
-          })
+            );
+          });
         }
         ps.push(
           <table id="UsersTable">
