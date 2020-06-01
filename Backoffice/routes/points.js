@@ -366,6 +366,7 @@ router.get("/list", async function(req, res, next){
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex('Interesse')
+  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .select()
   .then(rows => {
     let errormesage = { sucess : true , mesage: rows };
