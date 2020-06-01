@@ -36,11 +36,7 @@ fetch("https://localhost:3000/users/register", requestOptions)
 
 -----------
 * [/ (list)](#-list)
-* ```javascript 
-"status": "OK"
-"code": 200 
-"body!: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}
-```	
+* ```javascript "status": "OK" "code": 200  "body!: "{\n    \"sucess\": true,\n    \"mesage\": {\n        \"id\": 11,\n        \"email\": \"email\"\n    }\n}```	
 
 
 ## EndPoints
