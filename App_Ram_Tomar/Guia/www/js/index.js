@@ -186,6 +186,8 @@ var app = {
                 let mark = L.marker(coordCentral, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
                 pontos_e_poligonos.push(mark);
 
+                let btns = document.getElementById('btnTopo');
+
                 // Atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
                 let link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
                     body.classList.remove('overflow');
@@ -193,6 +195,29 @@ var app = {
                     divInfo.classList.remove("hidden");
                     mapa.classList.add('hidden');
                     mymap.closePopup();
+
+                    let backBtn = document.createElement('div');
+                    backBtn.setAttribute('style', 'cursor: pointer');
+                    backBtn.onclick = () => {
+                        btns.removeChild(backBtn);
+
+                        body.classList.add('overflow');
+                        btPos.classList.remove('hidden');
+                        divInfo.classList.add("hidden");
+                        mapa.classList.remove('hidden');
+
+                        while (divInfo.lastElementChild) {
+                            divInfo.removeChild(divInfo.lastElementChild);
+                        }
+
+                        mymap.openPopup();
+                    };
+
+                    let icon = document.createElement('i');
+                    icon.setAttribute('class', 'fa fa-chevron-circle-left fa-2x');
+                    backBtn.appendChild(icon);
+
+                    btns.appendChild(backBtn);
 
                     // Criação de elementos e adicionados ao html
                     let hr = document.createElement('hr');
@@ -312,7 +337,7 @@ var app = {
 
             window.listarTodosOsPontos = () => {
                 removerTodosOsPontos();
-                
+
                 //metodo de jQuery para ir buscar à API do BackOffice
                 $.getJSON("http://188.251.50.68:3000/points/list", result => {
                     // Iterar todos os pontos de interesse
@@ -372,13 +397,31 @@ var app = {
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
-            var btBack = document.getElementById('idBackBt');
+            let btns = document.getElementById('btnTopo');
             btSobre.onclick = mostraSobre => {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
                 divInfo.classList.add('hidden');
                 btPos.classList.add('hidden');
                 body.classList.remove('overflow');
+
+                let backBtn = document.createElement('div');
+                backBtn.setAttribute('style', 'cursor: pointer');
+                backBtn.onclick = () => {
+                    btns.removeChild(backBtn);
+
+                    divAcerca.classList.add('hidden');
+                    mapa.classList.remove('hidden');
+                    divInfo.classList.remove('hidden');
+                    btPos.classList.remove('hidden');
+                    body.classList.add('overflow');
+                };
+
+                let icon = document.createElement('i');
+                icon.setAttribute('class', 'fa fa-chevron-circle-left fa-2x');
+                backBtn.appendChild(icon);
+
+                btns.appendChild(backBtn);
             }
 
             /****************************************************************/
