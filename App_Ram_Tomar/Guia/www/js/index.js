@@ -79,9 +79,10 @@ var app = {
             var divRot = document.getElementById('infoRoteiro');
 
 
+
             var br = document.createElement('br');
 
-
+    
 
             //metodo de jQuery para ir buscar à API do BackOffice
 
@@ -346,6 +347,8 @@ var app = {
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
             var btRot = document.getElementById('btRoteiro');
+            var btHome = document.getElementById('btHome');
+
             btSobre.onclick = mostraSobre => {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
@@ -357,14 +360,28 @@ var app = {
 
                 body.classList.remove('overflow');
             }
+            btRot.onclick = mostraRoteiros => {
+              //  divAcerca.classList.remove('hidden');
+                mapa.classList.add('hidden');
+                //divInfo.classList.add('hidden');
+                btPos.classList.add('hidden');
 
-         
+            btRot.classList.add('hidden');
+
+                body.classList.remove('overflow');
+
+            }
+            btHome.onclick = mostraInicio => {
+                location.reload();
+
+        }
        
             /****************************************************************/
 
             var idP = document.createElement('p');
             divInfo.appendChild(idP);
 
+        
             //trabalha o evento do botao dos dispositivos para voltar atras
             document.addEventListener("backbutton", onBackKeyDown, false);
             function onBackKeyDown(e) {
