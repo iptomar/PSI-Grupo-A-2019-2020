@@ -38,7 +38,6 @@ fetch("https://localhost:3000/users/register", requestOptions)
 ## EndPoints
 * [Autenticação](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#autentica%C3%A7%C3%A3o)
   * [/ (list)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-list)
-  * [/ (?)](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#-)
   * [register](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#register-1)
   * [login](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#login-1)
   * [getusers](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#getuserstokenadmin)
@@ -93,20 +92,6 @@ Devolve lista de utilizadores
   * email
   * age
 
-
-[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
-#### / (?)
-Devolve lista de utilizadores???
-* metodo: **POST**
-* O body deve conter: 
-    * *falta adicionar*
-* Retorna:
-    * id
-    * name
-    * surname
-    * password
-    * email
-    * age
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ####  /register
@@ -622,7 +607,7 @@ Mostra os pontos não válidos
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 #### /validate
-Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse??? *falta confirmar*
+Valida um ponto .Retorna todos os dados das imagens dado o ponto de interesse
 * metodo: **POST**
 * O body deve conter:
   * id (id do Ponto)
