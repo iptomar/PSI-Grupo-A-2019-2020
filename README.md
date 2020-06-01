@@ -766,6 +766,93 @@ Apaga os dados da imagem
    * ```errormesage = { sucess : false , mesage: "something went wrong and we are working on it 3" }```
   
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /searchinterest
+Retorna todos os dados das imagens dado o ponto de interesse
+* metodo: **POST**
+* O body deve conter:
+  * data
+    * id (id do ponto de interesse)
+* Retorna:
+  * sucess: true
+  * message :
+    * id
+    * titulo
+    * descricao
+    * data
+    * isvalid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar*
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /pointdata
+Retorna todos os dados das imagens dado o ponto de interesse
+* metodo: **POST**
+* O body deve conter:
+  * data
+    * id (id do ponto de interesse)
+* Retorna:
+  * sucess: true
+  * message :   
+    * Path
+    * Legenda
+    * AutorFonte
+    * tipoEdif
+    * usersid
+    * imagem
+* Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar*
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### /getnonvalidated
+Mostra as imagens não válidas
+* metodo: **POST**
+* O body deve conter:
+  * email
+* Retorna:
+  * sucess: true
+  * message : 
+    * Path
+    * Legenda
+    * AutorFonte
+    * tipoEdif
+    * usersid
+    * imagem
+    * isvalid
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+    * *falta adicionar*
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
+  * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
+  
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
+#### //validate
+Valida uma imagem. Retorna todos os dados das imagens.
+* metodo: **POST**
+* O body deve conter:
+  * id (id da Imagem)
+  * email
+* Retorna:
+  * sucess: true
+  * message : update sucessfull
+  * Exemplo:
+    * ```"status": "OK"```
+    * ```"code": 200```
+     * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": \"updated sucessfull\"\n}"```
+* Mensagens de erro:
+  * ``` errormesage = { sucess : false , mesage: "token not used" }```
+  * ``` errormesage = { sucess : false , mesage: "only admins can do this" }```
+
+[Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
 ### Proprietários
 #### /list
 Devolve a lista de todos os proprietários
@@ -808,7 +895,8 @@ Adiciona um proprietário
 Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a solicitar o update é um administrador. Não poderá ser permitido o update ao ID do ponto
 * metodo: **POST**
 * O body deve conter:
-  * id 
+  * id (id do proprietario)
+  * user (email do utilizador)
   * data
     * name
     * work
@@ -823,5 +911,6 @@ Atualiza os dados do proprietário.Terá de ser verificado se o utilizador a sol
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "Proprietary doesn't exist" }```
   * ``` errormesage = { sucess : false , mesage: "token not used" }```
+  * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
 
 [Indice](https://github.com/iptomar/PSI-Grupo-A-2019-2020/tree/backend_v3#endpoints)
