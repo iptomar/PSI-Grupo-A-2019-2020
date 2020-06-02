@@ -146,7 +146,7 @@ class Register extends Component {
                         <p className="TitleP">Novo Utilizador</p>
       
                         <div id="ProfileBox">
-                            <input
+                           <h4>Nome</h4> <input
                                 type="text"
                                 id="name"
                                 name="name"
@@ -156,7 +156,7 @@ class Register extends Component {
                                     this.reload
                                 }
                             ></input>
-                            <input
+                           <h4>Apelido</h4> <input
                                 type="text"
                                 id="surname"
                                 name="surname"
@@ -166,7 +166,7 @@ class Register extends Component {
                                     this.reload
                                 }
                             ></input>
-
+                            <h4>Email</h4>
                             <input
                                 type="text"
                                 id="email"
@@ -179,7 +179,7 @@ class Register extends Component {
                                     this.reload
                                 }
                             ></input>
-
+                            <h4>Idade</h4>
                             <input
                                 type="text"
                                 id="age"
@@ -190,7 +190,7 @@ class Register extends Component {
                                     this.reload
                                 }
                             ></input>
-
+                            <h4>Password</h4>
                             <input
                                 type="password"
                                 id="password"
