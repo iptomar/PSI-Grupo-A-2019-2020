@@ -1,7 +1,5 @@
-!gggs
-! ggg
-#                                                           Casos de Teste
-##                                                           Utilizadores 
+# Casos de Teste
+## Utilizadores 
 ### Registar:
 Inserir utilizador na base de dados
 * **Entrada:** id,nome, apelido, password, idade, email
