@@ -204,7 +204,7 @@ class Profile extends Component {
                 </div>
 
                 <div className="FieldDiv">
-                  <label className="FieldLabel">Data de enauguração</label>
+                  <label className="FieldLabel">Data de inauguração</label>
                   <input
                     type="text"
                     id="date"
