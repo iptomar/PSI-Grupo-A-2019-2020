@@ -155,7 +155,7 @@ Autentica o utilizador
 [Indice](#endpoints)
 #### /getUsers/{tokenAdmin}
 Lista os utilizadores
-* metodo: **Get** 
+* metodo: **GET** 
 * Retorna:
 * O body deve conter:  
     * tokenAdmin
@@ -280,7 +280,7 @@ Verifica se um utilizador é administrador
  ### Roteiros
  ##### /list
 Retorna a lista de roteiros
-* metodo: **Get** 
+* metodo: **GET** 
 * Retorna:
   * sucess: true
   * message : 
@@ -649,7 +649,7 @@ Retorna a lista dos pontos de interesse
   * ```"code": 200```
   * ```"body": "{\n    \"sucess\": true,\n    \"mesage\": [\n        {\n            \"id\": 1,\n            \"titulo\": \"Palácio da Justiça\",\n            \"descricao\": \"O edifício foi inaugurado em 1959. O piso térreo do edifício é elevado através de uma escadaria, e apresenta arcada com galeria; no piso nobre, abriram-se janelas de sacada no intercolúnio. Na construção sobressai o calcário dourado da região, profusamente aplicado em paredes, pavimentos e escadas. Os pavimentos beneficiaram da aplicação de revestimentos de madeira e mármore. No topo central, entre duas colunas, colocou-se um tríptico a fresco, da autoria de Guilherme Camarinha. A utilização de revestimentos cerâmicos policromados nas zonas públicas do edifício expressa uma prática comum na arquitetura judicial deste período. O edifício inclui, nas paredes laterais do pátio interior, painéis cerâmicos decorativos, com motivos alusivos à função simbólica do edifício, desenhados por Jorge Barradas.\",\n            \"coordenadas\": \"39.60092678,-8.41364175,39.60100945,-8.41395021,39.60114998,-8.4134835,39.60091989,-8.41336763,39.60090529,-8.4134084,39.60086423,-8.41339123,39.60084935,-8.4134295,39.60081959,-8.41341555,39.60073775,-8.41367126,39.60077247,-8.41369307,39.60074299,-8.4137814,39.60078019,-8.41380394,39.60077109,-8.41383398\",\n            \"data\": \"1951\",\n            \"tipoEdif\": \"Edifício Público\",\n            \"user_id\": 1,\n            \"prop_id\": 1\n,\n            \"isvalid\": true\n        }\n    ]\n}"```
 * Mensagens de erro:
-  * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }````
+  * ```errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
 [Indice](#endpoints)
 
@@ -725,7 +725,7 @@ Adiciona uma imagem
 [Indice](#endpoints)
 #### /getImage
 Retorna todas imagens dado o ponto de interesse
-* metodo: **Get** 
+* metodo: **GET** 
 * O body deve conter:
   * data (path da imagem)
 * Retorna:
@@ -855,7 +855,7 @@ Valida uma imagem. Retorna todos os dados das imagens.
 ### Proprietários
 #### /list
 Devolve a lista de todos os proprietários
-* metodo: **Get** 
+* metodo: **GET** 
 * Retorna:
   * sucess: true
   * message : 
