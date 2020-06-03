@@ -10,7 +10,6 @@ class Routes extends Component {
     this.state = {
       loggedIn: false,
       redirect: "/Routes",
-      role: "",
       userdata: null,
       routes: [],
       routeId: null,
@@ -23,7 +22,6 @@ class Routes extends Component {
   componentDidMount() {
     if (sessionStorage.getItem("userData")) {
       let data = JSON.parse(sessionStorage.getItem("userData"));
-      this.setState({ role: data.email });
       this.setState({ userdata: data });
       sessionStorage.setItem("token", data.token);
       this.setState({ loggedIn: true });
@@ -76,7 +74,7 @@ class Routes extends Component {
   async getPointsInfo(pontos) {
     let newPontos = [];
     let i = pontos.length;
-    let iterator=0;
+    let iterator = 0;
     await pontos.forEach(async (element) => {
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
@@ -119,7 +117,7 @@ class Routes extends Component {
         if (i == iterator) {
           this.setState({ points: newPontos });
         }
-      }else{
+      } else {
         iterator++;
         if (i == iterator) {
           this.setState({ points: newPontos });
@@ -273,14 +271,20 @@ class Routes extends Component {
             <tr>
               <td>{element.descricao}</td>
             </tr>
-            {imgArr}
-            <button
-              onClick={() =>
-                this.deletePointFromRoute(this.state.routeId, element.id)
-              }
-            >
-              ❌
-            </button>
+            <tr>
+              <td>{imgArr}</td>
+            </tr>
+            <tr>
+              <td>
+                <button
+                  onClick={() =>
+                    this.deletePointFromRoute(this.state.routeId, element.id)
+                  }
+                >
+                  ❌
+                </button>
+              </td>
+            </tr>
           </table>
         );
       });
@@ -304,6 +308,17 @@ class Routes extends Component {
                 >
                   Novo Roteiro
                 </button>
+                {this.state.userdata !== null &&
+                this.state.userdata.isadmin === 1 ? (
+                  <button
+                    id="RegisterRedirectBtt"
+                    onClick={() => {
+                      this.setState({ redirect: "/RoutesToValidate" });
+                    }}
+                  >
+                    Validar Roteiros
+                  </button>
+                ) : null}
                 <button
                   id="RegisterRedirectBtt"
                   onClick={() => {

@@ -10,7 +10,6 @@ class Points extends Component {
     this.state = {
       loggedIn: false,
       redirect: "/MyPoints",
-      role: "",
       userdata: null,
       points: [],
     };
@@ -21,7 +20,6 @@ class Points extends Component {
   async componentDidMount() {
     if (sessionStorage.getItem("userData")) {
       let data = JSON.parse(sessionStorage.getItem("userData"));
-      this.setState({ role: data.email });
       this.setState({ userdata: data });
       sessionStorage.setItem("token", data.token);
       this.setState({ loggedIn: true });
@@ -126,7 +124,7 @@ class Points extends Component {
               <td>
                 <button onClick={() => this.deletePoint(point.id)}>❌</button>
                 <button onClick={() => this.updatePoint(point)}>📝</button>
-                <button onClick={() => this.getImages(point)}>🖼</button>
+                <button onClick={() => this.getImages(point)}>📸</button>
                 <button onClick={() => this.getPoint(point)}>📖</button>
               </td>
             </tr>
@@ -153,6 +151,28 @@ class Points extends Component {
                 >
                   Novo ponto
                 </button>
+                {this.state.userdata !== null &&
+                this.state.userdata.isadmin === 1 ? (
+                  <button
+                    id="RegisterRedirectBtt"
+                    onClick={() => {
+                      this.setState({ redirect: "/PointsToValidate" });
+                    }}
+                  >
+                    Validar Pontos
+                  </button>
+                ) : null}
+                {this.state.userdata !== null &&
+                this.state.userdata.isadmin === 1 ? (
+                  <button
+                    id="RegisterRedirectBtt"
+                    onClick={() => {
+                      this.setState({ redirect: "/ImagesToValidate" });
+                    }}
+                  >
+                    Validar Imagens
+                  </button>
+                ) : null}
               </div>
               {UI}
             </div>

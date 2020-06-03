@@ -88,7 +88,6 @@ class Users extends Component {
   async makeNotAdmin(user) {
       
     if (user!=="admin@admin.com") {
-        console.log(user)
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
       myHeaders.append("Content-type", "application/json");

@@ -15,7 +15,7 @@ class Routes extends Component {
       points: [],
       routes: [],
       pointId: "0",
-      routeId: "0"
+      routeId: "0",
     };
     this.redirecter = this.redirecter.bind(this);
     this.submitRoute = this.submitRoute.bind(this);
@@ -44,7 +44,7 @@ class Routes extends Component {
   async getUserRoutes() {
     let idUser = JSON.parse(sessionStorage.getItem("userData"));
     idUser = idUser.id;
-    
+
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
@@ -71,29 +71,26 @@ class Routes extends Component {
 
     //Resposta por parte do server
     let data = await response.json();
-    if(data.mesage.length>0){
-        this.setState({routes:data.mesage, routeId:"1"});
-    }else{
-        this.setState({routes:data.mesage});
+    if (data.mesage.length > 0) {
+      this.setState({ routes: data.mesage, routeId: "1" });
+    } else {
+      this.setState({ routes: data.mesage });
     }
-    
   }
 
   //Função relativa à submissão do roteiro
   async submitRoute() {
-
     let div = document.getElementById("CreateStatusDiv"); //DIV que irá conter a resposta se o roteiro foi criado com sucesso ou não
-
 
     //Headers
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
     var raw = JSON.stringify({
-        "data":{
-            "idrot": this.state.routeId,
-            "idpoint":this.state.pointId
-        }
+      data: {
+        idrot: this.state.routeId,
+        idpoint: this.state.pointId,
+      },
     });
 
     //Tipo de request
@@ -122,7 +119,9 @@ class Routes extends Component {
     //Senão mostra a mensagem de erro
     else {
       div.style.color = "#dc3545";
-      this.setState({ CreateStatus: "Houve um erro ao criar ao associar ponto a roteiro" });
+      this.setState({
+        CreateStatus: "Houve um erro ao criar ao associar ponto a roteiro",
+      });
     }
   }
 
@@ -148,12 +147,11 @@ class Routes extends Component {
     );
     let data = await response.json();
     data = data.mesage;
-    if(data.length>0){
-        this.setState({ points: data, pointId:"1" });
-    }else{
-        this.setState({ points: data});
+    if (data.length > 0) {
+      this.setState({ points: data, pointId: "1" });
+    } else {
+      this.setState({ points: data });
     }
-    
   }
 
   render() {
@@ -166,14 +164,14 @@ class Routes extends Component {
       return <Redirect to={this.state.redirect} />;
     }
 
-    let options=[]; 
-    this.state.routes.forEach((r)=>{
-        options.push(<option value={r.id}>{r.nome}</option>);
+    let options = [];
+    this.state.routes.forEach((r) => {
+      options.push(<option value={r.id}>{r.nome}</option>);
     });
 
-    let options1=[]; 
-    this.state.points.forEach((p)=>{
-        options1.push(<option value={p.id}>{p.titulo}</option>);
+    let options1 = [];
+    this.state.points.forEach((p) => {
+      options1.push(<option value={p.id}>{p.titulo}</option>);
     });
 
     return (
@@ -186,15 +184,59 @@ class Routes extends Component {
               <div className="TitleDiv"></div>
               <p className="TitleP">Associar ponto a roteiro</p>
               <div id="RouteBox">
-                  {this.state.routes.length==0 ? <p id="noRoutes">Tem que criar um roteiro primeiro</p>:<p></p>}
-              <select id="mySelect" onChange={() => {this.setState({routeId:document.getElementById("mySelect").value}) }}>
-                {options}
-              </select>
-                {this.state.points.length==0 ? <p  id="noPoints">Tem que criar um ponto primeiro</p>:<p></p>}
-              <select id="mySelect1" onChange={() => {this.setState({pointId:document.getElementById("mySelect1").value}) }}>
-                {options1}
-              </select>
-                
+                {this.state.routes.length == 0 ? (
+                  <p id="noRoutes">Tem que criar um roteiro primeiro</p>
+                ) : (
+                  <p></p>
+                )}
+                <select
+                  id="mySelect"
+                  style={{
+                    borderRadius: 0,
+                    height: 60,
+                    width: 300,
+                    backgroundColor: "#202020",
+                    color: "#fff",
+                    fontFamily: " Oxygen, sans-serif",
+                    fontSize: 18,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                  onChange={() => {
+                    this.setState({
+                      routeId: document.getElementById("mySelect").value,
+                    });
+                  }}
+                >
+                  {options}
+                </select>
+                {this.state.points.length == 0 ? (
+                  <p id="noPoints">Tem que criar um ponto primeiro</p>
+                ) : (
+                  <p></p>
+                )}
+                <select
+                  id="mySelect1"
+                  style={{
+                    borderRadius: 0,
+                    height: 60,
+                    width: 300,
+                    backgroundColor: "#202020",
+                    color: "#fff",
+                    fontFamily: " Oxygen, sans-serif",
+                    fontSize: 18,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                  onChange={() => {
+                    this.setState({
+                      pointId: document.getElementById("mySelect1").value,
+                    });
+                  }}
+                >
+                  {options1}
+                </select>
+
                 <div id="CRButtonsDiv">
                   <button
                     className="CRBtts"
@@ -204,10 +246,14 @@ class Routes extends Component {
                   >
                     Voltar
                   </button>
-                  {this.state.routes.length!=0 && this.state.points.length!=0 ? <button className="CRBtts" onClick={this.submitRoute}>
-                    Criar
-                  </button>:<p></p>}
-                  
+                  {this.state.routes.length != 0 &&
+                  this.state.points.length != 0 ? (
+                    <button className="CRBtts" onClick={this.submitRoute}>
+                      Associar
+                    </button>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
 
                 <div id="CreateStatusDiv">{this.state.CreateStatus}</div>
