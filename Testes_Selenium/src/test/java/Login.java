@@ -29,9 +29,10 @@ public class Login {
     public void LoginSuccess() {
         LoginSuccessTest loginTest = new LoginSuccessTest(driver);
         loginTest.loginSuccess();// Testa um login que tem sucesso.
-        loginTest.checkRoutes();// Testa a página rotas
-        loginTest.checkPoints();// Testa a página pontos
-        loginTest.createPoint();// Testa a criação de ponto
+        //loginTest.checkRoutes();// Testa a página rotas
+       // loginTest.checkPoints();// Testa a página pontos
+        loginTest.checkUsers();// Testa a página de users registados
+        loginTest.createUser();
     //new RegisterSuccess(driver).registerSuccessfully(); // Testa um registo que tem sucesso.
     //new RegisterUnsuccessfull(driver).registerUnsuccessfully(); // Testa um registo sem sucesso.
     }

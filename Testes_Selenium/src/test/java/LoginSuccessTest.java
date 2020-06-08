@@ -84,6 +84,25 @@ public class LoginSuccessTest {
         }
     }
     
+        @Test
+    public void checkUsers() {
+        try {
+            //*[@id="NavButtons"]/button[1]
+            driver.findElement(By.xpath("//*[@id=\"NavButtons\"]/div/button[1]")).click();
+            if (!driver.getCurrentUrl().contains("Users")) {
+                Assert.fail();
+
+                driver.quit();
+            }
+            Thread.sleep(3500);
+        } catch (InterruptedException ex) {
+            Assert.fail();
+            driver.quit();
+            driver.close();
+        }
+    }
+
+    
     @Test
     public void createPoint(){
         try {
@@ -116,5 +135,46 @@ public class LoginSuccessTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginSuccessTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+        @Test
+    public void createUser() {
+        try {
+            //*[@id="PageCentralDiv"]/a
+            driver.findElement(By.id("RegisterRedirectBtt")).click();
+            if (!driver.getCurrentUrl().contains("Register")) {
+                Assert.fail();
+                driver.quit();
+            }
+            Thread.sleep(2500);
+            //driver.findElement(By.name("title")).click();
+            driver.findElement(By.name("name")).sendKeys("Teste");
+            driver.findElement(By.name("surname")).sendKeys("Selenium");
+            driver.findElement(By.name("email")).sendKeys("teste@teste.teste");
+            driver.findElement(By.name("age")).sendKeys("88");
+            driver.findElement(By.name("password")).sendKeys("Teste Selenium");
+
+            Thread.sleep(2500);
+            
+            
+            //Adicionar
+            driver.findElement(By.xpath("//*[@id=\"RegButtonsDiv\"]/button[2]")).click();
+            Thread.sleep(5000);
+
+
+            Thread.sleep(5000);
+
+            if (!driver.findElement(By.id("RegisterStatusDiv")).getText().contains("Registado com sucesso!")) {
+                Assert.fail();
+                driver.quit();
+                driver.close();
+            }
+            Thread.sleep(2000);
+
+        } catch (InterruptedException ex) {
+            Assert.fail();
+            System.out.println(ex.getMessage());
+            Logger.getLogger(LoginSuccessTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
