@@ -17,12 +17,12 @@ public class LoginSuccessTest {
     @Test
     public void loginSuccess() {
         try {
-            driver.get("http://localhost:4000");
+            driver.get("http://188.251.50.68:4000/");
             Thread.sleep(5000);
             driver.findElement(By.id("LogInOut")).click();
             Thread.sleep(2000);
              String url = driver.getCurrentUrl();
-             Assert.assertEquals(true,url.contains("login"));
+             Assert.assertEquals(true,url.contains("Login"));
              driver.findElement(By.name("email")).click();
              driver.findElement(By.name("email")).sendKeys("admin@admin.com");
              Thread.sleep(500);
@@ -101,6 +101,50 @@ public class LoginSuccessTest {
             driver.close();
         }
     }
+    @Test
+    public void checkProfile(){
+         try {
+             //Testa a pagina do proprio utilizador
+            //*[@id="NavButtons"]/button[1]
+            driver.findElement(By.xpath("//*[@id=\"NavButtons\"]/div/button[2]")).click();
+            if (!driver.getCurrentUrl().contains("Profile")) {
+                Assert.fail();
+
+                driver.quit();
+            }
+            Thread.sleep(3500);
+        } catch (InterruptedException ex) {
+            Assert.fail();
+            driver.quit();
+            driver.close();
+        }
+    }
+    @Test
+    public void editProfile(){
+        try {
+            if(!driver.getCurrentUrl().contains("Profile")){
+                Assert.fail();
+                driver.quit();
+            }
+            //Testa a edicao de dados do proprio utilizador
+            Thread.sleep(2500);
+            driver.findElement(By.name("name")).click();
+            driver.findElement(By.name("name")).sendKeys("Teste Selenium");
+            driver.findElement(By.name("surname")).click();
+            driver.findElement(By.name("surname")).sendKeys("Teste Selenium");
+            driver.findElement(By.name("age")).click();
+            driver.findElement(By.name("age")).sendKeys("20");
+            driver.findElement(By.id("SaveBtt")).click();
+            Thread.sleep(2500);
+            
+            if(!driver.findElement(By.id("EditStatusDiv")).getText().contains("Perfil atualizado com sucesso!")){
+                Assert.fail();
+                driver.quit();
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(LoginSuccessTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     
     @Test
@@ -176,5 +220,44 @@ public class LoginSuccessTest {
             Logger.getLogger(LoginSuccessTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+     @Test
+    public void createRoute(){
+        try {
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"RegisterRedirectBtt\"]/[1]")).click();
+            Thread.sleep(5000);
+            if (!driver.getCurrentUrl().contains("AddRoute")) {
+                Assert.fail();
+                driver.quit();
+            }
+            Thread.sleep(2500);
+            
+            //enviar dados
+            driver.findElement(By.name("title")).click();
+            driver.findElement(By.name("title")).sendKeys("Teste Selenium");
+            driver.findElement(By.name("descr")).click();
+            driver.findElement(By.name("descr")).sendKeys("Teste Selenium");
+            Thread.sleep(2500);
+            //adicionar roteiro
+            driver.findElement(By.xpath("//*[@id=\"CRButtonsDiv\"]/button[2]")).click();
+            Thread.sleep(5000);
+            
+            
+            //verificar se foi criado com sucesso
+             if (!driver.findElement(By.id("CreateStatusDiv")).getText().contains("Roteiro criado com sucesso!")) {
+                Assert.fail();
+                driver.quit();
+                driver.close();
+            }
+            Thread.sleep(2000);
+            
+            
+            
+        } catch (InterruptedException ex) {
+           Assert.fail();
+            System.out.println(ex.getMessage());
+            Logger.getLogger(LoginSuccessTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

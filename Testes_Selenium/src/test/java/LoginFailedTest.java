@@ -15,7 +15,7 @@ public class LoginFailedTest {
     @Test
     public void loginFail() {
         try {
-            driver.get("http://localhost:4000");
+            driver.get("http://188.251.50.68:4000/");
             Thread.sleep(5000);
             driver.findElement(By.id("LogInOut")).click();
             Thread.sleep(2000);
