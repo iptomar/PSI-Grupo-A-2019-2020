@@ -146,7 +146,7 @@ class Images extends Component {
               <p className="TitleP">Imagens do ponto</p>
               <div id="RegisterRedirectDiv">
                 <button
-                  id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                   onClick={() => {
                     this.setState({ redirect: "/AddImages" });
                   }}

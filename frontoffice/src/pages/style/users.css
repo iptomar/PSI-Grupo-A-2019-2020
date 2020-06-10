@@ -54,7 +54,7 @@ button:focus{
     padding-right: 100px;
 }
 
-#RegisterRedirectBtt{
+.RegisterRedirectBtt{
     width: 200px;
     border:none;
     margin-top: 20px;
@@ -69,12 +69,12 @@ button:focus{
     border-top: #181818 2px solid;
 }
 
-#RegisterRedirectBtt:hover{
+.RegisterRedirectBtt:hover{
     border-top: #FF6600 2px solid;
     background-color: #303030;
 }
 
-#RegisterRedirectBtt:focus{
+.RegisterRedirectBtt:focus{
     border-top: #FF6600 2px solid;
     background-color: #303030;
 }

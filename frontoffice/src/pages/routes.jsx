@@ -301,7 +301,7 @@ class Routes extends Component {
               <p className="TitleP">Roteiros</p>
               <div id="RegisterRedirectDiv">
                 <button
-                  id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                   onClick={() => {
                     this.setState({ redirect: "/AddRoute" });
                   }}
@@ -311,7 +311,7 @@ class Routes extends Component {
                 {this.state.userdata !== null &&
                 this.state.userdata.isadmin === 1 ? (
                   <button
-                    id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                     onClick={() => {
                       this.setState({ redirect: "/RoutesToValidate" });
                     }}
@@ -320,7 +320,7 @@ class Routes extends Component {
                   </button>
                 ) : null}
                 <button
-                  id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                   onClick={() => {
                     this.setState({ redirect: "/AddPointToRoute" });
                   }}

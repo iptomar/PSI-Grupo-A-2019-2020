@@ -181,7 +181,7 @@ class Users extends Component {
 
               <div id="RegisterRedirectDiv">
                 <button
-                  id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                   onClick={() => {
                     this.setState({ redirect: "/Register" });
                   }}

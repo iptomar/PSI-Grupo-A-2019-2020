@@ -144,7 +144,7 @@ class Points extends Component {
               <p className="TitleP">Pontos</p>
               <div id="RegisterRedirectDiv">
                 <button
-                  id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                   onClick={() => {
                     this.setState({ redirect: "/createPoint" });
                   }}
@@ -154,7 +154,7 @@ class Points extends Component {
                 {this.state.userdata !== null &&
                 this.state.userdata.isadmin === 1 ? (
                   <button
-                    id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                     onClick={() => {
                       this.setState({ redirect: "/PointsToValidate" });
                     }}
@@ -165,7 +165,7 @@ class Points extends Component {
                 {this.state.userdata !== null &&
                 this.state.userdata.isadmin === 1 ? (
                   <button
-                    id="RegisterRedirectBtt"
+                  className="RegisterRedirectBtt"
                     onClick={() => {
                       this.setState({ redirect: "/ImagesToValidate" });
                     }}
