@@ -669,11 +669,7 @@ Retorna todos os dados das imagens incluindo as proprias imagens dado o ponto de
     * AutorFonte
     * Interesse_id
     * usersid
-    * ( imagem em base 64)( *falta nome do atri* )
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
+    * ( imagem em base 64)
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -738,10 +734,6 @@ Retorna todas imagens dado o ponto de interesse
     * tipoEdif
     * usersid
     * imagem
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -777,10 +769,6 @@ Retorna todos os dados das imagens dado o ponto de interesse
     * descricao
     * data
     * isvalid
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -800,10 +788,6 @@ Retorna todos os dados das imagens dado o ponto de interesse
     * tipoEdif
     * usersid
     * imagem
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   
@@ -823,10 +807,6 @@ Mostra as imagens não válidas
     * usersid
     * imagem
     * isvalid
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar*
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
   * ```errormesage= {sucess: false, mesage: "only admins can do this"}```
@@ -862,11 +842,7 @@ Devolve a lista de todos os proprietários
     * id
     * name
     * work
-    * user_id
-* Exemplo:
-  * ```"status": "OK"```
-  * ```"code": 200```
-  * *falta adicionar* 
+    * user_id 
 * Mensagens de erro:
   * ``` errormesage = { sucess : false , mesage: "something went wrong and we are working on it" }```
 
