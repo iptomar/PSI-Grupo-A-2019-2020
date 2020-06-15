@@ -153,16 +153,16 @@ class Users extends Component {
             <td>{element.isadmin === 1 ? "Sim" : "Não"}</td>
             <td>
               {element.isadmin === 1 ? (
-                <button onClick={() => this.makeNotAdmin(element.email)}>
+                <button title="Remover cargo Administrador" onClick={() => this.makeNotAdmin(element.email)}>
                   ⬇️
                 </button>
               ) : (
-                <button onClick={() => this.makeAdmin(element.email)}>
+                <button title="Promover a Administrador"onClick={() => this.makeAdmin(element.email)}>
                   ⬆️
                 </button>
               )}
 
-              <button onClick={() => this.deleteUser(element.id)}>❌</button>
+              <button title="Eliminar utilizador" onClick={() => this.deleteUser(element.id)}>❌</button>
             </td>
           </tr>
         );

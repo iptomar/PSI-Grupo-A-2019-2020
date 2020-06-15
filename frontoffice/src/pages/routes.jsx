@@ -96,8 +96,6 @@ class Routes extends Component {
       let data = await response.json();
       if (data.mesage.length != 0) {
         data = data.mesage[0];
-        //
-        //
         // vai buscar imagens
         requestOptions = {
           method: "GET",
@@ -216,7 +214,7 @@ class Routes extends Component {
             </tr>
             <tr>
               <td>
-                <button
+                <button title="Ver pontos do roteiro"
                   onClick={() => {
                     this.setState({ routeId: element.id });
                     this.getPoints(element.id);
@@ -225,7 +223,7 @@ class Routes extends Component {
                   👁️‍🗨️
                 </button>
                 {element.user_id == this.state.userdata.id ? (
-                  <button
+                  <button title="Editar roteiro"
                     onClick={() => {
                       sessionStorage.setItem("nomeRoteiro", element.nome);
                       sessionStorage.setItem(
@@ -240,7 +238,7 @@ class Routes extends Component {
                   </button>
                 ) : null}
                 {element.user_id == this.state.userdata.id ? (
-                  <button onClick={() => this.deleteRoute(element.id)}>
+                  <button title="Eliminar roteiro" onClick={() => this.deleteRoute(element.id)}>
                     ❌
                   </button>
                 ) : null}

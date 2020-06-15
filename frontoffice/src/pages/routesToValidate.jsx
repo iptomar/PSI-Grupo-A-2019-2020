@@ -104,7 +104,7 @@ class RoutesToValidate extends React.Component {
             <td>{element.nome}</td>
             <td>{element.descricao}</td>
             <td>
-              <button
+              <button  title="Validar"
                 onClick={() => {
                   this.validateRoute(element.id);
                 }}

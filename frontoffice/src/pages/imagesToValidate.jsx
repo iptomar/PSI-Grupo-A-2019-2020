@@ -146,10 +146,10 @@ class ImagesToValidate extends React.Component {
           <tr id={element.id}>
             <td>{element.id}</td>
             <td id="details">
-              <button onClick={() => this.showModal(element)}>📝</button>
+              <button title="Ver imagem" onClick={() => this.showModal(element)}>📝</button>
             </td>
             <td>
-              <button onClick={() => this.validateImage(element.id)}>✔️</button>
+              <button title="Validar imagem" onClick={() => this.validateImage(element.id)}>✔️</button>
             </td>
           </tr>
         );

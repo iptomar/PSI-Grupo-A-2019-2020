@@ -107,7 +107,7 @@ class PointsToValidate extends React.Component {
               <i>todo...</i>
             </td>
             <td>
-              <button
+              <button title="Validar"
                 onClick={() => {
                   this.validatePoint(element.id);
                 }}

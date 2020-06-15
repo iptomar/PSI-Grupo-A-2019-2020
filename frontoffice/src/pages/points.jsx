@@ -122,10 +122,10 @@ class Points extends Component {
             </tr>
             <tr>
               <td>
-                <button onClick={() => this.deletePoint(point.id)}>❌</button>
-                <button onClick={() => this.updatePoint(point)}>📝</button>
-                <button onClick={() => this.getImages(point)}>📸</button>
-                <button onClick={() => this.getPoint(point)}>📖</button>
+                <button title="Eliminar ponto" onClick={() => this.deletePoint(point.id)}>❌</button>
+                <button title="Editar ponto" onClick={() => this.updatePoint(point)}>📝</button>
+                <button title="Ver fotografias"onClick={() => this.getImages(point)}>📸</button>
+                <button title="Ver detalhes" onClick={() => this.getPoint(point)}>📖</button>
               </td>
             </tr>
           </table>

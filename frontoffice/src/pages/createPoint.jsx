@@ -275,7 +275,7 @@ class Profile extends Component {
                       style={{ width: "140px", margin: "4px" }}
                       onClick={this.addPolignPoint}
                     >
-                      Adicionar >
+                      Adicionar 
                     </button>
                     <button
                       className="CPBtts"
