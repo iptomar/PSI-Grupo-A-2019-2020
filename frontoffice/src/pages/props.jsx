@@ -53,7 +53,6 @@ class Props extends React.Component {
     } else this.setState({ redirect: local });
   }
 
-
   render() {
     if (this.state.redirect !== "/props") {
       return <Redirect to={this.state.redirect} />;
@@ -61,7 +60,7 @@ class Props extends React.Component {
 
     if (this.state.isadmin == false && sessionStorage.getItem("userData")) {
       this.setState({ redirect: "/Routes" });
-      return (<Redirect to={this.state.redirect} />);
+      return <Redirect to={this.state.redirect} />;
     }
 
     //Array que irá conter a lista de utilizadores
@@ -69,7 +68,6 @@ class Props extends React.Component {
 
     if (this.state.routes !== [] && this.state.user.isadmin) {
       this.state.routes.forEach((element) => {
-        
         UI.push(
           <tr id={element.id}>
             <td>{element.id}</td>
@@ -78,10 +76,10 @@ class Props extends React.Component {
           </tr>
         );
       });
-    }else{
+    } else {
       this.state.routes.forEach((element) => {
         console.log(element);
-        if(element.user_id==this.state.user.id){
+        if (element.user_id == this.state.user.id) {
           UI.push(
             <tr id={element.id}>
               <td>{element.id}</td>
@@ -89,7 +87,7 @@ class Props extends React.Component {
               <td>{element.work}</td>
             </tr>
           );
-        } 
+        }
       });
     }
 
@@ -102,6 +100,14 @@ class Props extends React.Component {
             <div id="PageCentralDiv">
               <div className="TitleDiv"></div>
               <p className="TitleP">Proprietários</p>
+              <button
+                className="RegisterRedirectBtt"
+                onClick={() => {
+                  this.setState({ redirect: "/createprop" });
+                }}
+              >
+                Crie um proprietário
+              </button>
 
               <table id="UsersTable">
                 <tr>
