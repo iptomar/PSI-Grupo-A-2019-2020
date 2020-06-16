@@ -46,14 +46,25 @@ class NavBar extends Component {
                 className="CenterNavButton"
                 onClick={() => this.props.redirecter("/Routes")}
               >
-                {" "}
-                Roteiros{" "}
+                Roteiros
               </button>
               <button
                 className="CenterNavButton"
                 onClick={() => this.props.redirecter("/MyPoints")}
               >
                 Pontos
+              </button>
+              <button
+                className="CenterNavButton"
+                onClick={() => this.props.redirecter("/AllPoints")}
+              >
+                Todos os Pontos
+              </button>
+              <button
+                className="CenterNavButton"
+                onClick={() => this.props.redirecter("/Props")}
+              >
+               Proprietários
               </button>
               {this.state.user.isadmin === 1 ? (
                 <div style={{ display: "flex", flexDirection: "row" }}>

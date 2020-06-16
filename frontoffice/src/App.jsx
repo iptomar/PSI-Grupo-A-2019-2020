@@ -24,10 +24,9 @@ import PointsToValidate from './pages/pointsToValidate';
 import RoutesToValidate from './pages/routesToValidate';
 import ImagesToValidate from './pages/imagesToValidate';
 import Props from './pages/props';
-import CProp from './pages/createProp';
 
-//const ApiPath = "http://188.251.50.68:3000/";
-const ApiPath = "http://localhost:3000/";
+const ApiPath = "http://188.251.50.68:3000/";
+//const ApiPath = "http://localhost:3000/";
 
 class App extends React.Component {
   render() {
@@ -48,14 +47,13 @@ class App extends React.Component {
           <Route exact path="/MyPoints" render={(props) => <Points {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/Create" render={(props) => <Create {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/Image" render={(props) => <Images {...props} ApiPath={ApiPath} />}></Route>
-          <Route exact path="/props" render={(props) => <Props {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/Props" render={(props) => <Props {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/AddImages" render={(props) => <AddImages {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/PointsToValidate" render={(props) => <PointsToValidate {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/RoutesToValidate" render={(props) => <RoutesToValidate {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/PointDetails" render={(props) => <PointDetails {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/ImagesToValidate" render={(props) => <ImagesToValidate {...props} ApiPath={ApiPath} />}></Route>
-          <Route exact path="/allPoints" render={(props) => <Points2 {...props} ApiPath={ApiPath} />}></Route>
-          <Route exact path="/createProp" render={(props) => <CProp {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/AllPoints" render={(props) => <Points2 {...props} ApiPath={ApiPath} />}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>
