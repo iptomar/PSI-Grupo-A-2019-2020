@@ -195,7 +195,7 @@ class Users extends Component {
                   <th className="TableHeader">Nome </th>
                   <th className="TableHeader">E-mail</th>
                   <th className="TableHeader">Idade</th>
-                  <th className="TableHeader">Administrador?</th>
+                  <th className="TableHeader">Administrador</th>
                   <th className="TableHeader">Opções</th>
                 </tr>
                 {UI}

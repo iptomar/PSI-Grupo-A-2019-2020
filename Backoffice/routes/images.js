@@ -19,7 +19,6 @@ router.get("/searchgetimage", async function(req, res, next){
   .then(async rows => {
       for(var i = 0;i<rows.length;i++){
       try{
-        console.log(i);
         datas.push({
           "id": rows[i].id,
           "img": await fs.readFileSync("./files/images/"+rows[i].Path+".txt", 'utf8'),
@@ -41,7 +40,6 @@ router.get("/searchgetimage", async function(req, res, next){
         continue;
       }
     }
-    console.log(datas);
       let errormesage = { sucess : true , mesage: datas };
       res.send(errormesage);
     })
