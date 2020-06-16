@@ -13,6 +13,7 @@ import AddPointToRoute from "./pages/addpointtoroute";
 import Create from "./pages/create";
 import InsertPoint from "./pages/createPoint";
 import Points from "./pages/points";
+import Points2 from './pages/allpoints';
 import UpdatePoint from './pages/updatePoint';
 import Images from './pages/image';
 import AddImages from './pages/addimages';
@@ -52,6 +53,7 @@ class App extends React.Component {
           <Route exact path="/RoutesToValidate" render={(props) => <RoutesToValidate {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/PointDetails" render={(props) => <PointDetails {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/ImagesToValidate" render={(props) => <ImagesToValidate {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/allPoints" render={(props) => <Points2 {...props} ApiPath={ApiPath} />}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>
