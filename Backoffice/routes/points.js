@@ -215,6 +215,7 @@ router.post("/searchpoints", async function(req, res, next){
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex('Inter_Roteir')
+  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .join('Interesse', 'Inter_Roteir.id_inter', '=', 'Interesse.id')
   //.select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
    .select()
