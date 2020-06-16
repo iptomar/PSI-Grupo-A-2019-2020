@@ -46,12 +46,64 @@ exports.seed = function (knex, Promise) {
           id_inter: 10,
         },
         {
-          id_roteir: 2,
-          id_inter: 1,
+          id_roteir: 1,
+          id_inter: 11,
         },
         {
-          id_roteir: 3,
-          id_inter: 1,
+          id_roteir: 1,
+          id_inter: 12,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 13,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 14,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 15,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 16,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 17,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 18,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 19,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 20,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 21,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 22,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 23,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 24,
+        },
+        {
+          id_roteir: 1,
+          id_inter: 25,
         },
       ]);
     });
