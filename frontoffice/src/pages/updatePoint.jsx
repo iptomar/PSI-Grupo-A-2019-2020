@@ -12,10 +12,13 @@ class Profile extends Component {
       redirect: "/UpdatePoint",
       EditStatus: "",
       point: JSON.parse(sessionStorage.getItem("point")),
+      proprietarios: [],
+      proprietarioId: JSON.parse(sessionStorage.getItem("point")).prop_id,
     };
     this.redirecter = this.redirecter.bind(this);
     this.updatePoint = this.updatePoint.bind(this);
     this.reload = this.reload.bind(this);
+    this.getOwners = this.getOwners.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +28,6 @@ class Profile extends Component {
       this.setState({ loggedIn: false });
     }
     let aux = this.state.point.coordenadas.split(",");
-    console.log(aux);
     let x = document.getElementById("coordx");
     let y = document.getElementById("coordy");
     let pcoordinates = document.getElementById("pcoordinates");
@@ -34,6 +36,36 @@ class Profile extends Component {
     for (let i = 2; i < aux.length; i += 2) {
       pcoordinates.value += "(" + aux[i] + "," + aux[i + 1] + ")\n";
     }
+
+    this.getOwners();
+  }
+
+  async getOwners() {
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      mode: "cors",
+      redirect: "follow",
+    };
+    let user = JSON.parse(sessionStorage.getItem("userData"));
+    let response = await fetch(
+      this.props.ApiPath + "props/list",
+      requestOptions
+    ).catch((error) => console.log("error", error));
+    let json = await response.json();
+    let array = json.mesage;
+    let aux = [];
+
+    array.forEach((element) => {
+      if (element.user_id === user.id) {
+        aux.push(element);
+      }
+    });
+    this.setState({ proprietarios: aux });
   }
 
   async updatePoint() {
@@ -62,7 +94,7 @@ class Profile extends Component {
         data: dataEdif,
         tipoEdif: tipoEdificio,
         user_id: user.id,
-        prop_id: 1,
+        prop_id: this.state.proprietarioId,
       },
     });
 
@@ -136,6 +168,13 @@ class Profile extends Component {
   render() {
     if (this.state.redirect !== "/UpdatePoint") {
       return <Redirect to={this.state.redirect} />;
+    }
+
+    let options = [];
+    if (this.state.proprietarios.length > 0) {
+      this.state.proprietarios.forEach((r) => {
+        options.push(<option value={r.id}>{r.name}</option>);
+      });
     }
 
     return (
@@ -218,6 +257,34 @@ class Profile extends Component {
                     }
                     onFocus={this.reload}
                   ></input>
+                </div>
+
+                <div className="FieldDiv">
+                  <label className="FieldLabel">Proprietário do Edifício</label>
+                  <select
+                    id="mySelect"
+                    style={{
+                      borderRadius: 0,
+                      height: 60,
+                      width: 510,
+                      backgroundColor: "#202020",
+                      color: "#fff",
+                      fontFamily: " Oxygen, sans-serif",
+                      fontSize: 18,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                      marginLeft: 20,
+                      marginRight: 20,
+                    }}
+                    onChange={() => {
+                      this.setState({
+                        proprietarioId: document.getElementById("mySelect")
+                          .value,
+                      });
+                    }}
+                  >
+                    {options}
+                  </select>
                 </div>
 
                 <div className="FieldDiv">
