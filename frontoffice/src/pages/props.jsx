@@ -67,8 +67,9 @@ class Props extends React.Component {
     //Array que irá conter a lista de utilizadores
     let UI = [];
 
-    if (this.state.routes !== []) {
+    if (this.state.routes !== [] && this.state.user.isadmin) {
       this.state.routes.forEach((element) => {
+        
         UI.push(
           <tr id={element.id}>
             <td>{element.id}</td>
@@ -76,6 +77,19 @@ class Props extends React.Component {
             <td>{element.work}</td>
           </tr>
         );
+      });
+    }else{
+      this.state.routes.forEach((element) => {
+        console.log(element);
+        if(element.user_id==this.state.user.id){
+          UI.push(
+            <tr id={element.id}>
+              <td>{element.id}</td>
+              <td>{element.name}</td>
+              <td>{element.work}</td>
+            </tr>
+          );
+        } 
       });
     }
 

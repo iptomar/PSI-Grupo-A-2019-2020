@@ -24,8 +24,8 @@ import RoutesToValidate from './pages/routesToValidate';
 import ImagesToValidate from './pages/imagesToValidate';
 import Props from './pages/props';
 
-const ApiPath = "http://188.251.50.68:3000/";
-//const ApiPath = "http://localhost:3000/";
+//const ApiPath = "http://188.251.50.68:3000/";
+const ApiPath = "http://localhost:3000/";
 
 class App extends React.Component {
   render() {
