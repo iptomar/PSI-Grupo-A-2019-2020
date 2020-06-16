@@ -148,7 +148,7 @@ router.post("/searchpoint", async function(req, res, next){
   .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .select("*")
   //.where({ id: req.body.data,isvalid:true })
-  .whereRaw('Interesse.user_id = ?', [req.body.data])
+  .whereRaw('Interesse.id = ?', [req.body.data])
   .where({isvalid:true})
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };

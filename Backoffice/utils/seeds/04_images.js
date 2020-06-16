@@ -20,7 +20,7 @@ exports.seed = function(knex, Promise) {
         Path: "2",
         Interesse_id: 2,
         usersid: 1,
-        isvalid:false
+        isvalid:true
 		},
       {
         id:"3" ,
@@ -29,7 +29,7 @@ exports.seed = function(knex, Promise) {
         Path: "3",
         Interesse_id: 1,
         usersid: 1,
-        isvalid:false
+        isvalid:true
 		}
     ]);
   });

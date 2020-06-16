@@ -136,6 +136,7 @@ class Profile extends Component {
   }
 
   async getOwners() {
+    let div = document.getElementById("EditStatusDiv");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
@@ -160,7 +161,16 @@ class Profile extends Component {
         aux.push(element);
       }
     });
-    this.setState({ proprietarios: aux });
+    if(aux.length!=0){
+      this.setState({ proprietarios: aux, proprietarioId:aux[0].id });
+    }else{
+      div.style.color = "#dc3545";
+      this.setState({
+        EditStatus: "Por favor crie um proprietario antes de criar um ponto",
+        VerifyStatus: "",
+      });
+    }
+    
   }
 
   addPolignPoint() {
