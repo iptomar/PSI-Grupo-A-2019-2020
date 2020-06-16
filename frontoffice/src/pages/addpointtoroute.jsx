@@ -120,7 +120,7 @@ class Routes extends Component {
     else {
       div.style.color = "#dc3545";
       this.setState({
-        CreateStatus: "Houve um erro ao criar ao associar ponto a roteiro",
+        CreateStatus: "Houve um erro ao associar ponto a roteiro",
       });
     }
   }

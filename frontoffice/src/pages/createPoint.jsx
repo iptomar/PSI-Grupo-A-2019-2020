@@ -11,12 +11,15 @@ class Profile extends Component {
       loggedIn: false,
       redirect: "/CreatePoint",
       EditStatus: "",
+      proprietarios: [],
+      proprietarioId:0
     };
     this.redirecter = this.redirecter.bind(this);
     this.submitPoint = this.submitPoint.bind(this);
     this.reload = this.reload.bind(this);
     this.addPolignPoint = this.addPolignPoint.bind(this);
     this.removePolignPoint = this.removePolignPoint.bind(this);
+    this.getOwners = this.getOwners.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +28,7 @@ class Profile extends Component {
     } else {
       this.setState({ loggedIn: false });
     }
+    this.getOwners();
   }
 
   async submitPoint() {
@@ -40,13 +44,14 @@ class Profile extends Component {
     let div2 = document.getElementById("VerifyStatusDiv");
     //Caso algum deles não esteja preenchido não deixa
     if (
-      titulo == "" ||
-      description == "" ||
-      tipoEdificio == "" ||
-      dataEdif == "" ||
-      x == "" ||
-      y == "" ||
-      pcoordinates == ""
+      titulo === "" ||
+      description === "" ||
+      tipoEdificio === "" ||
+      dataEdif === "" ||
+      x === "" ||
+      y === "" ||
+      pcoordinates === ""||
+      this.state.proprietarioId===0
     ) {
       div2.style.color = "#dc3545";
       this.setState({
@@ -72,7 +77,7 @@ class Profile extends Component {
         data: dataEdif,
         tipoEdif: tipoEdificio,
         user_id: user.id,
-        prop_id: 1,
+        prop_id: this.state.proprietarioId,
       },
     });
 
@@ -130,6 +135,34 @@ class Profile extends Component {
     });
   }
 
+  async getOwners() {
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      mode: "cors",
+      redirect: "follow",
+    };
+    let user = JSON.parse(sessionStorage.getItem("userData"));
+    let response = await fetch(
+      this.props.ApiPath + "props/list",
+      requestOptions
+    ).catch((error) => console.log("error", error));
+    let json = await response.json();
+    let array = json.mesage;
+    let aux = [];
+
+    array.forEach((element) => {
+      if (element.user_id === user.id) {
+        aux.push(element);
+      }
+    });
+    this.setState({ proprietarios: aux });
+  }
+
   addPolignPoint() {
     let pointx = document.getElementById("apcoordx");
     let pointy = document.getElementById("apcoordy");
@@ -155,6 +188,13 @@ class Profile extends Component {
   render() {
     if (this.state.redirect !== "/CreatePoint") {
       return <Redirect to={this.state.redirect} />;
+    }
+
+    let options = [];
+    if (this.state.proprietarios.length > 0) {
+      this.state.proprietarios.forEach((r) => {
+        options.push(<option value={r.id}>{r.name}</option>);
+      });
     }
 
     return (
@@ -204,7 +244,7 @@ class Profile extends Component {
                 </div>
 
                 <div className="FieldDiv">
-                <label className="FieldLabel">Data de inauguração</label>
+                  <label className="FieldLabel">Data de inauguração</label>
 
                   <input
                     type="text"
@@ -214,6 +254,32 @@ class Profile extends Component {
                     onChange={this.reload}
                     onFocus={this.reload}
                   ></input>
+                </div>
+                <div className="FieldDiv">
+                  <label className="FieldLabel">Proprietário do Edifício</label>
+                  <select
+                    id="mySelect"
+                    style={{
+                      borderRadius: 0,
+                      height: 60,
+                      width: 510,
+                      backgroundColor: "#202020",
+                      color: "#fff",
+                      fontFamily: " Oxygen, sans-serif",
+                      fontSize: 18,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                      marginLeft: 20,
+                      marginRight: 20,
+                    }}
+                    onChange={() => {
+                      this.setState({
+                        proprietarioId: document.getElementById("mySelect").value,
+                      });
+                    }}
+                  >
+                    {options}
+                  </select>
                 </div>
 
                 <div className="FieldDiv">
@@ -275,7 +341,7 @@ class Profile extends Component {
                       style={{ width: "140px", margin: "4px" }}
                       onClick={this.addPolignPoint}
                     >
-                      Adicionar 
+                      Adicionar
                     </button>
                     <button
                       className="CPBtts"
