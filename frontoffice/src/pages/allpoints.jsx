@@ -58,6 +58,11 @@ class Points2 extends Component {
       return <Redirect to={this.state.redirect} />;
     }
 
+    if (!sessionStorage.getItem("userData")) {
+      this.setState({ redirect: "/" });
+      return <Redirect to={this.state.redirect} />;
+    }
+
     let UI = [];
 
     if (this.state.points.length != 0) {
