@@ -358,7 +358,7 @@ var app = {
                     anchRoteio.onclick = () => {
                         removerTodosOsPontos();
 
-                        $.post("http://188.251.50.68:3000/points/searchpoint", { data: roteiro.id }, result => {
+                        $.post("http://188.251.50.68:3000/points/searchpoints", { data: roteiro.id }, result => {
                             // Iterar todos os pontos de interesse
                             result.mesage.forEach(row => mostrarPontosDeInteresse(row));
                         });
