@@ -2,11 +2,13 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file } = require('../helpers')
+const {file,validateUser } = require('../helpers')
 
 //Usage:
 //Return all owners
 router.get("/list", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -18,11 +20,11 @@ router.get("/list", async function(req, res, next){
       res.send(errormesage);
     })
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -36,6 +38,8 @@ router.get("/list", async function(req, res, next){
 //Usage:
 //body.data = { name:"name", work:"work", user_id:"user_id" }
 router.post("/insert", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
 
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
@@ -43,11 +47,11 @@ router.post("/insert", async function(req, res, next){
   await knex("prop")
   .insert(req.body.data)
   .catch(async function(err) {
-    var d = new Date();
+    d = new Date();
     await file(
-      "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
       "a",
-      err.stack()
+      err.stack
     );
     let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
@@ -60,10 +64,13 @@ router.post("/insert", async function(req, res, next){
 
 //Usage:
 //body.id = id do proprietário a actualizar
+//body.user = e-mail do utilizador
 //body.data = informação a actualizar(json)
 router.post("/update", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+if(await validateUser(req.body.user)){
   //ToDo: 
-  //- Terá de ser verificado se o utilizador a solicitar o update é um administrador
   //- Não poderá ser permitido o update ao ID do ponto
 
   //Activar chaves estrangeiras
@@ -83,8 +90,12 @@ router.post("/update", async function(req, res, next){
       }
   })
   .catch(async function(err){
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-    let errormesage = { sucess : false , mesage: "token not used" };
+    d = new Date();
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "token not used" };
     res.send(errormesage);
   });
 
@@ -97,6 +108,12 @@ router.post("/update", async function(req, res, next){
 
   let errormesage= {sucess: true, mesage: "Proprietary sucessfully updated"};
   res.send(errormesage);
+}
+else
+{
+  let errormesage= {sucess: false, mesage: "admin only"};
+  res.send(errormesage);
+}
 });
 
 module.exports = router;

@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var knex = require("../utils/databaseConection");
-const {file } = require('../helpers')
+const {file,validation,validateUser } = require('../helpers')
 
 /* GET users listing. */
 router.get("/", async function(req, res, next) {
@@ -45,9 +45,9 @@ router.post("/login", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
 
       console.log(err);
@@ -62,10 +62,9 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
   // o token é o do administrador?
   await knex("users")
     .select("*")
-    .where({ email: "admin@admin.com" })
+    .where({ token: req.params.tokenAdmin })
     .then(result => {
-      console.log(result[0].token);
-      if (result[0].token != req.params.tokenAdmin) {
+      if (!result[0].isadmin) {
         let errormesage = {
           sucess: false,
           mesage: "The token provided is not the admin's",
@@ -78,9 +77,9 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       console.log(err);
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
@@ -90,8 +89,7 @@ router.get("/getUsers/:tokenAdmin", async function(req, res, next) {
 
   // Se chegar aqui tem permissão para aceder a todos os utilizadores, sendo que estes são enviados
   await knex("users")
-    .select('id','name','surname','email','age')
-    .whereNot({ name: "admin" })
+    .select('id','name','surname','email','age','isadmin')
     .then(response => {
       let errormesage = { sucess : true , mesage: response };
       res.send(errormesage);
@@ -108,8 +106,7 @@ router.post("/register", async function(req, res, next) {
     req.body.password == null ||
     req.body.name == null ||
     req.body.surname == null ||
-    req.body.age == null ||
-    req.body.tokenAdmin == null
+    req.body.age == null
   ) {
     //let error = { error: "Incorrect parameters" };
     let errormesage = { sucess : false , mesage: "Incorrect parameters" };
@@ -117,39 +114,6 @@ router.post("/register", async function(req, res, next) {
     //res.status(400).send(error);
     return;
   }
-
-  // o token enviado é o do admin
-  await knex("users")
-    .select("*")
-    .where({ email: "admin@admin.com" })
-    .then(result => {
-      result = result[0];
-
-      // O token enviado tem que ser o do admin
-      if (req.body.tokenAdmin != result.token) {
-        let errormesage = {
-          sucess: false,
-          mesage: "The token provided is not the admin's"
-        };
-        res.send(errormesage);
-        //res.status(401).send(error);
-        return;
-      }
-    })
-    .catch(async function(err) {
-      var d = new Date();
-      await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
-        "a",
-        err.stack()
-      );
-
-      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
-    res.send(errormesage);
-      console.log(err);
-
-      //res.send(err);
-    });
 
   let query;
 
@@ -165,9 +129,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
 
       console.log(err);
@@ -195,14 +159,15 @@ router.post("/register", async function(req, res, next) {
       password: req.body.password,
       age: req.body.age,
       email: req.body.email,
-      token: randomstring
+      token: randomstring,
+      isadmin: false
     })
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
@@ -221,9 +186,9 @@ router.post("/register", async function(req, res, next) {
     .catch(async function(err) {
       var d = new Date();
       await file(
-        "logs/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
         "a",
-        err.stack()
+        err.stack
       );
       let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
       res.send(errormesage);
@@ -252,15 +217,21 @@ router.post("/update", async function(req, res, next) {
         let errormesage = { sucess : true , mesage: "update sucessfull" };
         res.send(errormesage);
     }).catch(async function(err) {
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
         });
 
   }
   catch (err){
-    await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
     res.send(errormesage);
   }
 
@@ -269,10 +240,10 @@ router.post("/update", async function(req, res, next) {
 //usage:
 //body.user = token
 //body.data = id do utilizador a eliminar(json)
+//body.email = e-mail do utilizador a eliminar
 router.delete("/delete", async function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
-
-  //TODO: Terá de ser verificado se o utilizador a solicitar o delete é um administrador.
+  if(!(await validateUser(req.body.email))){
 
   let del = false;
 
@@ -291,8 +262,11 @@ router.delete("/delete", async function(req, res, next) {
       }
     })
     .catch(async function(err){
-      await file("error/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate()+"_"+d.getUTCHours()+"_"+d.getUTCMinutes()+"_"+d.getUTCSeconds(), "a",""+err.stack);
-      let errormesage = { sucess : false , mesage: "token not used" };
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "token not used" };
       res.send(errormesage);
     });
 
@@ -307,6 +281,111 @@ router.delete("/delete", async function(req, res, next) {
     let errormesage = { sucess : true , mesage: "User successfully deleted" };
       res.send(errormesage);
     //res.send(msg);
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "admins cant be deleted"};
+    res.send(errormesage);
+  }
+});
+
+//usage:
+//body.user = email do utilizador para dar administrador
+//body.email = email do utilizador atual
+router.post("/giveadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validateUser(req.body.email)){
+  try{
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  var admin = false;
+      return await knex('users').where({ email: req.body.user }).update({isadmin:true}).then(async function( resp ){ 
+        let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);
+    }).catch(async function(err) {
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+        });
+
+  }
+  catch (err){
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+  }
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "only admins can do this"};
+    res.send(errormesage);
+  }
+
+});
+
+
+//usage:
+//body.user = email do utilizador para dar administrador
+//body.email = email do utilizador atual
+router.post("/removeadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validateUser(req.body.email)){
+  try{
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  var admin = false;
+      return await knex('users').where({ email: req.body.user }).update({isadmin:false}).then(async function( resp ){ 
+        let errormesage = { sucess : true , mesage: "update sucessfull" };
+        res.send(errormesage);
+    }).catch(async function(err) {
+      await file(
+        "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+        "a",
+        err.stack
+      );      let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+      res.send(errormesage);
+        });
+
+  }
+  catch (err){
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+  }
+  }
+  else
+  {
+    let errormesage= {sucess: false, mesage: "only admins can do this"};
+    res.send(errormesage);
+  }
+
+});
+
+//usage:
+//body.email = email do utilizador atual
+router.post("/isadmin", async function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  if(await validateUser(req.body.email)){
+ 
+    let errormesage = { sucess : true , mesage: "is admin" };
+    res.send(errormesage)
+  
+  }
+  else
+  {
+    let errormesage= {sucess : true , mesage: "is not admin" };
+    res.send(errormesage);
+  }
+
 });
 
 module.exports = router;
