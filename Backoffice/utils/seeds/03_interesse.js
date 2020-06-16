@@ -22,8 +22,8 @@ exports.seed = function(knex, Promise) {
 		coordenadas: '39.60513022,-8.40528399,39.60538647,-8.40573263,39.60482052,-8.40562248,39.60465492,-8.40476918,39.60526551,-8.40456855,39.60580225,-8.40481675',
 		data: '1952-1969',
     tipoEdif: 'Edifício Público',
-    user_id: 1,
-    prop_id: 1,
+    user_id: 2,
+    prop_id: 2,
     isvalid:true
 		},
       {
@@ -34,7 +34,7 @@ exports.seed = function(knex, Promise) {
 		data: '1951-1957',
 		tipoEdif: 'Edifício Público',
     user_id: 3,
-    prop_id: 1,
+    prop_id: 3,
     isvalid:false
 		}
 		

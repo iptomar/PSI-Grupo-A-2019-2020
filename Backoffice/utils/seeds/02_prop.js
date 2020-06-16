@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
         id:2 ,
         name: "Amândio Pinto Marcelino",
         work: "Arquiteto",
-        user_id: 2
+        user_id: 1
 		},
       {
         id:3 ,
