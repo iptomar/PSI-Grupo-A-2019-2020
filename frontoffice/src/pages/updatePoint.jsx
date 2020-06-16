@@ -12,6 +12,7 @@ class Profile extends Component {
       redirect: "/UpdatePoint",
       EditStatus: "",
       point: JSON.parse(sessionStorage.getItem("point")),
+      idPoint: JSON.parse(sessionStorage.getItem("point")).id,
       proprietarios: [],
       proprietarioId: JSON.parse(sessionStorage.getItem("point")).prop_id,
     };
@@ -86,7 +87,7 @@ class Profile extends Component {
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
     var raw = JSON.stringify({
-      id: 1,
+      id: this.state.idPoint,
       data: {
         titulo: titulo,
         descricao: description,
@@ -346,7 +347,7 @@ class Profile extends Component {
                       style={{ width: "140px", margin: "4px" }}
                       onClick={this.addPolignPoint}
                     >
-                      Adicionar >
+                      Adicionar 
                     </button>
                     <button
                       className="CPBtts"
