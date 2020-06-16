@@ -145,8 +145,11 @@ router.post("/searchpoint", async function(req, res, next){
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex('Interesse')
+  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .select("*")
-  .where({ id: req.body.data,isvalid:true })
+  //.where({ id: req.body.data,isvalid:true })
+  .whereRaw('Interesse.user_id = ?', [req.body.data])
+  .where({isvalid:true})
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
@@ -164,8 +167,8 @@ router.post("/searchpoint", async function(req, res, next){
     console.log(err);
   });
 
-  let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
-  res.send(errormesage);
+  //let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+  //res.send(errormesage);
 });
 
 //Usage:
@@ -203,7 +206,7 @@ router.post("/search", async function(req, res, next){
 
 //Usage:
 //Return all points id
-//body.data = idRoteiro
+//body.data = user_id
 router.post("/searchuser", async function(req, res, next){
   var d = new Date();
   await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
@@ -211,8 +214,14 @@ router.post("/searchuser", async function(req, res, next){
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
   await knex('Interesse')
+  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
+  /*.join('prop', function() {
+    this.on('Interesse.prop_id', '=', 'prop.id')
+    .on('Interesse.user_id', '=', knex.raw('?', [req.body.data]))
+  }, 'left')*/
   .select("*")
-  .where({ user_id: req.body.data })
+  //.where({ user_id: req.body.data })
+  .whereRaw('Interesse.user_id = ?', [req.body.data])
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
