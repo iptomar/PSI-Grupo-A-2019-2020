@@ -213,15 +213,7 @@ router.post("/searchuser", async function(req, res, next){
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  await knex('Interesse')
-  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
-  /*.join('prop', function() {
-    this.on('Interesse.prop_id', '=', 'prop.id')
-    .on('Interesse.user_id', '=', knex.raw('?', [req.body.data]))
-  }, 'left')*/
-  .select("*")
-  //.where({ user_id: req.body.data })
-  .whereRaw('Interesse.user_id = ?', [req.body.data])
+  await knex.raw("select Interesse.id as id , Interesse.titulo as titulo, Interesse.descricao as descricao,  Interesse.coordenadas as coordenadas,  Interesse.data as data,  Interesse.tipoEdif as tipoEdif, Interesse.user_id as user_id, Interesse.prop_id as prop_id,  Interesse.isvalid as isvalid , prop.id as prop_id , prop.name as name , prop.work as work, prop.user_id as propuser_id from interesse,prop where interesse.prop_id = prop.id")
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
