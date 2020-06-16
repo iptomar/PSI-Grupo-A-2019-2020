@@ -148,7 +148,7 @@ router.post("/searchpoint", async function(req, res, next){
   .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .select("*")
   //.where({ id: req.body.data,isvalid:true })
-  .whereRaw('Interesse.id = ?', [req.body.data])
+  .whereRaw('Interesse.user_id = ?', [req.body.data])
   .where({isvalid:true})
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
@@ -203,6 +203,45 @@ router.post("/search", async function(req, res, next){
   /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
   res.send(errormesage);*/
 });
+
+
+//Usage:
+//Return all points id
+//body.data = idRoteiro
+router.post("/searchpoints", async function(req, res, next){
+  var d = new Date();
+  await file("logs/"+d.getFullYear()+"_"+d.getMonth()+"_"+d.getDate(), "a",JSON.stringify(req.body)+""+JSON.stringify(req.params)+""+JSON.stringify(req.baseUrl));
+  //Activar chaves estrangeiras
+  await knex.schema.raw('PRAGMA foreign_keys = ON;');
+
+  await knex('Inter_Roteir')
+  .join('Interesse', 'Inter_Roteir.id_inter', '=', 'Interesse.id')
+  .select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
+  .where({ "Inter_Roteir.id_roteir": req.body.data ,
+  "Interesse.isvalid" : true
+  })
+  .then(rows => {
+      let errormesage = { sucess : true , mesage: rows };
+      res.send(errormesage);
+      
+    })
+  .catch(async function(err) {
+    d = new Date();
+    await file(
+      "error/" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate(),
+      "a",
+      err.stack
+    );
+    let errormesage = { sucess : false , mesage: "something went wrong and we are working on it" };
+    res.send(errormesage);
+    console.log(err);
+  });
+
+  /*let errormesage= {sucess: false, mesage: "something went wrong and we are working on it"};
+  res.send(errormesage);*/
+});
+
+
 
 //Usage:
 //Return all points id
