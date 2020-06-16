@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var updatedb=true;
+var updatedb=false;
 /**
  * Module dependencies.
  */
@@ -10,7 +10,6 @@ var app3 = require('../app');
 var debug = require('debug')('foo:server');
 const http = require('http');
 const https = require('https');
-const http = require('http');
 const fs = require('fs');
 
 const {file } = require('../helpers')
