@@ -158,7 +158,7 @@ exports.seed = function (knex, Promise) {
             "39.60073665, -8.41144502, 39.60073252, -8.41145843, 39.60073252, -8.41142356, 39.60076971, -8.41142893, 39.60076558, -8.41147184",
           data: "1955",
           tipoEdif: "Edifício de Arquitectura Doméstica",
-          user_id: 1,
+          user_id: 2,
           prop_id: 5,
           isvalid: true,
         },

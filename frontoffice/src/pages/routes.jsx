@@ -259,32 +259,56 @@ class Routes extends Component {
             );
           });
         }
-        ps.push(
-          <table id="UsersTable">
-            <tr>
-              <th className="TableHeader">
-                {element.titulo} - {element.data}
-              </th>
-            </tr>
-            <tr>
-              <td>{element.descricao}</td>
-            </tr>
-            <tr>
-              <td>{imgArr}</td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  onClick={() =>
-                    this.deletePointFromRoute(this.state.routeId, element.id)
-                  }
-                >
-                  ❌
-                </button>
-              </td>
-            </tr>
-          </table>
-        );
+        if(this.state.userdata.id==element.user_id){
+          ps.push(
+            <table id="UsersTable">
+              <tr>
+                <th className="TableHeader">
+                  {element.titulo} - {element.data}
+                </th>
+              </tr>
+              <tr>
+                <td>{element.descricao}</td>
+              </tr>
+              <tr>
+                <td>{imgArr}</td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    onClick={() =>
+                      this.deletePointFromRoute(this.state.routeId, element.id)
+                    }
+                  >
+                    ❌
+                  </button>
+                </td>
+              </tr>
+            </table>
+          );
+        }else{
+          ps.push(
+            <table id="UsersTable">
+              <tr>
+                <th className="TableHeader">
+                  {element.titulo} - {element.data}
+                </th>
+              </tr>
+              <tr>
+                <td>{element.descricao}</td>
+              </tr>
+              <tr>
+                <td>{imgArr}</td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+              </tr>
+            </table>
+          );
+        }
+        
       });
     }
 
