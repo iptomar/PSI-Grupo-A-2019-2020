@@ -47,6 +47,12 @@ exports.seed = function (knex, Promise) {
           work: "Arquitetos",
           user_id: 1,
         },
+        {
+          id: 8,
+          name: "António Rodrigues",
+          work: "Arquiteto",
+          user_id: 1,
+        },
       ]);
     });
 };
