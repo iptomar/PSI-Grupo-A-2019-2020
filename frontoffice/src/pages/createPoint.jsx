@@ -255,6 +255,7 @@ class Profile extends Component {
                     onFocus={this.reload}
                   ></input>
                 </div>
+                
                 <div className="FieldDiv">
                   <label className="FieldLabel">Proprietário do Edifício</label>
                   <select
