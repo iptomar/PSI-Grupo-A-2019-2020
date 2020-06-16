@@ -4,7 +4,7 @@ import './style/addRoute.css';
 import "./style/pageframe.css";
 import NavBar from "./navBar";
 
-class cProp extends Component {
+class CProp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,10 +14,12 @@ class cProp extends Component {
             CreateStatus: ""
         };
         this.redirecter = this.redirecter.bind(this);
-        this.submitProp = this.redirecter.submitProp(this);
+        this.submitProp = this.submitProp.bind(this);
+
     }
 
     componentDidMount() {
+        console.log(this.props);
         if (sessionStorage.getItem("userData")) {
             let data = JSON.parse(sessionStorage.getItem("userData"));
             this.setState({ userdata: data });
@@ -27,22 +29,45 @@ class cProp extends Component {
         }
     }
 
-    submitProp() {
+    async submitProp() {
 
         let propName = document.getElementById("title").value; //Obter o nome do proprietario
         let propJob = document.getElementById("prof").value; //Obter a profissão do proprietario
+        let id = JSON.parse(sessionStorage.getItem("userData"));
+        id = id.id;
+
+
 
         //Headers
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-type", "application/json");
         var raw = JSON.stringify({
-            "data":{
-                "name":propName,
-                "work":propJob,
-                "user_id": 2
+            "data": {
+                "name": propName,
+                "work": propJob,
+                "user_id": id
             }
         });
+
+        var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            mode: "cors",
+            redirect: "follow",
+        };
+
+        //Enviar o POST para o servidor
+        let response = await fetch(
+            this.props.ApiPath + "props/insert",
+            requestOptions
+        );
+
+        //Resposta por parte do server
+        let data = await response.json();
+        //
+        console.log(data.sucess);
     }
 
     redirecter(local) {
@@ -96,7 +121,7 @@ class cProp extends Component {
 
                                 <div id="CRButtonsDiv">
                                     <button className="CRBtts" onClick={() => { this.setState({ redirect: "/props" }) }} >Voltar</button>
-                                    <button className="CRBtts" onClick={this.submitProp}>Criar</button>
+                                    <button className="CRBtts" onClick={()=>{this.submitProp()}}>Criar</button>
                                 </div>
 
                                 <div id="CreateStatusDiv">{this.state.CreateStatus}</div>
@@ -118,4 +143,4 @@ class cProp extends Component {
     }
 }
 
-export default cProp;
+export default CProp;
