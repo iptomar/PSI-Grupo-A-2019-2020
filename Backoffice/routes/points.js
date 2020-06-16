@@ -216,8 +216,9 @@ router.post("/searchpoints", async function(req, res, next){
 
   await knex('Inter_Roteir')
   .join('Interesse', 'Inter_Roteir.id_inter', '=', 'Interesse.id')
-  .select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
-  .where({ "Inter_Roteir.id_roteir": req.body.data ,
+  //.select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
+   .select()
+   .where({ "Inter_Roteir.id_roteir": req.body.data ,
   "Interesse.isvalid" : true
   })
   .then(rows => {
