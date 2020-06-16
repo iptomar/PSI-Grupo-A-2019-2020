@@ -9,7 +9,7 @@ class Props extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: "/props",
+      redirect: "/Props",
       role: "",
       user: JSON.parse(sessionStorage.getItem("userData")),
       routes: [],
@@ -54,7 +54,7 @@ class Props extends React.Component {
   }
 
   render() {
-    if (this.state.redirect !== "/props") {
+    if (this.state.redirect !== "/Props") {
       return <Redirect to={this.state.redirect} />;
     }
 
@@ -103,7 +103,7 @@ class Props extends React.Component {
               <button
                 className="RegisterRedirectBtt"
                 onClick={() => {
-                  this.setState({ redirect: "/createprop" });
+                  this.setState({ redirect: "/CreateProp" });
                 }}
               >
                 Crie um proprietário

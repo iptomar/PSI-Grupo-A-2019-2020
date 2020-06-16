@@ -9,7 +9,7 @@ class Points2 extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: "/allPoints",
+      redirect: "/AllPoints",
       userdata: null,
       points: [],
     };
@@ -54,7 +54,7 @@ class Points2 extends Component {
   }
 
   render() {
-    if (this.state.redirect !== "/allPoints") {
+    if (this.state.redirect !== "/AllPoints") {
       return <Redirect to={this.state.redirect} />;
     }
 

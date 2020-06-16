@@ -9,7 +9,7 @@ class CProp extends Component {
         super(props);
         this.state = {
             loggedIn: false,
-            redirect: "/createProp",
+            redirect: "/CreateProp",
             userdata: null,
             CreateStatus: ""
         };
@@ -85,7 +85,7 @@ class CProp extends Component {
             return <Redirect to={this.state.redirect} />;
         }
 
-        if (this.state.redirect !== "/createProp") {
+        if (this.state.redirect !== "/CreateProp") {
             return <Redirect to={this.state.redirect} />;
         }
 

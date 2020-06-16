@@ -55,7 +55,7 @@ class App extends React.Component {
           <Route exact path="/PointDetails" render={(props) => <PointDetails {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/ImagesToValidate" render={(props) => <ImagesToValidate {...props} ApiPath={ApiPath} />}></Route>
           <Route exact path="/AllPoints" render={(props) => <Points2 {...props} ApiPath={ApiPath} />}></Route>
-          <Route exact path="/createProp" render={(props) => <CProp {...props} ApiPath={ApiPath} />}></Route>
+          <Route exact path="/CreateProp" render={(props) => <CProp {...props} ApiPath={ApiPath} />}></Route>
           <Route component={NotFoundPage} />
         </Switch>
       </Router>
