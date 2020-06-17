@@ -243,7 +243,7 @@ class Profile extends Component {
                 </div>
 
                 <div className="FieldDiv">
-                  <label className="FieldLabel">Data de enauguração</label>
+                  <label className="FieldLabel">Data de inauguração</label>
                   <input
                     type="text"
                     id="date"
@@ -261,7 +261,7 @@ class Profile extends Component {
                 </div>
 
                 <div className="FieldDiv">
-                  <label className="FieldLabel">Proprietário do Edifício</label>
+                  <label className="FieldLabel">Autor/es do Edifício</label>
                   <select
                     id="mySelect"
                     style={{

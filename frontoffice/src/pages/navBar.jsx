@@ -64,7 +64,7 @@ class NavBar extends Component {
                 className="CenterNavButton"
                 onClick={() => this.props.redirecter("/Props")}
               >
-               Proprietários
+               Autores
               </button>
               {this.state.user.isadmin === 1 ? (
                 <div style={{ display: "flex", flexDirection: "row" }}>

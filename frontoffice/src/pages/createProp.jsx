@@ -97,7 +97,7 @@ class CProp extends Component {
                     <div id="PageCenter">
                         <div id="PageCentralDiv">
                             <div className="TitleDiv"></div>
-                            <p className="TitleP">Criar proprietário</p>
+                            <p className="TitleP">Registar um Autor</p>
                             <div id="RouteBox">
                                 <div className="FieldDiv">
                                     <label className="FieldLabel">Nome</label>

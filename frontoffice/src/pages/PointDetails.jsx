@@ -141,7 +141,7 @@ class PointDetails extends Component {
                 </div>
 
                 <div className="FieldDiv">
-                  <label className="FieldLabel">Proprietário do Edifício</label>
+                  <label className="FieldLabel">Autor/es do Edifício</label>
                   <input
                     type="text"
                     id="date"

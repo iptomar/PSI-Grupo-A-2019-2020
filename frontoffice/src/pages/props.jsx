@@ -99,14 +99,14 @@ class Props extends React.Component {
           <div id="PageCenter">
             <div id="PageCentralDiv">
               <div className="TitleDiv"></div>
-              <p className="TitleP">Proprietários</p>
+              <p className="TitleP">Autor</p>
               <button
                 className="RegisterRedirectBtt"
                 onClick={() => {
                   this.setState({ redirect: "/CreateProp" });
                 }}
               >
-                Crie um proprietário
+                Registar um Autor
               </button>
 
               <table id="UsersTable">

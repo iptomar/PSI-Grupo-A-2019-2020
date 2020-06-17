@@ -50,7 +50,8 @@ class HomePage extends Component {
                 <div id="PageMainDiv">
                     <div className="BackgroundDiv"></div>
                     <div id="PageCenter">
-                    <div id="PageCentralDiv">
+                    <div  id="PageCentralDiv">
+                               
                     </div>
                     <footer id="FooterDiv">
                         <p id="Footer1p">ToursTomar</p>
