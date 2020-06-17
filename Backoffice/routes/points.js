@@ -144,12 +144,7 @@ router.post("/searchpoint", async function(req, res, next){
   //Activar chaves estrangeiras
   await knex.schema.raw('PRAGMA foreign_keys = ON;');
 
-  await knex('Interesse')
-  .join('prop', 'Interesse.prop_id', '=', 'prop.id')
-  .select("*")
-  //.where({ id: req.body.data,isvalid:true })
-  .whereRaw('Interesse.user_id = ?', [req.body.data])
-  .where({isvalid:true})
+  await knex.raw("select Interesse.id as id , Interesse.titulo as titulo, Interesse.descricao as descricao,  Interesse.coordenadas as coordenadas,  Interesse.data as data,  Interesse.tipoEdif as tipoEdif, Interesse.user_id as user_id, Interesse.prop_id as prop_id,  Interesse.isvalid as isvalid , prop.id as prop_id , prop.name as name , prop.work as work, prop.user_id as propuser_id from interesse,prop where interesse.prop_id = prop.id and interesse.id="+req.body.data)
   .then(rows => {
       let errormesage = { sucess : true , mesage: rows };
       res.send(errormesage);
@@ -217,9 +212,9 @@ router.post("/searchpoints", async function(req, res, next){
   await knex('Inter_Roteir')
   .join('prop', 'Interesse.prop_id', '=', 'prop.id')
   .join('Interesse', 'Inter_Roteir.id_inter', '=', 'Interesse.id')
-  //.select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
-   .select()
-   .where({ "Inter_Roteir.id_roteir": req.body.data ,
+    //.select("Interesse.id","Interesse.titulo","Interesse.descricao","Interesse.coordenadas","Interesse.data","Interesse.tipoEdif","Interesse.user_id","Interesse.prop_id")
+  .select()
+  .where({ "Inter_Roteir.id_roteir": req.body.data ,
   "Interesse.isvalid" : true
   })
   .then(rows => {

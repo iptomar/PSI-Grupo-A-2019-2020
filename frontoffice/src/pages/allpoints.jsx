@@ -4,12 +4,12 @@ import "./style/points.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
 
-class Points extends Component {
+class Points2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: "/MyPoints",
+      redirect: "/AllPoints",
       userdata: null,
       points: [],
     };
@@ -30,28 +30,13 @@ class Points extends Component {
   }
 
   async getPoints() {
-    let idUser = JSON.parse(sessionStorage.getItem("userData"));
-    idUser = idUser.id;
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ data: idUser });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      mode: "cors",
-      redirect: "follow",
-    };
-
+    //Obter todos os pontos
     let response = await fetch(
-      this.props.ApiPath + "points/searchuser",
-      requestOptions
+      this.props.ApiPath + "points/list"
     );
+    //Resposta por parte do servidor
     let data = await response.json();
     data = data.mesage;
-    console.log(data);
     this.setState({ points: data });
   }
 
@@ -63,46 +48,18 @@ class Points extends Component {
     } else this.setState({ redirect: local });
   }
 
-  async deletePoint(id) {
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Content-type", "application/json");
-    var raw = JSON.stringify({ id: id });
-
-    var requestOptions = {
-      method: "DELETE",
-      headers: myHeaders,
-      body: raw,
-      mode: "cors",
-      redirect: "follow",
-    };
-
-    let response = await fetch(
-      this.props.ApiPath + "points/delete",
-      requestOptions
-    );
-    let data = await response.json();
-    await this.getPoints();
-    console.log(data);
-  }
-
-  updatePoint(point) {
-    this.setState({ redirect: "UpdatePoint" });
-    sessionStorage.setItem("point", JSON.stringify(point));
-  }
-
-  getImages(point) {
-    this.setState({ redirect: "Image" });
-    sessionStorage.setItem("point", JSON.stringify(point.id));
-  }
-
   getPoint(point) {
     this.setState({ redirect: "PointDetails" });
     sessionStorage.setItem("point", JSON.stringify(point));
   }
 
   render() {
-    if (this.state.redirect !== "/MyPoints") {
+    if (this.state.redirect !== "/AllPoints") {
+      return <Redirect to={this.state.redirect} />;
+    }
+
+    if (!sessionStorage.getItem("userData")) {
+      this.setState({ redirect: "/" });
       return <Redirect to={this.state.redirect} />;
     }
 
@@ -122,10 +79,7 @@ class Points extends Component {
             </tr>
             <tr>
               <td>
-                <button title="Eliminar ponto" onClick={() => this.deletePoint(point.id)}>❌</button>
-                <button title="Editar ponto" onClick={() => this.updatePoint(point)}>📝</button>
-                <button title="Ver fotografias"onClick={() => this.getImages(point)}>📸</button>
-                <button title="Ver detalhes" onClick={() => this.getPoint(point)}>📖</button>
+                <button onClick={() => this.getPoint(point)}>📖</button>
               </td>
             </tr>
           </table>
@@ -191,4 +145,4 @@ class Points extends Component {
   }
 }
 
-export default Points;
+export default Points2;

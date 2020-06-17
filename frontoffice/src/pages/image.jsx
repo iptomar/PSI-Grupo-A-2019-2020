@@ -3,7 +3,6 @@ import { Redirect, Link } from "react-router-dom";
 import "./style/points.css";
 import "./style/pageframe.css";
 import NavBar from "./navBar";
-import ReactFileReader from 'react-file-reader';
 
 class Images extends Component {
   constructor(props) {
@@ -13,16 +12,19 @@ class Images extends Component {
       data: null,
       point: JSON.parse(sessionStorage.getItem("point")),
       images: [],
-      imags: []
+      imags: [],
     };
     this.redirecter = this.redirecter.bind(this);
+    this.deleteImage = this.deleteImage.bind(this);
+    this.getUserImages = this.getUserImages.bind(this);
+    this.getImages = this.getImages.bind(this);
   }
 
   async componentDidMount() {
     await this.getUserImages();
   }
 
-  async getUserImages(){
+  async getUserImages() {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-type", "application/json");
@@ -37,73 +39,11 @@ class Images extends Component {
     };
 
     let response = await fetch(
-      "http://localhost:3000/images/search",
+      this.props.ApiPath + "images/search",
       requestOptions
     );
     let data = await response.json();
     await this.getImages(data.mesage);
-  }
-
-  async addImages() {
-    //Tamanho do array
-    let id = this.state.point;
-    console.log(id);
-    let arraySize = this.state.imags.length;
-    for (let index = 0; index < arraySize; index++) {
-      //Obter o index da virgula
-      let virgulaIndex = this.state.imags[index].indexOf(',', 0);
-      console.log(virgulaIndex);
-      //Adicionar 1 ao valor do index obtido, pois quer-se o que está à frente
-      //da virgula
-      virgulaIndex += 1;
-      //Obter agora a substring da imagem
-      let image = this.state.imags[index].substring(virgulaIndex);
-      console.log(image);
-      //Mandar a imagem para o servidor
-      var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-type", "application/json");
-
-      var raw = JSON.stringify({
-        data: {
-          dados: {
-            Path: "",
-            Legenda: "Legenda",
-            AutorFonte: "AutorFonte",
-            Interesse_id: id,
-            usersid: 1,
-          },
-          imagem: image,
-        },
-      });
-
-
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        mode: "cors",
-        redirect: "follow"
-      };
-
-      let response = await fetch(
-        "http://localhost:3000/images/insert",
-        requestOptions
-      )
-      //Resposta por parte do server
-      let data = await response.json();
-
-      console.log(data);
-
-      window.location.reload();
-    }
-  }
-
-  handleFiles = files => {
-    //Set state imagens com os ficheiros a ser introduzidos
-    this.setState({ imags: files.base64 });
-    this.addImages();
   }
 
   async getImages(images) {
@@ -123,7 +63,7 @@ class Images extends Component {
       };
 
       let response = await fetch(
-        "http://localhost:3000/images/getimage",
+        this.props.ApiPath + "images/getimage",
         requestOptions
       );
       let data = await response.json();
@@ -135,27 +75,27 @@ class Images extends Component {
     });
   }
 
-  async deleteImage(id){
+  async deleteImage(id) {
     var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-type", "application/json");
-      var raw = JSON.stringify({ data: {id:id} });
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-type", "application/json");
+    var raw = JSON.stringify({ data: { id: id } });
 
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        mode: "cors",
-        redirect: "follow",
-      };
+    var requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      mode: "cors",
+      redirect: "follow",
+    };
 
-      let response = await fetch(
-        "http://localhost:3000/images/delete",
-        requestOptions
-      );
-      let data = await response.json();
-      
-      await this.getUserImages();
+    let response = await fetch(
+      this.props.ApiPath + "images/delete",
+      requestOptions
+    );
+    let data = await response.json();
+
+    await this.getUserImages();
   }
 
   redirecter(local) {
@@ -174,12 +114,24 @@ class Images extends Component {
     if (this.state.images.length != 0) {
       this.state.images.forEach((img) => {
         imgs.push(
-          <div>
-            <h4>{img.AutorFonte}</h4>
-            <img src={"data:image/jpg;base64," + img.img} width="500"></img>
-            <button onClick={() => this.deleteImage(img.id)}>❌</button>
-            <p>{img.Legenda}</p>
-          </div>
+          <table id="UsersTable">
+            <tr>
+              <th className="TableHeader" colspan="2">
+                {img.AutorFonte}
+              </th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <img src={"data:image/jpg;base64," + img.img} width="600"></img>
+              </td>
+            </tr>
+            <tr>
+              <td>{img.Legenda}</td>
+              <td>
+                <button onClick={() => this.deleteImage(img.id)}>❌</button>
+              </td>
+            </tr>
+          </table>
         );
       });
     }
@@ -190,18 +142,45 @@ class Images extends Component {
           <div className="BackgroundDiv"></div>
           <div id="PageCenter">
             <div id="PageCentralDiv">
-              <br />
-              <Link type="button" to="/mypoints">
-                Voltar
-              </Link>
-              <div className="input-group">
-                <label htmlFor="email">Fotografias do edificio</label>
-                <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
-                  <button className='btn'>Upload</button>
-                </ReactFileReader>
+              <div className="TitleDiv"></div>
+              <p className="TitleP">Imagens do ponto</p>
+              <div id="RegisterRedirectDiv">
+                <button
+                  className="RegisterRedirectBtt"
+                  onClick={() => {
+                    this.setState({ redirect: "/AddImages" });
+                  }}
+                >
+                  Adicionar imagens
+                </button>
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>{imgs}</div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                {imgs}
+                <div
+                  style={{
+                    padding: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <button
+                    className="CPBtts"
+                    onClick={() => {
+                      this.setState({ redirect: "/MyPoints" });
+                    }}
+                  >
+                    Voltar
+                  </button>
+                </div>
+              </div>
             </div>
             <footer id="FooterDiv">
               <p id="Footer1p">ToursTomar</p>

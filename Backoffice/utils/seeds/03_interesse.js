@@ -158,7 +158,7 @@ exports.seed = function (knex, Promise) {
             "39.60073665, -8.41144502, 39.60073252, -8.41145843, 39.60073252, -8.41142356, 39.60076971, -8.41142893, 39.60076558, -8.41147184",
           data: "1955",
           tipoEdif: "Edifício de Arquitectura Doméstica",
-          user_id: 1,
+          user_id: 2,
           prop_id: 5,
           isvalid: true,
         },
@@ -166,7 +166,7 @@ exports.seed = function (knex, Promise) {
           id: 13,
           titulo: "Edifícios plurifamiliares geminados",
           descricao:
-            "O alçado principal divide o corpo de acesso da área correspondente aos fogos. A agregação da zona de fogos foi estabelecida através de uma moldura saliente ao pano da parede, que envolve as varandas inclusas no volume e em que as zonas superiores aos vãos integram placas onduladas de fibrocimento e pintado. O edifício combina uma estrutura de vigas e pilares de betão armado e lajes aligeiradas, com uma cobertura de duas águas em estrutura de madeira, revestida com telha cerâmica. No acesso à zona habitacional do edifício impôs-se uma porta de “chapa e perfis de ferro a levar vidros” cuja forma foi replicada na porta e nas montras da zona comercial.",
+            "O acesso aos dois edifícios faz-se através de um vão reentrante, em cota superior à do passeio e que é vencida por uma escada com seis degraus. A entrada principal, comum no pano de fachada das duas construções, é marcada por um muro recortado que autonomiza o acesso aos edifícios. A composição da fachada ensaia a adição e subtração de volumes ao elemento parietal de alinhamento com a rua. Na fachada principal, orientada a Este, destaca-se o volume das varandas projetadas nos dois pisos superiores, enquanto no rés do chão, as varandas estão inclusas no pano de parede.",
           coordenadas:
             "39.60445653, -8.40587676, 39.60444, -8.40585798, 39.6044524, -8.40589821, 39.60448546, -8.40588748, 39.60447719, -8.40584993",
           data: "1955",
